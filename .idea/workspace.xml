@@ -1,40 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="845d390a-7d33-45c5-a91c-ee024cbdf63b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.babelrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.editorconfig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.postcssrc.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/build.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/check-versions.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/dev-client.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/dev-server.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/utils.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/vue-loader.conf.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/webpack.base.conf.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/webpack.dev.conf.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/webpack.prod.conf.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config/dev.env.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config/prod.env.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/assets/css/common.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/assets/img/bg.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/assets/img/hb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/assets/img/rule.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/toast/component.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/toast/toast.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/router/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/util/base64Code.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/util/wxAuth.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/views/index.vue" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="845d390a-7d33-45c5-a91c-ee024cbdf63b" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -163,12 +130,12 @@
       <option name="presentableId" value="Default" />
       <updated>1509006446508</updated>
       <workItem from="1509006448272" duration="1429000" />
-      <workItem from="1509008064145" duration="5595000" />
+      <workItem from="1509008064145" duration="6123000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7024000" />
+    <option name="totallyTimeSpent" value="7552000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
