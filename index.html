@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="Expires" content="-1">
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta name="description" content="旧物回收,转卖平台">
+        <meta name="Keywords" content="猪猪集市,二手货,转卖">
+
+        <!--<script src="https://api.map.baidu.com/api?ak=cDM9NcGNTyvtFFYhatGzjnCA0ixaobc2&v=2.0&services=false">
+        </script>-->
+        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=cDM9NcGNTyvtFFYhatGzjnCA0ixaobc2"></script>
+
+    <title>猪猪集市</title>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+
+    //上传图片预览，加快展现
+    function previewImage(uploadFlag){
+           var file  = document.querySelector('#inputFile').files[0];
+           var reader = new FileReader();
+           reader.onloadend = function () {
+            var spanNode= document.createElement('span');
+
+            document.querySelector('#imgdata').appendChild(spanNode)
+            document.querySelector('#imgdata').querySelectorAll('span')[uploadFlag].innerHTML=reader.result
+            }
+            if (file) {
+            reader.readAsDataURL(file);
+           }
+  }
+  </script>
+    <div id="app-box"></div>
+
+  </body>
+</html>
