@@ -2,37 +2,30 @@ html{font-size: 14px;}
 html,body,#app,.page{
 	height: 100%;
   overflow: hidden;
+  color:#4d4d4d;
+  font-family:Microsoft YaHei;
 }
-.weui-search-bar{
-	background-color: rgba(0,0,0,0)!important;
-	padding: 0.6rem 1rem!important;
-
+a,a:hover,a:active,a:link{
+  color:#4d4d4d;
 }
-.weui-search-bar:after{
-	border-bottom: none!important;
+.blueBtnBg{
+  background:blue!important;
+  color:#fff;
 }
-.weui-search-bar__form{
-	background-color: #fff;
-	border-radius: 8px;
-	opacity: 0.5
+.TextEllipsis{
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  word-wrap: break-word; 
+  word-break: normal;
 }
-.wordBreak{
-  word-wrap:break-word;
+.flexBox{
+  display: flex;
 }
-.right{
-    float: right;
-}
-.redFont{
-    color: #FA5B5B;
-  }
-.gray9Font{
-    color: #999999;
-}
-.blueFont{
-    color: #576AA3;
-}
-.font14{
-    font-size: 28/40rem;
+.flex1{
+  flex:1;
 }
 .alignC{
     text-align: center;
@@ -40,43 +33,64 @@ html,body,#app,.page{
 .alignR{
     text-align: right;
 }
+.redFont{
+  color:#627984;
+}
+.greenFont{
+  color:#01C304;
+}
+.blueFont{
+  color:#5CC2FD
+}
+.blockTips{
+  color: #999;
+  font-size: 24/40rem;
+  padding: 25/40rem 30/40rem;
+}
+.groupNoTop{
+  margin-top: -48/40rem;
+}
+.groupNoLine .weui-cells:before,.groupNoLine .weui-cell:before{
+  border-top: none;
+}
+.groupNoLine .weui-cells:after{
+  border-bottom:none
+}
+.gradientBtn{
+  background-image:-webkit-linear-gradient(to left,#627984,#627984); 
+  background-image:linear-gradient(to left,#627984,#627984);
+}
+.fundsBtnBox{
+  padding: 70/40rem 30/40rem;
+  .gradientBtn{
+    color: #fff;
+    font-size: 32/40rem;
+    height: 100/40rem;
+  }
+}
+.btnBg{
+  font-size:32/40rem!important;
+  padding:12/40rem 0;
+}
+.blueBg{
+  background:#627984!important;
+  color:#fff!important;
+}
+.scroll-wrap{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  top: 0;
+  overflow: hidden;
+}
+
 button{
   outline:none;
 }
 i{
   font-style:normal;
 }
-.BlueBtn{
-      background-color: #38446A!important;
-      color: #fff!important;
-      width: 100%;
-      border-radius: 5px;
-      border:none;
-    }
-.WhiteBtn{
-	  background-color: #FFF!important;
-	  color: #38446A!important;
-	  width: 100%;
-	  border-radius: 5px;
-	  border:none;
-}
-.sectionBox{
-	background-color: #fff;
-	border-radius: 5px;
-	padding: 15/14rem;
-}
-.line{
-  border-bottom: 1px solid #e2e2e2;
-}
-.radius{
-  border-radius: 15/40rem;
-}
-.radius .vux-no-group-title{
-  border-radius: 15/40rem;
-}
-.weui-dialog__btn_primary{
-    color:#3F4B6F!important;
-  }
 .ellipsis{
     text-overflow: ellipsis;
     overflow: hidden;
@@ -103,138 +117,6 @@ i{
   top:0;
   background-color: #fff;
 }    
-/*首页*/
-.publisBottomFlex{
-	display: inline-block;
-	width: 100%;
-	height: 100%;
-}
-/*封号弹框*/
-.dialogUnBox{
-  font-size: 30/40rem;
-  padding: 30/40rem;
-}
-.dialogSureBtn{
-  margin: 1rem;
-  padding: 10/40rem 0!important;
-  width: 85%!important;
-  background-color: #38446A!important;
-  color: #fff!important;
-  font-size: 30/40rem;
-}
-.dialogUnBox .weui-dialog{
-  padding:1rem 1rem 20/40rem 1rem;
-  border-radius: 10/40rem;
-  width: 75%;
-}
-.listConfirm .weui-dialog__bd{
-    min-height: 0!important;
-  }
-/*发布*/
-.locateAdress .weui-cell_access .weui-cell__ft:after{
-	border-color: rgba(0,0,0,0)!important;
-}
-.weui-cells:after{
-	border-bottom: none!important;
-}
-.locateAdress .vux-cell-box:before,.loginPage .weui-cell:before{
-	border-top: none!important;
-}
-.publishMain .weui-cell_access .weui-cell__ft{
-	width: 70%;
-	text-align: left;
-	color: #222;
-}
-.accountPage .weui-cell_access .weui-cell__ft{
-	padding-right: 0!important
-}
-.accountPage .weui-cell_access .weui-cell__ft:after{
-	display: none!important
-}
-.saleMain .weui-label{
-	width: 5.5rem!important
-}
-.weui-cell:before{
-	right: 15px!important;
-}
-.saleMain .weui-cell_access .weui-cell__ft{
-	text-align: left!important;
-  color: inherit;
-}
-/*个人*/
-.personBox .weui-cells{
-	border-radius: 5px;
-}
-.cellMrg .weui-cells:before{
-	left: 15px!important;
-	right: 15px!important;
-}
-
-.font-one-line-ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  word-break: break-all;
-}
-
-.font-two-line-ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.vux-1px-b:after{
-  border-bottom: 1px solid #e0e0e0;
-}
-.dp-header .dp-item{
-  &.dp-left,&.dp-right{
-    color: #343434 !important;
-  }
-}
-.vux-popup-picker-header-menu-right{
-  color: #343434 !important;
-}
-
-/*登录*/
-.loginMain .weui-cells:before{
-    border-top: none;
-}
-.loginMain .weui-btn_default{
-    background-color: #fff!important;
-}
-.loginByWx .weui-btn:after{
-    border: none!important
-}
-
-/*发布*/
-.commonbtn-wrap{
-  padding: 0 12/40rem 30/40rem 12/40rem;
-  margin-top: 60/40rem;
-  .commonbtn{
-    line-height: 94/40rem;
-    font-size: 36/40rem;
-    width: 100%;
-  }
-  &.pd30{
-    padding: 0 30/40rem 30/40rem 30/40rem;
-  }
-  .weui-btn:after{
-    border: none;
-  }
-  .weui-btn_default{
-    background-color: #38446a;
-    color: #fff;
-    font-size: 34/40rem;
-    &:active{
-      background-color: #38446a !important;
-      color: #f1f1f1 !important;
-    }
-  }
-}
 
 @media screen and (max-width:750px)
 {

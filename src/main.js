@@ -85,27 +85,17 @@ Vue.mixin({
                 limit: 5,
                 hasNext: true
             },
+            addr:{
+              latitude:'0',
+              longitude:'0',
+            }
         }
     },
     methods: {
-        ajaxerr: function(msg) {
-            this.toast.show = true
-            this.toast.msg = msg
-        },
-        //定义一个全局提示方法
-        toastFn : function(msg,callback) {
-            this.toast.msg  = msg
-            this.toast.show = true
-            if(callback) {
-                this.callback = callback
-            }
-        },
         //分页
         getCurrentValue:function(value){
           this.pullupStatus = value.pullupStatus;
           this.pulldownStatus = value.pulldownStatus;
-        },
-        testFn:function(){
         },
         setTitle: function(title){
             document.title = title;
@@ -127,66 +117,6 @@ Vue.mixin({
               }, 2000)
           }
         },
-        mxShare: function(_url,param,callback){  //获取分享内容
-          // alert(JSON.stringify(param))
-          if(!arguments.length){
-            sharePara({
-              title: ''
-            });
-            return false;
-          }
-          this.$http.get(_url,{params:param}).then(function(res) {
-            sharePara(res.data);
-          });
-          function sharePara(data){
-            // wx.ready(function () {
-            wx.onMenuShareAppMessage({
-              title: data.title,
-              desc: data.content,
-              link: data.link,
-              type: '', // 分享类型,music、video或link，不填默认为link
-              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-              imgUrl: data.iconUrl,
-              success: function () {
-                // this.$broadcast('share-close');
-                return;
-                // 用户确认分享后执行的回调函数
-              },
-              cancel: function () {
-                return;
-                // 用户取消分享后执行的回调函数
-              }
-            });
-            wx.onMenuShareTimeline({
-              title: data.title,
-              link: data.link,
-              imgUrl: data.iconUrl,
-              success: function () {
-                return;
-                // 用户确认分享后执行的回调函数
-              },
-              cancel: function () {
-                return;
-                // 用户取消分享后执行的回调函数
-              }
-            });
-            wx.onMenuShareQQ({
-              title: data.title,
-              desc: data.content,
-              link: data.link,
-              imgUrl: data.iconUrl,
-              success: function () {
-                return;
-                // 用户确认分享后执行的回调函数
-              },
-              cancel: function () {
-                return;
-                // 用户取消分享后执行的回调函数
-              }
-            });
-            // });
-          }
-        }
     },
 
 })
@@ -197,57 +127,54 @@ Vue.filter('price2', function (value) {
   if(!value) value = 0;
   return value.toFixed(2);
 })
-//Vue.component('toast',require('./components/toast/toast'));
-//Vue.component('toast',Toast);
-// Vue.http.options.emulateJSON = false;
 let userdata = JSON.parse(localStorage.getItem('_user'))
-let token = '';
-router.beforeEach((to, from, next) => {
-  if (from.path == '/account/moreset') {
-    token = ''
-  }
-  // 是否一级导航
-  if (to.path.replace(/[^/]/g, '').length > 1) {
-    router.app.isIndex = false
-  } else {
-    router.app.isIndex = true
-  }
-  // 验证是否登陆
-  if (to.meta.auth) {
-    if (!token) {
-      userdata = JSON.parse(localStorage.getItem('_user'))
-      if (userdata) {
-        token = userdata.token
-      }
-    }
-    if (token) {
-      next()
-    } else {
-      _g.toastMsg('error', '未登录')
-      setTimeout(() => {
-        router.push({path: '/login?path=' + to.path,replace: true})
-      }, 1500)
-    }
-  } else {
-    next()
-  }
-})
-router.afterEach((to, from, next) => {
-  // 验证是否登陆
-  if (to.meta.auth) {
-    if (!token) {
-      _g.toastMsg('error', '未登录')
-      setTimeout(() => {
-        router.push({path: '/login?path=' + to.path, replace: true})
-      }, 1500)
-    }
-  }
-  if (to.path.replace(/[^/]/g, '').length > 1) {
-    router.app.isIndex = false
-  } else {
-    router.app.isIndex = true
-  }
-})
+// let token = '';
+// router.beforeEach((to, from, next) => {
+//   if (from.path == '/account/moreset') {
+//     token = ''
+//   }
+//   // 是否一级导航
+//   if (to.path.replace(/[^/]/g, '').length > 1) {
+//     router.app.isIndex = false
+//   } else {
+//     router.app.isIndex = true
+//   }
+//   // 验证是否登陆
+//   if (to.meta.auth) {
+//     if (!token) {
+//       userdata = JSON.parse(localStorage.getItem('_user'))
+//       if (userdata) {
+//         token = userdata.token
+//       }
+//     }
+//     if (token) {
+//       next()
+//     } else {
+//       _g.toastMsg('error', '未登录')
+//       setTimeout(() => {
+//         router.push({path: '/login?path=' + to.path,replace: true})
+//       }, 1500)
+//     }
+//   } else {
+//     next()
+//   }
+// })
+// router.afterEach((to, from, next) => {
+//   // 验证是否登陆
+//   if (to.meta.auth) {
+//     if (!token) {
+//       _g.toastMsg('error', '未登录')
+//       setTimeout(() => {
+//         router.push({path: '/login?path=' + to.path, replace: true})
+//       }, 1500)
+//     }
+//   }
+//   if (to.path.replace(/[^/]/g, '').length > 1) {
+//     router.app.isIndex = false
+//   } else {
+//     router.app.isIndex = true
+//   }
+// })
 //ajax 拦截   全局做判断
 let url = document.location.href.split('#')[0]
 let seturl = ''
@@ -255,12 +182,14 @@ let seturl = ''
 if (url.indexOf('weixin-usedgoods.thy360.com')!=-1) {
   seturl = 'https://weixin-usedgoods.thy360.com'
 }else{
-  seturl = 'https://api-dev-usedgoods.thy360.com'
+  seturl = 'https://weixin-dev-h9.thy360.com'
 }
+//Vue.http.headers.common['client'] = 3;
 Vue.http.defaults.baseURL = seturl
 Vue.http.defaults.timeout = 1000 * 15
+Vue.http.defaults.headers['client'] = '3'
+//Vue.http.defaults.headers['imei'] = ''
 // Vue.http.defaults.headers.token = userdata ? userdata.token : ''
-// Vue.http.defaults.headers['Content-Type'] = 'application/json'
 Vue.http.interceptors.request.use(
   config => {
     if (JSON.parse(localStorage.getItem('_user'))) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
@@ -327,6 +256,13 @@ Vue.http.interceptors.response.use(
     return Promise.reject(error.response.data)   // 返回接口返回的错误信息
 });
 
+wx.getLocation({
+    type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+    success: function (res) {
+        this.addr.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+        this.addr.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+    }
+});
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false

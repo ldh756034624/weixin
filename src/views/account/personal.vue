@@ -1,223 +1,173 @@
 <template>
-	<div class="page accountPage">
-      <div class="bgBlue"></div>
-      <div class="accountCont">
-          <div class="accountUser personBox">
-
-                  <div class="accountUserTop">
-                  <router-link to='/account/perMsg'>
-                      <div class="accountUserImg">
-                          <span :style="styles"></span>
-                      </div>
-                      <p>{{personalData.nickname}}</p>
-
-                      <p v-if="!userok" class="credit">登录/注册</p>
-              </router-link>
-                      <p v-if="userok" class="credit" v-bind:class="{ creditok: personalData.isZmAuthorize }" @click="zmgo"><span v-bind:class="personalData.isZmAuthorize ? 'creditIcon': 'crediterrIcon'"></span>{{personalData.isZmAuthorize?'芝麻信用 '+personalData.zmEvaluate: '芝麻信用未认证'}}</p>
-                  </div>
-              <group class='cellMrg' v-bind:class="{ err: !userok}">
-                <cell title="我的账户" @click.native='gohybAccount()'>
-                  <img slot="icon" width="23" style="display:block;margin-right:10px;"
-                  src="../../assets/img/personal/myaccount.png">
-                </cell>
-              </group>
-          </div>
-
-              <group class='personBox'>
-                  <cell title="我发布的" link='/account/mypublish' >
-                      <img slot="icon" width="23" style="display:block;margin-right:10px;"
-                      src="../../assets/img/personal/mypublish.png">
-                  </cell>
-                  <cell title="我卖出的" link='/account/mysell' >
-                      <img slot="icon" width="23" style="display:block;margin-right:10px;"
-                     src="../../assets/img/personal/myselled.png">
-                  </cell>
-                  <cell title="我买到的"  link='/account/mybuy'>
-                      <img slot="icon" width="23" style="display:block;margin-right:10px;"
-                      src="../../assets/img/personal/mybuy.png">
-                  </cell>
-                  <cell title="我收藏的" link='/account/mycollection' >
-                      <img slot="icon" width="23" style="display:block;margin-right:10px;"
-                      src="../../assets/img/personal/mycoleection.png">
-                  </cell>
-
-              </group>
-
-          <group class='personBox mrgBottom'>
-              <cell title="更多设置" link='/account/moreset'>
-                  <img slot="icon" width="23" style="display:block;margin-right:10px;"
-                  src="../../assets/img/personal/myset.png">
-              </cell>
-          </group>
+	<div class="page personalPage">
+      <div class="personalTopBg">
+          
+          <router-link to='/account/setting'>
+              <img src="../../assets/img/index/my_btn_setting@2x.png" class="settingIcon">
+          </router-link>
+          <router-link to='/account/infoChange'>
+              <div class="accountUserImg">
+                  <img :src="userHeadImg">
+              </div>
+              <p class="nickName">{{personalData.nickName}}</p>
+          </router-link>
       </div>
-      <!-- <setNick></setNick> -->
+       <flexbox :gutter="0">
+          <flexbox-item>
+            <router-link :to="{path:'/account/purse',query:{balance:personalData.balance,limit:personalData.withdrawalCount}}">
+              <div class="personalItemBox">
+                <p class="redFont">{{personalData.balance | price2}}</p>
+                <p>钱包</p>
+              </div>
+            </router-link>
+          </flexbox-item>
+          <flexbox-item>
+            <router-link :to="{path:'/my/vMoney',query:{vbNum:personalData.vb}}">
+              <div class="personalItemBox ItemBorder">
+                <p class="redFont">{{personalData.vb}}</p>
+                <p>V币</p>
+              </div>
+            </router-link>
+          </flexbox-item>
+          <flexbox-item>
+            <router-link to="/my/cupon">
+              <div class="personalItemBox">
+                <p class="redFont">{{personalData.cardNum}}</p>
+                <p>卡券</p>
+              </div>
+            </router-link>
+          </flexbox-item>
+        </flexbox>
+      <div class="accountCont">
+              <group class='personBox'>
+
+                  <cell title="我的订单" link='/my/myOrder' is-link>
+                      <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                      src="../../assets/img/index/icon_order@2x.png">
+                  </cell>
+                  <cell title="酒店记录"  value='暂未开放'>
+                      <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                      src="../../assets/img/index/icon_hotel@2x.png">
+                  </cell>
+                   <cell title="银行卡" link='/my/myCard'>
+                      <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                      src="../../assets/img/index/icon_bankcard@2x.png">
+                  </cell>
+                  <cell title="收货地址"  value='暂未开放'>
+                      <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                      src="../../assets/img/index/icon_adress@2x.png">
+                  </cell>
+              </group>
+      </div>
       <Bottombar :index="2"></Bottombar>
   </div>
 </template>
 <script>
-import {Group,Cell} from 'vux'
-import uploadHeadImg from '@/components/uploadHeadImg'
-import userImg from '@/assets/img/personal/user.png'
-import Bottombar from '@/components/BottomBar'
- import setNick from '@/components/index/setNick'
+import { Flexbox, FlexboxItem,Group,Cell} from 'vux'
 
-// var url = require('aUrl')
+import userimg from '../../assets/img/index/my_img_user@2x.png'
+import Bottombar from '@/components/BottomBar'
+
 export default {
   mounted(){
-    let  self=this;
-    self.setTitle('个人中心');
-    if (JSON.parse(localStorage.getItem('_user'))) {
-      self.init();
-      self.userok = true
-      self.styles = {
-        backgroundImage:`url(${JSON.parse(localStorage.getItem('_user')).img})`
-      }
-      
-    } else {
-      self.styles = {
-        backgroundImage:`url(${self.userimg})`
-        }
+    this.setTitle('个人中心');
+    this.init();
+    if(localStorage.getItem('img')){
+      this.userHeadImg=localStorage.getItem('img')
     }
-
   },
   data () {
     return {
       personalData:{},
       userok: false,
-      userimg: userImg,
+      userHeadImg: userimg,
       styles: {},
     }
   },
   methods:{
     init(){
       let self = this
-      self.$http.get('/sh/ja/v1/user/msg')
+      self.$http.get('h9/api/account/info')
         .then(function(res) {
-          if(res.data.statusCode==0){
-              self.personalData=res.data.data
-              localStorage.setItem('_user',JSON.stringify(res.data.data))
+          if(res.data.code==0){
+              self.personalData=res.data.data 
+              if(self.personalData.imgUrl){
+                self.userHeadImg=self.personalData.imgUrl
+                localStorage.setItem('img',self.personalData.imgUrl)
+              }
           }
         })
-    },
-    zmgo() {
-      let self = this
-      if (self.personalData.isZmAuthorize) {
-        return
-      }
-      self.$http.get('/sh/ja/v1/zm/getAuthInfoAuthorize')
-        .then(function(res) {
-          if(res.data.statusCode==0){
-               window.location.href = res.data.data
-          }
-        })
-    },
-    gohybAccount(){
-      let self = this;
-
-      let hyburl = '',windowUrl=document.location.href.split('#')[0]
-      if (windowUrl.indexOf('localhost:8080')!=-1 || windowUrl.indexOf('dev-usedgoods.thy360.com/used_good')!=-1) {
-        hyburl = 'https://api-devtest-hyb.thy360.com'
-      } else if (windowUrl.indexOf('weixin-usedgoods.thy360.com')!=-1) {
-        hyburl = 'https://hybapi.thy360.com'
-      }
-      window.location.href=hyburl+"/hyb/#!/home/?appId=appidzzerhuo0vyokl&token="+JSON.parse(localStorage.getItem('_user')).token
     }
   },
    components: {
-    Group,
-    uploadHeadImg,
-    Cell,
-    Bottombar,
-    setNick,
-    Cell
+    Flexbox, FlexboxItem,Group,Cell,Bottombar,Cell
   },
 }
 
 </script>
 
 <style scoped lang='less'>
-    .bgBlue{
-      background-color: #38446A;
-      height: 8rem;
+    .personalPage{
+      background: #fff;
     }
-    .mrgBottom{
-      margin-bottom: 4rem;
+    .personalTopBg{
+      background:url('../../assets/img/index/my_img_bg@2x.png') no-repeat;
+      background-size: cover;
+      height: 516/40rem;
     }
-    .accountPage{
-      background-color: #f0f0f0;
-      overflow: auto;
-      position: relative;
-      z-index: 999;
-    }
-    .accountCont{
-      padding: 0 0.6rem 0.3rem;
-    }
-    .personBox{
-      background-color: #fff;
-      border-radius: 10/40rem;
-      margin-top: -20/40rem;
-    }
-    .accountUser{
-        margin-top: -3rem;
-        position: relative;
-        line-height: 56/40rem;
-    }
-    .accountUserTop{
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      font-size: 34/40rem;
-      color: #222;
-    }
-    .credit{
-      font-size: 30/40rem;
-      color: #666;
-    }
-    .credit.creditok {
-      color: #29AB91;
-    }
-    .creditIcon{
-      background:url('../../assets/img/mian/credit.png') no-repeat center;
-      background-size:100%;
-      display: inline-block;
-      width: 24/40rem;
-      height:28/40rem;
-      margin-right: 0.3rem;
-    }
-    .crediterrIcon{
-      background:url('../../assets/img/mian/crediterr.png') no-repeat center;
-      background-size:100%;
-      display: inline-block;
-      width: 24/40rem;
-      height:28/40rem;
-      margin-right: 0.3rem;
-    }
-    .cellMrg{
-      padding-top: 6rem;
-    }
-    .cellMrg.err {
-      padding-top: 4rem;
+    .settingIcon{
+      width: 60/40rem;
+      height: 60/40rem;
+      float: right;
+      margin: 70/40rem 20/40rem 0 0;
     }
     .accountUserImg{
-      width: 184/40rem;
-      height: 184/40rem;
-      margin: -2.5rem auto 0.5rem;
+      width: 150/40rem;
+      height: 150/40rem;
+      margin: 0 auto;
+      padding: 140/40rem 0 15/40rem;
+    }
+    .nickName{
+      text-align: center;
+      font-size: 36/40rem;
+      color: #fff;
     }
     .accountUserImg img,.accountUserImg span{
       display: inline-block;
-      width: 100%;
-      height: 100%;
+      width: 150/40rem;
+      height: 150/40rem;
       border-radius: 99/40rem;
       background-size: 100%;
       background-position: center;
       background-repeat: no-repeat;
       background-color: #f0f0f0;
     }
+    .personalItemBox{
+      text-align: center;
+      font-size: 24/40rem;
+      line-height: 0;
+      margin:46/40rem 0; 
+      .redFont{
+        font-size: 48/40rem;
+      }
+    }
+    .personalItemBox p:last-child{
+      margin-top: 55/40rem;
+    }
+    .ItemBorder{
+      border-left:1px solid #d9d9d9;
+      border-right:1px solid #d9d9d9;
+    }
 
 </style>
-<style type="text/css" lang='less'>
-  .personBox .vux-cell-primary{
+<style lang='less'>
+  .personBox .weui-cells:before,.personBox .weui-cell:before{
+    border-top:none;
+  }
+  .personBox .weui-cells{
     font-size: 30/40rem;
-    color: #666;
+  }
+  .personBox .weui-cell__ft{
+    font-size: 24/40rem;
   }
 </style>

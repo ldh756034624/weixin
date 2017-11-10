@@ -2,13 +2,13 @@
 		<div class="tableBox">
 			<div class="cellbox" >
 				<div class="blackCont">
-          <img :src='images' v-show='!isNoImg'>
+          <!-- <img :src='images' v-show='!isNoImg'>
           <img src='../assets/img/blank/net.png' v-if='isNoImg==true && noLogin==false'>
           <img src='../assets/img/blank/noLogin.png' v-if='isNoImg==true &&noLogin==true'>
 					<p>{{text}}</p>
           <x-button mini v-show='showReload' class='blankPageBtn' @click.native="reload">重新加载</x-button>
-          <!-- <x-button mini v-show='showPublish' class='blankPageBtn' @click.native="goPublish">去发布</x-button> -->
-          <x-button mini v-show='noLogin' class='blankPageBtn' @click.native="goLogin">去登录</x-button>
+          <x-button mini v-show='noLogin' class='blankPageBtn' @click.native="goLogin">去登录</x-button> -->
+          暂无数据
 				</div>
 			</div>
 		</div>
@@ -21,28 +21,9 @@ import {XButton} from 'vux'
 export default {
   mounted() {
     let self=this;
-    if(!self.images ){
-      self.isNoImg=true;
-    }
-    if(self.blankType=='noLogin'){
-      self.noLogin=true
-    }
-    if((self.text).indexOf('网络')!=-1){
-      self.showReload=true;
-    }
-    if((self.text).indexOf('暂时没有相关商品呢')!=-1){
-      self.showPublish=true;
-    }
+    
   },
    props:{
-    images: {
-      type: String,
-      default: ""
-    },
-    text:{
-      type: String,
-      default: ""
-    },
     blankType:{
       type: String,
       default: ""

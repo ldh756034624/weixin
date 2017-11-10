@@ -1,12 +1,6 @@
 
-import Hello from '@/components/Hello'
-
 export default [
     {
-      path: '/hello',
-      name: 'Hello',
-      component: Hello
-    },{
     	path:'*',
     	name:'home',
     	component (resolve) {require(['@/views/index'], resolve)}
@@ -19,187 +13,89 @@ export default [
       name:'login',
       component (resolve) {require(['@/views/login'], resolve)}
     },{
+      path:'/active/hongbao',
+      name:'hongbao',
+      meta: { auth: true },
+      component (resolve) {require(['@/views/active/hongbao'], resolve)} //红包活动页
+    },{
+      path:'/active/hongbaoCode',
+      name:'hongbaoCode',
+      meta: { auth: false },
+      component (resolve) {require(['@/views/active/hongbaoCode'], resolve)}
+    },{
+      path:'/active/prizeResult',
+      component (resolve) {require(['@/views/active/prizeResult'], resolve)}
+    },{
+      path:'/active/prizeRecord',
+      component (resolve) {require(['@/views/active/prizeRecord'], resolve)}
+    },{
+      path:'/active/searchIsReally',
+      component (resolve) {require(['@/views/active/searchIsReally'], resolve)} //查询真伪
+    },{
     	path:'/TestVux',
     	name:'TestVux',
     	component (resolve) {require(['@/components/HelloFromVux'], resolve)}
     },{
-    	path:'/unused/publish',
-    	name:'unusedPublish',
-      meta: { auth: true },
-    	component (resolve) {require(['@/views/unused/publish'], resolve)}
-    },{
-      path:'/sale/publish',
-      name:'salePublish',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/sale/publish'], resolve)}
-    },{
-      path:'/donate/publish',
-      name:'donatePublish',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/donate/publish'], resolve)}
-    },{
       path:'/account/personal',
       name:'accountPersonal',
-      meta: { auth: false },
+      meta: { auth: true },
       component (resolve) {require(['@/views/account/personal'], resolve)} //个人账户
     },{
-      path:'/account/mypublish',
-      name:'accountMypublish',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/myPublish'], resolve)} //我发布的
+      path:'/account/purse',
+      name:'accountPurse',
+      meta: { auth: false },
+      component (resolve) {require(['@/views/account/purse'], resolve)} //我的钱包
     },{
-      path:'/account/mysell',
-      name:'accountSell',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/mySell'], resolve)} //我卖出的
+      path:'/account/setting',
+      component (resolve) {require(['@/views/account/setting'], resolve)} //我的钱包  
     },{
-      path:'/account/changePrice',
-      name:'changePrice',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/changePrice'], resolve)} //修改价格
+      path:'/account/purseParticulars',
+      component (resolve) {require(['@/views/account/purseParticulars'], resolve)} //钱包明细
     },{
-      path:'/account/mybuy',
-      name:'accountBuy',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/myBuy'], resolve)} //我买到的
+      path:'/account/funds',
+      component (resolve) {require(['@/views/account/funds'], resolve)} //提现
     },{
-      path:'/account/mycollection',
-      name:'accountMyCollection',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/myCollection'], resolve)} //我收藏的
+      path:'/account/chooseBank',
+      component (resolve) {require(['@/views/account/chooseBank'], resolve)} //选择银行卡 
     },{
-      path:'/account/orderdetail',
-      name:'accountOrderDetail',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/orderDetail'], resolve)} //订单详情
+      path:'/account/addBank',
+      component (resolve) {require(['@/views/account/addBank'], resolve)} //添加银行卡 
     },{
-      path:'/unused/detaile',
-      name:'unusedDetaile',
-      component (resolve) {require(['@/views/unused/detaile'], resolve)}
+      path:'/account/phoneRecharge',
+      component (resolve) {require(['@/views/account/phoneRecharge'], resolve)} //手机充值
     },{
-      path:'/unused/paysuccess',
-      name:'unusedPaysuccess',
-      component (resolve) {require(['@/views/unused/paysuccess'], resolve)}
+      path:'/account/ddExchange',
+      component (resolve) {require(['@/views/account/ddExchange'], resolve)} //滴滴券兑换
     },{
-      path:'/sale/detaile',
-      name:'saleDetaile',
-      component (resolve) {require(['@/views/sale/detaile'], resolve)}
+      path:'/account/result',
+      component (resolve) {require(['@/views/account/result'], resolve)} //手机充值,滴滴券兑换结果页
     },{
-      path:'/donate/detaile',
-      name:'donateDetaile',
-      component (resolve) {require(['@/views/donate/detaile'], resolve)}
+      path:'/my/vMoney',
+      component (resolve) {require(['@/views/my/vMoney'], resolve)} //V币
     },{
-      path:'/search/search',
-      name:'search',
-      component (resolve) {require(['@/views/search/search'], resolve)} //搜索
+      path:'/my/vMoneyParticulars',
+      component (resolve) {require(['@/views/my/vMoneyParticulars'], resolve)} //V币明细
     },{
-      path:'/sale/payensure',
-      name:'salePayensure',
-      // meta: { auth: true },
-      component (resolve) {require(['@/views/sale/payensure'], resolve)}
+      path:'/my/cupon',
+      component (resolve) {require(['@/views/my/cupon'], resolve)} //我的卡券
     },{
-      path:'/account/addaddress',
-      name:'accountAddaddr',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/addAddress'], resolve)}
+      path:'/my/myCard',
+      component (resolve) {require(['@/views/my/myCard'], resolve)} //我的卡券
     },{
-      path:'/account/addresslist',
-      name:'accountAddaddrlist',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/addressList'], resolve)}
+      path:'/my/myOrder',
+      component (resolve) {require(['@/views/my/myOrder'], resolve)} //我的订单
     },{
-      path:'/unused/buy',
-      name:'unusedBuy',
-      //meta: { auth: true },
-      component (resolve) {require(['@/views/unused/buy'], resolve)}
+      path:'/my/orderDetail',
+      component (resolve) {require(['@/views/my/orderDetail'], resolve)} //订单详情
     },{
-      path:'/unused/pay',
-      name:'unusedpay',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/unused/pay'], resolve)}
+      path:'/account/infoChange',
+      component (resolve) {require(['@/views/account/infoChange'], resolve)} //资料修改
     },{
-      path:'/account/moreset',
-      name:'accountmoreSet',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/moreSet'], resolve)}
-    },{
-      path:'/account/advice',
-      name:'accountAdvice',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/advice'], resolve)}
-    },{
-      path:'/account/complaint',
-      name:'accountComplaint',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/complaint'], resolve)}
-    },{
-      path:'/message',
-      name:'message',
-      component (resolve) {require(['@/views/message/message'], resolve)}
-    },{
-      path:'/account/perMsg',
-      name:'accountPerMsg',
-      meta: { auth: true },
-      component (resolve) {require(['@/views/account/perMsg'], resolve)}
-    },{
-      path:'/account/setNick',
-      name:'accountSetNick',
-      component (resolve) {require(['@/views/account/setNick'], resolve)}
-    },{
-      path:'/operate/express',
-      name:'express',
-      component (resolve) {require(['@/views/operate/express'], resolve)} //我要发货
-    },{
-      path:'/operate/bindPhone',
-      name:'bindPhone',
-      component (resolve) {require(['@/views/operate/bindPhone'], resolve)} //绑定手机号
-    },{
-      path:'/unused/changePrice',
-      name:'changePrice',
-      component (resolve) {require(['@/views/unused/changePrice'], resolve)} //修改价格
-    },{
-      path:'/operate/expressMsg',
-      name:'expressMsg',
-      component (resolve) {require(['@/views/operate/expressMsg'], resolve)} //物流详情
-    },{
-      path:'/back/apply',
-      name:'backApply',
-      component (resolve) {require(['@/views/back/apply'], resolve)} //退款申请
-    },{
-      path:'/back/detaile',
-      name:'backDetaile',
-      component (resolve) {require(['@/views/back/detaile'], resolve)} //退款详情
-    },{
-      path:'/back/arbitration',
-      name:'arbitration',
-      component (resolve) {require(['@/views/back/arbitration'], resolve)} //申请仲裁
-    },{
-      path:'/back/arbitrationDetail',
-      name:'arbitrationDetail',
-      component (resolve) {require(['@/views/back/arbitrationDetail'], resolve)} //仲裁详情
-    },{
-      path:'/back/showMoney',
-      name:'showMoney',
-      component (resolve) {require(['@/views/back/showMoney'], resolve)} //查看钱款
-    },{
-      path:'/search/searchRecord',
-      name:'searchRecord',
-      component (resolve) {require(['@/views/search/searchRecord'], resolve)} //搜索记录
-    },{
-      path:'/account/aboutUs',
-      name:'aboutUs',
-      component (resolve) {require(['@/views/account/aboutUs'], resolve)} //关于我们
+      path:'/account/bindPhone',
+      component (resolve) {require(['@/views/account/bindPhone'], resolve)} //绑定手机号
     },{
       path:'/deal/platformDeal',
       name:'aboutUs',
       component (resolve) {require(['@/views/deal/platformDeal'], resolve)} //平台规范
-    },{
-      path:'/deal/userDeal',
-      name:'aboutUs',
-      component (resolve) {require(['@/views/deal/userDeal'], resolve)} //用户保证金协议
-    },{
-      path:'/deal/waiterDeal',
-      name:'aboutUs',
-      component (resolve) {require(['@/views/deal/waiterDeal'], resolve)} //服务协议
-    },
+    }
   ]

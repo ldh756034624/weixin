@@ -3,7 +3,8 @@
       <form enctype="multipart/form-data" method="post" name="fileinfo">
         <div class="nickUpldBox">
           <input type="file" name="uploadedFile" id="inputFile" v-on:change="uploadImage" style="opacity:0;">
-          <span :style="styles"></span>
+          <!-- <span :style="styles"></span> -->
+          <img :src="headImg">
         </div>
       </form>
       <form enctype="multipart/form-data" method="post" name="fileinfo2" style="display:none">
@@ -29,24 +30,22 @@
 </template>
 <script>
 
-//let Base64 = require('js-base64').Base64;
 import {baseCode} from '@/util/base64Code'
 import { XInput} from 'vux'
 import VueCropper from 'vue-cropper'
 import wx from 'weixin-js-sdk'
-// var url = require('aUrl')
 export default {
   mounted(){
     let self=this;
-      self.styles = {
-        backgroundImage:`url(${self.imgsrc})`
-      }
+    if(localStorage.getItem('img')){
+      this.headImg=localStorage.getItem('img')
+    }
   },
   data () {
     return {
       styles: {},
-      imgsrc:JSON.parse(localStorage.getItem('_user')).img,
-      uploadurl:'/sh/ja/v1/file/goods/upload',
+      headImg:this.imgsrc,
+      uploadurl:'h9/api/file/upload',
       testWx:'',
       testWx2:'',
       testWxData:'',
@@ -59,7 +58,13 @@ export default {
         width:300,
         height:200
       },
+      hasChooseFile:false,
       width:document.body.clientWidth
+    }
+  },
+  props:{
+    imgsrc:{
+      type:String
     }
   },
   methods:{
@@ -84,28 +89,19 @@ export default {
        //截图完成后data base64类型图片
         this.$refs.cropper.getCropData((data) => {
           var blob = self.dataURItoBlob(data); // 上一步中的函数
-          //var canvas = document.createElement('canvas');
-          //var dataURL = canvas.toDataURL('image/jpeg', 0.5);
           var fd = new FormData(document.forms[1]);
-          fd.append("uploadedFile", blob, 'image.png');
-
-
+          fd.append("file", blob, 'image.png');
           self.$http.post(self.uploadurl,fd)
             .then(function(res) {
 
-              if(res.data.statusCode==0){   
-                self.imgsrc=res.data.url;
-                self.styles = {
-                  backgroundImage:`url(${data})`,
-                }
-                self.changeUser()
+              if(res.data.code==0){
+                _g.toastMsg('error','上传成功')   
+                self.headImg=res.data.data;
               } else {
-                self.$vux.toast.show({
-                    text: res.data.msg,
-                    type: 'text',
-                })
+                _g.toastMsg('error',res.data.msg)
               }
               self.showCut=false;
+              self.$emit("listenToChildImg",false)
             })
         })
       //}*/
@@ -126,7 +122,8 @@ export default {
     },
     uploadImage: function (e) {
         let self = this
-        var file = e.target.files[0]
+        var file = e.target.files[0];
+        self.$emit("listenToChildImg",true)
         if (!/\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/.test(e.target.value)) {
            self.$vux.toast.show({
             text: '图片类型必须是.gif,jpeg,jpg,png,bmp中的一种',
@@ -142,22 +139,6 @@ export default {
 
         self.showCut=true;
     },
-    changeUser(){
-      let self = this
-      var _user=JSON.parse(localStorage.getItem('_user'));
-      var user={
-        avatar:self.imgsrc,
-        nickName:JSON.parse(localStorage.getItem('_user')).nickname,
-        sex:JSON.parse(localStorage.getItem('_user')).sex,
-      }
-      self.$http.post('/sh/ja/v1/user/edit',user)
-        .then(function(res) {
-          if(res.data.statusCode==0){
-            _user.img = self.imgsrc;
-            localStorage.setItem("_user", JSON.stringify(_user));
-          }
-        })
-    }
   },
    components: {
     XInput,
@@ -192,7 +173,7 @@ export default {
     }
     .uploadTpl .close{
       display: inline-block;
-      background:url('../assets/img/mian/xx@2x.png') no-repeat center; 
+      background:url('../assets/img/index/xx@2x.png') no-repeat center; 
       width: 35/40rem;
       height: 35/40rem;
       border-radius: 1rem;
@@ -212,6 +193,10 @@ export default {
     }
     .nickUpldBox{
       position: relative;
+      img{
+        width: 100%;
+        border-radius: 2rem;
+      }
     }
     .headImgUplTpl input{
       position: absolute;
@@ -226,10 +211,6 @@ export default {
       background-size: 100%;
       background-position: center;
       background-color: #f0f0f0;
-    }
-    .testUpload{
-      height: 200px;
-      width: 200px;
     }
 </style>
 <style>

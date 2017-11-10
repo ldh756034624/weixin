@@ -1,7 +1,7 @@
 <template>
   <div class="uploadTpl">
     <div class="img-wrap grid grid25" v-for="(lst,index) in imagelist">
-      <img class="del" v-on:click="remove(index)" src="../assets/img/mian/xx@2x.png">
+      <img class="del" v-on:click="remove(index)" src="../assets/img/index/xx@2x.png">
       <img v-bind:src="lst" v-on:click='showBig(lst)'>
     </div>
      <div class="img-wrap grid grid25" v-if="maxlength>imagelist.length">
@@ -234,7 +234,7 @@ export default {
     }
     .uploadTpl .close{
       display: inline-block;
-      background:url('../assets/img/mian/xx@2x.png') no-repeat center; 
+      background:url('../assets/img/index/xx@2x.png') no-repeat center; 
       width: 35/40rem;
       height: 35/40rem;
       border-radius: 1rem;

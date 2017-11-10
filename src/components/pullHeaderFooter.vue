@@ -10,7 +10,7 @@
 			正在刷新</span>
 		</div>
 		<div slot="pullup" class="xs-plugin-pullup-container xs-plugin-pullup-up upstyle xxxxxx" v-bind:class="{'upstatus': statusUp === 'stop' || statusUp === 'up'}">
-			<!-- <i class="loading-gif" v-show="statusUp === 'down' || statusUp === 'loading'"></i> -->
+			<i class="loading-gif" v-show="statusUp === 'down' || statusUp === 'loading'"></i>
 			<i class="loading-gif" v-show="statusUp === 'disabled'"></i>
 			<span v-show="statusUp === 'default'"></span>
 			<span v-show="statusUp === 'down'">松开加载</span>
@@ -31,6 +31,10 @@
 				default:'default'
 			}
 		},
+		mounted(){
+			console.log(this.statusUp)
+			console.log(this.statusDown)
+		}
 	}
 </script>
 <style scoped lang='less'>

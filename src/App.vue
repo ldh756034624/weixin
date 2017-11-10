@@ -1,12 +1,12 @@
 <template>
   <div id="app">
 	    <router-view></router-view>
-      <div class="noNet" v-if='hasNetA==false && noLogin==false'>
+      <!-- <div class="noNet" v-if='hasNetA==false && noLogin==false'>
           <blankPage  :text='text' v-show='!hasNetA' :images='blankImg'> </blankPage>
       </div>
       <div class="noLogin" v-if='hasNetA==false && noLogin==true'>
           <blankPage  :text='loginText' v-show='noLogin' :blankType='blankType'> </blankPage>
-      </div>
+      </div> -->
       <div v-transfer-dom>
         <x-dialog v-show="!dialogShow" class="dialogUnBox appDialogUnBox">
           <div>
@@ -89,16 +89,16 @@ export default {
     },
     wxSign: function(){   //获取微信分享签名参数
       let self = this
-      let rcmurl = "/sh/ja/v1/share/auth";
-      self.$http.post(rcmurl,{"url":location.href})
-        .then(function(res) {
-          if(res.data.statusCode==0){
-            self.wxConfig(res.data.data);
-          } else {
-            self.toast.msg = res.data.msg;
-            self.toast.show = true;
-          }
-        })
+      // let rcmurl = "/sh/ja/v1/share/auth";
+      // self.$http.post(rcmurl,{"url":location.href})
+      //   .then(function(res) {
+      //     if(res.data.statusCode==0){
+      //       self.wxConfig(res.data.data);
+      //     } else {
+      //       self.toast.msg = res.data.msg;
+      //       self.toast.show = true;
+      //     }
+      //   })
     },
     wxConfig: function(config){   //微信分享参数初始化
       let self = this;

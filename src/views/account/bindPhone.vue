@@ -10,7 +10,7 @@
         </x-input>
         <div class="dealBox">
           温馨提示:未注册欢乐之家账号的手机号，登录时将自动注册，且代表您已同意
-          <span v-on:click="showUserDeal=true" class='blueFont'>《用户服务协议》</span>
+          <span v-on:click="show2=true" class='blueFont'>《用户服务协议》</span>
         </div>
         <div class="fundsBtnBox">
           <x-button class='gradientBtn' v-bind:class="loginParams.phone==''|| loginParams.code==''? 'err': ''" :disabled='!loginBtnCanUse' @click.native="loginFn(0)">确定</x-button>
@@ -18,8 +18,8 @@
         
      </group>
      <div v-transfer-dom>
-        <popup v-model="showUserDeal" height="100%" class='dealPopup'>
-          <platformDeal v-model="showUserDeal" v-on:listenToDealShow='dealShowFn'></platformDeal>
+        <popup v-model="show2" height="100%" class='dealPopup'>
+          <platformDeal v-model="show2" v-on:listenToDealShow='dealShowFn'></platformDeal>
         </popup>
      </div> 
   </div>
@@ -28,8 +28,8 @@
 <script>
 import Vue from 'vue';
 import {  Group, XInput,XButton,Popup,TransferDom,XDialog} from 'vux'
-import userDeal from './deal/userDeal'
-import platformDeal from './deal/platformDeal'
+import userDeal from '../deal/userDeal'
+import platformDeal from '../deal/platformDeal'
 import {encode} from '@/util/base64Code'
 export default {
   directives: {
@@ -86,7 +86,7 @@ export default {
            _g.toastMsg('error', '请输入11位手机号')
           return;
         }
-        self.$http.get('h9/api/user/sms/'+self.trim(self.loginParams.phone)+'/1')
+        self.$http.get('h9/api/user/sms/register/'+self.trim(self.loginParams.phone))
         .then(function(res) {
           if(res.data.code===0){
             self.countTime();
