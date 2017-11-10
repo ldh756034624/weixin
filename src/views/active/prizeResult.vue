@@ -7,14 +7,16 @@
           ￥<span>{{prizeData.money}}</span>
         </div>
         <div>
-          <div v-if='noGetPrize'>
+          
+          <div v-if="noGetPrize">
             <x-input  v-model="bindPhoneParam.phone" class='prizePhone'  placeholder='请输入手机号'></x-input>
             <x-button mini class='prizeGetBtn'  @click.native="getPrizeFn">立即领取</x-button>
           </div>
           <div v-else class="prizeGet">
-            <p class="account">红包已放置账户:{{bindPhoneParam.phone}}</p>
+            <p class="account">红包已放置账户:{{prizeAccount}}</p>
             <p>登录App或欢乐之家社区即可使用</p>
           </div>
+          
         </div>
       </div>
       <div v-else class="noPrize">
@@ -63,6 +65,7 @@ export default {
       codeAlert:false,
       codeType:'2',
       prizeNum:0,
+      prizeAccount:'',
       bindPhoneParam:{}
     }
   },
@@ -74,6 +77,10 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
             self.prizeData=res.data.data
+            if(self.prizeData.tel){
+              self.noGetPrize=false
+              self.prizeAccount=self.prizeData.tel
+            }
             self.prizeNum=self.prizeData.lotteryUsers.length
             if(res.data.data.roomUser){
               self.codeUrl=res.data.data.qrCode
@@ -101,6 +108,7 @@ export default {
             if(res.data.code==0){
                 _g.toastMsg('error', '领取成功!')
                 self.noGetPrize=false
+                self.prizeAccount=self.bindPhoneParam.phone
             }
           })
       }

@@ -1,5 +1,5 @@
 <template>
-	<div class="page">
+	<div class="page infoChangePage">
     <group class='infoBox groupNoTop groupNoLine'>
         <cell title="头像" class='infoImgCell'>
             <uploadHeadImg class="infoHeadImg" ref='uploadHeadImg' :imgsrc='userHeadImg' v-on:listenToChildImg='hasFileChoosed'></uploadHeadImg>
@@ -10,12 +10,13 @@
         <cell title="手机号" v-if="infoData.tel!=''" :value='infoData.tel'></cell>
         <cell title="手机号" v-else value='绑定' link='/account/bindPhone' is-link></cell>
         <cell title="性别" :value='infoData.sex' @click.native="showPopupFn(sexPopup,'sex')" is-link></cell>
-        <datetime v-model="infoData.birthday" :start-date="startDate" @on-change="changeDateTime" title="生日"></datetime>
+        <datetime v-model="infoData.birthday" :start-date="startDate" @on-change="changeDateTime"  title="生日"></datetime>
         <cell title="情感" :value='infoData.marriageStatus'  @click.native="showPopupFn(marriagePopup,'marriage')" is-link></cell>
     </group>
     <group class='infoBox' title='隐私信息(不公开)' v-if='showOtherInfo'>
         <cell title="学历" :value='infoData.education'  @click.native="showPopupFn(educationPopup,'education')" is-link></cell>
-        <x-input title="职业" v-model='infoData.job' placeholder="请输入职业" ></x-input>
+        <cell title="职业" :value='infoData.job'  @click.native="showPopupFn(jobPopup,'job')" is-link></cell>
+        <!-- <x-input title="职业" v-model='infoData.job' placeholder="请输入职业" ></x-input> -->
     </group>
     <div class="fundsBtnBox">
       <x-button class='gradientBtn' v-if='showOtherInfo' @click.native="changeFn" :show-clear="false">确认修改</x-button>
@@ -42,6 +43,7 @@ export default {
     let  self=this;
     self.setTitle('资料修改');
     self.init();
+    self.popupDataInit();
   },
   data () {
     return {
@@ -52,9 +54,10 @@ export default {
       startDate:'1900-01-01',
       infoData:{},
       popupData:[],
-      sexPopup:[{key:1,value:'男'},{key:0,value:'女'}],
-      marriagePopup:[{key:1,value:'单身'},{key:2,value:'恋爱'},{key:3,value:'已婚'},{key:4,value:'其他'}],
-      educationPopup:[{key:1,value:'小学及以下'},{key:2,value:'初中'},{key:3,value:'高中'},{key:4,value:'中专'},{key:5,value:'本科'}],
+      sexPopup:[],
+      marriagePopup:[],
+      educationPopup:[],
+      jobPopup:[],
       type:'',
     }
   },
@@ -74,6 +77,17 @@ export default {
               if(!self.infoData.birthday){
                 self.infoData.birthday='1980-01-01'
               }
+          }
+        })
+    },
+    popupDataInit(){
+      self.$http.get('h9/api/user/info/options')
+        .then(function(res) {
+          if(res.data.code==0){
+            self.sexPopup=res.data.data.sexList
+            self.marriagePopup=res.data.data.emotionList
+            self.educationPopup=res.data.data.educationList
+            self.jobPopup=res.data.data.jobList
           }
         })
     },
@@ -99,15 +113,15 @@ export default {
         this.infoData.sex=item.value
       }else if(this.type==='marriage'){
         this.infoData.marriageStatus=item.value
-      }else{
+      }else if(this.type==='education'){
         this.infoData.education=item.value
+      }else{
+        this.infoData.job=item.value
       }
       this.showPopup=false;
     },
     changeFn:function(){
       let self = this;
-      console.log(self.infoData.job+"=========")
-      console.log(self.infoData.nickName+"=========")
       var userData={
         avatar:self.userHeadImg,
         birthday:self.infoData.birthday,
@@ -184,5 +198,8 @@ export default {
     padding: 30/40rem 0;
     border-top: 1px solid #f2f2f2;
     text-align: center;
+  }
+  .infoChangePage .vux-datetime{
+    font-size: 30/40rem;
   }
 </style>

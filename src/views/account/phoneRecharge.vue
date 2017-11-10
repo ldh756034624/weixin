@@ -2,7 +2,7 @@
 	<div class="page phoneRechargePage">
       <div class="page phoneRechargeCont">
       <div class="phoneNum">
-        <input type="tel" v-model='phoneNum'/>
+        <input type="tel" v-model='reChargePhoneNum'/>
         <img src="../../assets/img/account/recharge_icon_contacts@2x.png" />
       </div>
       <p class="phoneName">默认</p>
@@ -19,7 +19,7 @@
         <x-button class='btnBg blueBg' @click.native="rechargeFn()">充值</x-button>
       </div>
       </div>
-      <codeAlert :showCodeAlert='codeAlert' :type='codeType' ref='codeAlert' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
+      <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='reChargePhoneNum' ref='codeAlert' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
   </div>
 </template>
 <script>
@@ -32,12 +32,12 @@ export default {
     self.init();
     let userObj = JSON.parse(localStorage.getItem('_user'))
     if(userObj){
-      console.log(userObj)
+      self.reChargePhoneNum=userObj.tel
     }
   },
   data () {
     return {
-      phoneNum:'13602687596',
+      reChargePhoneNum:'',
       rechargeData:[],
       rechargeChoosed:'',
       codeAlert:false,
@@ -53,7 +53,7 @@ export default {
           if(res.data.code==0){
               self.rechargeData=res.data.data 
               self.rechargeParams.id=self.rechargeData[0].id
-              self.rechargeParams.tel=self.phoneNum
+              self.rechargeParams.tel=self.reChargePhoneNum
           }
         })
     },
@@ -62,8 +62,11 @@ export default {
       this.rechargeParams.id=item.id
     },
     rechargeFn:function(){
+      if(!self.rechargeParams.tel){
+        _g.toastMsg('error', '请输入手机号!')
+        return;
+      }
       this.codeAlert=true;
-
     },
     codeAlertFn:function(data){
       let self = this

@@ -86,7 +86,7 @@ export default {
            _g.toastMsg('error', '请输入11位手机号')
           return;
         }
-        self.$http.get('h9/api/user/sms/register/'+self.trim(self.loginParams.phone))
+        self.$http.get('h9/api/user/sms/register/'+self.trim(self.loginParams.phone)+'/2')
         .then(function(res) {
           if(res.data.code===0){
             self.countTime();
@@ -133,20 +133,13 @@ export default {
           phone:self.trim(self.loginParams.phone),
           code:self.loginParams.code+''
       }
-      curl='h9/api/user/phone/login'
+      curl='h9/api/user/phone/bind'
       self.$http.post(curl,logindata)
           .then(function(res) {
             if(res.data.code==0){
-              localStorage.setItem("_user", JSON.stringify(res.data.data));
-              Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : ''
-              var setBoolean=res.data.data.firstLogin;
-              _g.toastMsg('error','登录成功');
+              _g.toastMsg('error','绑定成功');
               setTimeout(() => {
-                if(self.path){
-                  self.$router.replace({path:self.path})
-                }else{
-                  self.$router.replace({path:'/index'})
-                }
+                history.go(-1)
               }, 1500)
             }
             else{
