@@ -199,7 +199,7 @@ Vue.http.interceptors.request.use(
       config.headers.token = JSON.parse(localStorage.getItem('_user')).token;
     } else {
       config.headers.token ='';
-      token = ''
+      //token = ''
     }
     return config;
   },
