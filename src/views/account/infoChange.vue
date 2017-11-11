@@ -9,13 +9,13 @@
         <x-input title="昵称" v-model='infoData.nickName' placeholder="昵称" :show-clear="false"></x-input>
         <cell title="手机号" v-if="infoData.tel!=''" :value='infoData.tel'></cell>
         <cell title="手机号" v-else value='绑定' link='/account/bindPhone' is-link></cell>
-        <cell title="性别" :value='infoData.sex' @click.native="showPopupFn(sexPopup,'sex')" is-link></cell>
+        <cell title="性别" :value='infoData.sex' @click.native="showPopupFn(infoData.sexList,'sex')" is-link></cell>
         <datetime v-model="infoData.birthday" :start-date="startDate" @on-change="changeDateTime"  title="生日"></datetime>
-        <cell title="情感" :value='infoData.marriageStatus'  @click.native="showPopupFn(marriagePopup,'marriage')" is-link></cell>
+        <cell title="情感" :value='infoData.marriageStatus'  @click.native="showPopupFn(infoData.emotionList,'marriage')" is-link></cell>
     </group>
     <group class='infoBox' title='隐私信息(不公开)' v-if='showOtherInfo'>
-        <cell title="学历" :value='infoData.education'  @click.native="showPopupFn(educationPopup,'education')" is-link></cell>
-        <cell title="职业" :value='infoData.job'  @click.native="showPopupFn(jobPopup,'job')" is-link></cell>
+        <cell title="学历" :value='infoData.education'  @click.native="showPopupFn(infoData.educationList,'education')" is-link></cell>
+        <cell title="职业" :value='infoData.job'  @click.native="showPopupFn(infoData.jobList,'job')" is-link></cell>
         <!-- <x-input title="职业" v-model='infoData.job' placeholder="请输入职业" ></x-input> -->
     </group>
     <div class="fundsBtnBox">
@@ -43,7 +43,6 @@ export default {
     let  self=this;
     self.setTitle('资料修改');
     self.init();
-    self.popupDataInit();
   },
   data () {
     return {
@@ -54,20 +53,24 @@ export default {
       startDate:'1900-01-01',
       infoData:{},
       popupData:[],
-      sexPopup:[],
-      marriagePopup:[],
-      educationPopup:[],
-      jobPopup:[],
+      sexKey:'',
+      marriageKey:'',
+      educationKey:'',
+      jobKey:'',
       type:'',
     }
   },
   methods:{
     init(){
       let self = this
-      self.$http.get('h9/api/user/info')
+      self.$http.get('h9/api/user/info/options')
         .then(function(res) {
           if(res.data.code==0){
               self.infoData=res.data.data 
+              self.infoData.sex=self.findPopup(self.infoData.sexList)
+              self.infoData.marriageStatus=self.findPopup(self.infoData.emotionList)
+              self.infoData.education=self.findPopup(self.infoData.educationList)
+              self.infoData.job=self.findPopup(self.infoData.jobList)
               if(self.infoData.avatar){
                 self.userHeadImg=self.infoData.avatar
                 localStorage.setItem('img',self.infoData.avatar)
@@ -80,16 +83,14 @@ export default {
           }
         })
     },
-    popupDataInit(){
-      self.$http.get('h9/api/user/info/options')
-        .then(function(res) {
-          if(res.data.code==0){
-            self.sexPopup=res.data.data.sexList
-            self.marriagePopup=res.data.data.emotionList
-            self.educationPopup=res.data.data.educationList
-            self.jobPopup=res.data.data.jobList
-          }
-        })
+    findPopup:function(popup){
+      var popupvalue;
+      for(var i=0;i<popup.length;i++){
+        if(popup[i].select==='1'){
+          popupvalue=popup[i].value
+        }
+      }
+      return popupvalue;
     },
     changeDateTime:function(val){
       this.infoData.birthday=val
@@ -111,12 +112,16 @@ export default {
     choosePopup:function(item){
       if(this.type==='sex'){
         this.infoData.sex=item.value
+        this.sexKey=item.key
       }else if(this.type==='marriage'){
         this.infoData.marriageStatus=item.value
+        this.marriageKey=item.key
       }else if(this.type==='education'){
         this.infoData.education=item.value
+        this.educationKey=item.key
       }else{
         this.infoData.job=item.value
+        this.jobKey=item.key
       }
       this.showPopup=false;
     },
@@ -125,17 +130,17 @@ export default {
       var userData={
         avatar:self.userHeadImg,
         birthday:self.infoData.birthday,
-        education:self.infoData.education,
-        job:self.infoData.job,
-        marriageStatus:self.infoData.marriageStatus,
+        education:self.educationKey,
+        job:self.jobKey,
+        marriageStatus:self.marriageKey,
         nickName:self.infoData.nickName,
-        sex:self.infoData.sex,
+        sex:self.sexKey,
       }
       self.$http.put('h9/api/user/info',userData)
         .then(function(res) {
           if(res.data.code==0){
               _g.toastMsg('error',"修改资料成功");
-              self.$router.push({path:'/account/personal'})
+              //self.$router.push({path:'/account/personal'})
           }
         })
     }

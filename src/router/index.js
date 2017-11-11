@@ -50,7 +50,10 @@ export default [
       component (resolve) {require(['@/views/account/setting'], resolve)} //设置
     },{
       path:'/account/problems',
-      component (resolve) {require(['@/views/account/problems'], resolve)} //常见问题   
+      component (resolve) {require(['@/views/account/problems'], resolve)} //常见问题 
+    },{
+      path:'/account/articleDetail',
+      component (resolve) {require(['@/views/account/articleDetail'], resolve)} //文章详情
     },{
       path:'/account/purseParticulars',
       component (resolve) {require(['@/views/account/purseParticulars'], resolve)} //钱包明细

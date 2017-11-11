@@ -208,50 +208,20 @@ Vue.http.interceptors.response.use(
     if(response.status==200){
       store.state.hasNet=true
     }
-    if(response.data.statusCode==4005){
-      store.state.dialogUnShow=false
-      store.state.dialogUnText=response.data.msg
-    }
-    if(response.data.statusCode==500){
-      store.state.hasNet=false
+    if(response.data.code==402){
+      _g.toastMsg('error', '请先绑定手机号')
+      setTimeout(() => {
+        router.replace('/account/bindPhone')
+      }, 1500)
     }
     return response;
   },
   err =>{
-    store.state.hasNet=false
+    _g.toastMsg('error', '出错了')
   },
   error => {
     if (error.response) {
-      if(error.response.statusCode=402){
-            store.state.hasNet=true
-           _g.toastMsg('error', '请先绑定手机号')
-            setTimeout(() => {
-              router.replace('/operate/bindPhone')
-            }, 1500)
-      }else{
-          switch (error.response.status) {
-            case 401:
-              // 返回 401 清除token信息并跳转到登录页面
-              //localStorage.setItem("token","");
-                setTimeout(() => {
-                  router.replace('/login')
-                }, 1500)
-                break;
-            case 404:
-              store.state.hasNet=false
-              _g.toastMsg('error', '404')
-              break;    
-            case 500:
-              store.state.hasNet=false
-              _g.toastMsg('error', '接口服务异常')
-              break;
-            case 502:
-              store.state.hasNet=false
-              _g.toastMsg('error', '接口服务异常')
-              break;
-          }
-      }
-      
+      _g.toastMsg('error', '出错了')
     }
     return Promise.reject(error.response.data)   // 返回接口返回的错误信息
 });

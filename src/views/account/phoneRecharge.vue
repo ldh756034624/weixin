@@ -6,7 +6,7 @@
         <img src="../../assets/img/account/recharge_icon_contacts@2x.png" />
       </div>
       <p class="phoneName">默认</p>
-      <p class="LeastMoney flexBox">充话费 <span class='flex1 alignR'>钱包余额￥</span></p>
+      <p class="LeastMoney flexBox">充话费 <span class='flex1 alignR'>钱包余额￥{{rechargeData.balance}}</span></p>
       <flexbox :gutter="0" wrap="wrap" class='phoneRechargeFlexBox'>
           <flexbox-item :span="1/3" v-for='(item,index) in rechargeData.priceList' @click.native='chooseMoney(item,index)'>
             <div class="phoneBox" :class="{'blueBg':index==rechargeChoosed}">
@@ -52,7 +52,7 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
               self.rechargeData=res.data.data 
-              self.rechargeParams.id=self.rechargeData[0].id
+             self.rechargeParams.id=self.rechargeData.priceList[0].id
               self.rechargeParams.tel=self.reChargePhoneNum
           }
         })
@@ -62,7 +62,9 @@ export default {
       this.rechargeParams.id=item.id
     },
     rechargeFn:function(){
-      if(!self.rechargeParams.tel){
+      console.log("==="+this.rechargeParams.tel)
+      console.log("==="+JSON.parse(localStorage.getItem('_user')).tel)
+      if(!this.rechargeParams.tel){
         _g.toastMsg('error', '请输入手机号!')
         return;
       }
@@ -80,6 +82,8 @@ export default {
             if(res.data.code==0){
                 _g.toastMsg('error', '充值成功!')
                 self.$router.push({path:'/account/personal'})
+            }else{
+              _g.toastMsg('error', res.data.msg)
             }
           })
       }
