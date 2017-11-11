@@ -79,10 +79,11 @@ export default {
    methods: {
     getWxCode:function(){
       let self=this;
-      var redirectUrl=Vue.http.defaults.baseURL+'/#/index'
+      var redirectUrl=Vue.http.defaults.baseURL+'/h9-weixin/#/index'
       console.log(redirectUrl)
       console.log("base64=="+encode(redirectUrl))
-      window.location.href='h9/api/common/wechat/code?url='+encode(redirectUrl)
+      //window.location.href='/sh/ja/v1/wechat/auth?autoLogin=true&url='+encode(wxRedirectUrl)
+      window.location.href='/h9/api/common/wechat/code?url='+encode(redirectUrl)
     },
     weChatLogin:function(){
       let self=this;
