@@ -73,6 +73,7 @@ export default {
     console.log("self.WxCode="+self.WxCode)
     _g.toastMsg('error', self.WxCode)
     if(self.WxCode){
+      console.log("111111111111")
        _g.toastMsg('error', '11111111111111!')
       self.weChatLogin();
     }else{
@@ -92,8 +93,10 @@ export default {
     weChatLogin:function(){
       let self=this;
       _g.toastMsg('error', 'weChatLogin!')
+       console.log('weChatLogin!')
       self.$http.post('h9/api/user/common/wechat/'+self.WxCode)
       .then(function(res) {
+        console.log('code======'+res.data.code)
          _g.toastMsg('error', res.data.code)
         if(res.data.code==0){
           localStorage.setItem("_user", JSON.stringify(res.data.data));
