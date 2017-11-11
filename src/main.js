@@ -205,6 +205,7 @@ Vue.http.interceptors.request.use(
 });
 Vue.http.interceptors.response.use(
   response => {
+    console.log(response)
     if(response.status==200){
       store.state.hasNet=true
     }

@@ -73,10 +73,10 @@ export default {
     console.log("self.WxCode="+self.WxCode)
     _g.toastMsg('error', self.WxCode)
     if(self.WxCode){
-      console.log("weChatLogin")
+      console.log("weChatLogin"+self.WxCode)
       self.weChatLogin();
     }else{
-      console.log("getWxCode"+self.WxCode )
+      console.log("getWxCode" )
       self.getWxCode()
     }
     
@@ -91,17 +91,18 @@ export default {
     },
     weChatLogin:function(){
       let self=this;
-      console.log('weChatLogin!')
-      self.$http.get('h9/api/wechat/login?code='+self.WxCode)
-      .then(function(res) {
-         console.log('code======'+res)
-         console.log('code======'+res.data.code)
+      console.log('weChatLogin!'+self.WxCode)
+      //self.$http.get('h9/api/wechat/login?code='+self.WxCode)
+      //.then(function(res) {
+        window.location.href=Vue.http.defaults.baseURL+'h9/api/wechat/login?code='+self.WxCode
+         //console.log('code======'+res)
+         //console.log('code======'+res.data.code)
         // if(res.data.code==0){
         //   localStorage.setItem("_user", JSON.stringify(res.data.data));
         //   Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
         //   self.init();
         // }
-      })
+     // })
     },
      init(){
         let self=this;
