@@ -47,7 +47,10 @@ export default [
       component (resolve) {require(['@/views/account/purse'], resolve)} //我的钱包
     },{
       path:'/account/setting',
-      component (resolve) {require(['@/views/account/setting'], resolve)} //我的钱包  
+      component (resolve) {require(['@/views/account/setting'], resolve)} //设置
+    },{
+      path:'/account/problems',
+      component (resolve) {require(['@/views/account/problems'], resolve)} //常见问题   
     },{
       path:'/account/purseParticulars',
       component (resolve) {require(['@/views/account/purseParticulars'], resolve)} //钱包明细

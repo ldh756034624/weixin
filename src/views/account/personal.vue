@@ -100,7 +100,7 @@ export default {
     }
   },
    components: {
-    Flexbox, FlexboxItem,Group,Cell,Bottombar,Cell
+    Flexbox, FlexboxItem,Group,Cell,Bottombar
   },
 }
 

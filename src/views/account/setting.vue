@@ -1,13 +1,34 @@
 <template>
-	<div class="page versionPage">
+	<div class="page settingPage">
+    <group class='settingBox'>
+
+    <cell title="常见问题" link='/account/problems' is-link></cell>
     <p class="flexBox">版本信息 <span class='flex1 alignR'>Ver 1.0</span></p>
+    </group>
     <x-button class='bottomBtn gradientBtn' @click.native="">退出当前帐号</x-button>
     
   </div>
 </template>
+<script>
+import { Group,Cell,XButton} from 'vux'
+export default {
+  mounted(){
+    this.setTitle('设置');
+  },
+  data () {
+    return {
+    }
+  },
+  methods:{
+  },
+   components: {
+    Group,Cell,XButton
+  },
+}
 
+</script>
 <style scoped lang='less'>
-  .versionPage{
+  .settingPage{
     background: #fff;
     .flexBox{
       padding: 30/40rem;
@@ -27,5 +48,18 @@
     width: 100%;
     text-align: center;
     font-size: 32/40rem;
+  }
+</style>
+<style lang='less'>
+  .settingBox{
+    .weui-cells:before,.weui-cells:after {
+      border:none;
+    }
+    .weui-cell{
+      padding: 30/40rem;
+    }
+    .vux-label{
+      font-size: 30/40rem;
+    }
   }
 </style>
