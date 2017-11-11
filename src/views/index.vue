@@ -94,15 +94,11 @@ export default {
       console.log('weChatLogin!'+self.WxCode)
       self.$http.get('h9/api/wechat/login?code='+self.WxCode)
       .then(function(res) {
-        console.log('code======'+res)
-        //window.location.href=Vue.http.defaults.baseURL+'/h9/api/wechat/login?code='+self.WxCode
-         //console.log('code======'+res)
-         //console.log('code======'+res.data.code)
-        // if(res.data.code==0){
-        //   localStorage.setItem("_user", JSON.stringify(res.data.data));
-        //   Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
-        //   self.init();
-        // }
+        if(res.data.code==0){
+          localStorage.setItem("_user", JSON.stringify(res.data.data));
+          Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
+          self.init();
+        }
       })
     },
      init(){
