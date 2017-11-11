@@ -83,7 +83,7 @@ export default {
       console.log(redirectUrl)
       console.log("base64=="+encode(redirectUrl))
       //window.location.href='/sh/ja/v1/wechat/auth?autoLogin=true&url='+encode(wxRedirectUrl)
-      window.location.href='/h9/api/common/wechat/code?url='+encode(redirectUrl)
+      window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
     },
     weChatLogin:function(){
       let self=this;
