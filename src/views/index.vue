@@ -70,7 +70,8 @@ export default {
     let self=this;
     self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
-    
+    console.log("self.WxCode="+self.WxCode)
+    _g.toastMsg('error', self.WxCode)
     if(self.WxCode){
        _g.toastMsg('error', '11111111111111!')
       self.weChatLogin();
