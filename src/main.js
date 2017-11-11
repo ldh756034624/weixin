@@ -192,6 +192,9 @@ Vue.http.defaults.headers['client'] = '3'
 // Vue.http.defaults.headers.token = userdata ? userdata.token : ''
 Vue.http.interceptors.request.use(
   config => {
+    console.log("config=")
+    console.log(config)
+    console.log(config.url)
     if (JSON.parse(localStorage.getItem('_user'))) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
       config.headers.token = JSON.parse(localStorage.getItem('_user')).token;
     } else {
@@ -218,9 +221,6 @@ Vue.http.interceptors.response.use(
       }, 1500)
     }
     return response;
-  },
-  err =>{
-    _g.toastMsg('error', '出错了')
   },
   error => {
     if (error.response) {
