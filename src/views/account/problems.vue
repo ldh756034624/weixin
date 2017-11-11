@@ -2,7 +2,7 @@
 	<div class="page problemPage">
     <group class='problemBox'>
 
-      <cell title="问题" link='' is-link></cell>
+      <cell :title="item.title"  :link="{path:'/account/articleDetail',query:{id:item.articleId}}" v-for='item in problemList' is-link></cell>
       <cell title="问题" link='' is-link></cell>
     </group>
     
@@ -13,12 +13,23 @@ import { Group,Cell} from 'vux'
 export default {
   mounted(){
     this.setTitle('常见问题');
+    this.init();
   },
   data () {
     return {
+      problemList:[],
     }
   },
   methods:{
+    init(){
+      let self = this
+      self.$http.get('h9/api/user/help')
+        .then(function(res) {
+          if(res.data.code==0){
+              self.problemList=res.data.data 
+          }
+        })
+    }
   },
    components: {
     Group,Cell

@@ -81,11 +81,8 @@ export default {
       let self=this;
       var redirectUrl=Vue.http.defaults.baseURL+'/#/index'
       console.log(redirectUrl)
-      self.$http.get('h9/api/common/wechat/code?url='+encode(redirectUrl))
-      .then(function(res) {
-        if(res.data.code==0){
-        }
-      })
+      console.log("base64=="+encode(redirectUrl))
+      window.location.href='h9/api/common/wechat/code?url='+encode(redirectUrl)
     },
     weChatLogin:function(){
       let self=this;
