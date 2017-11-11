@@ -192,9 +192,6 @@ Vue.http.defaults.headers['client'] = '3'
 // Vue.http.defaults.headers.token = userdata ? userdata.token : ''
 Vue.http.interceptors.request.use(
   config => {
-    console.log("config=")
-    console.log(config)
-    console.log(config.url)
     if (JSON.parse(localStorage.getItem('_user'))) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
       config.headers.token = JSON.parse(localStorage.getItem('_user')).token;
     } else {
@@ -207,12 +204,6 @@ Vue.http.interceptors.request.use(
 });
 Vue.http.interceptors.response.use(
   response => {
-    console.log(response)
-    console.log(response.config.url)
-    console.log(response.data)
-    if (!response) {
-
-    }
     if(response.status==200){
       store.state.hasNet=true
     }
@@ -228,7 +219,6 @@ Vue.http.interceptors.response.use(
     if (error.response) {
       _g.toastMsg('error', '出错了')
     }
-    console.log(error.response)
     return Promise.reject(error)   // 返回接口返回的错误信息
 });
 

@@ -70,13 +70,9 @@ export default {
     let self=this;
     self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
-    console.log("self.WxCode="+self.WxCode)
-    _g.toastMsg('error', self.WxCode)
     if(self.WxCode){
-      console.log("weChatLogin"+self.WxCode)
       self.weChatLogin();
     }else{
-      console.log("getWxCode" )
       self.getWxCode()
     }
     
@@ -85,13 +81,10 @@ export default {
     getWxCode:function(){
       let self=this;
       var redirectUrl=Vue.http.defaults.baseURL+'/h9-weixin/#/index'
-      console.log(redirectUrl)
-      console.log("base64=="+encode(redirectUrl))
       window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
     },
     weChatLogin:function(){
       let self=this;
-      console.log('weChatLogin!'+self.WxCode)
       self.$http.get('h9/api/wechat/login?code='+self.WxCode)
       .then(function(res) {
         if(res.data.code==0){
