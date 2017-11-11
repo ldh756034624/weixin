@@ -211,6 +211,9 @@ Vue.http.interceptors.response.use(
     console.log(response)
     console.log(response.config.url)
     console.log(response.data)
+    if (!response) {
+
+    }
     if(response.status==200){
       store.state.hasNet=true
     }
@@ -226,7 +229,8 @@ Vue.http.interceptors.response.use(
     if (error.response) {
       _g.toastMsg('error', '出错了')
     }
-    return Promise.reject(error.response.data)   // 返回接口返回的错误信息
+    console.log(error.response)
+    return Promise.reject(error)   // 返回接口返回的错误信息
 });
 
 wx.getLocation({
