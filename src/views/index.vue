@@ -72,8 +72,10 @@ export default {
     self.WxCode = self.$route.query.code;
     
     if(self.WxCode){
+       _g.toastMsg('error', '11111111111111!')
       self.weChatLogin();
     }else{
+       _g.toastMsg('error', '22222222222!')
       self.getWxCode()
     }
     
@@ -88,8 +90,10 @@ export default {
     },
     weChatLogin:function(){
       let self=this;
-      self.$http.get('h9/api/user/common/wechat/'+self.WxCode)
+      _g.toastMsg('error', 'weChatLogin!')
+      self.$http.post('h9/api/user/common/wechat/'+self.WxCode)
       .then(function(res) {
+         _g.toastMsg('error', res.data.code)
         if(res.data.code==0){
           localStorage.setItem("_user", JSON.stringify(res.data.data));
           Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
