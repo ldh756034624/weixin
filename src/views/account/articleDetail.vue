@@ -1,7 +1,7 @@
 <template>
 	<div class="page articlePage">
     <p class="title">{{articleData.title}}</p>
-    <p class="date"><span>{{articleData.createTime}}</span>{{articleData.userName}}</p>
+    <p class="date"><span>{{articleData.startTime}}</span>{{articleData.userName}}</p>
     <div class="content">{{articleData.content}}</div>
   </div>
 </template>

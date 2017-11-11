@@ -94,7 +94,7 @@ export default {
       let self=this;
       _g.toastMsg('error', 'weChatLogin!')
        console.log('weChatLogin!')
-      self.$http.get('h9/api/user/common/wechat/code?code='+self.WxCode)
+      self.$http.get('h9/api/wechat/login?code='+self.WxCode)
       .then(function(res) {
         console.log('code======'+res.data.code)
          _g.toastMsg('error', res.data.code)
