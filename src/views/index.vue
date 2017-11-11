@@ -94,7 +94,7 @@ export default {
       console.log('weChatLogin!'+self.WxCode)
       //self.$http.get('h9/api/wechat/login?code='+self.WxCode)
       //.then(function(res) {
-        window.location.href=Vue.http.defaults.baseURL+'h9/api/wechat/login?code='+self.WxCode
+        window.location.href=Vue.http.defaults.baseURL+'/h9/api/wechat/login?code='+self.WxCode
          //console.log('code======'+res)
          //console.log('code======'+res.data.code)
         // if(res.data.code==0){
