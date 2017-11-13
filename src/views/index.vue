@@ -70,12 +70,12 @@ export default {
     let self=this;
     self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
-    // if(self.WxCode){
-    //   self.weChatLogin();
-    // }else{
-    //   self.getWxCode()
-    // }
-    self.init();
+    if(self.WxCode){
+      self.weChatLogin();
+    }else{
+      self.getWxCode()
+    }
+    //self.init();
     
   },
    methods: {
