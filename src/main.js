@@ -9,7 +9,7 @@ import RouterConfig from './router/index'
 import App from './App'
 import Home from './components/HelloFromVux'
 import { AlertPlugin, ToastPlugin, AjaxPlugin } from 'vux'
-import wx from 'weixin-js-sdk'
+//import wx from 'weixin-js-sdk'
 import _g from './helpers/global'
 
 Vue.use(AlertPlugin)
@@ -119,15 +119,15 @@ Vue.mixin({
         },
         getLocal: function(){
           console.log("main11==================")
-          wx.getLocation({
-              type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-              success: function (res) {
-                console.log("main==================")
-                console.log(res)
-                  this.addr.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-                  this.addr.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-              }
-          });
+          // wx.getLocation({
+          //     type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+          //     success: function (res) {
+          //       console.log("main==================")
+          //       console.log(res)
+          //         this.addr.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+          //         this.addr.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+          //     }
+          // });
         }
     },
 

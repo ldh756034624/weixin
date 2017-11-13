@@ -99,7 +99,7 @@ export default {
         timestamp: config.timestamp,
         nonceStr: config.nonceStr,
         signature: config.signature,
-        jsApiList: ['getLocation','scanQRCode']
+        jsApiList: ['getLocation','scanQRCode','onMenuShareTimeline', 'onMenuShareAppMessage','onMenuShareQQ','chooseImage','uploadImage','downloadImage']
       });
       wx.ready(function(){
           console.log("ok")

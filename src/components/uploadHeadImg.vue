@@ -33,7 +33,7 @@
 import {baseCode} from '@/util/base64Code'
 import { XInput} from 'vux'
 import VueCropper from 'vue-cropper'
-import wx from 'weixin-js-sdk'
+//import wx from 'weixin-js-sdk'
 export default {
   mounted(){
     let self=this;
