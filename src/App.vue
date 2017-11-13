@@ -79,24 +79,15 @@ export default {
         nonceStr: config.nonceStr,
         signature: config.signature,
         jsApiList: ['getLocation','scanQRCode'],
-        success: function (res) {
-          console.log("sdfsaf")
-        },
-        faile: function (res) {
-          console.log("000000")
-        }
       });
       wx.ready(function(){
-          console.log("ok")
-          _g.toastMsg('error', 'ok')
-
           wx.getLocation({
               type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
               success: function (res) {
-                console.log("main==================")
                 console.log(res)
                   this.addr.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                   this.addr.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                  console.log(this.addr.latitude)
               }
           });
       });

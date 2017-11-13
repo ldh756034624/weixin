@@ -76,6 +76,8 @@ export default {
               .then(function(res) {
                 if(res.data.code==0){
                   self.$router.push({path:'/active/hongbaoCode',query:{'code':result}})
+                }else{
+                   _g.toastMsg('error', res.data.msg)
                 }
               })
             }
