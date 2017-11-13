@@ -42,11 +42,17 @@ export default {
     },
     prizeFn:function(){
       let self=this;
+      if(!self.code){
+        _g.toastMsg('error', '请输入兑奖码');
+        return;
+      }
       //imei手机唯一标识没传
       self.$http.get('h9/lottery/qr?code='+self.code+'&longitude='+this.addr.latitude+'&latitude='+this.addr.longitude)
         .then(function(res) {
           if(res.data.code==0){
             self.$router.push({path:'/active/hongbaoCode',query:{'code':self.code}})
+          }else{
+            _g.toastMsg('error', res.data.msg)
           }
         })
     },

@@ -24,8 +24,8 @@
         <p>很遗憾,您未中奖</p>
       </div>
       <div class="prizeBtnBox" :class="{'prizeBtnMrg' : prizeData.money===0}">
-        <x-button mini class='miniBtn'  @click.native="">进入社区</x-button>
-        <x-button mini class='miniBtn'  @click.native="">下载APP</x-button>
+        <x-button mini class='miniBtn'  @click.native="goIndex">进入社区</x-button>
+        <x-button mini class='miniBtn'  @click.native="downApp">下载APP</x-button>
       </div>
     </div>
     <div class="prizerBox"> 
@@ -112,7 +112,20 @@ export default {
             }
           })
       }
-    }
+    },
+    goIndex:function(){
+       this.$router.push({path:'/index'})
+    },
+    downApp:function(){
+      var u = navigator.userAgent;
+      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+      var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+      if(isAndroid){
+          self.isChecking=true;
+      }else{
+          window.location = "https://itunes.apple.com/cn/app/%E7%8C%AA%E7%8C%AA%E9%9B%86%E5%B8%82/id1173387307?mt=8" 
+      }
+    },
   },
    components: {
     XInput,XButton,codeAlert

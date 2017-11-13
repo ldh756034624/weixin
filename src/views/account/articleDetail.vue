@@ -2,7 +2,8 @@
 	<div class="page articlePage">
     <p class="title">{{articleData.title}}</p>
     <p class="date"><span>{{articleData.startTime}}</span>{{articleData.userName}}</p>
-    <div class="content">{{articleData.content}}</div>
+    <div class="content" v-if="isHtml" v-html='articleData.content'></div>
+    <div class="content" v-else>{{articleData.content}}</div>
   </div>
 </template>
 <script>
@@ -16,6 +17,7 @@ export default {
     return {
       id:this.$route.query.id,
       articleData:{},
+      isHtml:false,
     }
   },
   methods:{
@@ -25,6 +27,11 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
               self.articleData=res.data.data 
+              if(self.articleData.content.indexOf('div')!=-1 || self.articleData.content.indexOf('p')!=-1){
+                self.isHtml=true
+              }else{
+                self.isHtml=false
+              }
           }
         })
     }
@@ -54,8 +61,20 @@ export default {
     }
     .content{
       color: #666;
-      font-size: 28/40rem;
+      font-size: 28/40rem!important;
       line-height: 46/40rem;
+    }
+  }
+</style>
+<style lang='less'>
+  .articlePage{
+    .content{
+      color: #666;
+      font-size: 28/40rem!important;
+      line-height: 46/40rem;
+      p{
+        font-size: 28/40rem!important;
+      }
     }
   }
 </style>

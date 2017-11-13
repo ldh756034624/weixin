@@ -72,7 +72,10 @@ export default {
     self.WxCode = self.$route.query.code;
     let userObj = JSON.parse(localStorage.getItem('_user'))
     if(self.WxCode){
+      console.log("userObj"+userObj)
+      console.log(userObj)
       if(!userObj){
+        console.log(userObj)
         self.weChatLogin();
       }else{
         self.init();

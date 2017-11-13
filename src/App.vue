@@ -89,16 +89,15 @@ export default {
     },
     wxSign: function(){   //获取微信分享签名参数
       let self = this
-      // let rcmurl = "/sh/ja/v1/share/auth";
-      // self.$http.post(rcmurl,{"url":location.href})
-      //   .then(function(res) {
-      //     if(res.data.statusCode==0){
-      //       self.wxConfig(res.data.data);
-      //     } else {
-      //       self.toast.msg = res.data.msg;
-      //       self.toast.show = true;
-      //     }
-      //   })
+      let rcmurl = "/h9/api/wechat/config";
+      self.$http.post(rcmurl,{"url":location.href})
+        .then(function(res) {
+          if(res.data.statusCode==0){
+            self.wxConfig(res.data.data);
+          } else {
+            _g.toastMsg('error', res.data.msg)
+          }
+        })
     },
     wxConfig: function(config){   //微信分享参数初始化
       let self = this;
@@ -108,9 +107,9 @@ export default {
         timestamp: config.timestamp,
         nonceStr: config.nonceStr,
         signature: config.signature,
-        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage','onMenuShareQQ','scanQRCode','chooseImage','uploadImage','downloadImage']
+        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage','onMenuShareQQ','getLocation','scanQRCode']
       });
-      this.mxShare();
+      this.getLocal();
     }
   }
 }

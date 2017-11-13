@@ -1,49 +1,51 @@
 <template>
 	<div class="page hongbaoPage">
-    <div class="exchangeCont">
-      <div class="flexBox">
-        <img class="groupLogo" src="../../assets/img/active/logo_huijiu@2x.png"/>
-        <p class="flex1 alignR redFt">
-          <span>进入社区</span>
-        </p>
-      </div>
-      
-      <div class="hongBaoImgBox" v-if="prizeData.roomUser">
-        <qrcode :value="codeUrl" type="img"></qrcode>
-        <p>叫上好友扫一扫,有钱大家一起分!</p>
-      </div>
-      <div v-else>
-        <img class="wine" src="../../assets/img/active/jiajiu@2x.png"/>
-        <div class="logoImgBox">
-          <img  src="../../assets/img/active/logo_gaolujia@2x.png"/>
+    <div v-if='!lottery'>
+      <div class="exchangeCont">
+        <div class="flexBox">
+          <img class="groupLogo" src="../../assets/img/active/logo_huijiu@2x.png"/>
+          <p class="flex1 alignR redFt">
+            <span>进入社区</span>
+          </p>
         </div>
+        
+        <div class="hongBaoImgBox" v-if="prizeData.roomUser">
+          <qrcode :value="codeUrl" type="img"></qrcode>
+          <p>叫上好友扫一扫,有钱大家一起分!</p>
+        </div>
+        <div v-else>
+          <img class="wine" src="../../assets/img/active/jiajiu@2x.png"/>
+          <div class="logoImgBox">
+            <img  src="../../assets/img/active/logo_gaolujia@2x.png"/>
+          </div>
+        </div>
+        
+        <div class="actorBox">
+          <flexbox :gutter="0" wrap="wrap">
+            <flexbox-item :span="1/4" v-for='item in prizeData.lotteryUsers' @click.native=''>
+              <div class="actorHeadImgBox">
+                <img :src="item.avatar"> 
+              </div>
+            </flexbox-item>
+          </flexbox>  
+        </div>
+        <div v-if="prizeData.roomUser" class="prizeBtnBox">
+          <p>开奖倒计时 <span>{{countDownTime}}</span></p>
+          <x-button mini class='prizeBtn'  @click.native="StarPrizeFn">开始抽奖</x-button>
+        </div>
+        <p v-else class="prizeTip">等待抽奖</p>
       </div>
-      
-      <div class="actorBox">
-        <flexbox :gutter="0" wrap="wrap">
-          <flexbox-item :span="1/4" v-for='item in prizeData.lotteryUsers' @click.native=''>
-            <div class="actorHeadImgBox">
-              <img :src="item.avatar"> 
-            </div>
-          </flexbox-item>
-        </flexbox>  
+      <div class="strategyText">
+        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
+        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
+        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
+        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
+        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
+        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
+        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
+        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
+        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
       </div>
-      <div v-if="prizeData.roomUser" class="prizeBtnBox">
-        <p>开奖倒计时 <span>{{countDownTime}}</span></p>
-        <x-button mini class='prizeBtn'  @click.native="StarPrizeFn">开始抽奖</x-button>
-      </div>
-      <p v-else class="prizeTip">等待抽奖</p>
-    </div>
-    <div class="strategyText">
-      <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-      <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-      <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-      <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-      <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-      <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-      <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-      <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-      <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
     </div>
   </div>
 </template>
@@ -56,13 +58,13 @@ export default {
     self.init();
     self.timer=setInterval(()=>{
       self.init();
-    },self.refreshTime*1000)
+    },self.refreshTime*10000)
   },
   data () {
     return {
       prizeData:{},
       isFirst:false,
-      lottery:false, //是否开奖
+      lottery:true, //是否开奖
       roomUser:false, //是否房主
       code:this.$route.query.code,
       timer:null,
@@ -80,13 +82,15 @@ export default {
       self.$http.get('/h9/lottery/room/'+self.code)
         .then(function(res) {
           if(res.data.code==0){
-            self.prizeData=res.data.data
+            self.prizeData=res.data.data;
+            self.lottery=self.prizeData.lottery;
             if(res.data.data.roomUser){
               self.codeUrl=res.data.data.qrCode
             }
-            self.refreshTime=self.prizeData.refreshTime
+            self.refreshTime=self.prizeData.refreshTime*1000
             if(res.data.data.lottery){
-              self.$router.push({path:'/active/prizeResult',query:{'code':self.code}})
+              clearInterval(self.timer); //清除  
+              self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
             }else{
               //调用函数：
               self.timestr=res.data.data.differentDate
@@ -101,7 +105,8 @@ export default {
       self.$http.get('/h9/lottery/'+self.code+'/start')
         .then(function(res) {
           if(res.data.code==0){
-            self.$router.push({path:'/active/prizeResult',query:{'code':self.code}})
+            clearInterval(self.timer); //清除  
+            self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
           }else{
             _g.toastMsg("error",res.data.msg)
           }
@@ -124,7 +129,7 @@ export default {
           if(hour=='00'&& min=='00'){
             if(sec=='00'){
               self.init();
-              clearInterval(a); //这里是让等于零时清除  
+              //clearInterval(a); //这里是让等于零时清除  
             }else{
               self.countDownTime = sec+'秒';
             }
