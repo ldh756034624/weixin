@@ -90,9 +90,9 @@ export default {
     wxSign: function(){   //获取微信分享签名参数
       let self = this
       let rcmurl = "/h9/api/wechat/config";
-      self.$http.post(rcmurl,{"url":location.href})
+      self.$http.get(rcmurl)
         .then(function(res) {
-          if(res.data.statusCode==0){
+          if(res.data.code==0){
             self.wxConfig(res.data.data);
           } else {
             _g.toastMsg('error', res.data.msg)
