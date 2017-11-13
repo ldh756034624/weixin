@@ -105,7 +105,7 @@ export default {
           console.log("ok")
           _g.toastMsg('error', 'ok')
 
-          this.getLocal();
+          self.getLocal();
       });
       wx.error(function(res){
           console.log("faile")
