@@ -2,7 +2,8 @@
 	<div class="page phoneRechargePage">
       <div class="page phoneRechargeCont">
       <div class="phoneNum">
-        <input type="tel" v-model='reChargePhoneNum'/>
+        <!-- <x-input type="tel" :value='reChargePhoneNum'></x-input> -->
+        <input type="tel" id="telInput" v-model='reChargePhoneNum'/>
         <img src="../../assets/img/account/recharge_icon_contacts@2x.png" />
       </div>
       <p class="phoneName">默认</p>
@@ -23,7 +24,7 @@
   </div>
 </template>
 <script>
-import {Group,Cell,Flexbox, FlexboxItem,XButton} from 'vux'
+import {Group,Cell,Flexbox, FlexboxItem,XButton,XInput} from 'vux'
 import codeAlert from '@/components/codeAlert'
 export default {
   mounted(){
@@ -50,7 +51,6 @@ export default {
               self.rechargeData=res.data.data 
              self.rechargeParams.id=self.rechargeData.priceList[0].id
              self.reChargePhoneNum=self.rechargeData.tel
-             self.rechargeParams.tel=self.rechargeData.tel
           }
         })
     },
@@ -59,6 +59,7 @@ export default {
       this.rechargeParams.id=item.id
     },
     rechargeFn:function(){
+      this.rechargeParams.tel=this.reChargePhoneNum
       if(!this.rechargeParams.tel){
         _g.toastMsg('error', '请输入手机号!')
         return;
@@ -86,7 +87,7 @@ export default {
     
   },
    components: {
-    Group,Cell,Flexbox, FlexboxItem,XButton,codeAlert
+    Group,Cell,Flexbox, FlexboxItem,XButton,XInput,codeAlert
   },
 }
 
@@ -106,6 +107,12 @@ export default {
         color: #333;
         border: none;
         width: 9rem;
+      }
+
+      #telInput:focus{
+        border:0!important;
+        border:none!important;
+        outline:none;
       }
       img{
         width: 60/40rem;
