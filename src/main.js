@@ -88,7 +88,9 @@ Vue.mixin({
             addr:{
               latitude:'0',
               longitude:'0',
-            }
+            },
+            latitude:0,
+            longitude:0,
         }
     },
     methods: {
@@ -123,9 +125,11 @@ Vue.mixin({
               success: function (res) {
                 console.log(res)
                 console.log('=============')
-                  console.log(this.addr.latitude)
-                  this.addr.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-                  this.addr.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                  console.log(this.latitude)
+                  this.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                  this.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                  console.log('======111=======')
+                  console.log(this.latitude)
               }
           });
           return this.addr;
