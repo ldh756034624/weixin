@@ -30,10 +30,6 @@ export default {
     let  self=this;
     self.setTitle('手机充值');
     self.init();
-    let userObj = JSON.parse(localStorage.getItem('_user'))
-    if(userObj){
-      self.reChargePhoneNum=userObj.tel
-    }
   },
   data () {
     return {
@@ -53,7 +49,8 @@ export default {
           if(res.data.code==0){
               self.rechargeData=res.data.data 
              self.rechargeParams.id=self.rechargeData.priceList[0].id
-              self.rechargeParams.tel=self.reChargePhoneNum
+             self.reChargePhoneNum=self.rechargeData.tel
+             self.rechargeParams.tel=self.rechargeData.tel
           }
         })
     },

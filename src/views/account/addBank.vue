@@ -85,6 +85,8 @@ export default {
               }else{
                 history.go(-1)
               }
+          }else{
+            _g.toastMsg('error',res.data.msg)
           }
         })
     },

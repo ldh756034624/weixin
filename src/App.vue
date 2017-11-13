@@ -105,13 +105,21 @@ export default {
           console.log("ok")
           _g.toastMsg('error', 'ok')
 
-          self.getLocal();
+          wx.getLocation({
+              type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+              success: function (res) {
+                console.log("main==================")
+                console.log(res)
+                  this.addr.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                  this.addr.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+              }
+          });
       });
       wx.error(function(res){
           console.log("faile")
           _g.toastMsg('error', 'faile')
       });
-      this.getLocal();
+      //this.getLocal();
     }
   }
 }
