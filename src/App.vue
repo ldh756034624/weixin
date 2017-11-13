@@ -35,29 +35,29 @@ export default {
     let self=this;
     self.wxSign();
   },
-  updated: function () {
-    let self=this;
-    self.hasNetA=self.$store.getters.hasNet;
-    self.dialogShow=self.$store.getters.dialogUnShow;
-    self.dialogText=self.$store.getters.dialogUnText;
-    if(self.$route.path.indexOf('/account/personal')!=-1 ||  self.$route.path.indexOf('/index')!=-1 ||  self.$route.path.indexOf('/detaile')!=-1){
-      self.noLogin =false
-    }else{
-      if(JSON.parse(localStorage.getItem('_user'))){
-        self.noLogin =false
-      }else{
-        self.noLogin =true
-      }
-    }
+  // updated: function () {
+  //   let self=this;
+  //   self.hasNetA=self.$store.getters.hasNet;
+  //   self.dialogShow=self.$store.getters.dialogUnShow;
+  //   self.dialogText=self.$store.getters.dialogUnText;
+  //   if(self.$route.path.indexOf('/account/personal')!=-1 ||  self.$route.path.indexOf('/index')!=-1 ||  self.$route.path.indexOf('/detaile')!=-1){
+  //     self.noLogin =false
+  //   }else{
+  //     if(JSON.parse(localStorage.getItem('_user'))){
+  //       self.noLogin =false
+  //     }else{
+  //       self.noLogin =true
+  //     }
+  //   }
     
-  },
-  beforeUpdate: function () {
-    let self=this;
-    //勿删
-    self.$store.getters.hasNet;
-    self.$store.getters.dialogUnShow;
-    self.$store.getters.dialogUnText;
-  },
+  // },
+  // beforeUpdate: function () {
+  //   let self=this;
+  //   //勿删
+  //   self.$store.getters.hasNet;
+  //   self.$store.getters.dialogUnShow;
+  //   self.$store.getters.dialogUnText;
+  // },
   data(){
     return {
       text:'网络出故障了,点击重新加载哦～',
@@ -73,19 +73,11 @@ export default {
   methods: {
   	isTabbar(){
   	  let path = this.$route.path;
-     if(path == '/' || /index/.test(path) || /personal/.test(path) || /message/.test(path)){
+     if(path == '/' || /index/.test(path) || /account/.test(path) || /shop/.test(path)){
   	  	return true;
   	  }else{
   	  	return false;
   	  }
-    },
-    gologin:function(){
-      let self=this;
-      self.$store.state.dialogUnShow=true;
-      self.$store.state.dialogUnText=''
-      delete localStorage._user;
-      delete localStorage.token;
-      self.$router.push({path:'/login'})
     },
     wxSign: function(){   //获取微信分享签名参数
       let self = this
@@ -107,7 +99,17 @@ export default {
         timestamp: config.timestamp,
         nonceStr: config.nonceStr,
         signature: config.signature,
-        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage','onMenuShareQQ','getLocation','scanQRCode']
+        jsApiList: ['getLocation','scanQRCode']
+      });
+      wx.ready(function(){
+          console.log("ok")
+          _g.toastMsg('error', 'ok')
+
+          this.getLocal();
+      });
+      wx.error(function(res){
+          console.log("faile")
+          _g.toastMsg('error', 'faile')
       });
       this.getLocal();
     }
