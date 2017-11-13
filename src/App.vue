@@ -35,29 +35,6 @@ export default {
     let self=this;
     self.wxSign();
   },
-  // updated: function () {
-  //   let self=this;
-  //   self.hasNetA=self.$store.getters.hasNet;
-  //   self.dialogShow=self.$store.getters.dialogUnShow;
-  //   self.dialogText=self.$store.getters.dialogUnText;
-  //   if(self.$route.path.indexOf('/account/personal')!=-1 ||  self.$route.path.indexOf('/index')!=-1 ||  self.$route.path.indexOf('/detaile')!=-1){
-  //     self.noLogin =false
-  //   }else{
-  //     if(JSON.parse(localStorage.getItem('_user'))){
-  //       self.noLogin =false
-  //     }else{
-  //       self.noLogin =true
-  //     }
-  //   }
-    
-  // },
-  // beforeUpdate: function () {
-  //   let self=this;
-  //   //勿删
-  //   self.$store.getters.hasNet;
-  //   self.$store.getters.dialogUnShow;
-  //   self.$store.getters.dialogUnText;
-  // },
   data(){
     return {
       text:'网络出故障了,点击重新加载哦～',
@@ -85,6 +62,7 @@ export default {
       self.$http.get(rcmurl)
         .then(function(res) {
           if(res.data.code==0){
+            console.log(res.data.data)
             self.wxConfig(res.data.data);
           } else {
             _g.toastMsg('error', res.data.msg)
@@ -93,13 +71,47 @@ export default {
     },
     wxConfig: function(config){   //微信分享参数初始化
       let self = this;
+      console.log(config)
       wx.config({
         debug: true,
         appId: config.appId,
         timestamp: config.timestamp,
         nonceStr: config.nonceStr,
         signature: config.signature,
-        jsApiList: ['getLocation','scanQRCode','onMenuShareTimeline', 'onMenuShareAppMessage','onMenuShareQQ','chooseImage','uploadImage','downloadImage']
+        jsApiList: [ 'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+        'hideMenuItems',
+        'showMenuItems',
+        'hideAllNonBaseMenuItem',
+        'showAllNonBaseMenuItem',
+        'translateVoice',
+        'startRecord',
+        'stopRecord',
+        'onRecordEnd',
+        'playVoice',
+        'pauseVoice',
+        'stopVoice',
+        'uploadVoice',
+        'downloadVoice',
+        'chooseImage',
+        'previewImage',
+        'uploadImage',
+        'downloadImage',
+        'getNetworkType',
+        'openLocation',
+        'getLocation',
+        'hideOptionMenu',
+        'showOptionMenu',
+        'closeWindow',
+        'scanQRCode',
+        'chooseWXPay',
+        'openProductSpecificView',
+        'addCard',
+        'chooseCard',
+        'openCard']
       });
       wx.ready(function(){
           console.log("ok")
