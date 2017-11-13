@@ -70,8 +70,13 @@ export default {
     let self=this;
     self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
+    let userObj = JSON.parse(localStorage.getItem('_user'))
     if(self.WxCode){
-      self.weChatLogin();
+      if(!userObj){
+        self.weChatLogin();
+      }else{
+        self.init();
+      }
     }else{
       self.getWxCode()
     }
@@ -190,7 +195,7 @@ export default {
     font-size: 28/40rem;
   }
   .articleTip{
-    font-size: 10/40rem;
+    font-size: 12/40rem;
     color: #999;
     margin-top: 20/40rem;
   }
