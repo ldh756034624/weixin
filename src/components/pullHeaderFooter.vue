@@ -43,8 +43,8 @@
 	    display: block;
 	    width: 3rem; 
 	    height: 3rem;
-	    background: url('../assets/img/blank/isBottom.png') 0 0 no-repeat;
-	    background-size: 100%;
+	    /*background: url('../assets/img/blank/isBottom.png') 0 0 no-repeat;
+	    background-size: 100%;*/
 	}
 	.min-loaging{
 		display: inline-block;

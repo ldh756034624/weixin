@@ -36,6 +36,9 @@ export default [
     	name:'TestVux',
     	component (resolve) {require(['@/components/HelloFromVux'], resolve)}
     },{
+      path:'/shop',
+      component (resolve) {require(['@/views/account/shop'], resolve)} //商城
+    },{
       path:'/account/personal',
       name:'accountPersonal',
       meta: { auth: true },

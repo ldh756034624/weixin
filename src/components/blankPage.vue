@@ -2,13 +2,18 @@
 		<div class="tableBox">
 			<div class="cellbox" >
 				<div class="blackCont">
-          <!-- <img :src='images' v-show='!isNoImg'>
-          <img src='../assets/img/blank/net.png' v-if='isNoImg==true && noLogin==false'>
-          <img src='../assets/img/blank/noLogin.png' v-if='isNoImg==true &&noLogin==true'>
-					<p>{{text}}</p>
-          <x-button mini v-show='showReload' class='blankPageBtn' @click.native="reload">重新加载</x-button>
-          <x-button mini v-show='noLogin' class='blankPageBtn' @click.native="goLogin">去登录</x-button> -->
-          暂无数据
+          <div v-if="blankType==='order'">
+            <img src='../assets/img/blank/img_ordererror@2x.png' >
+            <p>还未下单</p>
+          </div>
+          <div v-if="blankType==='cupon'">
+            <img src='../assets/img/blank/img_couponerror@2x.png' >
+            <p>还未获得卡券</p>
+          </div>
+          <div v-if="blankType==='particulars'">
+            <img src='../assets/img/blank/img_detailerror@2x.png' >
+            <p>目前没有交易明细</p>
+          </div>
 				</div>
 			</div>
 		</div>
@@ -74,7 +79,7 @@ export default {
       margin-top: -120/40rem;
     }
     .blackCont img{
-      width: 330/40rem;
+      width: 250/40rem;
       margin-top: -150/40rem;
     }
     .blackCont p{

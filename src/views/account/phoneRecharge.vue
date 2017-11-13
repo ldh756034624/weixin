@@ -62,8 +62,6 @@ export default {
       this.rechargeParams.id=item.id
     },
     rechargeFn:function(){
-      console.log("==="+this.rechargeParams.tel)
-      console.log("==="+JSON.parse(localStorage.getItem('_user')).tel)
       if(!this.rechargeParams.tel){
         _g.toastMsg('error', '请输入手机号!')
         return;
@@ -81,7 +79,7 @@ export default {
           .then(function(res) {
             if(res.data.code==0){
                 _g.toastMsg('error', '充值成功!')
-                self.$router.push({path:'/account/personal'})
+                self.$router.replace({path:'/account/result',query:{type:'recharge',money:res.data.data.money,tel:self.rechargeParams.tel}})
             }else{
               _g.toastMsg('error', res.data.msg)
             }

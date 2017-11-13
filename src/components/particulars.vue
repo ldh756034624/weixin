@@ -65,7 +65,7 @@ export default {
     return {
       particularsData:[],
       hasItem: false,
-      type:'noItem'
+      type:'particulars'
     }
   },
   methods:{

@@ -70,11 +70,12 @@ export default {
     let self=this;
     self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
-    if(self.WxCode){
-      self.weChatLogin();
-    }else{
-      self.getWxCode()
-    }
+    // if(self.WxCode){
+    //   self.weChatLogin();
+    // }else{
+    //   self.getWxCode()
+    // }
+    self.init();
     
   },
    methods: {
@@ -113,7 +114,18 @@ export default {
         if((item.link).indexOf('http')!=-1){
           window.open(item.link)
         }else{
-          this.$router.push({path:item.link})
+          //抢红包 "link:"lottery"/滴滴兑换 "link:"exchange_didi"/手机充值"link:"exchange_telephoneFare"/查询真伪 “link”:"validate"
+          if(item.link==='lottery'){
+            this.$router.push({path:'/active/hongbao'})
+          }else if(item.link==='exchange_didi'){
+            this.$router.push({path:'/account/ddExchange'})
+          }else if(item.link==='exchange_telephoneFare'){
+            this.$router.push({path:'/account/phoneRecharge'})
+          }else if(item.link==='validate'){
+            this.$router.push({path:'/active/searchIsReally'})
+          }else{
+            this.$router.push({path:item.link})
+          }
         }
      }
 

@@ -30,7 +30,7 @@
               </div>
               <pull-header-footer :status-up="pullupStatus" :status-down="pulldownStatus"></pull-header-footer>
       </scroller>
-      <blankPage v-show='hasItem' :blankType='type'></blankPage>
+      <blankPage v-show='!hasItem' :blankType='type'></blankPage>
     </div>
   </div>
 </template>
@@ -47,7 +47,7 @@ export default {
     return {
       myOrderData:[],
       hasItem:false,
-      type:'noItem'
+      type:'order'
     }
   },
   methods:{

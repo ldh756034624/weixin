@@ -128,59 +128,12 @@ Vue.filter('price2', function (value) {
   return value.toFixed(2);
 })
 let userdata = JSON.parse(localStorage.getItem('_user'))
-// let token = '';
-// router.beforeEach((to, from, next) => {
-//   if (from.path == '/account/moreset') {
-//     token = ''
-//   }
-//   // 是否一级导航
-//   if (to.path.replace(/[^/]/g, '').length > 1) {
-//     router.app.isIndex = false
-//   } else {
-//     router.app.isIndex = true
-//   }
-//   // 验证是否登陆
-//   if (to.meta.auth) {
-//     if (!token) {
-//       userdata = JSON.parse(localStorage.getItem('_user'))
-//       if (userdata) {
-//         token = userdata.token
-//       }
-//     }
-//     if (token) {
-//       next()
-//     } else {
-//       _g.toastMsg('error', '未登录')
-//       setTimeout(() => {
-//         router.push({path: '/login?path=' + to.path,replace: true})
-//       }, 1500)
-//     }
-//   } else {
-//     next()
-//   }
-// })
-// router.afterEach((to, from, next) => {
-//   // 验证是否登陆
-//   if (to.meta.auth) {
-//     if (!token) {
-//       _g.toastMsg('error', '未登录')
-//       setTimeout(() => {
-//         router.push({path: '/login?path=' + to.path, replace: true})
-//       }, 1500)
-//     }
-//   }
-//   if (to.path.replace(/[^/]/g, '').length > 1) {
-//     router.app.isIndex = false
-//   } else {
-//     router.app.isIndex = true
-//   }
-// })
 //ajax 拦截   全局做判断
 let url = document.location.href.split('#')[0]
 let seturl = ''
 
-if (url.indexOf('weixin-usedgoods.thy360.com')!=-1) {
-  seturl = 'https://weixin-usedgoods.thy360.com'
+if (url.indexOf('weixin-test-h9.thy360.com')!=-1) {
+  seturl = 'https://weixin-test-h9.thy360.com'
 }else{
   seturl = 'https://weixin-dev-h9.thy360.com'
 }
@@ -225,6 +178,8 @@ Vue.http.interceptors.response.use(
 wx.getLocation({
     type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
     success: function (res) {
+      console.log("main==================")
+      console.log(res)
         this.addr.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
         this.addr.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
     }

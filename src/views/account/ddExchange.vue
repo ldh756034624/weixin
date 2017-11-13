@@ -64,7 +64,7 @@ export default {
           .then(function(res) {
             if(res.data.code==0){
                 _g.toastMsg('error', '兑换成功成功!')
-                self.$router.push({path:'/account/personal'})
+                self.$router.replace({path:'/account/result',query:{type:'exchange',money:res.data.data.money,num:res.data.data.didiCardNumber}})
             }
           })
       }

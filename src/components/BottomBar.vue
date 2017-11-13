@@ -6,10 +6,10 @@
           <img slot="icon" src="../assets/img/index/tabbar_mainpage_selected@2x.png" class="active">
           <span slot="label">首页</span>
       </tabbar-item>
-      <tabbar-item :selected="/message/.test($route.path)" link="/message">
+      <tabbar-item :selected="/shop/.test($route.path)" link="https://gaolu.m.tmall.com/?shop_id=105592760">
           <img slot="icon" src="../assets/img/index/tabbar_mall_normal@2x.png" class="default">
           <img slot="icon" src="../assets/img/index/tabbar_mall_selected@2x.png" class="active">
-          <span slot="label">消息</span>
+          <span slot="label">商城</span>
       </tabbar-item>
       <tabbar-item :selected="/personal/.test($route.path)" link="/account/personal">
           <img slot="icon" src="../assets/img/index/tabbar_my_normal@2x.png" class="default">
@@ -65,7 +65,7 @@ export default {
         display: block;
       }
       span{
-        color: #fe5850!important;
+        color: #627984 !important;
       }
     }
   }

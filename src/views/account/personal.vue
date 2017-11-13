@@ -112,7 +112,7 @@ export default {
     }
     .personalTopBg{
       background:url('../../assets/img/index/my_img_bg@2x.png') no-repeat;
-      background-size: cover;
+      background-size: 100%;
       height: 516/40rem;
     }
     .settingIcon{
@@ -169,5 +169,8 @@ export default {
   }
   .personBox .weui-cell__ft{
     font-size: 24/40rem;
+  }
+  .accountCont .weui-cells:after{
+    border-bottom:none!important;
   }
 </style>

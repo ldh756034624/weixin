@@ -1,13 +1,16 @@
 <template>
 	<div class="page">
       <group class="fundsBox groupNoTop groupNoLine">
-          <cell title="添加银行卡"  @click.native="goCard()" is-link>
-            <span slot='title' class='flexBox'>
+          <cell title="添加银行卡"   @click.native="goCard()" is-link>
+            <span slot='title' v-if='hasCard' class='flexBox'>
               <img class="fundsCardIcon" :src="bankImg">
               <div class="flex1">
                 <p class="fundsCardName">{{name}}</p>
                 <p class="fundsCardNo">尾号{{cardLast}}</p>
               </div>
+            </span>
+            <span v-else>
+              添加银行卡
             </span>
           </cell>
       </group>
@@ -20,7 +23,7 @@
           </p>
       </group>
       <div class="fundsBtnBox">
-        <x-button class='gradientBtn' @click.native="codeAlert=true">提现</x-button>  
+        <x-button class='gradientBtn' @click.native="fundsFn">提现</x-button>  
       </div>
       <codeAlert :showCodeAlert='codeAlert' :type='codeType' ref='codeAlert' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
   </div>
@@ -46,6 +49,7 @@ export default {
   data () {
     return {
       fundMoney:'',
+      hasCard:false,
       moneyMark:'',
       isFocus:false,
       fundsData:{},
@@ -71,27 +75,36 @@ export default {
                 self.bankId=self.$route.query.bankId
                 self.cardLast=self.$route.query.cardLast
               }else{
-                self.name=self.fundsData.bankList[0].name
-                self.bankImg=self.fundsData.bankList[0].bankImg
-                self.bankId=self.fundsData.bankList[0].id
-                var strLen=self.fundsData.bankList[0].no.length
-                self.cardLast=self.fundsData.bankList[0].no.substr(strLen-4,strLen)
+                if(self.fundsData.bankList.length>0){
+                  self.hasCard=true
+                  self.name=self.fundsData.bankList[0].name
+                  self.bankImg=self.fundsData.bankList[0].bankImg
+                  self.bankId=self.fundsData.bankList[0].id
+                  var strLen=self.fundsData.bankList[0].no.length
+                  self.cardLast=self.fundsData.bankList[0].no.substr(strLen-4,strLen)
+                }else{
+                  self.hasCard=false
+                }
               }
           }
         })
     },
     goCard:function(){
       let self=this;
-      self.$router.replace({path:'/account/chooseBank'})
-      //self.$router.push({path:'/account/addBank'})
+      if(this.hasCard){
+        self.$router.replace({path:'/account/chooseBank'})
+      }else{
+        self.$router.replace({path:'/account/addBank'})
+      }
     },
     fundsFn:function(){
-      let self=this;
-      
+      if(!this.bankId){
+        _g.toastMsg('error', '请选择银行卡!')
+        return;
+      }
+      this.codeAlert=true
     },
     codeAlertFn:function(data){
-      console.log(data)
-
       let self = this
       if(data.show===false){
         self.codeAlert=false;
@@ -100,8 +113,8 @@ export default {
         self.$http.post('h9/api/consume/withdraw/'+self.bankId+'/'+data.codeNum)
         .then(function(res) {
           if(res.data.code==0){
-              _g.toastMsg('error', '充值成功!')
-              self.$router.push({path:'/account/personal'})
+              _g.toastMsg('error', '提现成功!')
+              self.$router.replace({path:'/account/result',query:{type:'funds',money:res.data.data.money,time:res.data.data.time}})
           }
         })
       }
