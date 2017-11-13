@@ -72,7 +72,7 @@ export default {
               var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
               _g.toastMsg('error', this.addr.latitude)
               _g.toastMsg('error', res.resultStr)
-              self.$http.get('h9/lottery/qr?code='+result+'&longitude='+this.addr.latitude+'&latitude='+this.addr.longitude)
+              self.$http.get('h9/lottery/qr?code='+result+'&longitude='+this.latitude+'&latitude='+this.longitude)
               .then(function(res) {
                 if(res.data.code==0){
                   self.$router.push({path:'/active/hongbaoCode',query:{'code':result}})

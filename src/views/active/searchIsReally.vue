@@ -86,7 +86,7 @@ export default {
         _g.toastMsg('error','请输入防伪码');
         return;
       }
-      self.$http.get('h9/lottery/product/check?code='+self.code+'&longitude='+this.addr.latitude+'&latitude='+this.addr.longitude)
+      self.$http.get('h9/lottery/product/check?code='+self.code+'&longitude='+this.latitude+'&latitude='+this.longitude)
         .then(function(res) {
           self.showResult=true;
           if(res.data.code==0){
