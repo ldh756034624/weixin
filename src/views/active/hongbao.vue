@@ -61,6 +61,8 @@ export default {
       let self=this;
       console.log("======this.latitude======"+self.latitude)
       self.scanMainFn();
+      console.log("=====self.getLocal()======")
+          console.log(self.getLocal())
       // wx.ready(function(){
 
       //     wx.scanQRCode({

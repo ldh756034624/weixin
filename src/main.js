@@ -28,11 +28,8 @@ const router = new VueRouter({
 })
 let store = new Vuex.Store({
   state:{
-    hasNet:true,
-    dialogUnShow:true,
-    dialogUnText:'',
-    payType:'',
-    payGoodId:'',
+    longitude:0,
+    latitude:0,
   },
 
   actions: {
@@ -40,20 +37,11 @@ let store = new Vuex.Store({
   mutations: {
   },
   getters: {
-    hasNet: state=> {
-      return state.hasNet
+    longitude: state=> {
+      return state.longitude
     },
-    dialogUnShow: state=> {
-      return state.dialogUnShow
-    },
-    dialogUnText: state=> {
-      return state.dialogUnText
-    },
-    payType: state=> {
-      return state.payType
-    },
-    payGoodId: state=> {
-      return state.payGoodId
+    latitude: state=> {
+      return state.latitude
     },
   },
   modules: {
