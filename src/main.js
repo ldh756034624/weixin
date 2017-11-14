@@ -143,8 +143,9 @@ Vue.mixin({
                 }
               })
             }
-          });
-    },
+          })
+        }
+    }
 
 })
 Vue.filter('price2', function (value) {
