@@ -121,6 +121,7 @@ Vue.mixin({
               success: function (res) {
                 this.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                 this.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                console.log("======main.latitude======"+this.latitude)
               }
           });
           return this.addr;
