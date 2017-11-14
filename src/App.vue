@@ -81,8 +81,6 @@ export default {
       });
       wx.ready(function(){
           self.getLocal();
-          console.log("=====self.getLocal()======")
-          console.log(self.getLocal())
       });
     }
   }
