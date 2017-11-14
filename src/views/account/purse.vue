@@ -5,7 +5,7 @@
           <div class="purseCont flexBox">
               <img src=""/>
               <div class="purseMoney flex1 redFont">
-                {{balance | price2}}
+                {{purseData.balance}}
               </div> 
               <x-button mini class='purseFundBtn' @click.native="goFunds()" >提现</x-button>
           </div>
@@ -16,7 +16,7 @@
       <p class="blockTips">增值服务</p>
       <flexbox :gutter="0" class='purseWaiterBox'>
           <flexbox-item>
-            <router-link :to="{path:'/account/phoneRecharge',query:{balance:balance}}">
+            <router-link :to="{path:'/account/phoneRecharge',query:{balance:purseData.balance}}">
               <div class="purseItemBox">
                 <img src="../../assets/img/account/wallet_icon_recharge@2x.png"/>
                 <p>手机充值</p>
@@ -24,7 +24,7 @@
             </router-link>
           </flexbox-item>
           <flexbox-item class='ItemBorder'>
-            <router-link :to="{path:'/account/ddExchange',query:{balance:balance}}">
+            <router-link :to="{path:'/account/ddExchange',query:{balance:purseData.balance,tel:purseData.tel}}">
               <div class="purseItemBox">
                 <img src="../../assets/img/account/wallet_icon_didi@2x.png"/>
                 <p>滴滴券兑换</p>
@@ -46,6 +46,7 @@ export default {
   mounted(){
     let  self=this;
     self.setTitle('我的钱包');
+    self.init();
   },
   data () {
     return {
@@ -56,7 +57,12 @@ export default {
   methods:{
     init(){
       let self = this
-      
+      self.$http.get('h9/api/account/info')
+        .then(function(res) {
+          if(res.data.code==0){
+              self.purseData=res.data.data 
+          }
+        })
     },
     goFunds:function(){
       let self=this;

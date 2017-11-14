@@ -15,7 +15,7 @@
           <x-button mini class='blueBg' @click.native="exchangeFn(item)">兑换</x-button>
         </div>
       </div>
-      <codeAlert :showCodeAlert='codeAlert' :type='codeType' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
+      <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='tel' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
   </div>
 </template>
 <script>
@@ -34,6 +34,7 @@ export default {
     return {
       codeAlert:false,
       balance:this.$route.query.balance,
+      tel:this.$route.query.tel,
       ddCuponData:[],
       ddCuponParams:{},
       codeType:'4' //1,"注册,登录",2, "绑定手机"),3,"提现"),4,"滴滴卡兑换"),5 手机充值的,0,"其他")

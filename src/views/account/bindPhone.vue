@@ -138,6 +138,7 @@ export default {
           .then(function(res) {
             if(res.data.code==0){
               _g.toastMsg('error','绑定成功');
+              //localStorage.setItem('_user.tel',self.loginParams.phone)
               setTimeout(() => {
                 history.go(-1)
               }, 1500)
