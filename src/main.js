@@ -119,7 +119,6 @@ Vue.mixin({
                     longitude:res.longitude
                 })
                 console.log("======store.latitude======"+store.state.latitude)
-                console.log("======store.latitude======"+$store.state.latitude)
               }
           });
           return this.addr;

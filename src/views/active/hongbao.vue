@@ -59,7 +59,9 @@ export default {
     scanFn:function(){
       console.log("============")
       let self=this;
-      console.log("======store.latitude======"+$store.state.latitude)
+
+      console.log("======store.latitude======"+self.$store.getters.latitude)
+      console.log("======store.latitude======"+self.$store.state.latitude)
       console.log("======store.latitude======"+store.state.latitude)
       console.log("======this.latitude======"+self.latitude)
       self.scanMainFn();
