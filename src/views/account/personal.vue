@@ -158,6 +158,9 @@ export default {
       border-left:1px solid #d9d9d9;
       border-right:1px solid #d9d9d9;
     }
+    .accountCont{
+      padding-bottom: 120/40rem;
+    }
 
 </style>
 <style lang='less'>

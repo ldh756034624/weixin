@@ -34,7 +34,7 @@
           <img :src="item.avatar"/>
           <div class="flex1">
             <p class="prizerName">
-              <span class='name flex1 TextEllipsis'>哈阿海对方是否卡拉书法家阿卡莎家里的房间阿斯科利房间里看书{{item.name}}</span>
+              <span class='name flex1 TextEllipsis'>{{item.name}}</span>
               <span class='date'>{{item.createDate}}</span>
             </p>
             <p>{{item.desc}}</p>

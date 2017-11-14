@@ -47,7 +47,7 @@ export default {
         return;
       }
       //imei手机唯一标识没传
-      self.$http.get('h9/lottery/qr?code='+self.code+'&longitude='+this.addr.latitude+'&latitude='+this.addr.longitude)
+      self.$http.get('h9/lottery/qr?code='+self.code+'&longitude='+self.$store.state.longitude+'&latitude='+self.$store.state.latitude)
         .then(function(res) {
           if(res.data.code==0){
             self.$router.push({path:'/active/hongbaoCode',query:{'code':self.code}})
@@ -58,22 +58,21 @@ export default {
     },
     scanFn:function(){
       let self=this;
-      console.log("======store.latitude======"+self.$store.state.latitude)
-          wx.scanQRCode({
-            needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-            scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-            success: function (res) {
-              var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-              self.$http.get('h9/lottery/qr?code='+result+'&longitude='+self.$store.state.longitude+'&latitude='+self.$store.state.latitude)
-              .then(function(res) {
-                if(res.data.code==0){
-                  self.$router.push({path:'/active/hongbaoCode',query:{'code':result}})
-                }else{
-                   _g.toastMsg('error', res.data.msg)
-                }
-              })
+      wx.scanQRCode({
+        needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+        scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+        success: function (res) {
+          var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+          self.$http.get('h9/lottery/qr?code='+result+'&longitude='+self.$store.state.longitude+'&latitude='+self.$store.state.latitude)
+          .then(function(res) {
+            if(res.data.code==0){
+              self.$router.push({path:'/active/hongbaoCode',query:{'code':result}})
+            }else{
+               _g.toastMsg('error', res.data.msg)
             }
-          });
+          })
+        }
+      });
     }
     
   },

@@ -113,34 +113,13 @@ Vue.mixin({
               success: function (res) {
                 this.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                 this.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-                console.log("======main.latitude======"+this.latitude)
                 store.commit("setLocal",{
                     latitude:res.latitude,
                     longitude:res.longitude
                 })
-                console.log("======store.latitude======"+store.state.latitude)
               }
           });
         },
-        // scanMainFn:function(){
-        //   let self=this;
-        //   console.log("======main.latitude======"+this.latitude)
-        //   wx.scanQRCode({
-        //     needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-        //     scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-        //     success: function (res) {
-        //       var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-        //       self.$http.get('h9/lottery/qr?code='+result+'&longitude='+this.latitude+'&latitude='+this.longitude)
-        //       .then(function(res) {
-        //         if(res.data.code==0){
-        //           self.$router.push({path:'/active/hongbaoCode',query:{'code':result}})
-        //         }else{
-        //            _g.toastMsg('error', res.data.msg)
-        //         }
-        //       })
-        //     }
-        //   })
-        // }
     }
 
 })

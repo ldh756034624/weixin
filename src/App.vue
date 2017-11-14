@@ -72,7 +72,7 @@ export default {
     wxConfig: function(config){   //微信分享参数初始化
       let self = this;
       wx.config({
-        debug: true,
+        debug: false,
         appId: config.appId,
         timestamp: config.timestamp,
         nonceStr: config.nonceStr,
