@@ -81,6 +81,8 @@ export default {
       });
       wx.ready(function(){
           self.getLocal();
+          consoel.log("=====self.getLocal()======")
+          consoel.log(self.getLocal())
       });
     }
   }
