@@ -35,6 +35,10 @@ let store = new Vuex.Store({
   actions: {
   },
   mutations: {
+    setLocal(state,item){
+        state.longitude=item.longitude
+        state.latitude=item.latitude
+    },
   },
   getters: {
     longitude: state=> {
@@ -110,6 +114,12 @@ Vue.mixin({
                 this.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                 this.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
                 console.log("======main.latitude======"+this.latitude)
+                store.commit("setLocal",{
+                    latitude:res.latitude,
+                    longitude:res.longitude
+                })
+                console.log("======store.latitude======"+store.state.latitude)
+                console.log("======store.latitude======"+$store.state.latitude)
               }
           });
           return this.addr;
