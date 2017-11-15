@@ -86,16 +86,16 @@ export default {
     self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
     let userObj = JSON.parse(localStorage.getItem('_user'))
-    // if(!userObj.token){
-    //   if(!self.WxCode){
-    //     self.getWxCode()
-    //   }else{
-    //     self.weChatLogin();
-    //   }
-    // }else{
-    //   self.init();
-    // }
-    self.init();
+    if(!userObj.token){
+      if(!self.WxCode){
+        self.getWxCode()
+      }else{
+        self.weChatLogin();
+      }
+    }else{
+      self.init();
+    }
+    //self.init();
     self.$watch('showAdverBlur',function(val){
       if(!val){
         sessionStorage.setItem('AdverBlur',false)
