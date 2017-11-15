@@ -3,7 +3,6 @@
     <group class='problemBox'>
 
       <cell :title="item.title"  :link="{path:'/account/articleDetail',query:{id:item.articleId}}" v-for='item in problemList' is-link></cell>
-      <cell title="问题" link='' is-link></cell>
     </group>
     
   </div>

@@ -1,6 +1,6 @@
 <template>
 	<div class="page hongbaoPage">
-    <div v-if='!lottery'>
+    <div v-if='lottery'>
       <div class="exchangeCont">
         <div class="flexBox">
           <img class="groupLogo" src="../../assets/img/active/logo_huijiu@2x.png"/>
@@ -37,6 +37,11 @@
       </div>
       <div class="strategyText" v-html='DealData'>
       </div>
+      <div class="animationBox" v-show='showAnimate'>
+        <div class="animation">
+          
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -50,9 +55,9 @@ export default {
     self.getDeal('lottery').then(function(data){
       self.DealData=data.data
     })
-    self.timer=setInterval(()=>{
-      self.init();
-    },self.refreshTime*10000)
+    // self.timer=setInterval(()=>{
+    //   self.init();
+    // },self.refreshTime*10000)
   },
   data () {
     return {
@@ -61,6 +66,7 @@ export default {
       isFirst:false,
       lottery:true, //是否开奖
       roomUser:false, //是否房主
+      showAnimate:false,
       code:this.$route.query.code,
       timer:null,
       codeUrl:'https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433747234',
@@ -84,8 +90,11 @@ export default {
             }
             self.refreshTime=self.prizeData.refreshTime*1000
             if(res.data.data.lottery){
-              clearInterval(self.timer); //清除  
-              self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
+              clearInterval(self.timer); //清除
+              self.showAnimate=true;  
+              setTimeout(function(){
+                self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
+              },3000)
             }else{
               //调用函数：
               self.timestr=res.data.data.differentDate
@@ -101,7 +110,10 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
             clearInterval(self.timer); //清除  
-            self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
+            self.showAnimate=true;  
+            setTimeout(function(){
+              self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
+            },3000)
           }else{
             _g.toastMsg("error",res.data.msg)
           }
@@ -243,7 +255,88 @@ export default {
         }
       }
     }
+    .animationBox{
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top:0;
+      z-index: 9;
+      background: rgba(0,0,0,.6);
+    }
+    .animation{
+      width: 300/40rem;
+      height: 300/40rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -150/40rem;
+      margin-left: -150/40rem;
+      animation: hbAnimate 3s linear 2s infinite;
+      -moz-animation: hbAnimate 3s linear 2s infinite; /* Firefox */
+      -webkit-animation: hbAnimate 3s linear 2s infinite;  /* Safari 和 Chrome */
+      -o-animation: hbAnimate 3s linear 2s infinite; /* Opera */
+    }
+
   }
+  @keyframes hbAnimate
+{
+  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: 100% }
+  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: 100% }
+  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: 100% }
+  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: 100% }
+  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: 100% }
+  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: 100% }
+  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: 100% }
+  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: 100% }
+  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: 100% }
+  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: 100% }
+  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: 100% }
+}
+
+@-moz-keyframes hbAnimate /* Firefox */
+{
+  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: 100% }
+  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: 100% }
+  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: 100% }
+  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: 100% }
+  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: 100% }
+  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: 100% }
+  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: 100% }
+  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: 100% }
+  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: 100% }
+  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: 100% }
+  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: 100% }
+}
+
+@-webkit-keyframes hbAnimate /* Safari 和 Chrome */
+{
+  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: 100% }
+  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: 100% }
+  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: 100% }
+  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: 100% }
+  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: 100% }
+  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: 100% }
+  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: 100% }
+  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: 100% }
+  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: 100% }
+  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: 100% }
+  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: 100% }
+}
+
+@-o-keyframes hbAnimate /* Opera */
+{
+  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: 100% }
+  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: 100% }
+  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: 100% }
+  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: 100% }
+  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: 100% }
+  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: 100% }
+  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: 100% }
+  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: 100% }
+  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: 100% }
+  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: 100% }
+  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: 100% }
+}
 </style>
 <style lang='less'>
   .hongbaoPage{

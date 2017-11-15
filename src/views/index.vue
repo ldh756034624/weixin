@@ -86,19 +86,16 @@ export default {
     self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
     let userObj = JSON.parse(localStorage.getItem('_user'))
-    if(self.WxCode){
-      console.log("userObj"+userObj)
-      console.log(userObj)
-      if(!userObj){
-        console.log(userObj)
-        self.weChatLogin();
-      }else{
-        self.init();
-      }
-    }else{
-      self.getWxCode()
-    }
-    //self.init();
+    // if(!userObj.token){
+    //   if(!self.WxCode){
+    //     self.getWxCode()
+    //   }else{
+    //     self.weChatLogin();
+    //   }
+    // }else{
+    //   self.init();
+    // }
+    self.init();
     self.$watch('showAdverBlur',function(val){
       if(!val){
         sessionStorage.setItem('AdverBlur',false)
@@ -106,11 +103,6 @@ export default {
     })
   },
    methods: {
-    getWxCode:function(){
-      let self=this;
-      var redirectUrl=Vue.http.defaults.baseURL+'/h9-weixin/#/index'
-      window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
-    },
     weChatLogin:function(){
       let self=this;
       self.$http.get('h9/api/wechat/login?code='+self.WxCode)
@@ -152,6 +144,7 @@ export default {
           if(item.link==='lottery'){
             this.$router.push({path:'/active/hongbao'})
           }else if(item.link==='exchange_didi'){
+            console.log("--------")
             this.hasPhone('/account/ddExchange')
             //this.$router.push({path:'/account/ddExchange'})
           }else if(item.link==='exchange_telephoneFare'){

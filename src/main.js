@@ -4,7 +4,7 @@ import Vue from 'vue'
 import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
-// import VueResource from 'vue-resource'
+import {encode} from '@/util/base64Code'
 import RouterConfig from './router/index'
 import App from './App'
 import Home from './components/HelloFromVux'
@@ -107,6 +107,11 @@ Vue.mixin({
               }, 2000)
           }
         },
+        getWxCode:function(){
+          let self=this;
+          var redirectUrl=Vue.http.defaults.baseURL+'/h9-weixin/#/index'
+          window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
+        },
         hasPhone:function(link){
           let self=this;
           self.$http.get('h9/api/account/info')
@@ -119,6 +124,8 @@ Vue.mixin({
                 setTimeout(function(){
                   self.$router.replace({path:'/account/bindPhone',query:{path:link}})
                 },1000)
+              }else if(response.data.code==401){
+                this.getWxCode();
               }
             })
         },
@@ -193,6 +200,9 @@ Vue.http.interceptors.response.use(
       setTimeout(() => {
         router.replace('/account/bindPhone')
       }, 1500)
+    }
+    if(response.data.code==401){
+      this.getWxCode();
     }
     return response;
   },
