@@ -86,7 +86,7 @@ export default {
     self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
     let userObj = JSON.parse(localStorage.getItem('_user'))
-    if(!userObj.token){
+    if(!userObj){
       if(!self.WxCode){
         self.getWxCode()
       }else{
