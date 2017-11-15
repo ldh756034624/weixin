@@ -122,6 +122,16 @@ Vue.mixin({
               }
             })
         },
+        getDeal:function(code){
+          let self=this;
+          var p = new Promise(function(resolve, reject){
+            self.$http.get('/h9/api/common/pageJson/'+code)
+            .then(function(res) {
+              resolve(res.data);
+            })
+          });
+          return p;
+        },
         getLocal:function(){
           wx.getLocation({
               type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'

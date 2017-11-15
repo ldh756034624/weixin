@@ -39,7 +39,7 @@
           <p class="blockTitle">社区精选</p>
           <div class="flexBox blockBox" v-for='item in homeData.recommendArticle' @click='goLinkFn(item)'>
               <div class="flex1">
-                  <p class="articleTitle TextEllipsis">{{item.title}}扎上帝发的风格山东分公司大概地方都感到反感誓地方萨发撒旦发生发射飞弹</p>
+                  <p class="articleTitle TextEllipsis">{{item.title}}</p>
                   <p class="articleTip">{{item.content}} <span>{{item.createTime}}</span></p>
               </div>
               <img :src="item.imgUrl" class="articleImg">
@@ -235,7 +235,7 @@ export default {
     font-size: 28/40rem;
   }
   .articleTip{
-    font-size: 12/40rem;
+    font-size: 24/40rem;
     color: #999;
     margin-top: 20/40rem;
   }

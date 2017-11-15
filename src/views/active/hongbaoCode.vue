@@ -35,16 +35,7 @@
         </div>
         <p v-else class="prizeTip">等待抽奖</p>
       </div>
-      <div class="strategyText">
-        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
-        <p>阿斯顿发快乐暑假大幅拉升浪费空间阿斯利康放假啊是</p>
+      <div class="strategyText" v-html='DealData'>
       </div>
     </div>
   </div>
@@ -56,6 +47,9 @@ export default {
     let self=this;
     self.setTitle('抢红包');
     self.init();
+    self.getDeal('lottery').then(function(data){
+      self.DealData=data.data
+    })
     self.timer=setInterval(()=>{
       self.init();
     },self.refreshTime*10000)
@@ -63,6 +57,7 @@ export default {
   data () {
     return {
       prizeData:{},
+      DealData:'',
       isFirst:false,
       lottery:true, //是否开奖
       roomUser:false, //是否房主

@@ -51,7 +51,7 @@
         您所查询的防伪码不存在，谨防假冒！或与公司客服人员联系！
       </div>
     </div>
-    <div class="searchDesc">
+    <div class="searchDesc" v-html='DealData'>
       <p>啊时间代付款拉萨街坊邻居撒风口浪尖撒旦了放假啦</p>
       <p>啊时间代付款拉萨街坊邻居撒风口浪尖撒旦了放假啦</p>
       <p>啊时间代付款拉萨街坊邻居撒风口浪尖撒旦了放假啦</p>
@@ -66,10 +66,14 @@ export default {
     let  self=this;
     self.setTitle('查询真伪');
     self.init();
+    self.getDeal('queryCode').then(function(data){
+      self.DealData=data.data
+    })
   },
   data () {
     return {
       searchData:{},
+      DealData:'',
       code:'',
       showResult:false,
       isReal:false

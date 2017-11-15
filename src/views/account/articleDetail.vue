@@ -71,9 +71,10 @@ export default {
     .content{
       color: #666;
       font-size: 28/40rem!important;
+      font-size: 14px!important;
       line-height: 46/40rem;
       p{
-        font-size: 28/40rem!important;
+        font-size: 14px!important;
       }
     }
   }
