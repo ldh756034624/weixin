@@ -6,7 +6,7 @@
         </cell>
     </group>
     <group class='infoBox groupNoTop groupNoLine' v-if='showOtherInfo'>
-        <x-input title="昵称" v-model='infoData.nickName' placeholder="昵称" :show-clear="false"></x-input>
+        <x-input title="昵称" v-model='infoData.nickName' placeholder="昵称" :max='15' :show-clear="false"></x-input>
         <cell title="手机号" v-if="infoData.tel!=''" :value='infoData.tel'></cell>
         <cell title="手机号" v-else value='绑定' link='/account/bindPhone' is-link></cell>
         <cell title="性别" :value='infoData.sex' @click.native="showPopupFn(infoData.sexList,'sex')" is-link></cell>
@@ -142,7 +142,7 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
               _g.toastMsg('error',"修改资料成功");
-              //self.$router.push({path:'/account/personal'})
+              self.$router.push({path:'/account/personal'})
           }
         })
     }

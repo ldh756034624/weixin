@@ -17,7 +17,7 @@
           </flexbox-item>
       </flexbox>
       <div class="rechargeBtnBox">
-        <x-button class='btnBg blueBg' @click.native="rechargeFn()">充值</x-button>
+        <x-button class='btnBg blueBg' :class="{'nocanUseBtn':!canUse}" @click.native="rechargeFn()" :disabled='!canUse'>充值</x-button>
       </div>
       </div>
       <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='reChargePhoneNum' ref='codeAlert' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
@@ -39,6 +39,8 @@ export default {
       rechargeChoosed:'',
       codeAlert:false,
       rechargeParams:{},
+      rechargeMoney:0,
+      canUse:false,
       codeType:'5' //1,"注册,登录",2, "绑定手机"),3,"提现"),4,"滴滴卡兑换"),5 手机充值的,0,"其他")
     }
   },
@@ -50,13 +52,23 @@ export default {
           if(res.data.code==0){
               self.rechargeData=res.data.data 
              self.rechargeParams.id=self.rechargeData.priceList[0].id
+             self.rechargeMoney=self.rechargeData.priceList[0].realPrice
              self.reChargePhoneNum=self.rechargeData.tel
+             if(self.rechargeData.balance > self.rechargeMoney){
+              self.canUse=true;
+             }
           }
         })
     },
     chooseMoney:function(item,index){
       this.rechargeChoosed=index;
       this.rechargeParams.id=item.id
+      this.rechargeMoney=item.realPrice
+      if(this.rechargeData.balance > this.rechargeMoney){
+        this.canUse=true;
+      }else{
+        this.canUse=false;
+      }
     },
     rechargeFn:function(){
       this.rechargeParams.tel=this.reChargePhoneNum
@@ -64,6 +76,11 @@ export default {
         _g.toastMsg('error', '请输入手机号!')
         return;
       }
+      if(this.rechargeData.balance < this.rechargeMoney){
+        _g.toastMsg('error', '余额不足!')
+        return;
+      }
+      rechargeData.balance
       this.codeAlert=true;
     },
     codeAlertFn:function(data){
@@ -163,4 +180,5 @@ export default {
       margin-bottom: 70/40rem;
     }
   }
+  
 </style>

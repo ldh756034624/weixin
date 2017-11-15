@@ -23,10 +23,10 @@
           <p>点击查询</p>
         </div>
       </div>
-      <!-- <group> -->
+      <div class="btnBox">
         <x-input v-model='code' class='searchInput' placeholder='请输入防伪码'></x-input>
         <x-button class='searchBtn' @click.native='searchRealFn'>查询真伪</x-button>
-      <!-- </group> -->
+      </div>
     </div>
     <div class="searchResultBox" v-if='showResult'>
       <div v-if='isReal'>
@@ -120,14 +120,17 @@ export default {
     .searchBox{
       background: #FF726B;
       border-radius: 10/40rem;
-      padding: 40/40rem 30/40rem;
-      margin-bottom: 20/40rem
+      padding: 40/40rem 0rem;
+      margin-bottom: 20/40rem;
+      .btnBox{
+        padding:30/40rem;
+      }
     }
     .searchProgress{
       color: #fff;
       img{
-        width: 56/40rem;
-        height: 56/40rem;
+        width: 46/40rem;
+        height: 46/40rem;
         vertical-align: top;
         margin-top: 15/40rem;
       }

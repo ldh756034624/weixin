@@ -130,7 +130,8 @@ export default {
     .nickName{
       text-align: center;
       font-size: 36/40rem;
-      color: #fff;
+      color: #222;
+      margin-top: 10/40rem;
     }
     .accountUserImg img,.accountUserImg span{
       display: inline-block;
@@ -158,8 +159,9 @@ export default {
       border-left:1px solid #d9d9d9;
       border-right:1px solid #d9d9d9;
     }
-    .accountCont{
+    .accountCont,.personBox{
       padding-bottom: 120/40rem;
+      margin-bottom: 120/40rem;
     }
 
 </style>

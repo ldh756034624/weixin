@@ -5,7 +5,7 @@
       <div class="flex1">
         <p class="cardName">{{item.name}}</p>
         <p class="cardType">储蓄卡</p>
-        <p class="cardNo">**** **** **** {{item.cardLast}}</p>
+        <p class="cardNo">{{item.cardfirst}} **** **** {{item.cardLast}}</p>
       </div>
       <img class="cardSetIcon" @click='goCancel(item)' src="../../assets/img/account/bankcard_btn_setting@2x.png"/>
     </div> 
@@ -33,7 +33,7 @@ export default {
   },
   mounted(){
     let  self=this;
-    self.setTitle('我的订单');
+    self.setTitle('我的银行卡');
     self.init();
   },
   data () {
@@ -53,8 +53,10 @@ export default {
               self.myCardData=res.data.data 
               for(var i=0;i<self.myCardData.length;i++){
                 var strLen=self.myCardData[i].no.length
-                var str=self.myCardData[i].no.substr(strLen-4,strLen);
+                var str=self.myCardData[i].no.substr(strLen-4,strLen),
+                    firstStr=self.myCardData[i].no.substr(0,4)
                 self.myCardData[i].cardLast=str;
+                self.myCardData[i].cardfirst=firstStr;
               }
           }
         })
@@ -90,6 +92,7 @@ export default {
   .cardListPage{
     background: #fff;
     color: #fff;
+    overflow-y:auto; 
     .cardListBox{
       padding: 30/40rem;
       margin: 30/40rem;

@@ -2,7 +2,11 @@
   <div class="page home" style="height:100%;">
       <main class="home_main">
         <div class="header-wrap">
-          <swiper loop auto dots-position="center" :list="topBannerList"  @on-index-change="" height="12.5rem"></swiper>
+          <swiper dots-position="center" dots-class="custom-bottom">
+            <swiper-item class="swiper-demo-img"  v-for="(item, index) in homeData.topBanner" height="12.5rem" :key="index" @click.native='goLinkFn(item)'>
+              <img :src="item.imgUrl">
+            </swiper-item>
+          </swiper>
         </div>
         <div class="flexBox verticalScroll">
           <img src="../assets/img/index/mainpage_icon_notification_@2x.png" class="indexRadio" />
@@ -42,13 +46,23 @@
           </div>
         </div>
       </main>
+      <div v-transfer-dom>
+        <x-dialog v-model="showAdverBlur" class="IndexDialogBox" hide-on-blur>
+          <div class="IndexDialog">
+              <img :src="adBanner.imgUrl" @click='goLinkFn(adBanner)'>
+            <p>
+              <span @click='showAdverBlur=false'></span>
+            </p>
+          </div>
+        </x-dialog>
+      </div>
       <Bottombar :index="0"></Bottombar>
       
   </div>
 </template>
 
 <script>
-import { Flexbox, FlexboxItem,Group, Cell, Swiper, SwiperItem, Tab, TabItem, Scroller, Spinner,TransferDom} from 'vux'
+import { Flexbox, FlexboxItem,Group, Cell, Swiper, SwiperItem, Tab, TabItem, Scroller, Spinner,XDialog, TransferDomDirective as TransferDom} from 'vux'
 import Bottombar from '@/components/BottomBar'
 import blankPage from '@/components/blankPage'
 import {encode} from '@/util/base64Code'
@@ -63,7 +77,8 @@ export default {
       homeData:{},
       topBannerList:[],
       WxCode:'',
-      
+      showAdverBlur:false,
+      adBanner:'',
     }
   },
   mounted () {
@@ -71,19 +86,19 @@ export default {
     self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
     let userObj = JSON.parse(localStorage.getItem('_user'))
-    if(self.WxCode){
-      console.log("userObj"+userObj)
-      console.log(userObj)
-      if(!userObj){
-        console.log(userObj)
-        self.weChatLogin();
-      }else{
-        self.init();
-      }
-    }else{
-      self.getWxCode()
-    }
-    //self.init();
+    // if(self.WxCode){
+    //   console.log("userObj"+userObj)
+    //   console.log(userObj)
+    //   if(!userObj){
+    //     console.log(userObj)
+    //     self.weChatLogin();
+    //   }else{
+    //     self.init();
+    //   }
+    // }else{
+    //   self.getWxCode()
+    // }
+    self.init();
     
   },
    methods: {
@@ -109,12 +124,16 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
             self.homeData=res.data.data;
-              for(var i=0;i<self.homeData.topBanner.length;i++){
-                self.topBannerList.push({
-                  url:self.homeData.topBanner[i].link,
-                  img:self.homeData.topBanner[i].imgUrl,
-                })
-              }
+            self.adBanner=self.homeData.adBanner[0]
+            if(self.homeData.adBanner.length>0){
+              self.showAdverBlur=true
+            }
+            for(var i=0;i<self.homeData.topBanner.length;i++){
+              self.topBannerList.push({
+                url:self.homeData.topBanner[i].link,
+                img:self.homeData.topBanner[i].imgUrl,
+              })
+            }
           }
         })
      },
@@ -149,7 +168,7 @@ export default {
     Scroller,
     Spinner,
     Bottombar,
-    blankPage,TransferDom
+    blankPage,TransferDom,XDialog
   }
 
 }
@@ -163,6 +182,15 @@ export default {
   height: 100%;
   background:#fff;
   transition: top 0.2s;
+  .header-wrap {
+      div{
+        text-align: center;
+      }
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
   .verticalScroll{
     /*border-bottom: 1px solid #ddd;*/
@@ -236,9 +264,31 @@ export default {
   .blockContBox{
     margin-bottom: 250/80rem;
   }
+  .IndexDialogBox{
+    text-align: center;
+    background: rgba(0,0,0,.0);
+    img{
+      width: 590/40rem;
+      height: 800/40rem;
+      border-radius: 10/40rem;
+    }
+    p{
+      margin-top: 50/40rem;
+    }
+    span{
+      background: url('../assets/img/index/mainpage_btn_adclose@2x.png');
+      background-size: 100%;
+      display: inline-block;
+      width: 78/40rem;
+      height: 78/40rem;
+    }
+  }
 </style>
 <style lang='less'>
   .indexTab .vux-tab-item{
     background: none!important;
+  }
+  .IndexDialogBox .weui-dialog{
+    background: none;
   }
 </style>

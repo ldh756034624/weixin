@@ -148,23 +148,23 @@ export default {
     .inputCode{
       input{
         font-size: 36/40rem;
-        color: #fff!important;
+        color: #222!important;
         text-align: center;
       }
       input::-webkit-input-placeholder { /* WebKit browsers */ 
-        color: #fff;
+        color: #222;
         font-size: 36/40rem;
       } 
       input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
-        color: #fff;
+        color: #222;
         font-size: 36/40rem;
       } 
       input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
-        color: #fff;
+        color: #222;
         font-size: 36/40rem;
       } 
       input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
-        color: #fff;
+        color: #222;
         font-size: 36/40rem;
       }
     }

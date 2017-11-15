@@ -74,6 +74,7 @@ export default {
                 self.bankImg=self.$route.query.cardIcon
                 self.bankId=self.$route.query.bankId
                 self.cardLast=self.$route.query.cardLast
+                self.hasCard=true
               }else{
                 if(self.fundsData.bankList.length>0){
                   self.hasCard=true
