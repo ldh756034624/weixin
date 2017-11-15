@@ -86,20 +86,24 @@ export default {
     self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
     let userObj = JSON.parse(localStorage.getItem('_user'))
-    if(self.WxCode){
-      console.log("userObj"+userObj)
-      console.log(userObj)
-      if(!userObj){
-        console.log(userObj)
-        self.weChatLogin();
-      }else{
-        self.init();
+    // if(self.WxCode){
+    //   console.log("userObj"+userObj)
+    //   console.log(userObj)
+    //   if(!userObj){
+    //     console.log(userObj)
+    //     self.weChatLogin();
+    //   }else{
+    //     self.init();
+    //   }
+    // }else{
+    //   self.getWxCode()
+    // }
+    self.init();
+    self.$watch('showAdverBlur',function(val){
+      if(!val){
+        sessionStorage.setItem('AdverBlur',false)
       }
-    }else{
-      self.getWxCode()
-    }
-    //self.init();
-    
+    })
   },
    methods: {
     getWxCode:function(){
@@ -124,10 +128,13 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
             self.homeData=res.data.data;
-            self.adBanner=self.homeData.adBanner[0]
-            if(self.homeData.adBanner.length>0){
-              self.showAdverBlur=true
+            self.adBanner=self.homeData.adBanner[0];
+            if(!sessionStorage.getItem('AdverBlur')){
+              if(self.homeData.adBanner.length>0){
+                self.showAdverBlur=true
+              }
             }
+            
             for(var i=0;i<self.homeData.topBanner.length;i++){
               self.topBannerList.push({
                 url:self.homeData.topBanner[i].link,
@@ -145,9 +152,11 @@ export default {
           if(item.link==='lottery'){
             this.$router.push({path:'/active/hongbao'})
           }else if(item.link==='exchange_didi'){
-            this.$router.push({path:'/account/ddExchange'})
+            this.hasPhone('/account/ddExchange')
+            //this.$router.push({path:'/account/ddExchange'})
           }else if(item.link==='exchange_telephoneFare'){
-            this.$router.push({path:'/account/phoneRecharge'})
+            this.hasPhone('/account/phoneRecharge')
+            //this.$router.push({path:'/account/phoneRecharge'})
           }else if(item.link==='validate'){
             this.$router.push({path:'/active/searchIsReally'})
           }else{

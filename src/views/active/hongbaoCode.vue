@@ -123,17 +123,23 @@ export default {
           sec=self.checkTime(sec)
           self.countDownTime = hour + "小时" + min + "分" + sec+'秒';
           self.timestr=self.timestr-1000;
-          if(hour=='00'){
-            self.countDownTime = min + "分" + sec+'秒';
-          }
-          if(hour=='00'&& min=='00'){
-            if(sec=='00'){
-              self.init();
-              //clearInterval(a); //这里是让等于零时清除  
-            }else{
-              self.countDownTime = sec+'秒';
+          if(self.timestr>1000){
+            if(hour=='00'){
+              self.countDownTime = min + "分" + sec+'秒';
             }
+            if(hour=='00'&& min=='00'){
+              if(sec=='00'){
+                self.init();
+                //clearInterval(a); //这里是让等于零时清除  
+              }else{
+                self.countDownTime = sec+'秒';
+              }
+            }
+          }else{
+            self.countDownTime = '即将开奖';
+            self.init();
           }
+          
       },1000)
                 
     },

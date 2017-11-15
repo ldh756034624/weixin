@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       codeAlert:false,
-      balance:this.$route.query.balance,
+      balance:localStorage.getItem('balance'),
       tel:this.$route.query.tel,
       ddCuponData:[],
       ddCuponParams:{},

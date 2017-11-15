@@ -107,6 +107,21 @@ Vue.mixin({
               }, 2000)
           }
         },
+        hasPhone:function(link){
+          let self=this;
+          self.$http.get('h9/api/account/info')
+            .then(function(res) {
+              if(res.data.code==0){
+                self.$router.push({path:link})
+                localStorage.setItem('balance',res.data.data.balance)
+              }else if(res.data.code==402){
+                _g.toastMsg('error', '请先绑定手机号')
+                setTimeout(function(){
+                  self.$router.replace({path:'/account/bindPhone',query:{path:link}})
+                },1000)
+              }
+            })
+        },
         getLocal:function(){
           wx.getLocation({
               type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'

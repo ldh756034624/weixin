@@ -7,7 +7,7 @@
         <img src="../../assets/img/account/recharge_icon_contacts@2x.png" />
       </div>
       <p class="phoneName">默认</p>
-      <p class="LeastMoney flexBox">充话费 <span class='flex1 alignR'>钱包余额￥{{rechargeData.balance}}</span></p>
+      <p class="LeastMoney flexBox">充话费 <span class='flex1 alignR'>钱包余额￥{{balance}}</span></p>
       <flexbox :gutter="0" wrap="wrap" class='phoneRechargeFlexBox'>
           <flexbox-item :span="1/3" v-for='(item,index) in rechargeData.priceList' @click.native='chooseMoney(item,index)'>
             <div class="phoneBox" :class="{'blueBg':index==rechargeChoosed}">
@@ -36,6 +36,7 @@ export default {
     return {
       reChargePhoneNum:'',
       rechargeData:[],
+      balance:localStorage.getItem('balance'),
       rechargeChoosed:'',
       codeAlert:false,
       rechargeParams:{},
@@ -54,7 +55,7 @@ export default {
              self.rechargeParams.id=self.rechargeData.priceList[0].id
              self.rechargeMoney=self.rechargeData.priceList[0].realPrice
              self.reChargePhoneNum=self.rechargeData.tel
-             if(self.rechargeData.balance > self.rechargeMoney){
+             if(self.balance > self.rechargeMoney){
               self.canUse=true;
              }
           }
@@ -64,7 +65,7 @@ export default {
       this.rechargeChoosed=index;
       this.rechargeParams.id=item.id
       this.rechargeMoney=item.realPrice
-      if(this.rechargeData.balance > this.rechargeMoney){
+      if(this.balance > this.rechargeMoney){
         this.canUse=true;
       }else{
         this.canUse=false;

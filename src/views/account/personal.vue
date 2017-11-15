@@ -91,6 +91,7 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
               self.personalData=res.data.data 
+              localStorage.setItem('balance',self.personalData.balance)
               if(self.personalData.imgUrl){
                 self.userHeadImg=self.personalData.imgUrl
                 localStorage.setItem('img',self.personalData.imgUrl)
