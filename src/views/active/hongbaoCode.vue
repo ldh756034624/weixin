@@ -39,10 +39,10 @@
       </div>
       <div class="strategyText" v-html='DealData'>
       </div>
-      <div class="animationBox" v-show='showAnimate'>
-        <div class="animation">
-          
-        </div>
+    </div>
+    <div class="animationBox" v-show='showAnimate'>
+      <div class="animation">
+        
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@ export default {
     })
     self.timer=setInterval(()=>{
       self.init();
-    },self.refreshTime*10000)
+    },self.refreshTime)
   },
   data () {
     return {
@@ -75,7 +75,7 @@ export default {
       time1:'2017-11-09 20:10',
       countDownTime:'',
       timestr:60000,
-      refreshTime:1, 
+      refreshTime:10000, 
     }
   },
   methods:{
@@ -83,8 +83,10 @@ export default {
       let self = this;
       var myDate = new Date();
       console.log("倒计时："+"===="+myDate.getMinutes()+"======"+myDate.getSeconds() )
+      //self.$http.get('/h9/lottery/room/h68HhuMH')
       self.$http.get('/h9/lottery/room/'+self.code)
         .then(function(res) {
+          self.refreshTime=self.refreshTime*1
           if(res.data.code==0){
             self.prizeData=res.data.data;
             self.lottery=self.prizeData.lottery;
@@ -93,13 +95,9 @@ export default {
             }
             self.refreshTime=self.prizeData.refreshTime*1000
             if(res.data.data.lottery || res.data.data.differentDate===0){
-               console.log("要清空了："+"===="+myDate.getMinutes()+"======"+myDate.getSeconds() )
+               self.showAnimate=true;
               clearInterval(self.timer); //清除
-              self.showAnimate=true;  
-               console.log("要跳转了："+"===="+myDate.getMinutes()+"======"+myDate.getSeconds() )
-               self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
               setTimeout(function(){
-                 console.log("跳转了："+"===="+myDate.getMinutes()+"======"+myDate.getSeconds() )
                 self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
               },3000)
             }else{
@@ -150,7 +148,6 @@ export default {
             }
           }else{
             self.countDownTime = '即将开奖';
-            self.init();
           }
           
       },1000)
@@ -277,10 +274,10 @@ export default {
       left: 50%;
       margin-top: -150/40rem;
       margin-left: -150/40rem;
-      animation: hbAnimate 3s linear 2s infinite;
-      -moz-animation: hbAnimate 3s linear 2s infinite; /* Firefox */
-      -webkit-animation: hbAnimate 3s linear 2s infinite;  /* Safari 和 Chrome */
-      -o-animation: hbAnimate 3s linear 2s infinite; /* Opera */
+      animation: hbAnimate 3s linear 0s infinite;
+      -moz-animation: hbAnimate 3s linear 0s infinite; /* Firefox */
+      -webkit-animation: hbAnimate 3s linear 0s infinite;  /* Safari 和 Chrome */
+      -o-animation: hbAnimate 3s linear 0s infinite; /* Opera */
     }
 
   }
