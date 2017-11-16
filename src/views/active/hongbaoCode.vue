@@ -81,7 +81,8 @@ export default {
   methods:{
     init(){
       let self = this;
-      console.log("调用")
+      var myDate = new Date();
+      console.log("倒计时："+"===="+myDate.getMinutes()+"======"+myDate.getSeconds() )
       self.$http.get('/h9/lottery/room/'+self.code)
         .then(function(res) {
           if(res.data.code==0){
@@ -91,10 +92,13 @@ export default {
               self.codeUrl=res.data.data.qrCode
             }
             self.refreshTime=self.prizeData.refreshTime*1000
-            if(res.data.data.lottery){
+            if(res.data.data.lottery || res.data.data.differentDate===0){
+               console.log("要清空了："+"===="+myDate.getMinutes()+"======"+myDate.getSeconds() )
               clearInterval(self.timer); //清除
               self.showAnimate=true;  
+               console.log("要跳转了："+"===="+myDate.getMinutes()+"======"+myDate.getSeconds() )
               setTimeout(function(){
+                 console.log("跳转了："+"===="+myDate.getMinutes()+"======"+myDate.getSeconds() )
                 self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
               },3000)
             }else{
@@ -139,7 +143,6 @@ export default {
             if(hour=='00'&& min=='00'){
               if(sec=='00'){
                 self.init();
-                //clearInterval(a); //这里是让等于零时清除  
               }else{
                 self.countDownTime = sec+'秒';
               }
@@ -199,7 +202,7 @@ export default {
       padding: 30/40rem;
       font-size: 24/40rem;
       line-height: 40/40rem;
-      color: #666;
+      color: #666!important;
     }
     .exchangeCont{
       margin: 30/40rem;

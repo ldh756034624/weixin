@@ -16,7 +16,7 @@
           <flexbox-item>
             <router-link :to="{path:'/account/purse',query:{balance:personalData.balance,limit:personalData.withdrawalCount}}">
               <div class="personalItemBox">
-                <p class="redFont">{{personalData.balance | price2}}酒元</p>
+                <p class="redFont">{{personalData.balance | price2}}<span class='font12'>酒元</span></p>
                 <p>钱包</p>
               </div>
             </router-link>
@@ -151,6 +151,9 @@ export default {
       margin:46/40rem 0; 
       .redFont{
         font-size: 48/40rem;
+      }
+      .font12{
+        font-size: 24/40rem;
       }
     }
     .personalItemBox p:last-child{
