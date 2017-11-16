@@ -1,11 +1,13 @@
 <template>
 	<div class="page hongbaoPage">
-    <div v-if='lottery'>
+    <div v-if='!lottery'>
       <div class="exchangeCont">
         <div class="flexBox">
           <img class="groupLogo" src="../../assets/img/active/logo_huijiu@2x.png"/>
           <p class="flex1 alignR redFt">
-            <span>进入社区</span>
+            <router-link to='/index'>
+              <span>进入社区</span>
+            </router-link>
           </p>
         </div>
         
@@ -55,9 +57,9 @@ export default {
     self.getDeal('lottery').then(function(data){
       self.DealData=data.data
     })
-    // self.timer=setInterval(()=>{
-    //   self.init();
-    // },self.refreshTime*10000)
+    self.timer=setInterval(()=>{
+      self.init();
+    },self.refreshTime*10000)
   },
   data () {
     return {
@@ -106,7 +108,7 @@ export default {
     },
     StarPrizeFn:function(){
       let self=this;
-      self.$http.get('/h9/lottery/'+self.code+'/start')
+      self.$http.post('/h9/lottery/'+self.code+'/start')
         .then(function(res) {
           if(res.data.code==0){
             clearInterval(self.timer); //清除  

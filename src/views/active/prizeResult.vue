@@ -121,7 +121,7 @@ export default {
       var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
       var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
       if(isAndroid){
-          self.isChecking=true;
+          _g.toastMsg('error', '开发中!')
       }else{
           window.location = "https://itunes.apple.com/cn/app/%E7%8C%AA%E7%8C%AA%E9%9B%86%E5%B8%82/id1173387307?mt=8" 
       }

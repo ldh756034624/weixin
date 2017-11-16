@@ -114,20 +114,30 @@ Vue.mixin({
         },
         hasPhone:function(link){
           let self=this;
-          self.$http.get('h9/api/account/info')
-            .then(function(res) {
-              if(res.data.code==0){
-                self.$router.push({path:link})
-                localStorage.setItem('balance',res.data.data.balance)
-              }else if(res.data.code==402){
-                _g.toastMsg('error', '请先绑定手机号')
-                setTimeout(function(){
-                  self.$router.replace({path:'/account/bindPhone',query:{path:link}})
-                },1000)
-              }else if(response.data.code==401){
-                this.getWxCode();
-              }
-            })
+          let userObjItem=JSON.parse(localStorage.getItem('_user'))
+          if(userObjItem){
+            if(userObjItem.tel || localStorage.getItem('tel')){
+              self.$router.push({path:link})
+            }else{
+              _g.toastMsg('error', '请先绑定手机号')
+              setTimeout(function(){
+                self.$router.replace({path:'/account/bindPhone',query:{path:link}})
+              },1000)
+            }
+          }else{
+            this.getWxCode();
+          }
+          // self.$http.get('h9/api/account/info')
+          //   .then(function(res) {
+          //     if(res.data.code==0){
+          //       self.$router.push({path:link})
+          //       localStorage.setItem('balance',res.data.data.balance)
+          //     }else if(res.data.code==402){
+                
+          //     }else if(response.data.code==401){
+                
+          //     }
+          //   })
         },
         getDeal:function(code){
           let self=this;
@@ -172,11 +182,12 @@ if (url.indexOf('weixin-test-h9.thy360.com')!=-1) {
 }else{
   seturl = 'https://weixin-dev-h9.thy360.com'
 }
-//Vue.http.headers.common['client'] = 3;
 Vue.http.defaults.baseURL = seturl
 Vue.http.defaults.timeout = 1000 * 15
 Vue.http.defaults.headers['client'] = '3'
-//Vue.http.defaults.headers['imei'] = ''
+if(userdata){
+  Vue.http.defaults.headers['imei'] = userdata.openId
+}
 // Vue.http.defaults.headers.token = userdata ? userdata.token : ''
 Vue.http.interceptors.request.use(
   config => {

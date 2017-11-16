@@ -18,7 +18,7 @@
           <p class="flexBox fundsMoneyTips">提现金额 <span class='flex1 alignR'> 每日提现额度{{fundsData.withdrawalCount}}元</span></p>
           <x-input v-model="fundMoney" :title='moneyMark' @on-focus='moneyFocus()' :disabled='true'  @on-blur='moneyBlur()' :class="{'fundMoney':isFocus}" :show-clear="false" keyboard="number" placeholder='请输入提现金额'>
           </x-input>
-          <p class="leastMoney">钱包余额{{fundsData.balance | price2}}元 
+          <p class="leastMoney">酒元余额{{fundsData.balance | price2}}元 
             <!-- <span @click="fundMoney=fundsData.balance" class='blueFont'>全部提现</span> -->
           </p>
       </group>

@@ -28,7 +28,6 @@
 <script>
 import Vue from 'vue';
 import {  Group, XInput,XButton,Popup,TransferDom,XDialog} from 'vux'
-import userDeal from '../deal/userDeal'
 import platformDeal from '../deal/platformDeal'
 import {encode} from '@/util/base64Code'
 export default {
@@ -138,6 +137,7 @@ export default {
           .then(function(res) {
             if(res.data.code==0){
               _g.toastMsg('error','绑定成功');
+              localStorage.setItem('tel',self.loginParams.phone)
               if(self.path){
                 self.$router.push({path:self.path})
               }else{

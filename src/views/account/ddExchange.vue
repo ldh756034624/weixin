@@ -1,7 +1,7 @@
 <template>
 	<div class="page ddExchangePage">
       <!-- <img src="" /> -->
-      <p class="flexBox LeastMoneyBox"> <span class='flex1 alignR'>钱包余额￥{{balance}}</span></p>
+      <p class="flexBox LeastMoneyBox"> <span class='flex1 alignR'>酒元余额￥{{balance}}</span></p>
       <div class="flexBox cuponBox" v-for='item in ddCuponData'>
         <div class="flex1 flexBox">
           <img :src="item.imgUrl"/>

@@ -28,7 +28,6 @@
 <script>
 import Vue from 'vue';
 import {  Group, XInput,XButton,Popup,TransferDom,XDialog} from 'vux'
-import userDeal from './deal/userDeal'
 import platformDeal from './deal/platformDeal'
 import {encode} from '@/util/base64Code'
 export default {

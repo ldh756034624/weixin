@@ -9,7 +9,7 @@
               </div> 
               <x-button mini class='purseFundBtn' @click.native="goFunds()" >提现</x-button>
           </div>
-          <cell title="账单明细" link='/account/purseParticulars' is-link>
+          <cell title="酒店明细" link='/account/purseParticulars' is-link>
               <img slot="icon" width="30" style="display:block;margin-right:5px;" src="../../assets/img/index/icon_order@2x.png">
           </cell>
       </group>

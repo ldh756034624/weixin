@@ -13,18 +13,29 @@
         <x-button mini class='scanBtn' @click.native="scanFn()">扫码抢红包</x-button>
       </div>
       <div class="descRecordBox">
-        <span>游戏说明</span> 
+        <span v-on:click="showUserDeal=true">游戏说明</span> 
         <span class='line'>|</span> 
-        <span>游戏记录</span>
+        <router-link to='/active/prizeRecord'>
+          <span>游戏记录</span>
+        </router-link>
       </div>
       <img class="bottomLogo" src="../../assets/img/active/bitmap@2x.png"/>
     </div>
+    <div v-transfer-dom>
+        <popup v-model="showUserDeal" height="100%" class='dealPopup'>
+          <userDeal v-model="showUserDeal" v-on:listenToDealShow='dealShowFn'></userDeal>
+        </popup>
+     </div>
   </div>
 </template>
 <script>
-import { XInput,XButton} from 'vux'
+import { XInput,XButton,Popup,TransferDom} from 'vux'
+import userDeal from '../deal/userDeal'
 import wx from 'weixin-js-sdk'
 export default {
+  directives: {
+    TransferDom
+  },
   mounted(){
     let  self=this;
     self.setTitle('抢红包');
@@ -32,13 +43,16 @@ export default {
   data () {
     return {
       personalData:{},
+      showUserDeal:false,
       code:'',
     }
   },
   methods:{
-    init(){
-      let self = this
-      
+    dealShowFn:function(data){
+      let self=this;
+      if(data==false){
+        self.showUserDeal=false
+      }
     },
     prizeFn:function(){
       let self=this;
@@ -77,7 +91,7 @@ export default {
     
   },
    components: {
-    XInput,XButton
+    XInput,XButton,userDeal,Popup
   },
 }
 

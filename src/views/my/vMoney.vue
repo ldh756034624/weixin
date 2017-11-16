@@ -24,7 +24,7 @@
           <flexbox-item class='ItemBorder'>
             <div class="purseItemBox">
               <img src="../../assets/img/account/vcoin_icon_hotel@2x.png"/>
-              <p>酒店预订</p>
+              <p>H9酒店预订</p>
             </div>
           </flexbox-item>
           <flexbox-item>

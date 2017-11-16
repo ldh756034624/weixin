@@ -16,7 +16,7 @@
           <flexbox-item>
             <router-link :to="{path:'/account/purse',query:{balance:personalData.balance,limit:personalData.withdrawalCount}}">
               <div class="personalItemBox">
-                <p class="redFont">{{personalData.balance | price2}}</p>
+                <p class="redFont">{{personalData.balance | price2}}酒元</p>
                 <p>钱包</p>
               </div>
             </router-link>
@@ -45,7 +45,7 @@
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_order@2x.png">
                   </cell>
-                  <cell title="酒店记录"  value='暂未开放'>
+                  <cell title="H9酒店记录"  value='暂未开放'>
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_hotel@2x.png">
                   </cell>
