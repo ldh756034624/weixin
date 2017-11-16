@@ -97,6 +97,7 @@ export default {
               clearInterval(self.timer); //清除
               self.showAnimate=true;  
                console.log("要跳转了："+"===="+myDate.getMinutes()+"======"+myDate.getSeconds() )
+               self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
               setTimeout(function(){
                  console.log("跳转了："+"===="+myDate.getMinutes()+"======"+myDate.getSeconds() )
                 self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
