@@ -40,11 +40,11 @@ export default {
   },
   data () {
     return {
-      type:self.$route.query.type,
-      money:self.$route.query.money,
-      time:self.$route.query.time,
-      tel:self.$route.query.tel,
-      num:self.$route.query.num,
+      type:this.$route.query.type,
+      money:this.$route.query.money,
+      time:this.$route.query.time,
+      tel:this.$route.query.tel,
+      num:this.$route.query.num,
     }
   },
   methods:{

@@ -59,6 +59,9 @@
                   </cell>
               </group>
       </div>
+      <div class="emptyBox">
+        
+      </div>
       <Bottombar :index="2"></Bottombar>
   </div>
 </template>
@@ -110,6 +113,7 @@ export default {
 <style scoped lang='less'>
     .personalPage{
       background: #fff;
+      overflow-y:auto;
     }
     .personalTopBg{
       background:url('../../assets/img/index/my_img_bg@2x.png') no-repeat;
@@ -163,10 +167,12 @@ export default {
       border-left:1px solid #d9d9d9;
       border-right:1px solid #d9d9d9;
     }
-    .accountCont,.personBox{
-      padding-bottom: 120/40rem;
-      margin-bottom: 120/40rem;
+    @media screen and (max-width: 360px){
+      .accountCont{
+        padding-bottom: 120/40rem;
+      }
     }
+    
 
 </style>
 <style lang='less'>
