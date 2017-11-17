@@ -15,13 +15,13 @@
         <div class="fundsBtnBox">
           <x-button class='gradientBtn' v-bind:class="loginParams.phone==''|| loginParams.code==''? 'err': ''" :disabled='!loginBtnCanUse' @click.native="loginFn(0)">确定</x-button>
         </div>
-        
+
      </group>
      <div v-transfer-dom>
         <popup v-model="showUserDeal" height="100%" class='dealPopup'>
           <platformDeal v-model="showUserDeal" v-on:listenToDealShow='dealShowFn'></platformDeal>
         </popup>
-     </div> 
+     </div>
   </div>
 </template>
 
@@ -85,11 +85,11 @@ export default {
            _g.toastMsg('error', '请输入11位手机号')
           return;
         }
-        self.$http.get('h9/api/user/sms/'+self.trim(self.loginParams.phone)+'/1')
+        self.$http.get('h9/api/user/register/'+self.trim(self.loginParams.phone))
         .then(function(res) {
           if(res.data.code===0){
             self.countTime();
-          } 
+          }
            _g.toastMsg('error',res.data.msg)
         })
         clearInterval(self.timer);
@@ -153,8 +153,8 @@ export default {
             }
           })
       },
-      trim(str){ 
-        return str.replace(/\s/g, ""); 
+      trim(str){
+        return str.replace(/\s/g, "");
      }
   },
    components: {
