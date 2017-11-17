@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="prizerBox">
-        <p class="prizerNum">{{prizeNum}}人参与,中奖名单如下:</p>
+        <p class="prizerNum">{{prizeNum}}人参与,获得红包的人有:</p>
         <div class="prizerCont flexBox" v-for='item in prizeData.lotteryUsers'>
           <img :src="item.avatar"/>
           <div class="flex1">
