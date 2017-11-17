@@ -77,11 +77,10 @@ export default {
         _g.toastMsg('error', '请输入手机号!')
         return;
       }
-      if(this.rechargeData.balance < this.rechargeMoney){
+      if(parseInt(this.rechargeData.balance) < parseInt(this.rechargeMoney)){
         _g.toastMsg('error', '余额不足!')
         return;
       }
-      rechargeData.balance
       this.codeAlert=true;
     },
     codeAlertFn:function(data){
