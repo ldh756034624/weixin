@@ -10,7 +10,7 @@
             </router-link>
           </p>
         </div>
-
+        
         <div class="hongBaoImgBox" v-if="prizeData.roomUser">
           <qrcode :value="codeUrl" type="img"></qrcode>
           <p>叫上好友扫一扫,有钱大家一起分!</p>
@@ -21,28 +21,28 @@
             <img  src="../../assets/img/active/logo_gaolujia@2x.png"/>
           </div>
         </div>
-
+        
         <div class="actorBox">
           <flexbox :gutter="0" wrap="wrap">
             <flexbox-item :span="1/4" v-for='item in prizeData.lotteryUsers' @click.native=''>
               <div class="actorHeadImgBox">
-                <img :src="item.avatar">
+                <img :src="item.avatar"> 
               </div>
             </flexbox-item>
-          </flexbox>
+          </flexbox>  
         </div>
         <div v-if="prizeData.roomUser" class="prizeBtnBox">
           <p>开奖倒计时 <span>{{countDownTime}}</span></p>
           <x-button mini class='prizeBtn'  @click.native="StarPrizeFn">开始抽奖</x-button>
         </div>
-        <p v-else class="prizeTip">等待开奖</p>
+        <p v-else class="prizeTip">等待抽奖</p>
       </div>
       <div class="strategyText" v-html='DealData'>
       </div>
     </div>
     <div class="animationBox" v-show='showAnimate'>
       <div class="animation">
-
+        
       </div>
     </div>
   </div>
@@ -53,13 +53,15 @@ export default {
   mounted(){
     let self=this;
     self.setTitle('抢红包');
-    self.init();
+    
     self.getDeal('lottery').then(function(data){
       self.DealData=data.data
     })
-    self.timer=setInterval(()=>{
-      self.init();
-    },self.refreshTime)
+    self.getdata();
+    self.$watch('differentDate',function(val){
+        self.intervalLike(val);
+    })
+       
   },
   data () {
     return {
@@ -71,11 +73,14 @@ export default {
       showAnimate:false,
       code:this.$route.query.code,
       timer:null,
+      downtimer:null,
+      time_count:null,
       codeUrl:'https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433747234',
       time1:'2017-11-09 20:10',
       countDownTime:'',
       timestr:60000,
-      refreshTime:10000,
+      refreshTime:10000, 
+      differentDate:0,
     }
   },
   methods:{
@@ -83,29 +88,35 @@ export default {
       let self = this;
       var myDate = new Date();
       console.log("倒计时："+"===="+myDate.getMinutes()+"======"+myDate.getSeconds() )
-      //self.$http.get('/h9/lottery/room/h68HhuMH')
+      self.timer = setTimeout(function(){
+        self.getdata();
+      },self.refreshTime)
+      if(self.prizeData.lottery || self.prizeData.differentDate===0){
+       clearTimeout(self.timer)
+      }
+    },
+    getdata:function(){
+      let self = this;
       self.$http.get('/h9/lottery/room/'+self.code)
         .then(function(res) {
           self.refreshTime=self.refreshTime*1
           if(res.data.code==0){
             self.prizeData=res.data.data;
             self.lottery=self.prizeData.lottery;
+            self.differentDate=self.prizeData.differentDate;
             if(res.data.data.roomUser){
               self.codeUrl=res.data.data.qrCode
             }
             self.refreshTime=self.prizeData.refreshTime*1000
             if(res.data.data.lottery || res.data.data.differentDate===0){
                self.showAnimate=true;
-              clearInterval(self.timer); //清除
               setTimeout(function(){
                 self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
               },3000)
             }else{
-              //调用函数：
               self.timestr=res.data.data.differentDate
-              self.getCountDown();
             }
-
+            self.init();
           }
         })
     },
@@ -124,22 +135,21 @@ export default {
           }
         })
     },
-    getCountDown:function (){
+
+    intervalLike:function(timestr){
       let self=this;
-      var a=setInterval(function(){
-          var hour=Math.floor(self.timestr/1000/60/60%24);
-          var min=Math.floor(self.timestr/1000/60%60);
-          var sec=Math.floor(self.timestr/1000%60);
-          hour=self.checkTime(hour)
+      var min,sec;
+      self.time_count = setTimeout(function(){
+          var date = new Date(timestr); //转换成时间对象，这就简单了
+          min = date.getMinutes();  //获取分
+          sec = date.getSeconds();  //获取秒
           min=self.checkTime(min)
           sec=self.checkTime(sec)
-          self.countDownTime = hour + "小时" + min + "分" + sec+'秒';
-          self.timestr=self.timestr-1000;
-          if(self.timestr>1000){
-            if(hour=='00'){
-              self.countDownTime = min + "分" + sec+'秒';
-            }
-            if(hour=='00'&& min=='00'){
+          self.countDownTime =  min + "分" + sec+'秒';
+          
+          if(timestr>1000){
+            timestr=timestr-1000;
+            if(min=='00'){
               if(sec=='00'){
                 self.init();
               }else{
@@ -149,8 +159,16 @@ export default {
           }else{
             self.countDownTime = '即将开奖';
           }
-
-      },1000)
+            // 循环调用自身，达到和setInterval一样的效果
+            self.intervalLike(timestr)
+            
+        },1000);
+      if(self.prizeData.lottery || self.prizeData.differentDate===0){
+       clearTimeout(self.time_count)
+      }
+      if(sec<0){
+        clearTimeout(self.time_count)
+      }
 
     },
     checkTime:function (i){ //将0-9的数字前面加上0，例1变为01
