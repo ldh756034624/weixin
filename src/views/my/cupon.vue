@@ -111,8 +111,7 @@
         input.value = code
         input.select()
         document.execCommand('Copy')
-        console.log(input.value)
-        _g.toastMsg('error', '复制成功');
+        _g.toastMsg('error', '复制成功')
       }
     },
     components: {

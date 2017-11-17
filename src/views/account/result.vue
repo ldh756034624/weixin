@@ -20,6 +20,7 @@
           <x-button class='gradientBtn' v-if="type==='exchange'" @click.native="copy">复制券号</x-button>
           <x-button class='gradientBtn' v-else @click.native="goBack">完成</x-button>
       </div>
+    <input type="text" ref="copyInput" class="copy-input">
   </div>
 </template>
 <script>
@@ -50,15 +51,19 @@ export default {
   methods:{
     init(){
       let self = this
-      
+
     },
     goBack:function(){
       this.$router.replace({path:'/account/personal'})
     },
     copy:function(){
-      this.$router.replace({path:'/account/personal'})
+      let input = this.$refs.copyInput
+      input.value = this.num
+      input.select()
+      document.execCommand('Copy')
+      _g.toastMsg('error', '复制成功')
     },
-    
+
   },
    components: {
     Group,Cell, XInput,XButton
@@ -99,6 +104,14 @@ export default {
         color: #999;
         line-height: 40/40rem;
         text-align: center;
+      }
+      .copy-input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 1px;
+        width: 1px;
+        opacity: 0;
       }
     }
 </style>

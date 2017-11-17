@@ -10,7 +10,7 @@
             </router-link>
           </p>
         </div>
-        
+
         <div class="hongBaoImgBox" v-if="prizeData.roomUser">
           <qrcode :value="codeUrl" type="img"></qrcode>
           <p>叫上好友扫一扫,有钱大家一起分!</p>
@@ -21,28 +21,28 @@
             <img  src="../../assets/img/active/logo_gaolujia@2x.png"/>
           </div>
         </div>
-        
+
         <div class="actorBox">
           <flexbox :gutter="0" wrap="wrap">
             <flexbox-item :span="1/4" v-for='item in prizeData.lotteryUsers' @click.native=''>
               <div class="actorHeadImgBox">
-                <img :src="item.avatar"> 
+                <img :src="item.avatar">
               </div>
             </flexbox-item>
-          </flexbox>  
+          </flexbox>
         </div>
         <div v-if="prizeData.roomUser" class="prizeBtnBox">
           <p>开奖倒计时 <span>{{countDownTime}}</span></p>
           <x-button mini class='prizeBtn'  @click.native="StarPrizeFn">开始抽奖</x-button>
         </div>
-        <p v-else class="prizeTip">等待抽奖</p>
+        <p v-else class="prizeTip">等待开奖</p>
       </div>
       <div class="strategyText" v-html='DealData'>
       </div>
     </div>
     <div class="animationBox" v-show='showAnimate'>
       <div class="animation">
-        
+
       </div>
     </div>
   </div>
@@ -75,7 +75,7 @@ export default {
       time1:'2017-11-09 20:10',
       countDownTime:'',
       timestr:60000,
-      refreshTime:10000, 
+      refreshTime:10000,
     }
   },
   methods:{
@@ -114,8 +114,8 @@ export default {
       self.$http.post('/h9/lottery/'+self.code+'/start')
         .then(function(res) {
           if(res.data.code==0){
-            clearInterval(self.timer); //清除  
-            self.showAnimate=true;  
+            clearInterval(self.timer); //清除
+            self.showAnimate=true;
             setTimeout(function(){
               self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
             },3000)
@@ -149,18 +149,18 @@ export default {
           }else{
             self.countDownTime = '即将开奖';
           }
-          
+
       },1000)
-                
+
     },
-    checkTime:function (i){ //将0-9的数字前面加上0，例1变为01 
-     if(i<10) 
-     { 
-      i = "0" + i; 
-     } 
-     return i; 
-    } 
-    
+    checkTime:function (i){ //将0-9的数字前面加上0，例1变为01
+     if(i<10)
+     {
+      i = "0" + i;
+     }
+     return i;
+    }
+
   },
    components: {
     XButton,Flexbox, FlexboxItem,Qrcode
@@ -180,12 +180,11 @@ export default {
   .actorHeadImgBox{
     width: 120/40rem;
     height: 120/40rem;
-    border-radius: 4rem;
+    border-radius: 50%;
     text-align: center;
     margin: 30/40rem 0 0;
-    border:1px solid red;
     img{
-      border-radius: 5rem;
+      border-radius: 50%;
       width: 100%;
     }
   }
