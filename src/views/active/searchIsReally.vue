@@ -1,6 +1,6 @@
 <template>
-	<div class="page searchRealPage">
-    <img src="../../assets/img/active/tubiao@2x.png" class="searcLogo" />
+  <div class="page searchRealPage">
+    <img src="../../assets/img/active/tubiao@2x.png" class="searcLogo"/>
     <div class="searchBox">
       <div class="searchProgress">
         <div class="progBlock">
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div v-else>
-        您所查询的防伪码不存在，谨防假冒！或与公司客服人员联系！
+        {{errMsg}}
       </div>
     </div>
     <div class="searchDesc" v-html='DealData'>
@@ -59,100 +59,102 @@
   </div>
 </template>
 <script>
-import {Group,XInput,XButton} from 'vux'
-// var url = require('aUrl')
-export default {
-  mounted(){
-    let  self=this;
-    self.setTitle('查询真伪');
-    self.init();
-    self.getDeal('queryCode').then(function(data){
-      self.DealData=data.data
-    })
-  },
-  data () {
-    return {
-      searchData:{},
-      DealData:'',
-      code:'',
-      showResult:false,
-      isReal:false
-    }
-  },
-  methods:{
-    init(){
-      let self = this
-      
+  import {Group, XInput, XButton} from 'vux'
+  // var url = require('aUrl')
+  export default {
+    mounted() {
+      let self = this;
+      self.setTitle('查询真伪');
+      self.init();
+      self.getDeal('queryCode').then(function (data) {
+        self.DealData = data.data
+      })
     },
-    searchRealFn:function(){
-      let self=this;
-      if(!self.code){
-        _g.toastMsg('error','请输入防伪码');
-        return;
+    data() {
+      return {
+        errMsg: null,
+        searchData: {},
+        DealData: '',
+        code: '',
+        showResult: false,
+        isReal: false
       }
-      self.$http.get('h9/lottery/product/check?code='+self.code+'&longitude='+self.$store.state.longitude+'&latitude='+self.$store.state.latitude)
-        .then(function(res) {
-          self.showResult=true;
-          if(res.data.code==0){
-            self.isReal=true;
-            self.searchData=res.data.data
-          }else{
-            self.isReal=false;
-          }
-        })
-    }
-    
-  },
-   components: {
-    Group,XInput,XButton
-  },
-}
+    },
+    methods: {
+      init() {
+        let self = this
+      },
+      searchRealFn: function () {
+        let self = this;
+        if (!self.code) {
+          _g.toastMsg('error', '请输入防伪码')
+          self.showResult = false;
+          return;
+        }
+        self.$http.get('h9/lottery/product/check?code=' + self.code + '&longitude=' + self.$store.state.longitude + '&latitude=' + self.$store.state.latitude)
+          .then(function (res) {
+            self.showResult = true;
+            if (res.data.code == 0) {
+              self.isReal = true;
+              self.searchData = res.data.data
+            } else {
+              self.isReal = false
+              self.errMsg = res.data.msg
+            }
+          })
+      }
+
+    },
+    components: {
+      Group, XInput, XButton
+    },
+  }
 
 </script>
 
 <style scoped lang='less'>
-  .searchRealPage{
+  .searchRealPage {
     background: #FE5850;
     text-align: center;
-    overflow-y:auto;
+    overflow-y: auto;
     padding: 30/40rem;
-    .searcLogo{
+    .searcLogo {
       width: 260/40rem;
       height: 260/40rem;
-      margin: 30/40rem 0 20/40rem ;
+      margin: 30/40rem 0 20/40rem;
     }
-    .searchBox{
+    .searchBox {
       background: #FF726B;
       border-radius: 10/40rem;
       padding: 40/40rem 0rem;
       margin-bottom: 20/40rem;
-      .btnBox{
-        padding:30/40rem;
+      .btnBox {
+        padding: 30/40rem;
       }
     }
-    .searchProgress{
+    .searchProgress {
       color: #fff;
-      img{
+      img {
         width: 46/40rem;
         height: 46/40rem;
         vertical-align: top;
         margin-top: 15/40rem;
       }
     }
-    .progBlock{
+    .progBlock {
       display: inline-block;
       font-size: 24/40rem;
-      label{
+      label {
         font-size: 48/40rem;
       }
     }
-    .searchInput{
+    .searchInput {
       font-size: 36/40rem;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 10/40rem;
       margin-top: 40/40rem;
     }
-    .searchBtn{
+    .searchBtn {
       font-size: 36/40rem;
       color: #333;
       margin: 20/40rem 0;
@@ -160,22 +162,22 @@ export default {
       color: #333;
       height: 100/40rem;
     }
-    .searchResultBox{
+    .searchResultBox {
       padding: 10/40rem 30/40rem;
       border-radius: 10/40rem;
       background: #fff;
       font-size: 24/40rem;
       color: #999;
       line-height: 50/40rem;
-      label{
+      label {
         width: 4rem;
         text-align: left;
       }
-      .alignR{
+      .alignR {
         color: #333;
       }
     }
-    .searchDesc{
+    .searchDesc {
       background: #FF726B;
       font-size: 24/40rem;
       padding: 30/40rem;
@@ -187,8 +189,8 @@ export default {
   }
 </style>
 <style lang='less'>
-  .searchRealPage{
-    .searchInput .weui-input{
+  .searchRealPage {
+    .searchInput .weui-input {
       text-align: center;
     }
   }

@@ -7,7 +7,7 @@
           ￥<span>{{prizeData.money}}</span>
         </div>
         <div>
-          
+
           <div v-if="noGetPrize">
             <x-input  v-model="bindPhoneParam.phone" class='prizePhone'  placeholder='请输入手机号'></x-input>
             <x-button mini class='prizeGetBtn'  @click.native="getPrizeFn">立即领取</x-button>
@@ -16,7 +16,7 @@
             <p class="account">红包已放置账户:{{prizeAccount}}</p>
             <p>登录App或欢乐之家社区即可使用</p>
           </div>
-          
+
         </div>
       </div>
       <div v-else class="noPrize">
@@ -28,8 +28,8 @@
         <x-button mini class='miniBtn'  @click.native="downApp">下载APP</x-button>
       </div>
     </div>
-    <div class="prizerBox"> 
-        <p class="prizerNum">{{prizeNum}}人参与,中奖名单如下:</p>
+    <div class="prizerBox">
+        <p class="prizerNum">{{prizeNum}}人参与,获得红包的人有:</p>
         <div class="prizerCont flexBox" v-for='item in prizeData.lotteryUsers'>
           <img :src="item.avatar"/>
           <div class="flex1">
@@ -54,7 +54,7 @@ import codeAlert from '@/components/codeAlert'
 export default {
   mounted(){
     let  self=this;
-    self.setTitle('中奖结果');
+    self.setTitle('抢红包');
     self.init();
   },
   data () {
@@ -123,7 +123,7 @@ export default {
       if(isAndroid){
           _g.toastMsg('error', '开发中!')
       }else{
-          window.location = "https://itunes.apple.com/cn/app/%E7%8C%AA%E7%8C%AA%E9%9B%86%E5%B8%82/id1173387307?mt=8" 
+          window.location = "https://itunes.apple.com/cn/app/%E7%8C%AA%E7%8C%AA%E9%9B%86%E5%B8%82/id1173387307?mt=8"
       }
     },
   },
@@ -138,12 +138,12 @@ export default {
     .prizeResultPage{
       background: url('../../assets/img/active/bg_dafugui@2x.png') no-repeat;
       background-size: cover;
-      overflow-y:auto; 
+      overflow-y:auto;
     }
     .prizeResultCont{
-      background:rgba(255,255,255,.9);   
+      background:rgba(255,255,255,.9);
       padding: 30/40rem 1rem;
-      margin: 30/40rem; 
+      margin: 30/40rem;
       text-align: center;
       .groupLogo{
         width: 160/40rem;
@@ -219,7 +219,7 @@ export default {
         background: rgba(255,255,255,.9);
         font-size: 28/40rem;
         padding: 30/40rem;
-        margin: 30/40rem; 
+        margin: 30/40rem;
         .prizerCont{
           margin-top: 30/40rem;
         }
@@ -274,16 +274,16 @@ export default {
     .weui-input{
       text-align: center;
     }
-    input::-webkit-input-placeholder { /* WebKit browsers */ 
+    input::-webkit-input-placeholder { /* WebKit browsers */
       color: #ccc;
-    } 
-    input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+    }
+    input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
       color: #ccc;
-    } 
-    input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+    }
+    input::-moz-placeholder { /* Mozilla Firefox 19+ */
       color: #ccc;
-    } 
-    input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+    }
+    input:-ms-input-placeholder { /* Internet Explorer 10+ */
       color: #ccc;
     }
   }

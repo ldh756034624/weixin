@@ -19,8 +19,8 @@
         <!-- <x-input title="职业" v-model='infoData.job' placeholder="请输入职业" ></x-input> -->
     </group>
     <div class="fundsBtnBox">
-      <x-button class='gradientBtn' v-if='showOtherInfo' @click.native="changeFn" :show-clear="false">确认修改</x-button>
-    </div>  
+      <x-button class='gradientBtn' v-if='showOtherInfo' @click.native="changeFn" :show-clear="false">保存</x-button>
+    </div>
     <div v-transfer-dom>
       <popup v-model="showPopup" >
         <div class="infoPopup">
@@ -41,7 +41,7 @@ export default {
   },
   mounted(){
     let  self=this;
-    self.setTitle('资料修改');
+    self.setTitle('个人信息');
     self.init();
   },
   data () {
@@ -66,7 +66,7 @@ export default {
       self.$http.get('h9/api/user/info/options')
         .then(function(res) {
           if(res.data.code==0){
-              self.infoData=res.data.data 
+              self.infoData=res.data.data
               self.infoData.sex=self.findPopup(self.infoData.sexList)
               self.infoData.marriageStatus=self.findPopup(self.infoData.emotionList)
               self.infoData.education=self.findPopup(self.infoData.educationList)
@@ -148,7 +148,7 @@ export default {
           }
         })
     }
-    
+
   },
   components: {
      Group, XInput,XButton,Popup,Cell,Datetime,TransferDom,uploadHeadImg
@@ -175,6 +175,9 @@ export default {
     text-align: center;
     font-size: 32/40rem;
   }
+  .infoChangePage{
+    overflow-y: auto;
+  }
 </style>
 <style lang='less'>
   .infoBox .weui-input{
@@ -184,13 +187,13 @@ export default {
     .vux-cell-primary,.weui-label{
       font-size: 30/40rem;
     }
-  } 
+  }
   .infoBox .weui-input,.infoBox .weui-cell_access .weui-cell__ft{
     font-size: 30/40rem;
     color: #999;
   }
   .infoBox .weui-cell{
-    padding: 30/40rem 30/40rem!important; 
+    padding: 30/40rem 30/40rem!important;
   }
   .infoBox .infoImgCell{
     padding: 50/40rem 30/40rem 15/40rem 30/40rem!important;

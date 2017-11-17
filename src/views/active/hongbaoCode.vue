@@ -125,8 +125,8 @@ export default {
       self.$http.post('/h9/lottery/'+self.code+'/start')
         .then(function(res) {
           if(res.data.code==0){
-            clearInterval(self.timer); //清除  
-            self.showAnimate=true;  
+            clearInterval(self.timer); //清除
+            self.showAnimate=true;
             setTimeout(function(){
               self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
             },3000)
@@ -169,15 +169,16 @@ export default {
       if(sec<0){
         clearTimeout(self.time_count)
       }
+
     },
-    checkTime:function (i){ //将0-9的数字前面加上0，例1变为01 
-     if(i<10) 
-     { 
-      i = "0" + i; 
-     } 
-     return i; 
-    } 
-    
+    checkTime:function (i){ //将0-9的数字前面加上0，例1变为01
+     if(i<10)
+     {
+      i = "0" + i;
+     }
+     return i;
+    }
+
   },
    components: {
     XButton,Flexbox, FlexboxItem,Qrcode
@@ -197,12 +198,11 @@ export default {
   .actorHeadImgBox{
     width: 120/40rem;
     height: 120/40rem;
-    border-radius: 4rem;
+    border-radius: 50%;
     text-align: center;
     margin: 30/40rem 0 0;
-    border:1px solid red;
     img{
-      border-radius: 5rem;
+      border-radius: 50%;
       width: 100%;
     }
   }

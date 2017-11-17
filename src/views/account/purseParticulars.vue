@@ -8,7 +8,7 @@ import Particulars from '@/components/particulars'
 export default {
   mounted(){
     let  self=this;
-    self.setTitle('钱包明细');
+    self.setTitle('酒元明细');
   },
   data () {
     return {
@@ -29,6 +29,6 @@ export default {
 </script>
 
 <style scoped lang='less'>
-    
+
 
 </style>

@@ -7,12 +7,12 @@
           <img :src="item.imgUrl"/>
           <div class="flex1">
             <p class="name">{{item.name}}</p>
-            <p class="money">{{item.name}}元</p>
+            <p class="money">{{item.price}}元</p>
           </div>
         </div>
         <div class="exchangeBox">
           <p class="num">剩余{{item.stock}}张</p>
-          <x-button mini class='blueBg' @click.native="exchangeFn(item)">兑换</x-button>
+          <x-button mini class='blueBg' @click.native="exchangeFn(item)">立即兑换</x-button>
         </div>
       </div>
       <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='tel' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
@@ -27,7 +27,7 @@ export default {
   },
   mounted(){
     let  self=this;
-    self.setTitle('手机充值');
+    self.setTitle('滴滴券兑换');
     self.init();
   },
   data () {
@@ -46,11 +46,15 @@ export default {
       self.$http.get('h9/api/consume/didiCards')
         .then(function(res) {
           if(res.data.code==0){
-              self.ddCuponData=res.data.data 
+              self.ddCuponData=res.data.data
           }
         })
     },
     exchangeFn:function(item){
+      if (item.price > this.balance) {
+        _g.toastMsg('error', '余额不足!')
+        return
+      }
       this.codeAlert=true;
       this.ddCuponParams.id=item.goodId
     },
@@ -82,7 +86,7 @@ export default {
   .ddExchangePage{
     background: #fff;
     /*padding: 30/40rem 30/40rem 0 30/40rem;*/
-    overflow-y:auto; 
+    overflow-y:auto;
     .LeastMoneyBox{
       padding: 30/40rem;
       font-size: 28/40rem;
@@ -123,7 +127,7 @@ export default {
       border-left: 1px dashed #f2f2f2;
     }
   }
-  
-  
-  
+
+
+
 </style>
