@@ -77,6 +77,8 @@ export default {
       var phone;
       if(self.phoneNum){
         phone=self.phoneNum;
+      }else if(localStorage.getItem('tel')){
+        phone=localStorage.getItem('tel')
       }else{
         var userObj=JSON.parse(localStorage.getItem('_user'))
         phone=userObj.tel
