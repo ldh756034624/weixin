@@ -79,8 +79,6 @@ export default {
           if(res.data.code==0){
               _g.toastMsg('error','绑定成功')
               if(self.$route.query.type){
-                var strLen=this.cardData.no.length
-                var cardLast=this.cardData.no.substr(strLen-4,strLen)
                 self.$router.replace({path:'/account/funds'})
               }else{
                 history.go(-1)

@@ -142,7 +142,9 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
               _g.toastMsg('error',"修改资料成功");
-              self.$router.push({path:'/account/personal'})
+              setTimeout(function(){
+                self.$router.push({path:'/account/personal'})
+              },1500)
           }
         })
     }

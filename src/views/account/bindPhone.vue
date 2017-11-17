@@ -85,7 +85,7 @@ export default {
            _g.toastMsg('error', '请输入11位手机号')
           return;
         }
-        self.$http.get('h9/api/user/sms/'+self.trim(self.loginParams.phone)+'/2')
+        self.$http.get('h9/api/user/register/'+self.trim(self.loginParams.phone))
         .then(function(res) {
           if(res.data.code===0){
             self.countTime();

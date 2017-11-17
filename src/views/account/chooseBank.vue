@@ -5,7 +5,7 @@
           <img class="chooseBankImg" :src="item.bankImg"/>      
           <div class="flex1">
               <p class="chooseBankName">{{item.name}}</p>
-              <p class="chooseBankNo">尾号({{item.cardLast}})</p>
+              <p class="chooseBankNo">{{item.no}}</p>
           </div>
           <!-- <span v-if='chooseId==item.id'>X</span> -->
       </div>
@@ -50,7 +50,7 @@ export default {
     chooseCardFn:function(item){
       let self=this;
       self.chooseId=item.id
-      self.$router.replace({path:'/account/funds',query:{cardIcon:item.bankImg,cardName:item.name,cardLast:item.cardLast,bankId:item.id}})
+      self.$router.replace({path:'/account/funds',query:{cardIcon:item.bankImg,cardName:item.name,no:item.no,bankId:item.id}})
     }
   },
   components: {

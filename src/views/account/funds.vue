@@ -6,7 +6,8 @@
               <img class="fundsCardIcon" :src="bankImg">
               <div class="flex1">
                 <p class="fundsCardName">{{name}}</p>
-                <p class="fundsCardNo">尾号{{cardLast}}</p>
+                <!-- <p class="fundsCardNo">尾号{{cardLast}}</p> -->
+                <p class="fundsCardNo">{{no}}</p>
               </div>
             </span>
             <span v-else>
@@ -55,6 +56,7 @@ export default {
       fundsData:{},
       bankImg:'',
       name:'',
+      no:'',
       bankId:'',
       cardLast:'',
       codeAlert:false,
@@ -71,18 +73,17 @@ export default {
               self.fundMoney=self.fundsData.balance
               if(self.$route.query.cardIcon){
                 self.name=self.$route.query.cardName
+                self.no=self.$route.query.no
                 self.bankImg=self.$route.query.cardIcon
                 self.bankId=self.$route.query.bankId
-                self.cardLast=self.$route.query.cardLast
                 self.hasCard=true
               }else{
                 if(self.fundsData.bankList.length>0){
                   self.hasCard=true
                   self.name=self.fundsData.bankList[0].name
+                  self.no=self.fundsData.bankList[0].no
                   self.bankImg=self.fundsData.bankList[0].bankImg
                   self.bankId=self.fundsData.bankList[0].id
-                  var strLen=self.fundsData.bankList[0].no.length
-                  self.cardLast=self.fundsData.bankList[0].no.substr(strLen-4,strLen)
                 }else{
                   self.hasCard=false
                 }
@@ -95,7 +96,7 @@ export default {
       if(this.hasCard){
         self.$router.replace({path:'/account/chooseBank'})
       }else{
-        self.$router.replace({path:'/account/addBank'})
+        self.$router.replace({path:'/account/addBank',query:{type:'funds'}})
       }
     },
     fundsFn:function(){
