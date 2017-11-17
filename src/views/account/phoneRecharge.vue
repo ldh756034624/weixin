@@ -55,7 +55,7 @@ export default {
              self.rechargeParams.id=self.rechargeData.priceList[0].id
              self.rechargeMoney=self.rechargeData.priceList[0].realPrice
              self.reChargePhoneNum=self.rechargeData.tel
-             if(self.balance > self.rechargeMoney){
+             if(parseInt(self.balance) > parseInt(self.rechargeMoney)){
               self.canUse=true;
              }
           }
@@ -65,7 +65,7 @@ export default {
       this.rechargeChoosed=index;
       this.rechargeParams.id=item.id
       this.rechargeMoney=item.realPrice
-      if(this.balance > this.rechargeMoney){
+      if(parseInt(this.balance) > parseInt(this.rechargeMoney)){
         this.canUse=true;
       }else{
         this.canUse=false;
