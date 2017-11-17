@@ -27,7 +27,7 @@ export default {
   },
   mounted(){
     let  self=this;
-    self.setTitle('手机充值');
+    self.setTitle('滴滴券兑换');
     self.init();
   },
   data () {
