@@ -10,7 +10,7 @@
           <p class="addBankTips">信息加密处理，仅用于验证，确认代表您已同意<span class="blueFont" @click='showUserDeal=true'>《用户服务协议》</span></p>
       </group>
       <div class="fundsBtnBox">
-        <x-button class='gradientBtn' @click.native="addCardFn()">添加银行卡</x-button>  
+        <x-button class='gradientBtn' @click.native="addCardFn()">添加银行卡</x-button>
       </div>
       <div v-transfer-dom>
         <popup v-model="showPopup" >
@@ -54,7 +54,7 @@ export default {
       popupData:[],
       address:[],
       cardData:{},
-      
+
     }
   },
   methods:{
@@ -80,8 +80,8 @@ export default {
               _g.toastMsg('error','绑定成功')
               if(self.$route.query.type){
                 self.$router.replace({path:'/account/funds'})
-              }else{
-                history.go(-1)
+              }else{  // 跳到 选择银行卡
+                self.$router.replace({path:'/account/chooseBank'})
               }
           }else{
             _g.toastMsg('error',res.data.msg)
@@ -103,7 +103,7 @@ export default {
     logShow (str) {
       console.log('on-show')
     }
-    
+
   },
    components: {
     Group,XInput,XButton,XAddress,Cell,Popup,platformDeal
