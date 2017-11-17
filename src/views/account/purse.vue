@@ -6,10 +6,10 @@
               <img src=""/>
               <div class="purseMoney flex1 redFont">
                 {{purseData.balance}}
-              </div> 
+              </div>
               <x-button mini class='purseFundBtn' @click.native="goFunds()" >提现</x-button>
           </div>
-          <cell title="酒店明细" link='/account/purseParticulars' is-link>
+          <cell title="酒元明细" link='/account/purseParticulars' is-link>
               <img slot="icon" width="30" style="display:block;margin-right:5px;" src="../../assets/img/index/icon_order@2x.png">
           </cell>
       </group>
@@ -33,7 +33,7 @@
           </flexbox-item>
           <flexbox-item>
             <div class="purseItemBox">
-              
+
             </div>
           </flexbox-item>
         </flexbox>
@@ -60,7 +60,7 @@ export default {
       self.$http.get('h9/api/account/info')
         .then(function(res) {
           if(res.data.code==0){
-              self.purseData=res.data.data 
+              self.purseData=res.data.data
           }
         })
     },
@@ -68,7 +68,7 @@ export default {
       let self=this;
       self.$router.push({path:'/account/funds'})
     }
-    
+
   },
    components: {
     Group,Cell,Flexbox, FlexboxItem,XButton
