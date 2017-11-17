@@ -31,7 +31,7 @@
                   <p class="flexBox copy">券号:
                     <span class='cuponNum TextEllipsis'>{{item.cardNumber}} </span>
                     <span class="flex1 alignR">
-                        <x-button mini class='blueBg' @click.native="copyFn()">复制券码</x-button>
+                        <x-button mini class='blueBg' @click.native="copyFn()">复制券号</x-button>
                     </span>
                   </p>
                 </div>
@@ -43,12 +43,12 @@
   </div>
 </template>
 <script>
-import blankPage from '@/components/blankPage' 
-import PullHeaderFooter from '@/components/pullHeaderFooter' 
+import blankPage from '@/components/blankPage'
+import PullHeaderFooter from '@/components/pullHeaderFooter'
 import {Scroller,XButton} from 'vux'
 export default {
   mounted(){
-    this.setTitle('我的订单');
+    this.setTitle('我的卡券');
     this.init(1);
   },
   data () {
@@ -104,7 +104,7 @@ export default {
     goOrderDetail:function(){
       this.$router.push({path:'/my/orderDetail'})
     }
-    
+
   },
   components: {
     PullHeaderFooter,Scroller,blankPage,XButton
@@ -115,7 +115,7 @@ export default {
 
 <style scoped lang='less'>
   .mycupon{
-    
+
     .LeastMoneyBox{
       padding: 30/40rem 0;
       font-size: 28/40rem;
@@ -170,7 +170,7 @@ export default {
       }
     }
     .cuponNum{
-      width: 10rem;
+      width: 9.5rem;
       height: 1rem;
        -webkit-line-clamp: 1;
     }
