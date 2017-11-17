@@ -13,7 +13,7 @@
           <span v-on:click="showUserDeal=true" class='blueFont'>《用户服务协议》</span>
         </div>
         <div class="fundsBtnBox">
-          <x-button class='gradientBtn' v-bind:class="loginParams.phone==''|| loginParams.code==''? 'err': ''" :disabled='!loginBtnCanUse' @click.native="loginFn(0)">确定</x-button>
+          <x-button class='gradientBtn' v-bind:class="loginParams.phone==''|| loginParams.code==''? 'err': ''" :disabled='!loginBtnCanUse' @click.native="loginFn(0)">绑定</x-button>
         </div>
 
      </group>
