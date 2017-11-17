@@ -12,7 +12,7 @@
         </div>
         <div class="exchangeBox">
           <p class="num">剩余{{item.stock}}张</p>
-          <x-button mini class='blueBg' @click.native="exchangeFn(item)">兑换</x-button>
+          <x-button mini class='blueBg' @click.native="exchangeFn(item)">立即兑换</x-button>
         </div>
       </div>
       <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='tel' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
