@@ -1,184 +1,198 @@
 <template>
-	<div class="page phoneRechargePage">
-      <div class="page phoneRechargeCont">
+  <div class="page phoneRechargePage">
+    <div class="page phoneRechargeCont">
       <div class="phoneNum">
         <!-- <x-input type="tel" :value='reChargePhoneNum'></x-input> -->
         <input type="tel" id="telInput" v-model='reChargePhoneNum'/>
-        <img src="../../assets/img/account/recharge_icon_contacts@2x.png" />
+        <img src="../../assets/img/account/recharge_icon_contacts@2x.png"/>
       </div>
       <p class="phoneName">默认</p>
       <p class="LeastMoney flexBox">充话费 <span class='flex1 alignR'>酒元余额￥{{balance}}</span></p>
       <flexbox :gutter="0" wrap="wrap" class='phoneRechargeFlexBox'>
-          <flexbox-item :span="1/3" v-for='(item,index) in rechargeData.priceList' @click.native='chooseMoney(item,index)'>
-            <div class="phoneBox" :class="{'blueBg':index==rechargeChoosed}">
-              <p class="money">{{item.price}}元</p>
-              <p class="soldMoney">售价{{item.realPrice}}元</p>
-            </div>
-          </flexbox-item>
+        <flexbox-item :span="1/3" v-for='(item,index) in rechargeData.priceList'
+                      @click.native='chooseMoney(item,index)'>
+          <div class="phoneBox" :class="{'blueBg':index === rechargeChoosed}">
+            <p class="money">{{item.price}}元</p>
+            <p class="soldMoney">售价{{item.realPrice}}元</p>
+          </div>
+        </flexbox-item>
       </flexbox>
       <div class="rechargeBtnBox">
-        <x-button class='btnBg blueBg' :class="{'nocanUseBtn':!canUse}" @click.native="rechargeFn()" :disabled='!canUse'>充值</x-button>
+        <x-button class='btnBg blueBg' :class="{'nocanUseBtn':!canUse}" @click.native="rechargeFn()"
+                  :disabled='!canUse'>充值
+        </x-button>
       </div>
-      </div>
-      <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='reChargePhoneNum' ref='codeAlert' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
+    </div>
+    <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='reChargePhoneNum' ref='codeAlert'
+               v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
   </div>
 </template>
 <script>
-import {Group,Cell,Flexbox, FlexboxItem,XButton,XInput} from 'vux'
-import codeAlert from '@/components/codeAlert'
-export default {
-  mounted(){
-    let  self=this;
-    self.setTitle('手机充值');
-    self.init();
-  },
-  data () {
-    return {
-      reChargePhoneNum:'',
-      rechargeData:[],
-      balance:localStorage.getItem('balance'),
-      rechargeChoosed:'',
-      codeAlert:false,
-      rechargeParams:{},
-      rechargeMoney:0,
-      canUse:false,
-      codeType:'5' //1,"注册,登录",2, "绑定手机"),3,"提现"),4,"滴滴卡兑换"),5 手机充值的,0,"其他")
-    }
-  },
-  methods:{
-    init(){
-      let self = this
-      self.$http.get('h9/api/consume/mobile/denomination')
-        .then(function(res) {
-          if(res.data.code==0){
-              self.rechargeData=res.data.data 
-             self.rechargeParams.id=self.rechargeData.priceList[0].id
-             self.rechargeMoney=self.rechargeData.priceList[0].realPrice
-             self.reChargePhoneNum=self.rechargeData.tel
-             if(parseInt(self.balance) > parseInt(self.rechargeMoney)){
-              self.canUse=true;
-             }
-          }
-        })
+  import {Group, Cell, Flexbox, FlexboxItem, XButton, XInput} from 'vux'
+  import codeAlert from '@/components/codeAlert'
+
+  export default {
+    mounted() {
+      let self = this;
+      self.setTitle('手机充值');
+      self.init();
     },
-    chooseMoney:function(item,index){
-      this.rechargeChoosed=index;
-      this.rechargeParams.id=item.id
-      this.rechargeMoney=item.realPrice
-      if(parseInt(this.balance) > parseInt(this.rechargeMoney)){
-        this.canUse=true;
-      }else{
-        this.canUse=false;
+    data() {
+      return {
+        reChargePhoneNum: '',
+        rechargeData: [],
+        balance: localStorage.getItem('balance'),
+        rechargeChoosed: '',
+        codeAlert: false,
+        rechargeParams: {},
+        rechargeMoney: 0,
+        canUse: false,
+        codeType: '5' //1,"注册,登录",2, "绑定手机"),3,"提现"),4,"滴滴卡兑换"),5 手机充值的,0,"其他")
       }
     },
-    rechargeFn:function(){
-      this.rechargeParams.tel=this.reChargePhoneNum
-      if(!this.rechargeParams.tel){
-        _g.toastMsg('error', '请输入手机号!')
-        return;
-      }
-      if(parseInt(this.rechargeData.balance) < parseInt(this.rechargeMoney)){
-        _g.toastMsg('error', '余额不足!')
-        return;
-      }
-      this.codeAlert=true;
-    },
-    codeAlertFn:function(data){
-      let self = this
-      if(data.show===false){
-        self.codeAlert=false;
-      }
-      if(data.show===false && data.codeNum.length===4){
-        self.rechargeParams.code=data.codeNum
-        self.$http.post('h9/api/consume/mobile/recharge',self.rechargeParams)
-          .then(function(res) {
-            if(res.data.code==0){
-                _g.toastMsg('error', '充值成功!')
-                self.$router.replace({path:'/account/result',query:{type:'recharge',money:res.data.data.money,tel:self.rechargeParams.tel}})
-            }else{
-              _g.toastMsg('error', res.data.msg)
+    methods: {
+      init() {
+        let self = this
+        self.$http.get('h9/api/consume/mobile/denomination')
+          .then(function (res) {
+            if (res.data.code == 0) {
+              self.rechargeData = res.data.data
+              self.rechargeParams.id = self.rechargeData.priceList[0].id
+              self.rechargeMoney = self.rechargeData.priceList[0].realPrice
+              self.reChargePhoneNum = self.rechargeData.tel
+              if (parseInt(self.balance) > parseInt(self.rechargeMoney)) {
+                self.canUse = true;
+              }
             }
           })
+      },
+      chooseMoney: function (item, index) {
+        let choosePrice = parseFloat(item.realPrice)
+        let balance = parseFloat(this.balance)
+        if (choosePrice > balance) {
+          _g.toastMsg('error', '余额不足!')
+          return
+        }
+        this.rechargeChoosed = index;
+        this.rechargeParams.id = item.id
+        this.rechargeMoney = item.realPrice
+        if (parseInt(this.balance) > parseInt(this.rechargeMoney)) {
+          this.canUse = true;
+        } else {
+          this.canUse = false;
+        }
+      },
+      rechargeFn: function () {
+        this.rechargeParams.tel = this.reChargePhoneNum
+        if (!this.rechargeParams.tel) {
+          _g.toastMsg('error', '请输入手机号!')
+          return;
+        }
+        if (parseInt(this.rechargeData.balance) < parseInt(this.rechargeMoney)) {
+          _g.toastMsg('error', '余额不足!')
+          return;
+        }
+        this.codeAlert = true;
+      },
+      codeAlertFn: function (data) {
+        let self = this
+        if (data.show === false) {
+          self.codeAlert = false;
+        }
+        if (data.show === false && data.codeNum.length === 4) {
+          self.rechargeParams.code = data.codeNum
+          self.$http.post('h9/api/consume/mobile/recharge', self.rechargeParams)
+            .then(function (res) {
+              if (res.data.code == 0) {
+                _g.toastMsg('error', '充值成功!')
+                self.$router.replace({
+                  path: '/account/result',
+                  query: {type: 'recharge', money: res.data.data.money, tel: self.rechargeParams.tel}
+                })
+              } else {
+                _g.toastMsg('error', res.data.msg)
+              }
+            })
+        }
       }
-    }
-    
-  },
-   components: {
-    Group,Cell,Flexbox, FlexboxItem,XButton,XInput,codeAlert
-  },
-}
+
+    },
+    components: {
+      Group, Cell, Flexbox, FlexboxItem, XButton, XInput, codeAlert
+    },
+  }
 
 </script>
 
 <style scoped lang='less'>
-  .phoneRechargePage{
+  .phoneRechargePage {
     background: #fff;
-    .phoneRechargeCont{
+    .phoneRechargeCont {
       margin: 30/40rem 0 0 30/40rem;
       overflow-y: auto;
     }
-    .phoneNum{
+    .phoneNum {
       padding-right: 30/40rem;
-      input{
+      input {
         font-size: 48/40rem;
         color: #333;
         border: none;
         width: 9rem;
       }
 
-      #telInput:focus{
-        border:0!important;
-        border:none!important;
-        outline:none;
+      #telInput:focus {
+        border: 0 !important;
+        border: none !important;
+        outline: none;
       }
-      img{
+      img {
         width: 60/40rem;
         height: 60/40rem;
         float: right;
         margin-top: 10/40rem;
       }
     }
-    .phoneName{
+    .phoneName {
       font-size: 24/40rem;
       color: #999;
       margin-bottom: 20/40rem;
     }
-    .LeastMoney{
+    .LeastMoney {
       padding: 30/40rem 0;
       margin-right: 30/40rem;
       border-top: 1px solid #f2f2f2;
       font-size: 28/40rem;
-      span{
+      span {
         font-size: 24/40rem;
         color: #999;
       }
     }
-    .phoneBox{
+    .phoneBox {
       margin: 0 30/40rem 40/40rem 0;
       padding: 20/40rem 0;
       line-height: 50/40rem;
-      border:1px solid #999;
+      border: 1px solid #999;
       text-align: center;
       border-radius: 10/40rem;
-      .money{
+      .money {
         font-size: 36/40rem;
       }
-      .soldMoney{
+      .soldMoney {
         font-size: 24/40rem;
         color: #999;
       }
-      .moneyBoxActive{
+      .moneyBoxActive {
         background: #455F6B;
         color: #fff;
       }
     }
-    .blueBg .soldMoney{
+    .blueBg .soldMoney {
       color: #fff;
     }
-    .rechargeBtnBox{
-      padding:50/40rem 30/40rem 0 0;
+    .rechargeBtnBox {
+      padding: 50/40rem 30/40rem 0 0;
       margin-bottom: 70/40rem;
     }
   }
-  
+
 </style>

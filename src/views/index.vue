@@ -104,7 +104,7 @@
 //      if(!self.WxCode){
 //        self.getWxCode()
 //      }else{
-//        self.weChatLogin(); 
+//        self.weChatLogin();
 //      }
 //    }else{
 //      self.init();

@@ -4,6 +4,9 @@
       <x-dialog v-model="showCodeBlur" class="codeAlert" hide-on-blur>
         <div class="img-box">
           <p class="codeText">输入验证码</p>
+          <p class="money">
+            ￥{{money | price2}}
+          </p>
           <p class="codePhone">接收手机尾号({{phoneLast}})短信</p>
           <x-button class='codeBtn' @click.native='init()' :disabled='!canUse' mini>{{codeTip}}</x-button>
           <div class="changeCodeBox">
@@ -31,6 +34,9 @@ export default {
     TransferDom
   },
   props:{
+    money: {
+      type: String
+    },
     showCodeAlert:{
       type:Boolean
     },
@@ -100,7 +106,7 @@ export default {
     countTime() {
       if(this.count>0){
         this.canUse=false
-        this.codeTip =  '重新发送('+this.count + "s)";
+        this.codeTip =  '已发送('+this.count + "s)";
         this.count --;
       }else{
         this.canUse=true
@@ -108,7 +114,7 @@ export default {
         clearInterval(this.timer);
       }
     },
-    
+
   },
   components: {
     XDialog,XButton
@@ -119,7 +125,10 @@ export default {
 
 <style scoped lang='less'>
   .codeAlert{
-   
+    .money{
+      font-size: 48/40rem;
+      color: #627984;
+    }
     .codeText{
       padding: 30/40rem;
       font-size: 32/40rem;
@@ -127,7 +136,7 @@ export default {
       border-bottom: 1px solid #f2f2f2;
     }
     .codePhone{
-      padding: 30/40rem 0 15/40rem;
+      padding: 0 0 15/40rem;
       font-size: 28/40rem;
     }
     .codeBtn{
