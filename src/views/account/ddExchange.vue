@@ -7,7 +7,7 @@
           <img :src="item.imgUrl"/>
           <div class="flex1">
             <p class="name">{{item.name}}</p>
-            <p class="money">{{item.name}}元</p>
+            <p class="money">{{item.price}}元</p>
           </div>
         </div>
         <div class="exchangeBox">
@@ -46,11 +46,15 @@ export default {
       self.$http.get('h9/api/consume/didiCards')
         .then(function(res) {
           if(res.data.code==0){
-              self.ddCuponData=res.data.data 
+              self.ddCuponData=res.data.data
           }
         })
     },
     exchangeFn:function(item){
+      if (item.price > this.balance) {
+        _g.toastMsg('error', '余额不足!')
+        return
+      }
       this.codeAlert=true;
       this.ddCuponParams.id=item.goodId
     },
@@ -82,7 +86,7 @@ export default {
   .ddExchangePage{
     background: #fff;
     /*padding: 30/40rem 30/40rem 0 30/40rem;*/
-    overflow-y:auto; 
+    overflow-y:auto;
     .LeastMoneyBox{
       padding: 30/40rem;
       font-size: 28/40rem;
@@ -123,7 +127,7 @@ export default {
       border-left: 1px dashed #f2f2f2;
     }
   }
-  
-  
-  
+
+
+
 </style>
