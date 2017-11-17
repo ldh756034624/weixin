@@ -51,7 +51,6 @@ export default {
   methods:{
     init(){
       let self = this
-
     },
     goBack:function(){
       this.$router.replace({path:'/account/personal'})
