@@ -110,6 +110,7 @@ export default {
 <style scoped lang='less'>
     .personalPage{
       background: #fff;
+      padding-bottom: 120/40rem;
     }
     .personalTopBg{
       background:url('../../assets/img/index/my_img_bg@2x.png') no-repeat;
