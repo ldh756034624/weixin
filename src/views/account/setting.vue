@@ -1,49 +1,50 @@
 <template>
-	<div class="page settingPage">
+  <div class="page settingPage">
     <group class='settingBox'>
 
-    <cell title="常见问题" link='/account/problems' is-link></cell>
-    <p class="flexBox">版本信息 <span class='flex1 alignR'>Ver 1.0</span></p>
-    <cell title="退出登录" @click.native='logOut' is-link></cell>
+      <cell title="常见问题" link='/account/problems' is-link></cell>
+      <p class="flexBox">版本信息 <span class='flex1 alignR'>Ver 1.0</span></p>
+      <!--<cell title="退出登录" @click.native='logOut' is-link></cell>-->
     </group>
-    <x-button class='bottomBtn gradientBtn' @click.native="">退出当前帐号</x-button>
-    
+    <!--<x-button class='bottomBtn gradientBtn' @click.native="">退出当前帐号</x-button>-->
+
   </div>
 </template>
 <script>
-import { Group,Cell,XButton} from 'vux'
-export default {
-  mounted(){
-    this.setTitle('设置');
-  },
-  data () {
-    return {
-    }
-  },
-  methods:{
-    logOut:function(){
-      delete localStorage._user;
-      _g.toastMsg('success', '清除！')
-    }
-  },
-   components: {
-    Group,Cell,XButton
-  },
-}
+  import {Group, Cell, XButton} from 'vux'
+
+  export default {
+    mounted() {
+      this.setTitle('设置');
+    },
+    data() {
+      return {}
+    },
+    methods: {
+      logOut: function () {
+        delete localStorage._user;
+        _g.toastMsg('success', '清除！')
+      }
+    },
+    components: {
+      Group, Cell, XButton
+    },
+  }
 
 </script>
 <style scoped lang='less'>
-  .settingPage{
+  .settingPage {
     background: #fff;
-    .flexBox{
+    .flexBox {
       padding: 30/40rem;
       font-size: 30/40rem;
     }
-    .flex1{
+    .flex1 {
       color: #999;
     }
   }
-  .bottomBtn{
+
+  .bottomBtn {
     height: 100/40rem;
     line-height: 100/40rem;
     color: #fff;
@@ -56,14 +57,14 @@ export default {
   }
 </style>
 <style lang='less'>
-  .settingBox{
-    .weui-cells:before,.weui-cells:after {
-      border:none;
+  .settingBox {
+    .weui-cells:before, .weui-cells:after {
+      border: none;
     }
-    .weui-cell{
+    .weui-cell {
       padding: 30/40rem;
     }
-    .vux-label{
+    .vux-label {
       font-size: 30/40rem;
     }
   }
