@@ -17,7 +17,7 @@
           </flexbox-item>
       </flexbox>
       <div class="rechargeBtnBox">
-        <x-button class='btnBg blueBg' :class="{'nocanUseBtn':!canUse}" @click.native="rechargeFn()" :disabled='!canUse'>充值</x-button>
+        <x-button class='btnBg blueBg' @click.native="rechargeFn()" :disabled='!canUse'>充值</x-button>
       </div>
       </div>
       <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='reChargePhoneNum' ref='codeAlert' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
@@ -51,7 +51,7 @@ export default {
       self.$http.get('h9/api/consume/mobile/denomination')
         .then(function(res) {
           if(res.data.code==0){
-              self.rechargeData=res.data.data 
+              self.rechargeData=res.data.data
              self.rechargeParams.id=self.rechargeData.priceList[0].id
              self.rechargeMoney=self.rechargeData.priceList[0].realPrice
              self.reChargePhoneNum=self.rechargeData.tel
@@ -62,7 +62,7 @@ export default {
         })
     },
     chooseMoney:function(item,index){
-      
+
       if(parseInt(this.rechargeData.balance) > parseInt(this.rechargeMoney)){
         this.canUse=true;
         this.rechargeChoosed=index;
@@ -107,7 +107,7 @@ export default {
           })
       }
     }
-    
+
   },
    components: {
     Group,Cell,Flexbox, FlexboxItem,XButton,XInput,codeAlert
@@ -186,5 +186,5 @@ export default {
       margin-bottom: 70/40rem;
     }
   }
-  
+
 </style>

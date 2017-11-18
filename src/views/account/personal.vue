@@ -1,7 +1,7 @@
 <template>
 	<div class="page personalPage">
       <div class="personalTopBg">
-          
+
           <router-link to='/account/setting'>
               <img src="../../assets/img/index/my_btn_setting@2x.png" class="settingIcon">
           </router-link>
@@ -16,8 +16,8 @@
           <flexbox-item>
             <router-link :to="{path:'/account/purse',query:{balance:personalData.balance,limit:personalData.withdrawalCount}}">
               <div class="personalItemBox">
-                <p class="redFont">{{personalData.balance | price2}}<span class='font12'>酒元</span></p>
-                <p>钱包</p>
+                <p class="redFont">{{personalData.balance | price2}}</p>
+                <p>酒元</p>
               </div>
             </router-link>
           </flexbox-item>
@@ -60,7 +60,7 @@
               </group>
       </div>
       <div class="emptyBox">
-        
+
       </div>
       <Bottombar :index="2"></Bottombar>
   </div>
@@ -93,7 +93,7 @@ export default {
       self.$http.get('h9/api/account/info')
         .then(function(res) {
           if(res.data.code==0){
-              self.personalData=res.data.data 
+              self.personalData=res.data.data
               localStorage.setItem('balance',self.personalData.balance)
               if(self.personalData.imgUrl){
                 self.userHeadImg=self.personalData.imgUrl
@@ -152,7 +152,7 @@ export default {
       text-align: center;
       font-size: 24/40rem;
       line-height: 0;
-      margin:46/40rem 0; 
+      margin:46/40rem 0;
       .redFont{
         font-size: 48/40rem;
       }
@@ -172,7 +172,7 @@ export default {
         padding-bottom: 120/40rem;
       }
     }
-    
+
 
 </style>
 <style lang='less'>
