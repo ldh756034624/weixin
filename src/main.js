@@ -175,7 +175,8 @@ let seturl = ''
 if (url.indexOf('weixin-test-h9.thy360.com')!=-1) {
   seturl = 'https://weixin-test-h9.thy360.com'
 }else{
-  seturl = 'https://weixin-dev-h9.thy360.com'
+  //seturl = 'https://weixin-dev-h9.thy360.com'
+  seturl = 'https://weixin-test-h9.thy360.com'
 }
 Vue.http.defaults.baseURL = seturl
 Vue.http.defaults.timeout = 1000 * 15
@@ -208,7 +209,7 @@ Vue.http.interceptors.response.use(
       }, 1500)
     }
     if(response.data.code==401){
-      this.getWxCode();
+      console.dir(Vue.mixin)
     }
     return response;
   },

@@ -45,8 +45,10 @@ export default {
       let userObj = JSON.parse(localStorage.getItem('_user'))
       if(!userObj){
         if(!self.WxCode){
+          _g.toastMsg('error', '微信回调');
           self.getHongBaoWxCode()
         }else{
+          _g.toastMsg('error', '微信登录');
           self.weChatLogin();
         }
       }
@@ -73,8 +75,10 @@ export default {
       self.$http.get('h9/api/wechat/login?code='+self.WxCode)
       .then(function(res) {
         if(res.data.code==0){
+          _g.toastMsg('error', '微信登录成功');
           localStorage.setItem("_user", JSON.stringify(res.data.data));
           Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
+           _g.toastMsg('error', self.barcode);
           self.code=self.barcode
         }
       })
