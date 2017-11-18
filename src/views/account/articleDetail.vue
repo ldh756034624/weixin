@@ -26,7 +26,7 @@ export default {
       self.$http.get('h9/api/article/'+self.id)
         .then(function(res) {
           if(res.data.code==0){
-              self.articleData=res.data.data 
+              self.articleData=res.data.data
               if(self.articleData.content.indexOf('div')!=-1 || self.articleData.content.indexOf('p')!=-1){
                 self.isHtml=true
               }else{
@@ -53,7 +53,7 @@ export default {
     }
     .date{
       color: #999;
-      font-size: 28/40rem;
+      font-size: 32/40rem;
       margin: 30/40rem 0 60/40rem;
       span{
         margin-right: 10/40rem;
