@@ -81,8 +81,8 @@ export default {
               fd.append("uploadedFile", blob, 'image.png');
               self.$http.post(self.uploadurl,fd)
             .then(function(res) {
-                if(res.data.statusCode==0){   
-                } 
+                if(res.data.statusCode==0){
+                }
               }
             })
         })*/
@@ -95,7 +95,7 @@ export default {
             .then(function(res) {
 
               if(res.data.code==0){
-                _g.toastMsg('error','上传成功')   
+                _g.toastMsg('error','上传成功')
                 self.headImg=res.data.data;
               } else {
                 _g.toastMsg('error',res.data.msg)
@@ -105,7 +105,7 @@ export default {
             })
         })
       //}*/
-      
+
     },
     dataURItoBlob:function(base64Data) {
             var byteString;
@@ -173,7 +173,7 @@ export default {
     }
     .uploadTpl .close{
       display: inline-block;
-      background:url('../assets/img/index/xx@2x.png') no-repeat center; 
+      background:url('../assets/img/index/xx@2x.png') no-repeat center;
       width: 35/40rem;
       height: 35/40rem;
       border-radius: 1rem;
@@ -184,6 +184,8 @@ export default {
     }
     .headImgUplTpl{
       background-color: #fff;
+      border-radius: 50%;
+      overflow: hidden;
     }
     .headImgUplTpl span{
       display: inline-block;
@@ -218,6 +220,6 @@ export default {
     background-color: #fff!important;
   }
   .vueCropperBox .cropper-modal{
-    background:rgba(255,255,255,0.2)!important; 
+    background:rgba(255,255,255,0.2)!important;
   }
 </style>

@@ -17,8 +17,8 @@
       <p>券号:{{num}}</p>
     </div>
     <div class="fundsBtnBox">
-      <x-button class='gradientBtn' v-if="type==='exchange'" @click.native="copy">复制券号</x-button>
-      <x-button class='gradientBtn' v-if="type==='exchange'" @click.native="goBackDD">完成</x-button>
+      <x-button class='gradientBtn' v-if="type==='exchange' && coponShow" @click.native="copy">复制券号</x-button>
+      <x-button class='gradientBtn' v-if="!coponShow" @click.native="goBackDD">完成</x-button>  <!--和复制券号联合使用的按钮-->
       <x-button class='gradientBtn' v-else @click.native="goBack">完成</x-button>
     </div>
     <input type="text" ref="copyInput" class="copy-input">
@@ -41,6 +41,7 @@
     },
     data() {
       return {
+        coponShow: true,
         title: null,
         type: this.$route.query.type,
         money: this.$route.query.money,
@@ -68,6 +69,7 @@
         input.select()
         document.execCommand('Copy')
         _g.toastMsg('error', '复制成功')
+        this.coponShow = false
       },
 
     },

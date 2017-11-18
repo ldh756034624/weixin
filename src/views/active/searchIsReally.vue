@@ -52,9 +52,6 @@
       </div>
     </div>
     <div class="searchDesc" v-html='DealData'>
-      <p>啊时间代付款拉萨街坊邻居撒风口浪尖撒旦了放假啦</p>
-      <p>啊时间代付款拉萨街坊邻居撒风口浪尖撒旦了放假啦</p>
-      <p>啊时间代付款拉萨街坊邻居撒风口浪尖撒旦了放假啦</p>
     </div>
   </div>
 </template>
@@ -93,11 +90,14 @@
         }
         self.$http.get('h9/lottery/product/check?code=' + self.code + '&longitude=' + self.$store.state.longitude + '&latitude=' + self.$store.state.latitude)
           .then(function (res) {
-            self.showResult = true;
             if (res.data.code == 0) {
+              self.showResult = true;
               self.isReal = true;
               self.searchData = res.data.data
+            } else if(res.data.code == 1 ){
+              return
             } else {
+              self.showResult = true;
               self.isReal = false
               self.errMsg = res.data.msg
             }

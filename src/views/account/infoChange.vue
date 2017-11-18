@@ -141,7 +141,7 @@ export default {
       self.$http.put('h9/api/user/info',userData)
         .then(function(res) {
           if(res.data.code==0){
-              _g.toastMsg('error',"修改资料成功");
+              _g.toastMsg('error',"成功");
               setTimeout(function(){
                 self.$router.push({path:'/account/personal'})
               },1500)
