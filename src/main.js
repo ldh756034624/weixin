@@ -209,7 +209,8 @@ Vue.http.interceptors.response.use(
         router.replace('/account/bindPhone')
       }, 1500)
     }else if(response.data.code==401){
-      var redirectUrl=Vue.http.defaults.baseURL+'/h9-weixin/#/index'
+       delete localStorage._user;
+      var redirectUrl=document.location.href
       window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
     }else if(response.data.code!=0){
       _g.toastMsg('error', response.data.msg)

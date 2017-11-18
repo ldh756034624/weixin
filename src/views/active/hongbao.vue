@@ -54,6 +54,8 @@ export default {
           _g.toastMsg('error', '微信登录');
           self.weChatLogin();
         }
+      }else{
+        _g.toastMsg('error', "有用户信息");
       }
     }
     
@@ -82,7 +84,6 @@ export default {
           localStorage.setItem("_user", JSON.stringify(res.data.data));
           Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
            _g.toastMsg('error', self.barcode);
-          self.code=self.barcode
         }
       })
     },
