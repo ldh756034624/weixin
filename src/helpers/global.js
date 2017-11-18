@@ -25,7 +25,8 @@ const commonFn = {
       case 'error':
         bus.$vux.toast.show({
          text: msg,
-         type: 'text'
+         type: 'text',
+          time: 1500
         })
         break
     }
