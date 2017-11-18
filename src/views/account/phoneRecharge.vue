@@ -55,7 +55,7 @@ export default {
              self.rechargeParams.id=self.rechargeData.priceList[0].id
              self.rechargeMoney=self.rechargeData.priceList[0].realPrice
              self.reChargePhoneNum=self.rechargeData.tel
-             if(parseInt(self.balance) > parseInt(self.rechargeMoney)){
+             if(parseInt(self.rechargeData.balance) > parseInt(self.rechargeMoney)){
               self.canUse=true;
              }
           }
