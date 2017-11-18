@@ -131,7 +131,8 @@ Vue.mixin({
               },1000)
             }
           }else{
-            this.getWxCode();
+            var redirectUrl=Vue.http.defaults.baseURL+'/h9-weixin/#/index'
+            window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
           }
         },
         getDeal:function(code){
@@ -207,15 +208,17 @@ Vue.http.interceptors.response.use(
       setTimeout(() => {
         router.replace('/account/bindPhone')
       }, 1500)
-    }
-    if(response.data.code==401){
-      console.dir(Vue.mixin)
+    }else if(response.data.code==401){
+      var redirectUrl=Vue.http.defaults.baseURL+'/h9-weixin/#/index'
+      window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
+    }else if(response.data.code!=0){
+      _g.toastMsg('error', response.data.msg)
     }
     return response;
   },
   error => {
     if (error.response) {
-      _g.toastMsg('error', '出错了')
+      _g.toastMsg('error', ' 网络连接异常，请稍后再试')
     }
     return Promise.reject(error)   // 返回接口返回的错误信息
 });
