@@ -8,7 +8,7 @@
             ￥{{money | price2}}
           </p>
           <p class="codePhone">接收手机尾号({{phoneLast}})短信</p>
-          <x-button class='codeBtn' @click.native='init()' :disabled='!canUse' mini>{{codeTip}}</x-button>
+          <x-button class='codeBtn' @click.native='init()' :class="{'reCode':canUse}" :disabled='!canUse' mini>{{codeTip}}</x-button>
           <div class="changeCodeBox">
             <input type="tel" v-model="changeCode" id='codeInput' autofocus /><!--pattern="\d{11}"-->
             <div class="changeCodeSpan">
@@ -145,7 +145,12 @@ export default {
       background: #fff;
       font-size: 24/40rem;
     }
+    .reCode{
+      color: #222;
+      border: 2/40rem solid #222;
+    }
   }
+
   .changeCodeBox{
     position: relative;
     height: 4.5rem;
