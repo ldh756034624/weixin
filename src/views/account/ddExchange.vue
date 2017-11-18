@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       codeAlert:false,
-      balance:localStorage.getItem('balance'),
+      balance:'',
       tel:this.$route.query.tel,
       ddCuponData:[],
       ddCuponParams:{},
@@ -49,6 +49,13 @@ export default {
               self.ddCuponData=res.data.data
           }
         })
+      self.$http.get('h9/api/account/info')
+        .then(function(res) {
+          if(res.data.code==0){
+              self.balance=res.data.data.balance 
+          }
+        })  
+
     },
     exchangeFn:function(item){
       if (item.price > this.balance) {
