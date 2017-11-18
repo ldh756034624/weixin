@@ -4,9 +4,10 @@
 
       <cell title="常见问题" link='/account/problems' is-link></cell>
       <p class="flexBox">版本信息 <span class='flex1 alignR'>Ver 1.0</span></p>
-      <!--<cell title="退出登录" @click.native='logOut' is-link></cell>-->
+      <!--测试用-->
+      <cell title="退出登录" @click.native='logOut' is-link></cell>
     </group>
-    <!--<x-button class='bottomBtn gradientBtn' @click.native="">退出当前帐号</x-button>-->
+    <x-button class='bottomBtn gradientBtn' @click.native="">退出当前帐号</x-button>
 
   </div>
 </template>
