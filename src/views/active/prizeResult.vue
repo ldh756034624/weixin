@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="prizerBox">
-        <p class="prizerNum">{{prizeNum}}人参与,获得红包的人有:</p>
+        <p class="prizerNum">{{prizeData.userCount}}人参与,获得红包的人有:</p>
         <div class="prizerCont flexBox" v-for='item in prizeData.lotteryUsers'>
           <img :src="item.avatar"/>
           <div class="flex1">
@@ -64,7 +64,6 @@ export default {
       noGetPrize:true,
       codeAlert:false,
       codeType:'2',
-      prizeNum:0,
       prizeAccount:'',
       bindPhoneParam:{}
     }
@@ -73,7 +72,7 @@ export default {
     init(){
       let self = this
       console.log("调用")
-      self.$http.get('/h9/lottery/room/?code='+self.code)
+      self.$http.get('h9/lottery/room?code='+self.code)
         .then(function(res) {
           if(res.data.code==0){
             self.prizeData=res.data.data
@@ -81,7 +80,6 @@ export default {
               self.noGetPrize=false
               self.prizeAccount=self.prizeData.tel
             }
-            self.prizeNum=self.prizeData.lotteryUsers.length
             if(res.data.data.roomUser){
               self.codeUrl=res.data.data.qrCode
             }

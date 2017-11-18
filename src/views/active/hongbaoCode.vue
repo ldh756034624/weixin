@@ -62,7 +62,6 @@ export default {
     self.$watch('differentDate',function(val){
         self.intervalLike(val);
     })
-
   },
   data () {
     return {
@@ -72,7 +71,7 @@ export default {
       lottery:true, //是否开奖
       roomUser:false, //是否房主
       showAnimate:false,
-      code:this.$route.query.code,
+      code:this.$route.query.code, //本地兑奖码
       timer:null,
       downtimer:null,
       time_count:null,
@@ -98,7 +97,7 @@ export default {
     },
     getdata:function(){
       let self = this;
-      self.$http.get('/h9/lottery/room/'+self.code)
+      self.$http.get('h9/lottery/room?code='+self.code)
         .then(function(res) {
           self.refreshTime=self.refreshTime*1
           if(res.data.code==0){
@@ -112,6 +111,7 @@ export default {
             if(res.data.data.lottery || res.data.data.differentDate===0){
                self.showAnimate=true;
               setTimeout(function(){
+                //待更改
                 self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
               },3000)
             }else{
@@ -123,12 +123,13 @@ export default {
     },
     StarPrizeFn:function(){
       let self=this;
-      self.$http.get('/h9/lottery/start?code='+self.code)
+      self.$http.get('h9/lottery/start?code='+self.code)
         .then(function(res) {
           if(res.data.code==0){
             clearInterval(self.timer); //清除
             self.showAnimate=true;
             setTimeout(function(){
+              //待更改
               self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
             },3000)
           }else{

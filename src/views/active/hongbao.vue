@@ -39,15 +39,40 @@ export default {
   mounted(){
     let  self=this;
     self.setTitle('抢红包');
+    if (self.barcode) {
+      let userObj = JSON.parse(localStorage.getItem('_user'))
+      if(!userObj){
+        if(!self.WxCode){
+          self.getWxCode()
+        }else{
+          self.weChatLogin();
+        }
+      }
+    }
+    
   },
   data () {
     return {
       personalData:{},
       showUserDeal:false,
+      WxCode:this.$route.query.code, //微信回调码
+      barcode:this.$route.query.barcode, //扫码接口回调兑奖码
       code:'',
     }
   },
   methods:{
+
+    weChatLogin:function(){
+      let self=this;
+      self.$http.get('h9/api/wechat/login?code='+self.WxCode)
+      .then(function(res) {
+        if(res.data.code==0){
+          localStorage.setItem("_user", JSON.stringify(res.data.data));
+          Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
+          self.code=self.barcode
+        }
+      })
+    },
     dealShowFn:function(data){
       let self=this;
       if(data==false){
