@@ -55,7 +55,7 @@ export default {
     let self=this;
     self.setTitle('抢红包');
 
-    self.getDeal('lottery').then(function(data){
+    self.getDeal('lotterySimple').then(function(data){
       self.DealData=data.data
     })
     self.getdata();

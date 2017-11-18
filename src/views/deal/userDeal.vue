@@ -18,7 +18,7 @@ export default {
   },
   mounted () {
     let self=this;
-    self.getDeal('lotterySimple').then(function(data){
+    self.getDeal('lottery').then(function(data){
       self.DealData=data.data
     })
   },

@@ -31,6 +31,7 @@
 <script>
 import { XInput,XButton,Popup,TransferDom} from 'vux'
 import userDeal from '../deal/userDeal'
+import {encode} from '@/util/base64Code'
 import wx from 'weixin-js-sdk'
 export default {
   directives: {
@@ -39,14 +40,22 @@ export default {
   mounted(){
     let  self=this;
     self.setTitle('抢红包');
+    _g.toastMsg('error', document.location.href);
     if (self.barcode) {
+      self.code=self.barcode
       let userObj = JSON.parse(localStorage.getItem('_user'))
+       _g.toastMsg('error', userObj);
       if(!userObj){
+         _g.toastMsg('error', "==============");
         if(!self.WxCode){
-          self.getWxCode()
+          _g.toastMsg('error', '微信回调');
+          self.getHongBaoWxCode()
         }else{
+          _g.toastMsg('error', '微信登录');
           self.weChatLogin();
         }
+      }else{
+        _g.toastMsg('error', "有用户信息");
       }
     }
     
@@ -61,15 +70,20 @@ export default {
     }
   },
   methods:{
-
+    getHongBaoWxCode:function(){
+      let self=this;
+      var redirectUrl=document.location.href
+      window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
+    },
     weChatLogin:function(){
       let self=this;
       self.$http.get('h9/api/wechat/login?code='+self.WxCode)
       .then(function(res) {
         if(res.data.code==0){
+          _g.toastMsg('error', '微信登录成功');
           localStorage.setItem("_user", JSON.stringify(res.data.data));
           Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
-          self.code=self.barcode
+           _g.toastMsg('error', self.barcode);
         }
       })
     },
