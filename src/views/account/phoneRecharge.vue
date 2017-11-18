@@ -37,7 +37,7 @@ export default {
       reChargePhoneNum:'',
       rechargeData:{},
       balance:'',
-      rechargeChoosed:'',
+      rechargeChoosed:-1,
       codeAlert:false,
       rechargeParams:{},
       rechargeMoney:0,
@@ -62,13 +62,15 @@ export default {
         })
     },
     chooseMoney:function(item,index){
-      this.rechargeChoosed=index;
-      this.rechargeParams.id=item.id
-      this.rechargeMoney=item.realPrice
-      if(parseInt(this.balance) > parseInt(this.rechargeMoney)){
+      
+      if(parseInt(this.rechargeData.balance) > parseInt(this.rechargeMoney)){
         this.canUse=true;
+        this.rechargeChoosed=index;
+        this.rechargeParams.id=item.id
+        this.rechargeMoney=item.realPrice
       }else{
         this.canUse=false;
+        _g.toastMsg('error', '酒元不足!')
       }
     },
     rechargeFn:function(){
@@ -78,7 +80,7 @@ export default {
         return;
       }
       if(parseInt(this.rechargeData.balance) < parseInt(this.rechargeMoney)){
-        _g.toastMsg('error', '余额不足!')
+        _g.toastMsg('error', '酒元不足!')
         return;
       }
       this.codeAlert=true;
