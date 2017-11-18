@@ -31,7 +31,7 @@
           <label>面值</label>{{orderDetailData.rechargeMoney}}
         </p>
         <p>
-          <label>券号</label>{{orderDetailData.couponsNumber}}
+          <label>券号</label>{{orderDetailData.couponsNumber.substr(0,25)}}...
         </p>
       </div>
     </div>
