@@ -40,25 +40,14 @@ export default {
   mounted(){
     let  self=this;
     self.setTitle('抢红包');
-    _g.toastMsg('error', document.location.href);
     if (self.barcode) {
       self.code=self.barcode
-      let userObj = JSON.parse(localStorage.getItem('_user'))
-       _g.toastMsg('error', userObj);
-      if(!userObj){
-         _g.toastMsg('error', "==============");
-        if(!self.WxCode){
-          _g.toastMsg('error', '微信回调');
-          self.getHongBaoWxCode()
-        }else{
-          _g.toastMsg('error', '微信登录');
-          self.weChatLogin();
-        }
+      if(!self.WxCode){
+        self.getHongBaoWxCode()
       }else{
-        _g.toastMsg('error', "有用户信息");
+        self.weChatLogin();
       }
     }
-    
   },
   data () {
     return {
