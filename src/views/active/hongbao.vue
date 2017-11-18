@@ -31,6 +31,7 @@
 <script>
 import { XInput,XButton,Popup,TransferDom} from 'vux'
 import userDeal from '../deal/userDeal'
+import {encode} from '@/util/base64Code'
 import wx from 'weixin-js-sdk'
 export default {
   directives: {
@@ -39,11 +40,12 @@ export default {
   mounted(){
     let  self=this;
     self.setTitle('抢红包');
+    _g.toastMsg('error', document.location.href);
     if (self.barcode) {
       let userObj = JSON.parse(localStorage.getItem('_user'))
       if(!userObj){
         if(!self.WxCode){
-          self.getWxCode()
+          self.getHongBaoWxCode()
         }else{
           self.weChatLogin();
         }
@@ -61,7 +63,11 @@ export default {
     }
   },
   methods:{
-
+    getHongBaoWxCode:function(){
+      let self=this;
+      var redirectUrl=document.location.href
+      window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
+    },
     weChatLogin:function(){
       let self=this;
       self.$http.get('h9/api/wechat/login?code='+self.WxCode)
