@@ -10,7 +10,7 @@
             </router-link>
           </p>
         </div>
-        
+
         <div class="hongBaoImgBox" v-if="prizeData.roomUser">
           <qrcode :value="codeUrl" type="img"></qrcode>
           <p>叫上好友扫一扫,有钱大家一起分!</p>
@@ -21,15 +21,16 @@
             <img  src="../../assets/img/active/logo_gaolujia@2x.png"/>
           </div>
         </div>
-        
+
         <div class="actorBox">
           <flexbox :gutter="0" wrap="wrap">
             <flexbox-item :span="1/4" v-for='item in prizeData.lotteryUsers' @click.native=''>
               <div class="actorHeadImgBox">
-                <img :src="item.avatar"> 
+                <img :src="item.avatar">
+                <span class="me" v-if="item.me">我</span>
               </div>
             </flexbox-item>
-          </flexbox>  
+          </flexbox>
         </div>
         <div v-if="prizeData.roomUser" class="prizeBtnBox">
           <p>开奖倒计时 <span>{{countDownTime}}</span></p>
@@ -42,7 +43,7 @@
     </div>
     <div class="animationBox" v-show='showAnimate'>
       <div class="animation">
-        
+
       </div>
     </div>
   </div>
@@ -53,7 +54,7 @@ export default {
   mounted(){
     let self=this;
     self.setTitle('抢红包');
-    
+
     self.getDeal('lottery').then(function(data){
       self.DealData=data.data
     })
@@ -61,7 +62,7 @@ export default {
     self.$watch('differentDate',function(val){
         self.intervalLike(val);
     })
-       
+
   },
   data () {
     return {
@@ -79,7 +80,7 @@ export default {
       time1:'2017-11-09 20:10',
       countDownTime:'',
       timestr:60000,
-      refreshTime:10000, 
+      refreshTime:10000,
       differentDate:0,
     }
   },
@@ -146,7 +147,7 @@ export default {
           min=self.checkTime(min)
           sec=self.checkTime(sec)
           self.countDownTime =  min + "分" + sec+'秒';
-          
+
           if(timestr>1000){
             timestr=timestr-1000;
             if(min=='00'){
@@ -161,7 +162,7 @@ export default {
           }
             // 循环调用自身，达到和setInterval一样的效果
             self.intervalLike(timestr)
-            
+
         },1000);
       if(self.prizeData.lottery || self.prizeData.differentDate===0){
        clearTimeout(self.time_count)
@@ -196,6 +197,7 @@ export default {
     background: rgba(255,255,255,1);
   }
   .actorHeadImgBox{
+    position: relative;
     width: 120/40rem;
     height: 120/40rem;
     border-radius: 50%;
@@ -204,6 +206,20 @@ export default {
     img{
       border-radius: 50%;
       width: 100%;
+    }
+    .me{
+      height: 36/40rem;
+      width: 36/40rem;
+      line-height: 36/40rem;
+      text-align: center;
+      font-size: 24/40rem;
+      color: #fff;
+      font-weight: bold;
+      background: #FE5850;
+      position: absolute;
+      right: 0;
+      top: 0;
+      border-radius: 50%;
     }
   }
   .hongbaoPage{
@@ -270,6 +286,7 @@ export default {
           height: 100/40rem;
           background: #EE5954;
           color: #fff;
+          border-color: transparent;
           border-radius: 4rem;
           font-size: 40/40rem;
         }
