@@ -211,6 +211,9 @@ Vue.http.interceptors.response.use(
     }else if(response.data.code==401){
        delete localStorage._user;
       var redirectUrl=document.location.href
+      if(redirectUrl.indexOf('active/hongbao')==-1){
+        redirectUrl=Vue.http.defaults.baseURL+'/h9-weixin/#/index'
+      }
       window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
     }else if(response.data.code!=0){
       _g.toastMsg('error', response.data.msg)
