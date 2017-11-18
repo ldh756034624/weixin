@@ -40,7 +40,7 @@
           <div class="flexBox blockBox" v-for='item in homeData.recommendArticle' @click='goLinkFn(item)'>
               <div class="flex1">
                   <p class="articleTitle TextEllipsis">{{item.title}}</p>
-                  <p class="articleTip">{{item.content}} <span>{{item.createTime}}</span></p>
+                  <p class="articleTip">{{item.typeName}} <span>{{item.createTime}}</span></p>
               </div>
               <img :src="item.imgUrl" class="articleImg">
           </div>
@@ -230,12 +230,12 @@ export default {
     margin-top: 20/40rem;
   }
   .articleTip span{
-    margin-left: 1rem;
+    margin-left: 20/40rem;
   }
   .articleImg{
     width: 250/40rem;
     height: 180/40rem;
-    margin-left: 30/40rem;
+    margin-left: 22/40rem;
     border-radius: 10/40rem;
   }
   .articleTitle{

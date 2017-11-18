@@ -123,7 +123,7 @@ export default {
     },
     StarPrizeFn:function(){
       let self=this;
-      self.$http.post('/h9/lottery/'+self.code+'/start')
+      self.$http.get('/h9/lottery/start?code='+self.code)
         .then(function(res) {
           if(res.data.code==0){
             clearInterval(self.timer); //清除

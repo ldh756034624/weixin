@@ -73,7 +73,7 @@ export default {
     init(){
       let self = this
       console.log("调用")
-      self.$http.get('/h9/lottery/room/'+self.code)
+      self.$http.get('/h9/lottery/room/?code='+self.code)
         .then(function(res) {
           if(res.data.code==0){
             self.prizeData=res.data.data
