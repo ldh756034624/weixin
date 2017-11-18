@@ -2,7 +2,7 @@
   <div class="page resultPage">
     <div class="resultImgBox">
       <img class="resultImg" src="../../assets/img/account/tixian_img_success@2x.png"/>
-      <p class="typeBox">{{type}}成功</p>
+      <p class="typeBox">{{title}}成功</p>
       <p class="moneyBox"><i>￥</i>{{money}}</p>
     </div>
     <div class="resultText" v-if="type==='funds'">
@@ -18,6 +18,7 @@
     </div>
     <div class="fundsBtnBox">
       <x-button class='gradientBtn' v-if="type==='exchange'" @click.native="copy">复制券号</x-button>
+      <x-button class='gradientBtn' v-if="type==='exchange'" @click.native="goBackDD">完成</x-button>
       <x-button class='gradientBtn' v-else @click.native="goBack">完成</x-button>
     </div>
     <input type="text" ref="copyInput" class="copy-input">
@@ -29,19 +30,19 @@
   export default {
     mounted() {
       let self = this;
-      var title = '';
       if (self.type === 'funds') {
-        title = '提现'
+        this.title = '提现'
       } else if (self.type === 'recharge') {
-        title = '充值'
+        this.title = '充值'
       } else if (self.type === 'exchange') {
-        title = '兑换'
+        this.title = '兑换'
       }
 
       self.setTitle(title + '成功');
     },
     data() {
       return {
+        title: null,
         type: this.$route.query.type,
         money: this.$route.query.money,
         time: this.$route.query.time,
@@ -55,6 +56,9 @@
       },
       goBack: function () {
         this.$router.replace({path: '/account/funds'})
+      },
+      goBackDD() {
+        this.$router.replace({path: '/account/ddExchange'})
       },
       copy: function () {
         let input = this.$refs.copyInput
