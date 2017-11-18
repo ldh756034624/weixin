@@ -32,9 +32,9 @@
       let self = this;
       if (self.type === 'funds') {
         this.title = '提现'
-      } else if (self.type === 'recharge') {
+      } else if (self.type === 'recharge' || self.type === 'indexRecharge') {
         this.title = '充值'
-      } else if (self.type === 'exchange') {
+      } else if (self.type === 'exchange' || self.type === 'indexddExchange') {
         this.title = '兑换'
       }
       self.setTitle(title + '成功');

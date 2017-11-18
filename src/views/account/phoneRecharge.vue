@@ -52,8 +52,6 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
               self.rechargeData=res.data.data
-             self.rechargeParams.id=self.rechargeData.priceList[0].id
-             self.rechargeMoney=self.rechargeData.priceList[0].realPrice
              self.reChargePhoneNum=self.rechargeData.tel
              if(parseInt(self.rechargeData.balance) > parseInt(self.rechargeMoney)){
               self.canUse=true;
@@ -62,12 +60,11 @@ export default {
         })
     },
     chooseMoney:function(item,index){
-
+      this.rechargeParams.id=item.id
+      this.rechargeMoney=item.realPrice
       if(parseInt(this.rechargeData.balance) > parseInt(this.rechargeMoney)){
         this.canUse=true;
         this.rechargeChoosed=index;
-        this.rechargeParams.id=item.id
-        this.rechargeMoney=item.realPrice
       }else{
         this.canUse=false;
         _g.toastMsg('error', '余额不足!')
@@ -79,8 +76,8 @@ export default {
         _g.toastMsg('error', '请输入手机号!')
         return;
       }
-      if(parseInt(this.rechargeData.balance) < parseInt(this.rechargeMoney)){
-        _g.toastMsg('error', '余额不足!')
+      if(!this.rechargeParams.id){
+        _g.toastMsg('error', '请选择充值金额!')
         return;
       }
       this.codeAlert=true;
