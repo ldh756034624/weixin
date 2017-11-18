@@ -12,12 +12,12 @@
           <p class="orderText">{{orderDetailData.goodsInfoList[0].goodsName}}</p>
         </div>
       </div>
-    </div>  
+    </div>
     <div v-if='orderDetailData.orderType==1'>
       <p class="blockTips">商品信息</p>
       <div class="orderMsgBox">
         <p>
-          <label>充值金额</label>{{orderDetailData.payMoney}}
+          <label>充值金额</label>{{orderDetailData.rechargeMoney}}
         </p>
         <p>
           <label>充值号码</label>{{orderDetailData.tel}}
@@ -28,14 +28,14 @@
       <p class="blockTips">商品信息</p>
       <div class="orderMsgBox">
         <p>
-          <label>面额</label>{{orderDetailData.payMoney}}
+          <label>面值</label>{{orderDetailData.rechargeMoney}}
         </p>
         <p>
-          <label>券号</label>{{orderDetailData.tel}}
+          <label>券号</label>{{orderDetailData.couponsNumber}}
         </p>
       </div>
     </div>
-    <div v-else>
+    <div v-if='orderDetailData.orderType==3'>
       <p class="blockTips">配送信息</p>
       <div class="orderMsgBox">
         <p>
@@ -47,6 +47,9 @@
         <p>
           <label>联系地址</label>{{orderDetailData.address}}
         </p>
+        <p>
+          <label>物流单号</label>{{orderDetailData.logisticsNumber}}
+        </p>
       </div>
     </div>
     <p class="blockTips">订单信息</p>
@@ -55,13 +58,13 @@
         <label>订单号</label>{{orderDetailData.orderId}}
       </p>
       <p>
+        <label>下单时间</label>{{orderDetailData.createOrderDate}}
+      </p>
+      <p>
         <label>支付方式</label>{{orderDetailData.payMethod}}
       </p>
       <p>
         <label>支付金额</label>{{orderDetailData.payMoney}}
-      </p>
-      <p>
-        <label>下单时间</label>{{orderDetailData.createOrderDate}}
       </p>
     </div>
       <!-- <div class="orderBottomBtn">
@@ -90,14 +93,14 @@ export default {
       self.$http.get('h9/api/orders/'+self.orderId)
         .then(function(res) {
           if(res.data.code==0){
-              self.orderDetailData=res.data.data 
+              self.orderDetailData=res.data.data
           }
         })
     },
     exchangeFn:function(){
       let self=this;
     }
-    
+
   },
   components: {
      XButton
