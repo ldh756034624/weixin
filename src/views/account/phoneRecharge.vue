@@ -7,7 +7,7 @@
         <img src="../../assets/img/account/recharge_icon_contacts@2x.png" />
       </div>
       <p class="phoneName">默认</p>
-      <p class="LeastMoney flexBox">充话费 <span class='flex1 alignR'>酒元余额￥{{balance}}</span></p>
+      <p class="LeastMoney flexBox">充话费 <span class='flex1 alignR'>酒元余额￥{{rechargeData.balance}}</span></p>
       <flexbox :gutter="0" wrap="wrap" class='phoneRechargeFlexBox'>
           <flexbox-item :span="1/3" v-for='(item,index) in rechargeData.priceList' @click.native='chooseMoney(item,index)'>
             <div class="phoneBox" :class="{'blueBg':index==rechargeChoosed}">
@@ -35,8 +35,8 @@ export default {
   data () {
     return {
       reChargePhoneNum:'',
-      rechargeData:[],
-      balance:localStorage.getItem('balance'),
+      rechargeData:{},
+      balance:'',
       rechargeChoosed:'',
       codeAlert:false,
       rechargeParams:{},
@@ -94,7 +94,11 @@ export default {
           .then(function(res) {
             if(res.data.code==0){
                 _g.toastMsg('error', '充值成功!')
-                self.$router.replace({path:'/account/result',query:{type:'recharge',money:res.data.data.money,tel:self.rechargeParams.tel}})
+                if(self.$route.query.type){
+                  self.$router.replace({path:'/account/result',query:{type:self.$route.query.type,money:res.data.data.money,tel:self.rechargeParams.tel}})
+                }else{
+                  self.$router.replace({path:'/account/result',query:{type:'recharge',money:res.data.data.money,tel:self.rechargeParams.tel}})
+                }
             }else{
               _g.toastMsg('error', res.data.msg)
             }

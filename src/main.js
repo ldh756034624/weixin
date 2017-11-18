@@ -117,7 +117,13 @@ Vue.mixin({
           let userObjItem=JSON.parse(localStorage.getItem('_user'))
           if(userObjItem){
             if(userObjItem.tel || localStorage.getItem('tel')){
-              self.$router.push({path:link})
+              if(link==='/account/phoneRecharge'){
+                self.$router.push({path:link,query:{type:'indexRecharge'}})
+              }else if(link==='/account/ddExchange'){
+                self.$router.push({path:link,query:{type:'indexddExchange'}})
+              }else{
+                self.$router.push({path:link})
+              }
             }else{
               _g.toastMsg('error', '请先绑定手机号')
               setTimeout(function(){
@@ -127,17 +133,6 @@ Vue.mixin({
           }else{
             this.getWxCode();
           }
-          // self.$http.get('h9/api/account/info')
-          //   .then(function(res) {
-          //     if(res.data.code==0){
-          //       self.$router.push({path:link})
-          //       localStorage.setItem('balance',res.data.data.balance)
-          //     }else if(res.data.code==402){
-                
-          //     }else if(response.data.code==401){
-                
-          //     }
-          //   })
         },
         getDeal:function(code){
           let self=this;

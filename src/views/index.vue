@@ -144,12 +144,9 @@ export default {
           if(item.link==='lottery'){
             this.$router.push({path:'/active/hongbao'})
           }else if(item.link==='exchange_didi'){
-            console.log("--------")
             this.hasPhone('/account/ddExchange')
-            //this.$router.push({path:'/account/ddExchange'})
           }else if(item.link==='exchange_telephoneFare'){
             this.hasPhone('/account/phoneRecharge')
-            //this.$router.push({path:'/account/phoneRecharge'})
           }else if(item.link==='validate'){
             this.$router.push({path:'/active/searchIsReally'})
           }else{

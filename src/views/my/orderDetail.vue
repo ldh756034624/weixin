@@ -13,7 +13,29 @@
         </div>
       </div>
     </div>  
-    <div v-if='orderDetailData.orderType!=1 && orderDetailData.orderType!=2'>
+    <div v-if='orderDetailData.orderType==1'>
+      <p class="blockTips">商品信息</p>
+      <div class="orderMsgBox">
+        <p>
+          <label>充值金额</label>{{orderDetailData.payMoney}}
+        </p>
+        <p>
+          <label>充值号码</label>{{orderDetailData.tel}}
+        </p>
+      </div>
+    </div>
+    <div v-if='orderDetailData.orderType==2'>
+      <p class="blockTips">商品信息</p>
+      <div class="orderMsgBox">
+        <p>
+          <label>面额</label>{{orderDetailData.payMoney}}
+        </p>
+        <p>
+          <label>券号</label>{{orderDetailData.tel}}
+        </p>
+      </div>
+    </div>
+    <div v-else>
       <p class="blockTips">配送信息</p>
       <div class="orderMsgBox">
         <p>
@@ -27,22 +49,20 @@
         </p>
       </div>
     </div>
-    <div v-else>
-      <p class="blockTips">订单信息</p>
-      <div class="orderMsgBox">
-        <p>
-          <label>订单号</label>{{orderDetailData.orderId}}
-        </p>
-        <p>
-          <label>支付方式</label>{{orderDetailData.payMethod}}
-        </p>
-        <p>
-          <label>支付金额</label>{{orderDetailData.payMoney}}
-        </p>
-        <p>
-          <label>下单时间</label>{{orderDetailData.createOrderDate}}
-        </p>
-      </div>
+    <p class="blockTips">订单信息</p>
+    <div class="orderMsgBox">
+      <p>
+        <label>订单号</label>{{orderDetailData.orderId}}
+      </p>
+      <p>
+        <label>支付方式</label>{{orderDetailData.payMethod}}
+      </p>
+      <p>
+        <label>支付金额</label>{{orderDetailData.payMoney}}
+      </p>
+      <p>
+        <label>下单时间</label>{{orderDetailData.createOrderDate}}
+      </p>
     </div>
       <!-- <div class="orderBottomBtn">
           <x-button mini @click.native="">确认修改</x-button>

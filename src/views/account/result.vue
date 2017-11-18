@@ -54,7 +54,13 @@ export default {
 
     },
     goBack:function(){
-      this.$router.replace({path:'/account/personal'})
+      if(this.type==='indexRecharge'){
+        this.$router.replace({path:'/account/phoneRecharge'})
+      }else if(this.type==='indexddExchange'){
+        this.$router.replace({path:'/account/ddExchange'})
+      }else{
+        this.$router.replace({path:'/account/purse'})
+      }
     },
     copy:function(){
       let input = this.$refs.copyInput
