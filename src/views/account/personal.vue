@@ -16,7 +16,7 @@
           <flexbox-item>
             <router-link :to="{path:'/account/purse',query:{balance:personalData.balance,limit:personalData.withdrawalCount}}">
               <div class="personalItemBox">
-                <p class="redFont">{{personalData.balance | price2}}</p>
+                <p class="redFont">{{personalData.balance | price2 || 0.00}}</p>
                 <p>酒元</p>
               </div>
             </router-link>
@@ -24,7 +24,7 @@
           <flexbox-item>
             <router-link :to="{path:'/my/vMoney',query:{vbNum:personalData.vb}}">
               <div class="personalItemBox ItemBorder">
-                <p class="redFont">{{personalData.vb}}</p>
+                <p class="redFont">{{personalData.vb || 0.00}}</p>
                 <p>V币</p>
               </div>
             </router-link>
@@ -32,7 +32,7 @@
           <flexbox-item>
             <router-link to="/my/cupon">
               <div class="personalItemBox">
-                <p class="redFont">{{personalData.cardNum}}</p>
+                <p class="redFont">{{personalData.cardNum || 0}}</p>
                 <p>卡券</p>
               </div>
             </router-link>
