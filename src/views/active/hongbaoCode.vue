@@ -158,7 +158,7 @@ export default {
               if(sec=='00'){
                 self.init();
               }else{
-                self.countDownTime = sec;
+                self.countDownTime = min + ":" + sec;
               }
             }
           }else{
@@ -321,62 +321,62 @@ export default {
   }
   @keyframes hbAnimate
 {
-  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: 100% }
-  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: 100% }
-  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: 100% }
-  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: 100% }
-  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: 100% }
-  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: 100% }
-  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: 100% }
-  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: 100% }
-  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: 100% }
-  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: 100% }
-  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: 100% }
+  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: cover }
+  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: cover }
+  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: cover }
+  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: cover }
+  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: cover }
+  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: cover }
+  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: cover }
+  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: cover }
+  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: cover }
+  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: cover }
+  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: cover }
 }
 
 @-moz-keyframes hbAnimate /* Firefox */
 {
-  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: 100% }
-  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: 100% }
-  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: 100% }
-  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: 100% }
-  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: 100% }
-  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: 100% }
-  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: 100% }
-  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: 100% }
-  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: 100% }
-  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: 100% }
-  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: 100% }
+  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: cover }
+  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: cover }
+  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: cover }
+  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: cover }
+  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: cover }
+  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: cover }
+  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: cover }
+  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: cover }
+  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: cover }
+  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: cover }
+  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: cover }
 }
 
 @-webkit-keyframes hbAnimate /* Safari 和 Chrome */
 {
-  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: 100% }
-  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: 100% }
-  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: 100% }
-  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: 100% }
-  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: 100% }
-  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: 100% }
-  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: 100% }
-  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: 100% }
-  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: 100% }
-  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: 100% }
-  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: 100% }
+  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: cover }
+  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: cover }
+  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: cover }
+  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: cover }
+  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: cover }
+  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: cover }
+  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: cover }
+  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: cover }
+  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: cover }
+  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: cover }
+  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: cover }
 }
 
 @-o-keyframes hbAnimate /* Opera */
 {
-  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: 100% }
-  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: 100% }
-  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: 100% }
-  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: 100% }
-  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: 100% }
-  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: 100% }
-  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: 100% }
-  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: 100% }
-  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: 100% }
-  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: 100% }
-  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: 100% }
+  0% {background: url('../../assets/img/active/animation/1@2x.png') no-repeat center; background-size: cover }
+  10% {background: url('../../assets/img/active/animation/2@2x.png') no-repeat center; background-size: cover }
+  19% {background: url('../../assets/img/active/animation/3@2x.png') no-repeat center; background-size: cover }
+  29% {background: url('../../assets/img/active/animation/4@2x.png') no-repeat center; background-size: cover }
+  40% {background: url('../../assets/img/active/animation/5@2x.png') no-repeat center; background-size: cover }
+  50% {background: url('../../assets/img/active/animation/6@2x.png') no-repeat center; background-size: cover }
+  60% {background: url('../../assets/img/active/animation/7@2x.png') no-repeat center; background-size: cover }
+  70% {background: url('../../assets/img/active/animation/8@2x.png') no-repeat center; background-size: cover }
+  80% {background: url('../../assets/img/active/animation/9@2x.png') no-repeat center; background-size: cover }
+  90% {background: url('../../assets/img/active/animation/10@2x.png') no-repeat center; background-size: cover }
+  100% {background: url('../../assets/img/active/animation/11@2x.png') no-repeat center; background-size: cover }
 }
 </style>
 <style lang='less'>
