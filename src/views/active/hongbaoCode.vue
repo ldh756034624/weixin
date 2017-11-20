@@ -293,6 +293,9 @@ export default {
           border:0 solid transparent;
           border-radius: 4rem;
           font-size: 40/40rem;
+          &:after{
+            border: none;
+          }
         }
       }
     }
