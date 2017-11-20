@@ -194,6 +194,8 @@ export default {
       background-position: center;
     }
     .nickUpldBox{
+      border-radius: 50%;
+      overflow: hidden;
       position: relative;
       img{
         width: 100%;
