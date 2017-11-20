@@ -55,7 +55,6 @@ export default {
       if(self.changeCode.length==4){
         document.getElementById('codeInput').blur()
         self.$emit("CodeAlertStatus",{show:false,codeNum:self.changeCode})
-//        self.showCodeBlur=false;
       }
     })
     self.$watch('showCodeAlert',function(val){
@@ -100,6 +99,9 @@ export default {
             //_g.toastMsg('error','验证码发送成功')
             self.count=60
             self.countTime();
+          } else {  // 如果发送过于频繁，就不弹窗，直接消失
+            self.hide()
+            return
           }
           self.timer = setInterval(()=>{
             self.countTime();
@@ -119,6 +121,10 @@ export default {
     },
     hide() {
       this.showCodeBlur = false
+    },
+    show() {
+      this.showCodeBlur = true
+      this.init()
     },
     clearCode() {
       this.changeCode = ''

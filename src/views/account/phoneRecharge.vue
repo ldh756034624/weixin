@@ -20,7 +20,7 @@
         <x-button class='btnBg blueBg' @click.native="rechargeFn()" :disabled='!canUse'>充值</x-button>
       </div>
       </div>
-      <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='reChargePhoneNum' ref='codeAlert' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
+      <codeAlert :money="rechargeMoney" :showCodeAlert='codeAlert' :type='codeType' :phoneNum='reChargePhoneNum' ref='codeAlert' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
   </div>
 </template>
 <script>
@@ -80,7 +80,8 @@ export default {
         _g.toastMsg('error', '请选择充值金额!')
         return;
       }
-      this.codeAlert=true;
+//      this.codeAlert=true;
+      this.$refs.codeAlert.show()
     },
     codeAlertFn:function(data){
       let self = this
@@ -99,6 +100,7 @@ export default {
                   self.$router.replace({path:'/account/result',query:{type:'recharge',money:res.data.data.money,tel:self.rechargeParams.tel}})
                 }
             }else{
+              self.$refs.codeAlert.clearCode()
               _g.toastMsg('error', res.data.msg)
             }
           })
