@@ -61,7 +61,7 @@ export default {
     return {
       prizeData:{},
       code:this.$route.query.code,
-      noGetPrize:true,
+      noGetPrize:false,
       codeAlert:false,
       codeType:'2',
       prizeAccount:'',
@@ -79,6 +79,8 @@ export default {
             if(self.prizeData.tel){
               self.noGetPrize=false
               self.prizeAccount=self.prizeData.tel
+            }else{
+              self.noGetPrize=true
             }
             if(res.data.data.roomUser){
               self.codeUrl=res.data.data.qrCode
@@ -211,7 +213,6 @@ export default {
       .prizeBtnMrg{
         margin: 80/40rem 60/40rem;
       }
-
     }
     .prizerBox{
         background: rgba(255,255,255,.9);
@@ -245,10 +246,11 @@ export default {
           display: inline-block;
           text-align: center;
           .prizeMoney{
+            margin-bottom: 0.2rem;
             color: #ED5954;
             font-size: 32/40rem;
+            line-height: 1rem;
           }
-
         }
         .moneyBest{
           background: #ED5954;
