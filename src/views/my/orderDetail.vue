@@ -2,9 +2,9 @@
 	<div class="page">
     <div class="orderBox">
       <div class="flexBox">
-        <img class="orderIcons" src="../../assets/img/account/order_store_huijiu@2x.png"/>
+        <img class="orderIcons" :src="orderDetailData.companyIcon"/>
         <p class="flex1">{{orderDetailData.company}}</p>
-        <span class='redFont'>{{orderDetailData.orderStatus}}</span>
+        <span class='redFont' :class="{'redFt':orderDetailData.orderStatus==='已完成'}">{{orderDetailData.orderStatus}}</span>
       </div>
       <div class="flexBox orderContBox" @click='goOrderDetail()'>
         <img class="orderImg" :src="orderDetailData.goodsInfoList[0].imgUrl"/>

@@ -244,7 +244,7 @@ export default {
         }
         .moneyBox{
           display: inline-block;
-          text-align: center;
+          text-align: right;
           .prizeMoney{
             margin-bottom: 0.2rem;
             color: #ED5954;

@@ -16,9 +16,9 @@
               <div>
                 <div class="orderBox" v-for="item in myOrderData">
                   <div class="flexBox">
-                    <img class="orderIcons" src="../../assets/img/account/order_store_huijiu@2x.png"/>
+                    <img class="orderIcons" :src="item.companyIcon"/>
                     <p class="flex1">{{item.company}}</p>
-                    <span class='redFont'>{{item.status}}</span>
+                    <span class='redFont' :class="{'redFt':item.status==='已完成'}">{{item.status}}</span>
                   </div>
                   <div class="flexBox orderContBox" @click='goOrderDetail(item)'>
                     <img class="orderImg" :src="item.goodsInfoList[0].imgUrl"/>
