@@ -124,6 +124,13 @@ export default {
       this.changeCode = ''
     }
   },
+  watch: {
+    showCodeBlur(newVal) {
+      if (!newVal) {
+        this.changeCode = ''
+      }
+    }
+  },
   components: {
     XDialog,XButton
   },

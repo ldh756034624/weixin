@@ -119,7 +119,7 @@
             .then(function (res) {
               if (res.data.code == 0) {
                 _g.toastMsg('error', '提现成功!')
-                self.codeAlert = false;
+                self.$refs.codeAlert.hide()
                 self.$router.replace({
                   path: '/account/result',
                   query: {type: 'funds', money: res.data.data.money, time: res.data.data.time}
