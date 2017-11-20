@@ -211,7 +211,6 @@ export default {
       .prizeBtnMrg{
         margin: 80/40rem 60/40rem;
       }
-
     }
     .prizerBox{
         background: rgba(255,255,255,.9);
@@ -247,8 +246,8 @@ export default {
           .prizeMoney{
             color: #ED5954;
             font-size: 32/40rem;
+            line-height: 1.1rem;
           }
-
         }
         .moneyBest{
           background: #ED5954;
