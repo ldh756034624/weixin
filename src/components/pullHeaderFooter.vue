@@ -15,7 +15,7 @@
 			<span v-show="statusUp === 'default'"></span>
 			<span v-show="statusUp === 'down'">松开加载</span>
 			<span v-show="statusUp === 'loading'">正在加载</span>
-			<span v-show="statusUp === 'disabled'">已经到底了</span>
+			<span v-show="statusUp === 'disabled'">没有更多</span>
 		</div>
 	</div>
 </template>
@@ -41,30 +41,30 @@
 	.loading-gif {
 	    margin-left: 42%;
 	    display: block;
-	    width: 3rem; 
+	    width: 3rem;
 	    height: 3rem;
 	    /*background: url('../assets/img/blank/isBottom.png') 0 0 no-repeat;
 	    background-size: 100%;*/
 	}
 	.min-loaging{
 		display: inline-block;
-		width: 0.8rem; 
+		width: 0.8rem;
 	    height: 0.8rem;
 	    vertical-align: middle;
 	    background: url('../assets/img/blank/loading.gif') 0 0 no-repeat;
 	    background-size: 100%;
 	}
 	.downstyle{
-		position: absolute; 
-		width: 100%; 
-		top: -4.4rem; 
+		position: absolute;
+		width: 100%;
+		top: -4.4rem;
 		text-align: center;
 		font-size: 28/40rem;
 	}
 	.upstyle{
-		position: absolute; 
-		width: 100%; 
-		bottom: -4.4rem; 
+		position: absolute;
+		width: 100%;
+		bottom: -4.4rem;
 		text-align: center;
 		font-size: 28/40rem;
 		&.upstatus{
