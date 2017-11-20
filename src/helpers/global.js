@@ -30,6 +30,14 @@ const commonFn = {
         })
         break
     }
+  },
+  showLoading(txt){
+    bus.$vux.loading.show({
+      text: txt
+    })
+  },
+  hideLoading() {
+    bus.$vux.loading.hide()
   }
 }
 export default commonFn
