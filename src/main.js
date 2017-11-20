@@ -30,6 +30,7 @@ let store = new Vuex.Store({
   state:{
     longitude:0,
     latitude:0,
+    showLoading:false,
   },
 
   actions: {
@@ -39,6 +40,9 @@ let store = new Vuex.Store({
         state.longitude=item.longitude
         state.latitude=item.latitude
     },
+    setLoading(state,item){
+        state.showLoading=item
+    },
   },
   getters: {
     longitude: state=> {
@@ -46,6 +50,9 @@ let store = new Vuex.Store({
     },
     latitude: state=> {
       return state.latitude
+    },
+    showLoading: state=> {
+      return state.showLoading
     },
   },
   modules: {
@@ -193,6 +200,8 @@ Vue.http.interceptors.request.use(
     } else {
       config.headers.token ='';
     }
+    store.commit("setLoading",true)
+    console.log(store.state.showLoading)
     return config;
   },
   err => {
@@ -217,6 +226,8 @@ Vue.http.interceptors.response.use(
       window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
     }else if(response.data.code!=0){
       _g.toastMsg('error', response.data.msg)
+    }else{
+      store.commit("setLoading",false)
     }
     return response;
   },

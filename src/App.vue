@@ -1,19 +1,12 @@
 <template>
   <div id="app">
 	    <router-view></router-view>
-      <!-- <div class="loading">
-        <span class='loadingImg'></span>
-        <img src="assets/img/blank/loading.gif">
-        <img :src="lodingImg">
-      </div> -->
-      <div v-transfer-dom>
-        <x-dialog v-show="!dialogShow" class="dialogUnBox appDialogUnBox">
-          <div>
-            {{dialogText}}
-          </div>
-          <x-button mini class="dialogSureBtn" @click.native="gologin()" >确定</x-button>
-        </x-dialog>
-      </div>  
+      <div class="loading" v-if='loadingShow'>
+        <div class="cellBox">
+          <img :src="lodingImg">
+          <p>正在加载中</p>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -33,17 +26,11 @@ export default {
   mounted(){
     let self=this;
     self.wxSign();
+    console.log(self.loadingShow)
   },
   data(){
     return {
-      text:'网络出故障了,点击重新加载哦～',
-      hasNetA:true,
-      blankImg:'',
-      dialogShow:true,
-      dialogText:'',
-      loginText:'暂时没有登录,登录有惊喜！',
-      noLogin:false,
-      blankType:'noLogin',
+      loadingShow:this.$store.state.showLoading,
       lodingImg:require('./assets/img/blank/loading.gif')
     }
   },
@@ -95,7 +82,16 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background: red;
+    background: #fff;
+    display: table;
+    .cellBox{
+      display: table-cell;
+      vertical-align: middle;
+      width: 3rem;
+      text-align: center;
+      margin: 0 auto;
+      font-size: 24/40rem;
+    }
     img{
       width: 60/40rem;
       height: 60/40rem;
@@ -125,11 +121,5 @@ body {
 }
 .appDialogUnBox .weui-dialog{
   display: inline-block!important;
-}
-.noLogin{
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100%;
 }
 </style>
