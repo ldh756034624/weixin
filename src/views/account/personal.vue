@@ -16,7 +16,7 @@
           <flexbox-item>
             <router-link :to="{path:'/account/purse',query:{balance:personalData.balance,limit:personalData.withdrawalCount}}">
               <div class="personalItemBox">
-                <p class="redFont">{{personalData.balance | price2 || 0.00}}</p>
+                <p class="redFont">{{personalData.balance  || 0 | price2}}</p>
                 <p>酒元</p>
               </div>
             </router-link>

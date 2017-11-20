@@ -2,7 +2,11 @@
 	<div class="page prizeResultPage">
     <div class="prizeResultCont">
       <img class="groupLogo" src="../../assets/img/active/logo_huijiu@2x.png"/>
-      <div v-if='prizeData.money!==0'>
+      <div v-if='prizeData.money==0' class="noPrize">
+        <img src="../../assets/img/active/bg_weizhongjiang@2x.png">
+        <p>很遗憾,您未中奖</p>
+      </div>
+      <div v-else>
         <div class="prizeMoneyBox">
           ￥<span>{{prizeData.money}}</span>
         </div>
@@ -18,10 +22,6 @@
           </div>
 
         </div>
-      </div>
-      <div v-else class="noPrize">
-        <img src="../../assets/img/active/bg_weizhongjiang@2x.png">
-        <p>很遗憾,您未中奖</p>
       </div>
       <div class="prizeBtnBox" :class="{'prizeBtnMrg' : prizeData.money===0}">
         <x-button mini class='miniBtn'  @click.native="goIndex">进入社区</x-button>

@@ -209,6 +209,10 @@ export default {
         color: #222;
         font-size: 36/40rem;
       }
+
+    }
+    .weui-cell:before{
+      border-top: none!important;
     }
   }
 </style>

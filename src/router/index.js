@@ -58,6 +58,9 @@ export default [
       path:'/account/articleDetail',
       component (resolve) {require(['@/views/account/articleDetail'], resolve)} //文章详情
     },{
+      path:'/account/noticeDetail',
+      component (resolve) {require(['@/views/account/noticeDetail'], resolve)} //公告详情 
+    },{
       path:'/account/purseParticulars',
       component (resolve) {require(['@/views/account/purseParticulars'], resolve)} //钱包明细
     },{

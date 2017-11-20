@@ -60,6 +60,8 @@ export default {
     })
     self.getdata();
     self.$watch('differentDate',function(val){
+
+        clearTimeout(self.time_count)
         self.intervalLike(val);
     })
   },
@@ -141,13 +143,14 @@ export default {
     intervalLike:function(timestr){
       let self=this;
       var min,sec;
+
       self.time_count = setTimeout(function(){
           var date = new Date(timestr); //转换成时间对象，这就简单了
           min = date.getMinutes();  //获取分
           sec = date.getSeconds();  //获取秒
           min=self.checkTime(min)
           sec=self.checkTime(sec)
-          self.countDownTime =  min + "分" + sec+'秒';
+          self.countDownTime =  min + ":" + sec;
 
           if(timestr>1000){
             timestr=timestr-1000;
@@ -155,7 +158,7 @@ export default {
               if(sec=='00'){
                 self.init();
               }else{
-                self.countDownTime = sec+'秒';
+                self.countDownTime = sec;
               }
             }
           }else{
