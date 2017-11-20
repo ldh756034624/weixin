@@ -17,7 +17,7 @@
           <div class="cuponListBox" v-for="item in mycuponData">
             <div class="flexBox cuponBox">
               <div class="flex1 flexBox">
-                <img src="../../assets/img/account/wallet_icon_didi@2x.png"/>
+                <img :src="item.imgUrl"/>
                 <div class="flex1">
                   <p class="name">{{item.name}}</p>
                   <p class="money">{{item.price}}元</p>
