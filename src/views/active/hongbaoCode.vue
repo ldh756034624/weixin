@@ -36,7 +36,7 @@
           <p>开奖倒计时 <span>{{countDownTime}}</span></p>
           <x-button mini class='prizeBtn'  @click.native="StarPrizeFn">开始抽奖</x-button>
         </div>
-        <p v-else class="prizeTip">等待抽奖</p>
+        <p v-else class="prizeTip">等待开奖</p>
       </div>
       <div class="strategyText" v-html='DealData'>
       </div>
