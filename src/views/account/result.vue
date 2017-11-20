@@ -9,11 +9,11 @@
       <p>申请时间:{{time}}</p>
       <p>款项会在1-2个工作日内到帐</p>
     </div>
-    <div class="resultText" v-if="type==='recharge'">
+    <div class="resultText" v-if="type==='recharge' || type === 'indexRecharge'">
       <p>充值号码:{{tel}}</p>
       <p>1-10分钟到帐,请留意运营商短信通知</p>
     </div>
-    <div class="resultText" v-if="type==='exchange'">
+    <div class="resultText" v-if="type==='exchange' || type === 'indexddExchange'">
       <p>券号:{{num}}</p>
     </div>
     <div class="fundsBtnBox">
@@ -31,18 +31,18 @@
     mounted() {
       let self = this;
       if (self.type === 'funds') {
-        this.title = '提现'
+        self.title = '提现'
       } else if (self.type === 'recharge' || self.type === 'indexRecharge') {
-        this.title = '充值'
+        self.title = '充值'
       } else if (self.type === 'exchange' || self.type === 'indexddExchange') {
-        this.title = '兑换'
+        self.title = '兑换'
       }
-      self.setTitle(title + '成功');
+      self.setTitle(self.title + '成功');
     },
     data() {
       return {
         coponShow: true,
-        title: null,
+        title: '',
         type: this.$route.query.type,
         money: this.$route.query.money,
         time: this.$route.query.time,
