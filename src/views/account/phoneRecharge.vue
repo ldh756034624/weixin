@@ -34,6 +34,7 @@ export default {
   },
   data () {
     return {
+      timer: null,
       reChargePhoneNum:'',
       rechargeData:{},
       balance:'',
@@ -83,16 +84,33 @@ export default {
 //      this.codeAlert=true;
       this.$refs.codeAlert.show()
     },
-    codeAlertFn:function(data){
+    hideLoading() {
+      if (!this.overPending) {
+        clearTimeout(this.timer)
+      } else {
+        _g.hideLoading()
+      }
+    },
+    showLoading() {
+      this.overPending = false
+      this.timer = setTimeout(() => {
+        _g.showLoading()
+        this.overPending = true
+        clearTimeout(this.timer)
+      },1500)
+    },
+    codeAlertFn(data) {
       let self = this
       if(data.show===false){
         self.codeAlert=false;
       }
       if(data.show===false && data.codeNum.length===4){
+        this.showLoading()
         self.rechargeParams.code=data.codeNum
         self.$http.post('h9/api/consume/mobile/recharge',self.rechargeParams)
-          .then(function(res) {
+          .then(res => {
             if(res.data.code==0){
+                this.hideLoading()
                 _g.toastMsg('error', '充值成功!')
                 if(self.$route.query.type){
                   self.$router.replace({path:'/account/result',query:{type:self.$route.query.type,money:res.data.data.money,tel:self.rechargeParams.tel}})
@@ -100,6 +118,7 @@ export default {
                   self.$router.replace({path:'/account/result',query:{type:'recharge',money:res.data.data.money,tel:self.rechargeParams.tel}})
                 }
             }else{
+              this.hideLoading()
               self.$refs.codeAlert.clearCode()
               _g.toastMsg('error', res.data.msg)
             }

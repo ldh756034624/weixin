@@ -290,9 +290,12 @@ export default {
           height: 100/40rem;
           background: #EE5954;
           color: #fff;
-          border-color: transparent;
+          border:0 solid transparent;
           border-radius: 4rem;
           font-size: 40/40rem;
+          &:after{
+            border: none;
+          }
         }
       }
     }
