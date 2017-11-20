@@ -1,11 +1,10 @@
 <template>
   <div id="app">
 	    <router-view></router-view>
-      <!-- <div class="noNet" v-if='hasNetA==false && noLogin==false'>
-          <blankPage  :text='text' v-show='!hasNetA' :images='blankImg'> </blankPage>
-      </div>
-      <div class="noLogin" v-if='hasNetA==false && noLogin==true'>
-          <blankPage  :text='loginText' v-show='noLogin' :blankType='blankType'> </blankPage>
+      <!-- <div class="loading">
+        <span class='loadingImg'></span>
+        <img src="assets/img/blank/loading.gif">
+        <img :src="lodingImg">
       </div> -->
       <div v-transfer-dom>
         <x-dialog v-show="!dialogShow" class="dialogUnBox appDialogUnBox">
@@ -45,6 +44,7 @@ export default {
       loginText:'暂时没有登录,登录有惊喜！',
       noLogin:false,
       blankType:'noLogin',
+      lodingImg:require('./assets/img/blank/loading.gif')
     }
   },
   methods: {
@@ -87,6 +87,27 @@ export default {
 }
 
 </script>
+<style scoped lang='less'>
+  .loading{
+    position: fixed;
+    z-index: 9;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: red;
+    img{
+      width: 60/40rem;
+      height: 60/40rem;
+    }
+    .loadingImg{
+      display: inline-block;
+      width: 60/40rem;
+      height: 60/40rem;
+      background: url('./assets/img/blank/loading.gif');
+    }
+  }
+</style>
 <style lang='less'>
 @import '~vux/src/styles/reset.less';
 @import '~vux/src/styles/1px.less';

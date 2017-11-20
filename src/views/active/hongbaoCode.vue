@@ -60,6 +60,8 @@ export default {
     })
     self.getdata();
     self.$watch('differentDate',function(val){
+
+        clearTimeout(self.time_count)
         self.intervalLike(val);
     })
   },
@@ -141,6 +143,7 @@ export default {
     intervalLike:function(timestr){
       let self=this;
       var min,sec;
+
       self.time_count = setTimeout(function(){
           var date = new Date(timestr); //转换成时间对象，这就简单了
           min = date.getMinutes();  //获取分
