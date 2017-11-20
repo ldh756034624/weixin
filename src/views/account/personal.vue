@@ -118,7 +118,7 @@ export default {
     .personalTopBg{
       background:url('../../assets/img/index/my_img_bg@2x.png') no-repeat;
       background-size: 100%;
-      height: 516/40rem;
+      height: 470/40rem;
     }
     .settingIcon{
       width: 60/40rem;
