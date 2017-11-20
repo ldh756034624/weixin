@@ -150,7 +150,7 @@ export default {
           sec = date.getSeconds();  //获取秒
           min=self.checkTime(min)
           sec=self.checkTime(sec)
-          self.countDownTime =  min + "分" + sec+'秒';
+          self.countDownTime =  min + ":" + sec;
 
           if(timestr>1000){
             timestr=timestr-1000;
@@ -158,7 +158,7 @@ export default {
               if(sec=='00'){
                 self.init();
               }else{
-                self.countDownTime = sec+'秒';
+                self.countDownTime = sec;
               }
             }
           }else{
