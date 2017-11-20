@@ -3,12 +3,14 @@
       <div v-transfer-dom>
       <x-dialog v-model="showCodeBlur" class="codeAlert" hide-on-blur>
         <div class="img-box">
+          <i class="closeDialog" @click="hide">x</i>
           <p class="codeText">输入验证码</p>
           <p class="money">
             ￥{{money | price2}}
           </p>
-          <p class="codePhone">接收手机尾号({{phoneLast}})短信</p>
-          <x-button class='codeBtn' @click.native='init()' :class="{'reCode':canUse}" :disabled='!canUse' mini>{{codeTip}}</x-button>
+          <p class="codePhone">接收手机尾号({{phoneLast}})短信
+            <x-button class='codeBtn' @click.native='init()' :class="{'reCode':canUse}" :disabled='!canUse' mini>{{codeTip}}</x-button>
+          </p>
           <div class="changeCodeBox">
             <input type="tel" v-model="changeCode" id='codeInput' autofocus /><!--pattern="\d{11}"-->
             <div class="changeCodeSpan">
@@ -52,7 +54,8 @@ export default {
     self.$watch('changeCode',function(val){
       if(self.changeCode.length==4){
         document.getElementById('codeInput').blur()
-        self.showCodeBlur=false;
+        self.$emit("CodeAlertStatus",{show:false,codeNum:self.changeCode})
+//        self.showCodeBlur=false;
       }
     })
     self.$watch('showCodeAlert',function(val){
@@ -61,11 +64,11 @@ export default {
        self.init();
       }
     })
-    self.$watch('showCodeBlur',function(val){
-      if(val==false){
-        self.$emit("CodeAlertStatus",{show:false,codeNum:self.changeCode})
-      }
-    })
+//    self.$watch('showCodeBlur',function(val){
+//      if(val==false){
+//        self.$emit("CodeAlertStatus",{show:false,codeNum:self.changeCode})
+//      }
+//    })
   },
   data () {
     return {
@@ -114,7 +117,12 @@ export default {
         clearInterval(this.timer);
       }
     },
-
+    hide() {
+      this.showCodeBlur = false
+    },
+    clearCode() {
+      this.changeCode = ''
+    }
   },
   components: {
     XDialog,XButton
@@ -125,6 +133,15 @@ export default {
 
 <style scoped lang='less'>
   .codeAlert{
+    position: relative;
+    .closeDialog{
+      position: absolute;
+      right: 0;
+      top: -5/40rem;
+      color: #333;
+      font-size: 1rem;
+      padding: .5rem 1rem;
+    }
     .money{
       font-size: 48/40rem;
       color: #627984;
@@ -140,6 +157,11 @@ export default {
       font-size: 28/40rem;
     }
     .codeBtn{
+      margin-left: 10/40rem;
+      width: 160/40rem;
+      padding: 0;
+      height:50/40rem;
+      line-height: 50/40rem;
       color: #999;
       border:1px solid #d9d9d9;
       background: #fff;
