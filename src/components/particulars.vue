@@ -30,7 +30,7 @@
                 <p class="tipText">{{item.remarks}}</p>
                 <p class="date">{{item.createTime}}</p>
               </div>
-              <span :class="item.money > 0 ? 'redFont' : 'blueFont'">
+              <span :class="item.money >= 0 ? 'redFont' : 'blueFont'">
                 <span v-if="item.money > 0">+</span>{{item.money | price2}}
               </span>
             </div>
