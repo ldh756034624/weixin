@@ -69,6 +69,7 @@ Vue.mixin({
                 msg : '',
             },
             isIndex:false,
+            showLoad:false,
             //分页
             pullupStatus:'default',
             pulldownStatus:'default',
@@ -193,6 +194,8 @@ Vue.http.defaults.headers['client'] = '3'
 if(userdata){
   Vue.http.defaults.headers['imei'] = userdata.openId
 }
+Vue.http.defaults.headers['version'] = 'v1.0.0'   // 固定版本号给后台
+
 // Vue.http.defaults.headers.token = userdata ? userdata.token : ''
 Vue.http.interceptors.request.use(
   config => {
@@ -202,7 +205,6 @@ Vue.http.interceptors.request.use(
       config.headers.token ='';
     }
     store.commit("setLoading",true)
-    console.log(store.state.showLoading)
     return config;
   },
   err => {

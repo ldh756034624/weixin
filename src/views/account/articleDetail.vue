@@ -1,7 +1,7 @@
 <template>
-	<div class="page articlePage">
+	<div class="articlePage">
     <p class="title">{{articleData.title}}</p>
-    <p class="date"><span>{{articleData.startTime}}</span>{{articleData.userName}}</p>
+    <p class="date"><span>{{articleData.createTime}}</span>{{articleData.userName}}</p>
     <div class="content" v-if="isHtml" v-html='articleData.content'></div>
     <div class="content" v-else>{{articleData.content}}</div>
   </div>
@@ -27,6 +27,7 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
               self.articleData=res.data.data
+            console.log(res.data.data)
               if(self.articleData.content.indexOf('div')!=-1 || self.articleData.content.indexOf('p')!=-1){
                 self.isHtml=true
               }else{
@@ -63,6 +64,9 @@ export default {
       color: #666;
       font-size: 28/40rem!important;
       line-height: 46/40rem;
+      img{
+        width: 98%;
+      }
     }
   }
 </style>

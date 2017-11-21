@@ -3,7 +3,7 @@
     <group class='settingBox'>
 
       <cell title="常见问题" link='/account/problems' is-link></cell>
-      <p class="flexBox">版本信息 <span class='flex1 alignR'>Ver 1.0</span></p>
+      <p class="flexBox">版本信息 <span class='flex1 alignR'>Ver 4.0</span></p>
       <!--测试用-->
       <cell title="退出登录" @click.native='logOut' is-link></cell>
     </group>

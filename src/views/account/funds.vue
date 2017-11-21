@@ -20,7 +20,7 @@
       <x-input v-model="fundMoney" :title='moneyMark' @on-focus='moneyFocus()' :disabled='true' @on-blur='moneyBlur()'
                :class="{'fundMoney':isFocus}" :show-clear="false" keyboard="number" placeholder='请输入提现金额'>
       </x-input>
-      <p class="leastMoney">酒元余额￥{{fundsData.balance | price2}}元
+      <p class="leastMoney">酒元余额￥{{fundsData.balance | price2}}
         <!-- <span @click="fundMoney=fundsData.balance" class='blueFont'>全部提现</span> -->
       </p>
     </group>
@@ -73,7 +73,7 @@
           .then(function (res) {
             if (res.data.code == 0) {
               self.fundsData = res.data.data
-              self.fundMoney = self.fundsData.balance
+              self.fundMoney = self.fundsData.withdrawMoney
               if (self.$route.query.cardIcon) {
                 self.name = self.$route.query.cardName
                 self.no = self.$route.query.no

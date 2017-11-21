@@ -19,7 +19,7 @@
               <div class="flex1 flexBox">
                 <img :src="item.imgUrl"/>
                 <div class="flex1">
-                  <p class="name TextEllipsis">{{item.name}}</p>
+                  <p class="name">{{item.name}}</p>
                   <p class="money">{{item.price}}元</p>
                 </div>
               </div>
@@ -63,6 +63,9 @@
     methods: {
       init(page) {
         let self = this
+        if (page === 1) {
+          self.mycuponData = []
+        }
         self.$http.get('h9/api/account/didicoupons?page=' + page + '&limit=' + self.page.limit)
           .then(function (res) {
             if (res.data.code == 0) {

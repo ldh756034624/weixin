@@ -40,7 +40,7 @@
             <p>{{item.desc}}</p>
           </div>
           <div class='moneyBox'>
-            <p class='prizeMoney'>{{item.money}}元</p>
+            <p class='prizeMoney'>{{item.money}}酒元</p>
             <p class='moneyBest' v-if='item.maxMoney'><span class='handIcon'></span>手气最佳</p>
           </div>
         </div>

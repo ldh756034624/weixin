@@ -198,6 +198,9 @@ export default {
     margin-left: -210/40rem;
   }
   #codeInput{
+    width: 100%;
+    left:0;
+    margin-left: 0;
     opacity: 0;
     z-index: 9;
   }

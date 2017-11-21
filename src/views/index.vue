@@ -4,14 +4,14 @@
       <scroller lock-x scrollbar-y ref="detailScroller" use-pulldown height="100%" @on-pulldown-loading="refresh"  v-model="status1">
                 <div>
                   <main class="home_main">
-                    <div class="header-wrap">
+                    <div class="header-wrap" v-if='homeData.topBanner'>
                       <swiper dots-position="center" auto dots-class="custom-bottom">
                         <swiper-item class="swiper-demo-img"  v-for="(item, index) in homeData.topBanner" height="12.5rem" :key="index" @click.native='goLinkFn(item)'>
                           <img :src="item.imgUrl">
                         </swiper-item>
                       </swiper>
                     </div>
-                    <div class="flexBox verticalScroll">
+                    <div class="flexBox verticalScroll" v-if='homeData.noticeArticle'>
                       <img src="../assets/img/index/mainpage_icon_notification_@2x.png" class="indexRadio" />
                       <div class="flex1">
                         <swiper auto height="40px" direction="vertical" :interval=2000 class="" :show-dots="false">
@@ -38,7 +38,7 @@
                         </flexbox-item>
                       </flexbox>
                     </div>
-                    <div class="blockContBox">
+                    <div class="blockContBox"  v-if='homeData.recommendArticle'>
                       <p class="blockTitle">社区精选</p>
                       <div class="flexBox blockBox" v-for='item in homeData.recommendArticle' @click='goLinkFn(item)'>
                           <div class="flex1">
@@ -57,7 +57,12 @@
                 </div>
       </scroller>
     </div>
-      
+      <div class="loading" v-show='loadingShow'>
+        <div class="cellBox">
+          <img :src="lodingImg">
+          <p>正在加载中</p>
+        </div>
+      </div>
       <div v-transfer-dom>
         <x-dialog v-model="showAdverBlur" class="IndexDialogBox" hide-on-blur>
           <div class="IndexDialog">
@@ -69,7 +74,7 @@
         </x-dialog>
       </div>
       <Bottombar :index="0"></Bottombar>
-      
+
   </div>
 </template>
 
@@ -94,11 +99,14 @@ export default {
       status1: {
         pulldownStatus: 'default'
       },
+      loading:this.$store.state.showLoading,
+      loadingShow:true,
+      lodingImg:require('../assets/img/blank/loading.gif')
     }
   },
   mounted () {
     let self=this;
-    self.setTitle('欢乐之家');
+    self.setTitle('高炉家');
     self.WxCode = self.$route.query.code;
     let userObj = JSON.parse(localStorage.getItem('_user'))
     if(!userObj){
@@ -110,12 +118,17 @@ export default {
     }else{
       self.init();
     }
+    self.loadingShow=self.$store.state.showLoading
     //self.init();
     // self.$watch('showAdverBlur',function(val){
     //   if(!val){
     //     sessionStorage.setItem('AdverBlur',false)
     //   }
     // })
+  },
+  beforeUpdate: function () {
+    let self=this;
+    self.loadingShow=this.$store.state.showLoading
   },
    methods: {
     weChatLogin:function(){
@@ -135,12 +148,12 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
             self.homeData=res.data.data;
-            
+
             if(self.homeData.adBanner){
               self.adBanner=self.homeData.adBanner[0];
               self.showAdverBlur=true
             }
-            
+
             for(var i=0;i<self.homeData.topBanner.length;i++){
               self.topBannerList.push({
                 url:self.homeData.topBanner[i].link,
@@ -275,7 +288,6 @@ export default {
     width: 210/40rem;
     height: 120/40rem;
     border-radius: 8/40rem;
-    border:1px solid #ddd;
   }
   .blockTitle{
     font-size: 32/40rem;
@@ -301,6 +313,34 @@ export default {
       display: inline-block;
       width: 78/40rem;
       height: 78/40rem;
+    }
+  }
+  .loading{
+    position: fixed;
+    z-index: 9;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: table;
+    .cellBox{
+      display: table-cell;
+      vertical-align: middle;
+      width: 3rem;
+      text-align: center;
+      margin: 0 auto;
+      font-size: 24/40rem;
+    }
+    img{
+      width: 60/40rem;
+      height: 60/40rem;
+    }
+    .loadingImg{
+      display: inline-block;
+      width: 60/40rem;
+      height: 60/40rem;
+      background: url('../assets/img/blank/loading.gif');
     }
   }
 </style>
