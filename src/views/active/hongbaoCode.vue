@@ -33,7 +33,7 @@
           </flexbox>
         </div>
         <div v-if="prizeData.roomUser" class="prizeBtnBox">
-          <p>开奖倒计时 <span>{{countDownTime}}</span></p>
+          <p>开奖倒计时: <span>{{countDownTime}}</span></p>
           <x-button mini class='prizeBtn'  @click.native="StarPrizeFn">开始抽奖</x-button>
         </div>
         <p v-else class="prizeTip">等待开奖</p>

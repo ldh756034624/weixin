@@ -92,7 +92,7 @@ export default [
       component (resolve) {require(['@/views/my/cupon'], resolve)} //我的卡券
     },{
       path:'/my/myCard',
-      component (resolve) {require(['@/views/my/myCard'], resolve)} //我的卡券
+      component (resolve) {require(['@/views/my/myCard'], resolve)} //我的银行卡
     },{
       path:'/my/myOrder',
       component (resolve) {require(['@/views/my/myOrder'], resolve)} //我的订单
