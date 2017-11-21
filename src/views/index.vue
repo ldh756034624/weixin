@@ -57,7 +57,12 @@
                 </div>
       </scroller>
     </div>
-      
+      <div class="loading" v-show='loadingShow'>
+        <div class="cellBox">
+          <img :src="lodingImg">
+          <p>正在加载中</p>
+        </div>
+      </div>
       <div v-transfer-dom>
         <x-dialog v-model="showAdverBlur" class="IndexDialogBox" hide-on-blur>
           <div class="IndexDialog">
@@ -94,6 +99,9 @@ export default {
       status1: {
         pulldownStatus: 'default'
       },
+      loading:this.$store.state.showLoading,
+      loadingShow:true,
+      lodingImg:require('../assets/img/blank/loading.gif')
     }
   },
   mounted () {
@@ -110,12 +118,17 @@ export default {
     }else{
       self.init();
     }
+    self.loadingShow=self.$store.state.showLoading
     //self.init();
     // self.$watch('showAdverBlur',function(val){
     //   if(!val){
     //     sessionStorage.setItem('AdverBlur',false)
     //   }
     // })
+  },
+  beforeUpdate: function () {
+    let self=this;
+    self.loadingShow=this.$store.state.showLoading
   },
    methods: {
     weChatLogin:function(){
@@ -301,6 +314,34 @@ export default {
       display: inline-block;
       width: 78/40rem;
       height: 78/40rem;
+    }
+  }
+  .loading{
+    position: fixed;
+    z-index: 9;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: table;
+    .cellBox{
+      display: table-cell;
+      vertical-align: middle;
+      width: 3rem;
+      text-align: center;
+      margin: 0 auto;
+      font-size: 24/40rem;
+    }
+    img{
+      width: 60/40rem;
+      height: 60/40rem;
+    }
+    .loadingImg{
+      display: inline-block;
+      width: 60/40rem;
+      height: 60/40rem;
+      background: url('../assets/img/blank/loading.gif');
     }
   }
 </style>

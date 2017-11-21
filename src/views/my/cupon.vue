@@ -19,7 +19,7 @@
               <div class="flex1 flexBox">
                 <img :src="item.imgUrl"/>
                 <div class="flex1">
-                  <p class="name TextEllipsis">{{item.name}}</p>
+                  <p class="name">{{item.name}}</p>
                   <p class="money">{{item.price}}元</p>
                 </div>
               </div>

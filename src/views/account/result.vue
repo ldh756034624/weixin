@@ -61,7 +61,7 @@
         }
       },
       goBackDD() {
-        this.$router.replace({path: '/account/ddExchange'})
+        this.$router.replace({path: '/my/cupon'})
       },
       copy: function () {
         let input = this.$refs.copyInput

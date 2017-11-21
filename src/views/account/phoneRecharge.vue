@@ -12,7 +12,7 @@
           <flexbox-item :span="1/3" v-for='(item,index) in rechargeData.priceList' @click.native='chooseMoney(item,index)'>
             <div class="phoneBox" :class="{'blueBg':index==rechargeChoosed}">
               <p class="money">{{item.price}}元</p>
-              <p class="soldMoney">售价{{item.realPrice}}元</p>
+              <p class="soldMoney">售价{{item.realPrice}}酒元</p>
             </div>
           </flexbox-item>
       </flexbox>
