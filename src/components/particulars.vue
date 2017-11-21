@@ -72,6 +72,9 @@
     methods: {
       init(page) {
         let self = this
+        if (page === 1) {
+          self.particularsData = []
+        }
         self.$http.get(self.particularsUrl + '?page=' + page + '&limit=10')
           .then(function (res) {
             if (res.data.code == 0) {

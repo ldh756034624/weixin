@@ -53,6 +53,9 @@ export default {
   methods:{
     init(page){
       let self = this
+      if (page === 1) {
+        self.myOrderData = []
+      }
       self.$http.get('/h9/api/orders?page='+page+'&limit='+self.page.limit)
         .then(function(res) {
           if(res.data.code==0){
