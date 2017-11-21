@@ -4,14 +4,14 @@
       <scroller lock-x scrollbar-y ref="detailScroller" use-pulldown height="100%" @on-pulldown-loading="refresh"  v-model="status1">
                 <div>
                   <main class="home_main">
-                    <div class="header-wrap">
+                    <div class="header-wrap" v-if='homeData.topBanner'>
                       <swiper dots-position="center" auto dots-class="custom-bottom">
                         <swiper-item class="swiper-demo-img"  v-for="(item, index) in homeData.topBanner" height="12.5rem" :key="index" @click.native='goLinkFn(item)'>
                           <img :src="item.imgUrl">
                         </swiper-item>
                       </swiper>
                     </div>
-                    <div class="flexBox verticalScroll">
+                    <div class="flexBox verticalScroll" v-if='homeData.noticeArticle'>
                       <img src="../assets/img/index/mainpage_icon_notification_@2x.png" class="indexRadio" />
                       <div class="flex1">
                         <swiper auto height="40px" direction="vertical" :interval=2000 class="" :show-dots="false">
@@ -38,7 +38,7 @@
                         </flexbox-item>
                       </flexbox>
                     </div>
-                    <div class="blockContBox">
+                    <div class="blockContBox"  v-if='homeData.recommendArticle'>
                       <p class="blockTitle">社区精选</p>
                       <div class="flexBox blockBox" v-for='item in homeData.recommendArticle' @click='goLinkFn(item)'>
                           <div class="flex1">
