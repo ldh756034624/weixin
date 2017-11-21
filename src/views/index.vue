@@ -74,7 +74,7 @@
         </x-dialog>
       </div>
       <Bottombar :index="0"></Bottombar>
-      
+
   </div>
 </template>
 
@@ -148,12 +148,12 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
             self.homeData=res.data.data;
-            
+
             if(self.homeData.adBanner){
               self.adBanner=self.homeData.adBanner[0];
               self.showAdverBlur=true
             }
-            
+
             for(var i=0;i<self.homeData.topBanner.length;i++){
               self.topBannerList.push({
                 url:self.homeData.topBanner[i].link,
@@ -288,7 +288,6 @@ export default {
     width: 210/40rem;
     height: 120/40rem;
     border-radius: 8/40rem;
-    border:1px solid #ddd;
   }
   .blockTitle{
     font-size: 32/40rem;
