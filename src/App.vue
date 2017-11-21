@@ -1,12 +1,6 @@
 <template>
   <div id="app">
 	    <router-view></router-view>
-      <div class="loading" v-show='loadingShow'>
-        <div class="cellBox">
-          <img :src="lodingImg">
-          <p>正在加载中</p>
-        </div>
-      </div>
   </div>
 </template>
 
@@ -26,17 +20,9 @@ export default {
   mounted(){
     let self=this;
     self.wxSign();
-    self.loadingShow=this.$store.state.showLoading
-  },
-  beforeUpdate: function () {
-    let self=this;
-    self.loadingShow=this.$store.state.showLoading
   },
   data(){
     return {
-      loading:this.$store.state.showLoading,
-      loadingShow:true,
-      lodingImg:require('./assets/img/blank/loading.gif')
     }
   },
   methods: {
@@ -80,34 +66,7 @@ export default {
 
 </script>
 <style scoped lang='less'>
-  .loading{
-    position: fixed;
-    z-index: 9;
-    top:0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    display: table;
-    .cellBox{
-      display: table-cell;
-      vertical-align: middle;
-      width: 3rem;
-      text-align: center;
-      margin: 0 auto;
-      font-size: 24/40rem;
-    }
-    img{
-      width: 60/40rem;
-      height: 60/40rem;
-    }
-    .loadingImg{
-      display: inline-block;
-      width: 60/40rem;
-      height: 60/40rem;
-      background: url('./assets/img/blank/loading.gif');
-    }
-  }
+  
 </style>
 <style lang='less'>
 @import '~vux/src/styles/reset.less';
