@@ -2,8 +2,8 @@
 	<div class="dealPopup">
       	<input ref='input' v-bind:value='value' style="display:none">
         <div class="popup1">
-          <p v-show='show' @click='show=false' class="alignR">X</p>
-          <p class='dealName'>用户协议</p>
+          <p v-show='show' @click='show=false' class="alignR"><span class='close'></span></p>
+          <!-- <p class='dealName'>用户协议</p> -->
           <div v-html='DealData'>
             
           </div>
@@ -18,7 +18,6 @@ export default {
   },
   mounted () {
     let self=this;
-    this.setTitle("用户协议");
     self.getDeal('serviceProtocol').then(function(data){
       self.DealData=data.data
     })
@@ -78,5 +77,12 @@ export default {
       font-size: 28/40rem;
       margin: 10/40rem 0;
       font-weight: 600;
+    }
+    .close{
+      display: inline-block;
+      width: 28/40rem;
+      height: 28/40rem;
+      background: url('../../assets/img/index/xx@2x.png') no-repeat center;
+      background-size: 100%;
     }
 </style>

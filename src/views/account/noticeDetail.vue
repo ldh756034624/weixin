@@ -23,7 +23,7 @@ export default {
   methods:{
     init(){
       let self = this
-      self.$http.get('h9/api/article/'+self.id)
+      self.$http.get('h9/api/announcement/'+self.id)
         .then(function(res) {
           if(res.data.code==0){
               self.articleData=res.data.data

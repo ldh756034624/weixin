@@ -41,21 +41,35 @@
       <div class="accountCont">
               <group class='personBox'>
 
-                  <cell title="我的订单" link='/my/myOrder' is-link>
+                  <cell title="我的订单" link='/my/myOrder'>
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_order@2x.png">
+                      <span class='cellValueBox'  style="margin-right:-12px;">
+                        <i class='arrow'></i>
+                      </span>
                   </cell>
                   <cell title="H9酒店记录"  value='暂未开放'>
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_hotel@2x.png">
+                      <span class='cellValueBox'>
+                        <i>暂未开放</i>
+                        <i class='arrow'></i>
+                      </span>
                   </cell>
                    <cell title="银行卡" link='/my/myCard'>
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_bankcard@2x.png">
+                      <span class='cellValueBox'  style="margin-right:-12px;">
+                        <i class='arrow'></i>
+                      </span>
                   </cell>
                   <cell title="收货地址"  value='暂未开放'>
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_adress@2x.png">
+                      <span class='cellValueBox'>
+                        <i>暂未开放</i>
+                        <i class='arrow'></i>
+                      </span>
                   </cell>
               </group>
       </div>
@@ -172,7 +186,24 @@ export default {
         padding-bottom: 120/40rem;
       }
     }
-
+    .personBox{
+      .cellValueBox{
+        display: inline-block;
+        height: 60/40rem;
+        line-height: 60/40rem;
+      }
+      i{
+        display: inline-block;
+        font-style: normal;
+        vertical-align: top
+      }
+      .arrow{
+        width: 60/40rem;
+        height: 60/40rem;
+        background: url('../../assets/img/index/my_arrow_right@2x.png') no-repeat bottom center ;
+        background-size: 100%;
+      }
+    }
 
 </style>
 <style lang='less'>
@@ -187,5 +218,8 @@ export default {
   }
   .accountCont .weui-cells:after{
     border-bottom:none!important;
+  }
+  .accountCont .weui-cell_access .weui-cell__ft:after{
+    border: none
   }
 </style>

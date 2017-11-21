@@ -25,7 +25,7 @@
               </div>
             </div>
             <div class="flexBox">
-              <img src="../assets/img/index/mainpage_icon_hongbao@2x.png" v-if="particularsStr!=='hongbao'"/>
+              <img :src="item.imgUrl" v-if="particularsStr!=='hongbao'"/>
               <div class="flex1">
                 <p class="tipText">{{item.remarks}}</p>
                 <p class="date">{{item.createTime}}</p>

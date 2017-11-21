@@ -1,51 +1,63 @@
 <template>
   <div class="page home" style="height:100%;">
-      <main class="home_main">
-        <div class="header-wrap">
-          <swiper dots-position="center" dots-class="custom-bottom">
-            <swiper-item class="swiper-demo-img"  v-for="(item, index) in homeData.topBanner" height="12.5rem" :key="index" @click.native='goLinkFn(item)'>
-              <img :src="item.imgUrl">
-            </swiper-item>
-          </swiper>
-        </div>
-        <div class="flexBox verticalScroll">
-          <img src="../assets/img/index/mainpage_icon_notification_@2x.png" class="indexRadio" />
-          <div class="flex1">
-            <swiper auto height="40px" direction="vertical" :interval=2000 class="" :show-dots="false">
-              <swiper-item v-for='item in homeData.noticeArticle' @click.native='goLinkFn(item)'>
-                <p class="verticalSwiper TextEllipsis">{{item.title}}</p>
-              </swiper-item>
-            </swiper>
-          </div>
-        </div>
-        <flexbox :gutter="0" wrap="wrap">
-          <flexbox-item :span="1/4" v-for='item in homeData.navigationBanner' @click.native='goLinkFn(item)'>
-            <div class="indexItemBox">
-              <img :src="item.imgUrl"/>
-              <p>{{item.title}}</p>
-            </div>
-          </flexbox-item>
-        </flexbox>
-        <div class="indexLinkBox">
-          <flexbox :gutter="0" wrap="wrap" >
-            <flexbox-item :span="1/3" v-for='item in homeData.ideaBanner'  @click.native='goLinkFn(item)'>
-              <div class="linkBox">
-                <img :src="item.imgUrl"/>
-              </div>
-            </flexbox-item>
-          </flexbox>
-        </div>
-        <div class="blockContBox">
-          <p class="blockTitle">社区精选</p>
-          <div class="flexBox blockBox" v-for='item in homeData.recommendArticle' @click='goLinkFn(item)'>
-              <div class="flex1">
-                  <p class="articleTitle TextEllipsis">{{item.title}}</p>
-                  <p class="articleTip">{{item.typeName}} <span>{{item.createTime}}</span></p>
-              </div>
-              <img :src="item.imgUrl" class="articleImg">
-          </div>
-        </div>
-      </main>
+    <div class="scroll-wrap">
+      <scroller lock-x scrollbar-y ref="detailScroller" use-pulldown height="100%" @on-pulldown-loading="refresh"  v-model="status1">
+                <div>
+                  <main class="home_main">
+                    <div class="header-wrap">
+                      <swiper dots-position="center" auto dots-class="custom-bottom">
+                        <swiper-item class="swiper-demo-img"  v-for="(item, index) in homeData.topBanner" height="12.5rem" :key="index" @click.native='goLinkFn(item)'>
+                          <img :src="item.imgUrl">
+                        </swiper-item>
+                      </swiper>
+                    </div>
+                    <div class="flexBox verticalScroll">
+                      <img src="../assets/img/index/mainpage_icon_notification_@2x.png" class="indexRadio" />
+                      <div class="flex1">
+                        <swiper auto height="40px" direction="vertical" :interval=2000 class="" :show-dots="false">
+                          <swiper-item v-for='item in homeData.noticeArticle' @click.native='goLinkFn(item)'>
+                            <p class="verticalSwiper TextEllipsis">{{item.title}}</p>
+                          </swiper-item>
+                        </swiper>
+                      </div>
+                    </div>
+                    <flexbox :gutter="0" wrap="wrap">
+                      <flexbox-item :span="1/4" v-for='item in homeData.navigationBanner' @click.native='goLinkFn(item)'>
+                        <div class="indexItemBox">
+                          <img :src="item.imgUrl"/>
+                          <p>{{item.title}}</p>
+                        </div>
+                      </flexbox-item>
+                    </flexbox>
+                    <div class="indexLinkBox">
+                      <flexbox :gutter="0" wrap="wrap" >
+                        <flexbox-item :span="1/3" v-for='item in homeData.ideaBanner'  @click.native='goLinkFn(item)'>
+                          <div class="linkBox">
+                            <img :src="item.imgUrl"/>
+                          </div>
+                        </flexbox-item>
+                      </flexbox>
+                    </div>
+                    <div class="blockContBox">
+                      <p class="blockTitle">社区精选</p>
+                      <div class="flexBox blockBox" v-for='item in homeData.recommendArticle' @click='goLinkFn(item)'>
+                          <div class="flex1">
+                              <p class="articleTitle TextEllipsis">{{item.title}}</p>
+                              <p class="articleTip">{{item.typeName}} <span>{{item.createTime}}</span></p>
+                          </div>
+                          <img :src="item.imgUrl" class="articleImg">
+                      </div>
+                    </div>
+                  </main>
+                </div>
+                <div slot="pulldown" class="xs-plugin-pulldown-container xs-plugin-pulldown-down" style="position: absolute; width: 100%; height: 60px; line-height: 60px; top: -60px; text-align: center;">
+                  <span v-show="status1.pulldownStatus === 'default'"></span>
+                  <span class="pulldown-arrow" v-show="status1.pulldownStatus === 'down' || status1.pulldownStatus === 'up'" :class="{'rotate': status1.pulldownStatus === 'up'}">下拉刷新</span>
+                  <span v-show="status1.pulldownStatus === 'loading'"><spinner type="ios-small"></spinner></span>
+                </div>
+      </scroller>
+    </div>
+      
       <div v-transfer-dom>
         <x-dialog v-model="showAdverBlur" class="IndexDialogBox" hide-on-blur>
           <div class="IndexDialog">
@@ -79,6 +91,9 @@ export default {
       WxCode:'',
       showAdverBlur:false,
       adBanner:'',
+      status1: {
+        pulldownStatus: 'default'
+      },
     }
   },
   mounted () {
@@ -96,11 +111,11 @@ export default {
       self.init();
     }
     //self.init();
-    self.$watch('showAdverBlur',function(val){
-      if(!val){
-        sessionStorage.setItem('AdverBlur',false)
-      }
-    })
+    // self.$watch('showAdverBlur',function(val){
+    //   if(!val){
+    //     sessionStorage.setItem('AdverBlur',false)
+    //   }
+    // })
   },
    methods: {
     weChatLogin:function(){
@@ -120,11 +135,10 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
             self.homeData=res.data.data;
-            self.adBanner=self.homeData.adBanner[0];
-            if(!sessionStorage.getItem('AdverBlur')){
-              if(self.homeData.adBanner.length>0){
-                self.showAdverBlur=true
-              }
+            
+            if(self.homeData.adBanner){
+              self.adBanner=self.homeData.adBanner[0];
+              self.showAdverBlur=true
             }
             
             for(var i=0;i<self.homeData.topBanner.length;i++){
@@ -153,7 +167,14 @@ export default {
             this.$router.push({path:item.link})
           }
         }
-     }
+     },
+    refresh() {
+      let self = this;
+      setTimeout(() => {
+        self.init();
+        self.$refs.detailScroller.reset({top: 0}, 500, 'ease');
+      }, 2000)
+    },
 
   },
    components: {
@@ -289,5 +310,8 @@ export default {
   }
   .IndexDialogBox .weui-dialog{
     background: none;
+  }
+  .pulldown-arrow{
+    font-size: 24/40rem;
   }
 </style>
