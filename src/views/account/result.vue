@@ -54,8 +54,8 @@
       goBack: function () {
         if(this.type==='indexRecharge'){
           this.$router.replace({path:'/account/phoneRecharge'})
-        }else if(this.type==='indexddExchange'){
-          this.$router.replace({path:'/account/ddExchange'})
+        }else if(this.type === 'exchange' || this.type === 'indexddExchange'){
+          this.$router.replace({path:'/my/cupon'})
         }else{
           this.$router.replace({path:'/account/purse'})
         }

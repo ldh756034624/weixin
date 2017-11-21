@@ -8,7 +8,7 @@
       </div>
       <div v-else>
         <div class="prizeMoneyBox">
-          ￥<span>{{prizeData.money}}</span>
+          <span>{{prizeData.money}}</span>
         </div>
         <div>
 
