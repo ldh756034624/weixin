@@ -111,11 +111,11 @@ export default {
       self.init();
     }
     //self.init();
-    self.$watch('showAdverBlur',function(val){
-      if(!val){
-        sessionStorage.setItem('AdverBlur',false)
-      }
-    })
+    // self.$watch('showAdverBlur',function(val){
+    //   if(!val){
+    //     sessionStorage.setItem('AdverBlur',false)
+    //   }
+    // })
   },
    methods: {
     weChatLogin:function(){
@@ -135,11 +135,10 @@ export default {
         .then(function(res) {
           if(res.data.code==0){
             self.homeData=res.data.data;
-            self.adBanner=self.homeData.adBanner[0];
-            if(!sessionStorage.getItem('AdverBlur')){
-              if(self.homeData.adBanner.length>0){
-                self.showAdverBlur=true
-              }
+            
+            if(self.homeData.adBanner){
+              self.adBanner=self.homeData.adBanner[0];
+              self.showAdverBlur=true
             }
             
             for(var i=0;i<self.homeData.topBanner.length;i++){
