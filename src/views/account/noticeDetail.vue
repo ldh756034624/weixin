@@ -1,7 +1,7 @@
 <template>
 	<div class="page articlePage">
     <p class="title">{{articleData.title}}</p>
-    <p class="date"><span>{{articleData.startTime}}</span>{{articleData.userName}}</p>
+    <p class="date"><span>{{articleData.createTime}}</span>{{articleData.userName}}</p>
     <div class="content" v-if="isHtml" v-html='articleData.content'></div>
     <div class="content" v-else>{{articleData.content}}</div>
   </div>
