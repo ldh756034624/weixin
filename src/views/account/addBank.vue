@@ -81,7 +81,7 @@ export default {
               if(self.$route.query.type){
                 self.$router.replace({path:'/account/funds'})
               }else{  // 跳到 选择银行卡
-                self.$router.replace({path:'/account/chooseBank'})
+                self.$router.replace({path:'/my/myCard'})
               }
           }else{
             _g.toastMsg('error',res.data.msg)

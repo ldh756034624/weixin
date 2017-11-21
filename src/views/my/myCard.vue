@@ -50,14 +50,7 @@ export default {
       self.$http.get('h9/api/my/bankcards')
         .then(function(res) {
           if(res.data.code==0){
-              self.myCardData=res.data.data 
-              for(var i=0;i<self.myCardData.length;i++){
-                // var strLen=self.myCardData[i].no.length
-                // var str=self.myCardData[i].no.substr(strLen-4,strLen),
-                //     firstStr=self.myCardData[i].no.substr(0,4)
-                // self.myCardData[i].cardLast=str;
-                // self.myCardData[i].cardfirst=firstStr;
-              }
+              self.myCardData=res.data.data
           }
         })
     },
@@ -71,7 +64,7 @@ export default {
       self.$http.put('h9/api/bankCard/update/'+self.cancelCardId)
         .then(function(res) {
           if(res.data.code==0){
-              _g.toastMsg('error','取消绑定成功');
+              _g.toastMsg('error','解绑成功');
               self.init();
           }
         })
