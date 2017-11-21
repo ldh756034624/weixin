@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 	    <router-view></router-view>
-      <div class="loading" v-if='loadingShow'>
+      <div class="loading" v-show='loadingShow'>
         <div class="cellBox">
           <img :src="lodingImg">
           <p>正在加载中</p>
@@ -26,11 +26,16 @@ export default {
   mounted(){
     let self=this;
     self.wxSign();
-    console.log(self.loadingShow)
+    self.loadingShow=this.$store.state.showLoading
+  },
+  beforeUpdate: function () {
+    let self=this;
+    self.loadingShow=this.$store.state.showLoading
   },
   data(){
     return {
-      loadingShow:this.$store.state.showLoading,
+      loading:this.$store.state.showLoading,
+      loadingShow:true,
       lodingImg:require('./assets/img/blank/loading.gif')
     }
   },
@@ -70,7 +75,7 @@ export default {
           self.getLocal();
       });
     }
-  }
+  },
 }
 
 </script>

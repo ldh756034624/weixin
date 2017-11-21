@@ -69,6 +69,7 @@ Vue.mixin({
                 msg : '',
             },
             isIndex:false,
+            showLoad:false,
             //分页
             pullupStatus:'default',
             pulldownStatus:'default',
