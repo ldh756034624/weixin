@@ -85,19 +85,10 @@ export default {
       this.$refs.codeAlert.show()
     },
     hideLoading() {
-      if (!this.overPending) {
-        clearTimeout(this.timer)
-      } else {
-        _g.hideLoading()
-      }
+      _g.hideLoading()
     },
     showLoading() {
-      this.overPending = false
-      this.timer = setTimeout(() => {
-        _g.showLoading()
-        this.overPending = true
-        clearTimeout(this.timer)
-      },1500)
+      _g.showLoading()
     },
     codeAlertFn(data) {
       let self = this
@@ -117,10 +108,12 @@ export default {
                 }else{
                   self.$router.replace({path:'/account/result',query:{type:'recharge',money:res.data.data.money,tel:self.rechargeParams.tel}})
                 }
-            }else{
+            } else if(res.data.code ===  3){  // 如果提现次数过多
+              this.hideLoading()
+              self.$refs.codeAlert.hide()
+            } else {  // 验证码不正确
               this.hideLoading()
               self.$refs.codeAlert.clearCode()
-              _g.toastMsg('error', res.data.msg)
             }
           })
       }
