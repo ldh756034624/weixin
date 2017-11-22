@@ -10,9 +10,9 @@
                 <p class="fundsCardNo">{{no}}</p>
               </div>
             </span>
-        <span v-else>
-              添加银行卡
-            </span>
+        <!--<span v-else>-->
+              <!--添加银行卡-->
+            <!--</span>-->
       </cell>
     </group>
     <group class="fundsBox  groupNoLine">
