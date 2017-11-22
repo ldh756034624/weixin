@@ -15,7 +15,7 @@
           <x-button mini class='blueBg' @click.native="exchangeFn(item)">立即兑换</x-button>
         </div>
       </div>
-      <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='tel' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
+      <codeAlert ref="codeAlert" :showCodeAlert='codeAlert' :type='codeType' :phoneNum='tel' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
   </div>
 </template>
 <script>
@@ -52,9 +52,9 @@ export default {
       self.$http.get('h9/api/account/info')
         .then(function(res) {
           if(res.data.code==0){
-              self.balance=res.data.data.balance 
+              self.balance=res.data.data.balance
           }
-        })  
+        })
 
     },
     exchangeFn:function(item){
@@ -72,15 +72,23 @@ export default {
       }
       if(data.show===false && data.codeNum.length===4){
         self.ddCuponParams.code=data.codeNum
+        _g.showLoading()
         self.$http.put('h9/api/consume/didiCard/convert',self.ddCuponParams)
           .then(function(res) {
             if(res.data.code==0){
-                _g.toastMsg('error', '兑换成功成功!')
+              _g.hideLoading()
+              _g.toastMsg('error', '兑换成功成功!')
                  if(self.$route.query.type){
                   self.$router.replace({path:'/account/result',query:{type:self.$route.query.type,money:res.data.data.money,num:res.data.data.didiCardNumber}})
                  }else{
                   self.$router.replace({path:'/account/result',query:{type:'exchange',money:res.data.data.money,num:res.data.data.didiCardNumber}})
                  }
+            }else if(res.data.code ===  3){  // 如果提现次数过多
+              _g.hideLoading()
+              self.$refs.codeAlert.hide()
+            } else {  // 验证码不正确
+              _g.hideLoading()
+              self.$refs.codeAlert.clearCode()
             }
           })
       }
