@@ -1,7 +1,7 @@
 <template>
 	<div class="codeAlert">
       <div v-transfer-dom>
-      <x-dialog v-model="showCodeBlur" class="codeAlert" hide-on-blur>
+      <x-dialog v-model="showCodeBlur" class="codeAlert">
         <div class="img-box">
           <i class="closeDialog" @click="hide">x</i>
           <p class="codeText">输入验证码</p>
@@ -61,6 +61,8 @@ export default {
       if(val){
        self.showCodeBlur=true;
        self.init();
+      } else {
+        _g.hideLoading()
       }
     })
 //    self.$watch('showCodeBlur',function(val){
@@ -100,6 +102,7 @@ export default {
             self.count=60
             self.countTime();
           } else {  // 如果发送过于频繁，就不弹窗，直接消失
+            _g.hideLoading()
             self.hide()
             return
           }
@@ -121,6 +124,7 @@ export default {
     },
     hide() {
       this.showCodeBlur = false
+      _g.hideLoading()
     },
     show() {
       this.showCodeBlur = true
