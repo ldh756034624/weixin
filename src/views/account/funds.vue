@@ -115,9 +115,11 @@
 //          self.codeAlert = false;
 //        }
         if (data.show === false && data.codeNum.length === 4) {
+          _g.showLoading()
           self.$http.post('h9/api/consume/withdraw/' + self.bankId + '/' + data.codeNum)
             .then(function (res) {
               if (res.data.code == 0) {
+                _g.hideLoading()
                 _g.toastMsg('error', '提现成功!')
                 self.$refs.codeAlert.hide()
                 self.$router.replace({
@@ -125,8 +127,10 @@
                   query: {type: 'funds', money: res.data.data.money, time: res.data.data.time}
                 })
               } else if(res.data.code ===  3){  // 如果提现次数过多
+                _g.hideLoading()
                 self.$refs.codeAlert.hide()
               } else {  // 验证码不正确
+                _g.hideLoading()
                 self.$refs.codeAlert.clearCode()
               }
             })
