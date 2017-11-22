@@ -45,8 +45,12 @@ export default {
 </script>
 <style scoped lang='less'>
   .articlePage{
+    height: 100%;
+    width: 97%;
+    overflow-y: auto;
     background: #fff;
-    padding: 30/40rem;
+    padding-top: 3%;
+    padding-left: 3%;
     .title{
       font-size: 36/40rem;
       line-height: 58/40rem;
@@ -65,7 +69,7 @@ export default {
       font-size: 28/40rem!important;
       line-height: 46/40rem;
       img{
-        width: 98%;
+        width: 100%;
       }
     }
   }
@@ -79,6 +83,11 @@ export default {
       line-height: 46/40rem;
       p{
         font-size: 14px!important;
+      }
+      .gameExplain-cont{
+        img{
+          width: 100%;
+        }
       }
     }
   }
