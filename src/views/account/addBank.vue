@@ -1,10 +1,10 @@
 <template>
 	<div class="page addBank">
       <group class="groupNoTop groupNoLine">
-          <x-input title='持卡人' v-model="cardData.name" :show-clear="false" :min="2" :max="10" is-type="china-name"  placeholder='请输入真实姓名'></x-input>
-          <x-input title='银行卡号' v-model="cardData.no" :show-clear="false" keyboard="number" type='number' placeholder='请输入银行卡号'></x-input>
+          <x-input title='持卡人' v-model="cardData.name" :show-clear="false" :min="2" :max="10" is-type="china-name"  placeholder='请输入姓名'></x-input>
+          <x-input title='银行卡号' v-model="cardData.no" :show-clear="false" keyboard="number" type='number' placeholder='请输入卡号'></x-input>
           <cell title="银行机构" :value='cardType' @click.native='showPopup=true' is-link></cell>
-          <x-address title="地址" @on-hide="logHide" v-model="address" :list="addressData" placeholder="请选择地址">
+          <x-address title="开户省市" @on-hide="logHide" v-model="address" :list="addressData">
           </x-address>
 
           <p class="addBankTips">信息加密处理，仅用于验证，确认代表您已同意<span class="blueFont" @click='showUserDeal=true'>《用户服务协议》</span></p>
