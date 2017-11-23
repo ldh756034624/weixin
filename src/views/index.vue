@@ -145,7 +145,7 @@ export default {
      init(){
         let self=this;
         self.$http.get('h9/api/home')
-        .then(function(res) {
+        .then(res => {
           if(res.data.code==0){
             self.homeData=res.data.data;
 
