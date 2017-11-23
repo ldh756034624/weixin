@@ -116,7 +116,7 @@
   .searchRealPage {
     background: #FE5850;
     text-align: center;
-    overflow-y: auto;
+    overflow-y: scroll;
     padding: 30/40rem;
     .searcLogo {
       width: 260/40rem;

@@ -111,7 +111,7 @@ export default {
             }
             self.refreshTime=self.prizeData.refreshTime*1000
             if(res.data.data.lottery || res.data.data.differentDate===0){
-               self.showAnimate=true;
+              self.showAnimate=true
               setTimeout(function(){
                 //待更改
                 self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})

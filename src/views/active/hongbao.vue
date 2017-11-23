@@ -13,8 +13,8 @@
         <x-button mini class='scanBtn' @click.native="scanFn()">扫码抢红包</x-button>
       </div>
       <div class="descRecordBox">
-        <span v-on:click="showUserDeal=true">游戏说明</span> 
-        <span class='line'>|</span> 
+        <span v-on:click="showUserDeal=true">游戏说明</span>
+        <span class='line'>|</span>
         <router-link to='/active/prizeRecord'>
           <span>游戏记录</span>
         </router-link>
@@ -92,7 +92,11 @@ export default {
       self.$http.get('h9/lottery/qr?code='+self.code+'&longitude='+self.$store.state.longitude+'&latitude='+self.$store.state.latitude)
         .then(function(res) {
           if(res.data.code==0){
-            self.$router.push({path:'/active/hongbaoCode',query:{'code':self.code}})
+            if (res.data.data.lottery) {
+              self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
+              return
+            }
+            self.$router.push({path:'/active/hongbaoCode',query:{'code':self.code, isLottery: res.data.data.lottery}})
           }else{
             _g.toastMsg('error', res.data.msg)
           }
@@ -116,7 +120,7 @@ export default {
         }
       });
     }
-    
+
   },
    components: {
     XInput,XButton,userDeal,Popup
@@ -126,7 +130,7 @@ export default {
 </script>
 
 <style scoped lang='less'>
-    
+
 
 </style>
 <style type="text/css" lang='less'>
@@ -193,19 +197,19 @@ export default {
         color: #222!important;
         text-align: center;
       }
-      input::-webkit-input-placeholder { /* WebKit browsers */ 
+      input::-webkit-input-placeholder { /* WebKit browsers */
         color: #222;
         font-size: 36/40rem;
-      } 
-      input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+      }
+      input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
         color: #222;
         font-size: 36/40rem;
-      } 
-      input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+      }
+      input::-moz-placeholder { /* Mozilla Firefox 19+ */
         color: #222;
         font-size: 36/40rem;
-      } 
-      input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+      }
+      input:-ms-input-placeholder { /* Internet Explorer 10+ */
         color: #222;
         font-size: 36/40rem;
       }

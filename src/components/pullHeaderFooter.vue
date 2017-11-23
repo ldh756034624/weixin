@@ -15,8 +15,8 @@
 			<span v-show="statusUp === 'default'"></span>
 			<span v-show="statusUp === 'down'">松开加载</span>
 			<span v-show="statusUp === 'loading'">正在加载</span>
-			<span v-show="statusUp === 'disabled' && !noPage">没有更多</span>
-		</div>
+			<span v-show="statusUp === 'disabled'">没有更多</span>
+    </div>
 	</div>
 </template>
 <script>
@@ -36,7 +36,7 @@
 				noPage:true, //
 				flag:0, //标识监听的次数
 			}
-			
+
 		},
 		mounted(){
 		},
