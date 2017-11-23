@@ -27,7 +27,7 @@
     <div class="fundsBtnBox">
       <x-button class='gradientBtn' @click.native="fundsFn">提现</x-button>
     </div>
-    <codeAlert :showCodeAlert='codeAlert' :type='codeType' ref='codeAlert' :money="fundsData.balance"
+    <codeAlert :showCodeAlert='codeAlert' :type='codeType' ref='codeAlert' :money="fundMoney"
                v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
   </div>
 </template>
