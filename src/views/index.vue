@@ -45,7 +45,7 @@
                               <p class="articleTitle TextEllipsis">{{item.title}}</p>
                               <p class="articleTip">{{item.typeName}} <span>{{item.createTime}}</span></p>
                           </div>
-                          <img :src="item.imgUrl" class="articleImg">
+                          <img :src="item.imgUrl" class="articleImg" ref="articleImg">
                       </div>
                     </div>
                   </main>
@@ -162,7 +162,18 @@ export default {
             }
 
             self.$nextTick(() => {
-              self.$refs.detailScroller.reset()
+//              let imgs = self.$refs.articleImg
+//              let lastImg = imgs[imgs.length - 1]
+//              let timer = setInterval(() => {
+//                if (lastImg.complete) {
+//                  self.$refs.detailScroller.reset()
+//                  clearInterval(timer)
+//                  console.log('图片加载完成')
+//                }
+//              }, 50)
+              setTimeout(() => {    // 图片加载完成后刷新高度
+                self.$refs.detailScroller.reset()
+              },1000)
             })
           }
         })
