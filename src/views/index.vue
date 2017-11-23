@@ -160,6 +160,10 @@ export default {
                 img:self.homeData.topBanner[i].imgUrl,
               })
             }
+
+            self.$nextTick(() => {
+              self.$refs.detailScroller.reset()
+            })
           }
         })
      },
