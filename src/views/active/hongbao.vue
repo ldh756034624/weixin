@@ -112,6 +112,10 @@ export default {
           self.$http.get('h9/lottery/qr?code='+result+'&longitude='+self.$store.state.longitude+'&latitude='+self.$store.state.latitude)
           .then(function(res) {
             if(res.data.code==0){
+              if (res.data.data.lottery) {
+                self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
+                return
+              }
               self.$router.push({path:'/active/hongbaoCode',query:{'code':result}})
             }else{
                _g.toastMsg('error', res.data.msg)
