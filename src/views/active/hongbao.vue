@@ -89,8 +89,10 @@ export default {
         return;
       }
       //imei手机唯一标识没传
+      _g.showLoading()
       self.$http.get('h9/lottery/qr?code='+self.code+'&longitude='+self.$store.state.longitude+'&latitude='+self.$store.state.latitude)
         .then(function(res) {
+          _g.hideLoading()
           if(res.data.code==0){
             if (res.data.data.lottery) {
               self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
@@ -109,9 +111,15 @@ export default {
         scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
         success: function (res) {
           var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+          _g.showLoading()
           self.$http.get('h9/lottery/qr?code='+result+'&longitude='+self.$store.state.longitude+'&latitude='+self.$store.state.latitude)
           .then(function(res) {
+            _g.hideLoading()
             if(res.data.code==0){
+              if (res.data.data.lottery) {
+                self.$router.replace({path:'/active/prizeResult',query:{'code':result}})
+                return
+              }
               self.$router.push({path:'/active/hongbaoCode',query:{'code':result}})
             }else{
                _g.toastMsg('error', res.data.msg)
