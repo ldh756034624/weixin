@@ -113,7 +113,7 @@ export default {
           .then(function(res) {
             if(res.data.code==0){
               if (res.data.data.lottery) {
-                self.$router.replace({path:'/active/prizeResult',query:{'code':self.code}})
+                self.$router.replace({path:'/active/prizeResult',query:{'code':result}})
                 return
               }
               self.$router.push({path:'/active/hongbaoCode',query:{'code':result}})
