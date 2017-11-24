@@ -13,7 +13,7 @@
         <datetime v-model="infoData.birthday" :start-date="startDate" @on-change="changeDateTime"  title="生日"></datetime>
         <cell title="情感" :value='infoData.marriageStatus'  @click.native="showPopupFn(infoData.emotionList,'marriage')" is-link></cell>
     </group>
-    <group class='infoBox' title='隐私信息(不公开)' v-if='showOtherInfo'>
+    <group class='infoBox groupNoLine' title='隐私信息(不公开)' v-if='showOtherInfo'>
         <cell title="学历" :value='infoData.education'  @click.native="showPopupFn(infoData.educationList,'education')" is-link></cell>
         <cell title="职业" :value='infoData.job'  @click.native="showPopupFn(infoData.jobList,'job')" is-link></cell>
         <!-- <x-input title="职业" v-model='infoData.job' placeholder="请输入职业" ></x-input> -->
@@ -22,7 +22,7 @@
       <x-button class='gradientBtn' v-if='showOtherInfo' @click.native="changeFn" :show-clear="false">保存</x-button>
     </div>
     <div v-transfer-dom>
-      <popup v-model="showPopup" >
+      <popup v-model="showPopup">
         <div class="infoPopup">
           <p v-for='item in popupData' @click='choosePopup(item)'>{{item.value}}</p>
           <p @click='showPopup=false'>取消</p>
