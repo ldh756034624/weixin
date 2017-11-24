@@ -15,7 +15,7 @@
           <x-button mini class='blueBg' @click.native="exchangeFn(item)">立即兑换</x-button>
         </div>
       </div>
-      <codeAlert ref="codeAlert" :showCodeAlert='codeAlert' :type='codeType' :phoneNum='tel' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
+      <codeAlert ref="codeAlert" :money="couponMoney" :showCodeAlert='codeAlert' :type='codeType' :phoneNum='tel' v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
   </div>
 </template>
 <script>
@@ -32,6 +32,7 @@ export default {
   },
   data () {
     return {
+      couponMoney: 0,
       codeAlert:false,
       balance:'',
       tel:this.$route.query.tel,
@@ -62,6 +63,7 @@ export default {
         _g.toastMsg('error', '余额不足!')
         return
       }
+      this.couponMoney = item.price
       this.codeAlert=true;
       this.ddCuponParams.id=item.goodId
     },
@@ -77,7 +79,6 @@ export default {
           .then(function(res) {
             if(res.data.code==0){
               _g.hideLoading()
-              _g.toastMsg('error', '兑换成功成功!')
                  if(self.$route.query.type){
                   self.$router.replace({path:'/account/result',query:{type:self.$route.query.type,money:res.data.data.money,num:res.data.data.didiCardNumber}})
                  }else{
