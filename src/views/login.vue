@@ -2,7 +2,7 @@
   <div class="page loginPage">
      <group class='loginMain groupNoTop groupNoLine'>
         <p class="loginlabel">手机号</p>
-        <x-input mask="999 9999 9999" v-model="loginParams.phone" :max="13" is-type="china-mobile" class='inputbox code vux-1px-b' :class="{'hasValue':loginParams.phone!=''}" :show-clear="false" keyboard="number" placeholder='请输入11位手机号'>
+        <x-input mask="999 9999 9999" v-model="loginParams.phone" :max="13" is-type="china-mobile" class='inputbox code vux-1px-b' :class="{'hasValue':loginParams.phone!=''}" :show-clear="false" keyboard="number" placeholder='请输入手机号码'>
         </x-input>
         <p class="loginlabel">验证码</p>
         <x-input type="number" class='inputbox vux-1px-b' :class="{'hasValue':loginParams.code!=''}" placeholder="请输入验证码" keyboard="number" v-model="loginParams.code" :max="11">

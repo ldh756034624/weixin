@@ -8,7 +8,7 @@
         <p class="cardNo">{{item.no}}</p>
       </div>
       <img class="cardSetIcon" @click='goCancel(item)' src="../../assets/img/account/bankcard_btn_setting@2x.png"/>
-    </div> 
+    </div>
     <router-link to='/account/addBank'>
       <div class="addCard">
         <img src="../../assets/img/account/bankcard_icon_add@2x.png"/>
@@ -18,7 +18,7 @@
     <div v-transfer-dom>
       <popup v-model="cardSetPopup" >
         <div class="cardSet">
-          <p @click='cancelBind()'>解绑</p>
+          <p @click='cancelBind()'>解除绑定</p>
           <p class="redFont" @click='cardSetPopup=false'>取消</p>
         </div>
       </popup>
@@ -72,7 +72,7 @@ export default {
     goOrderDetail:function(){
       this.$router.push({path:'/my/orderDetail'})
     }
-    
+
   },
   components: {
      Popup,TransferDom
@@ -85,7 +85,7 @@ export default {
   .cardListPage{
     background: #fff;
     color: #fff;
-    overflow-y:auto; 
+    overflow-y:auto;
     .cardListBox{
       padding: 30/40rem;
       margin: 30/40rem;
