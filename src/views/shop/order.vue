@@ -2,13 +2,14 @@
 		<div class="page shopOrderPage">
       <group class=" groupNoTop groupNoLine">
         <cell title="" class='orderAddr' @click.native="goAddrList" is-link>
-          <span slot='title'>
+          
+          <span slot='title' v-if='hasDefault'>
+            <p>收货人:{{addressData.name}} <i class='phone'>{{addressData.phone}}</i></p>
+            <p>地址:{{addressData.address}}</p>
+          </span>
+          <span slot='title' v-else>
             请添加收货地址
           </span>
-          <!-- <span slot='title'>
-            <p>收货人:张三 <i class='phone'>13602687596</i></p>
-            <p>地址:广东省份额士大夫撒发放数量健康快乐经济困境路径上的管理局</p>
-          </span> -->
         </cell>
       </group>
       <div>
@@ -58,7 +59,7 @@
       </div>
       <div class="orderBottom">
         实付酒元:<span class='joyMoney'>{{shopPrice | price2}}酒元</span>
-        <x-button class='exchangeBtn' mini @click.native="">立即兑换</x-button>
+        <x-button class='exchangeBtn' mini @click.native="exchangeFn">立即兑换</x-button>
       </div>
         
 		</div>
@@ -74,13 +75,15 @@ export default {
   },
   data() {
     return {
-      show:true,
       addressId:0,
       countNum:1,
       money:0,
       goodsId:this.$route.query.id,
+      hasDefault:false,
+      addressData:{},
       shopData:{},
       shopPrice:0,
+      exchangeParams:{},
     }
   },
   methods:{
@@ -97,6 +100,11 @@ export default {
       this.$http.get('h9/api/address/default')
         .then((res)=>{
           if(res.data.code==0){
+            if(res.data.data){
+              this.hasDefault=true;
+              this.addressData=res.data.data
+              this.exchangeParams.addressId=res.data.data.id
+            }
           }
         })
     },
@@ -116,6 +124,16 @@ export default {
         this.countNum++
       }
       this.shopPrice=this.shopData.price*this.countNum
+    },
+    exchangeFn:function(){
+      this.exchangeParams.count=this.countNum
+      this.exchangeParams.goodsId=this.goodsId
+      this.$http.post('h9/store/goods/convert',this.exchangeParams)
+        .then((res)=>{
+          if(res.data.code==0){
+            
+          }
+        }) 
     }
   },
   components: {

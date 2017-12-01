@@ -26,8 +26,18 @@ export default {
   mounted() {
     let self=this;
     this.setTitle('添加新地址');
-    console.log(JSON.parse(this.addrEditObj))
-    console.dir(this.addrEditObj)
+    
+    if(this.$route.query.isEdit==='true'){ //编辑状态赋值
+      var editObj=JSON.parse(this.addrEditObj)
+      this.addressParams=editObj;
+      this.$refs.addres.addr=editObj.province+editObj.city+editObj.distict
+      this.$refs.addres.province=editObj.province
+      this.$refs.addres.city=editObj.city
+      this.$refs.addres.distict=editObj.distict
+      if(editObj.defaultAddress==1){
+        this.isDefault=true
+      }
+    }
   },
   data() {
     return {
@@ -35,7 +45,6 @@ export default {
       addressParams:{},
       address:[],
       isDefault:false,
-      isEdit:this.$route.query.isEdit,
       addrEditObj:this.$route.query.addrObj
     }
   },
@@ -60,10 +69,20 @@ export default {
       }else{
         this.addressParams.defaultAddress=0
       }
-      this.$http.post('h9/api/address/add',this.addressParams)
+      var postUrl=''
+      if(this.$route.query.isEdit==='true'){
+        postUrl='h9/api/address/update/'+this.addressParams.id
+      }else{
+        postUrl='h9/api/address/add'
+      }
+      this.$http.post(postUrl,this.addressParams)
         .then((res)=>{
           if(res.data.code==0){
-            console.log(this.addressParams)
+            if(this.$route.query.isEdit==='true'){
+              this.$router.replace({path:'/addrList'})
+            }else{
+              this.$router.replace({path:'/addrList'})
+            }
             //this.$router.push({path:'/shopList',query:{type:type}})
           }
         })

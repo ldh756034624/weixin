@@ -15,8 +15,10 @@
           @input="getCurrentValue">
           <div class="marginB">
             <div class="addrListBox" v-for='item in addressListData'>
-              <p><span class='name'>{{item.name}}</span> {{item.phone}}</p>
-              <p class="area">{{item.province}}{{item.city}}{{item.address}}</p>
+              <div>
+                <p><span class='name'>{{item.name}}</span> {{item.phone}}</p>
+                <p class="area">{{item.province}}{{item.city}}{{item.address}}</p>
+              </div>
               <div class="flexBox editBox">
                 <p class="flex1">
                   <i class='icon' :class="[item.defaultAddress===1 ? 'hasSet':'unSet']"></i>
@@ -96,12 +98,19 @@ export default {
       this.$router.push({path:'/addrChange'})
     },
     editFn:function(item){
-      this.$router.push({path:'/addrChange',query:{isEdit:true,addrObj:item}})
+      this.$router.push({path:'/addrChange',query:{isEdit:true,addrObj:JSON.stringify(item)}})
     },
     delFn:function(item){
+      let self=this;
       this.$vux.confirm.show({
         content:'确定删除地址吗?',
-        onConfirm () {}
+        onConfirm () {
+          self.$http.put('h9/api/address/delete/'+item.id)
+        .then((res)=> {
+          _g.toastMsg('error','删除成功')
+          //self.init(1)
+        })
+        }
       })
     },
     loadMore() {
