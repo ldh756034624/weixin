@@ -3,7 +3,7 @@
       <group class=" groupNoTop groupNoLine">
         <cell title="" class='orderAddr' @click.native="goAddrList" is-link>
           
-          <span slot='title' v-if='hasDefault'>
+          <span slot='title' v-if='hasAddress'>
             <p>收货人:{{addressData.name}} <i class='phone'>{{addressData.phone}}</i></p>
             <p>地址:{{addressData.address}}</p>
           </span>
@@ -71,7 +71,19 @@ export default {
   mounted() {
     this.setTitle('填写订单');
     this.init();
-    this.getDefaultAddr();
+    if(this.orderAddrObj){ //编辑状态赋值
+      var Obj=JSON.parse(this.orderAddrObj)
+      this.addressData.name=Obj.name
+      this.addressData.phone=Obj.phone
+      if(Obj.distict){
+        this.addressData.address=Obj.province+Obj.city+Obj.distict+Obj.address
+      }else{
+        this.addressData.address=Obj.province+Obj.city+Obj.address
+      }
+      this.hasAddress=true
+    }else{
+      this.getDefaultAddr();
+    }
   },
   data() {
     return {
@@ -79,7 +91,8 @@ export default {
       countNum:1,
       money:0,
       goodsId:this.$route.query.id,
-      hasDefault:false,
+      orderAddrObj:this.$route.query.addrObj,
+      hasAddress:false,
       addressData:{},
       shopData:{},
       shopPrice:0,
@@ -101,7 +114,7 @@ export default {
         .then((res)=>{
           if(res.data.code==0){
             if(res.data.data){
-              this.hasDefault=true;
+              this.hasAddress=true;
               this.addressData=res.data.data
               this.exchangeParams.addressId=res.data.data.id
             }
@@ -109,7 +122,7 @@ export default {
         })
     },
     goAddrList:function(){
-      this.$router.push({path:'/addrList'})
+      this.$router.push({path:'/addrList',query:{goodsId:this.goodsId}})
     },
     count:function(type){
 

@@ -14,13 +14,13 @@
           :pulldown-status="pulldownStatus"
           @input="getCurrentValue">
           <div class="marginB">
-            <div class="addrListBox" v-for='item in addressListData'>
-              <div>
+            <div class="addrListBox" v-for='item in addressListData' v-if='item.status===1'>
+              <div @click='chooseAddrFn(item)'>
                 <p><span class='name'>{{item.name}}</span> {{item.phone}}</p>
                 <p class="area">{{item.province}}{{item.city}}{{item.address}}</p>
               </div>
               <div class="flexBox editBox">
-                <p class="flex1">
+                <p class="flex1" @click='defaultFn(item)'>
                   <i class='icon' :class="[item.defaultAddress===1 ? 'hasSet':'unSet']"></i>
                   默认地址
                 </p>
@@ -38,9 +38,11 @@
         </scroller>
       </div>
       <footer>
-        <div>
-          <x-button class='bottomBtn gradientBtn' @click.native="addAddr">添加新地址</x-button>
-        </div>
+        <router-link :to="{path:'addrChange',query:{goodsId:goodsId}}">
+          <div>
+            <x-button class='bottomBtn gradientBtn'>添加新地址</x-button>
+          </div>
+        </router-link>
       </footer>
       <blankPage v-show='!hasItem' :blankType='type'></blankPage>
 		</div>
@@ -59,6 +61,7 @@ export default {
     return {
       type: 'address',
       hasItem:false,
+      goodsId:this.$route.query.goodsId,
       addressListData:[]
     }
   },
@@ -94,8 +97,15 @@ export default {
           });
         })
     },
-    addAddr:function(){
-      this.$router.push({path:'/addrChange'})
+    chooseAddrFn:function(item){
+      this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(item)}})
+    },
+    defaultFn:function(item){
+      this.$http.put('h9/api/address/default/'+item.id)
+        .then((res)=> {
+          _g.toastMsg('error','设定成功')
+          this.init(1)
+        })
     },
     editFn:function(item){
       this.$router.push({path:'/addrChange',query:{isEdit:true,addrObj:JSON.stringify(item)}})
@@ -108,7 +118,7 @@ export default {
           self.$http.put('h9/api/address/delete/'+item.id)
         .then((res)=> {
           _g.toastMsg('error','删除成功')
-          //self.init(1)
+          self.init(1)
         })
         }
       })

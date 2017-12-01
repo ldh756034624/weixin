@@ -45,6 +45,7 @@ export default {
       addressParams:{},
       address:[],
       isDefault:false,
+      goodsId:this.$route.query.goodsId,
       addrEditObj:this.$route.query.addrObj
     }
   },
@@ -79,11 +80,10 @@ export default {
         .then((res)=>{
           if(res.data.code==0){
             if(this.$route.query.isEdit==='true'){
-              this.$router.replace({path:'/addrList'})
+              this.$router.replace({path:'/addrList',query:{id:this.goodsId}})
             }else{
-              this.$router.replace({path:'/addrList'})
+              this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(this.addressParams)}})
             }
-            //this.$router.push({path:'/shopList',query:{type:type}})
           }
         })
 
