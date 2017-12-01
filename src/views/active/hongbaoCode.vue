@@ -11,16 +11,16 @@
           </p>
         </div>
 
-        <div class="hongBaoImgBox" v-if="prizeData.roomUser">
+        <div class="hongBaoImgBox">
           <qrcode :value="codeUrl" type="img"></qrcode>
           <p>叫上好友扫一扫,有钱大家一起分!</p>
         </div>
-        <div v-else>
+        <!-- <div v-if="!prizeData.roomUser">
           <img class="wine" src="../../assets/img/active/jiajiu@2x.png"/>
           <div class="logoImgBox">
             <img  src="../../assets/img/active/logo_gaolujia@2x.png"/>
           </div>
-        </div>
+        </div> -->
 
         <div class="actorBox">
           <flexbox :gutter="0" wrap="wrap">
@@ -32,6 +32,7 @@
             </flexbox-item>
           </flexbox>
         </div>
+        <p class="activeNum">当前参与人数:{{prizeData.userCount}}人</p>
         <div v-if="prizeData.roomUser" class="prizeBtnBox">
           <p>开奖倒计时: <span>{{countDownTime}}</span></p>
           <x-button mini class='prizeBtn'  @click.native="StarPrizeFn">开始抽奖</x-button>
@@ -238,6 +239,11 @@ export default {
       font-size: 24/40rem;
       line-height: 40/40rem;
       color: #666!important;
+    }
+    .activeNum{
+      padding: 20/40rem 0;
+      color: #999;
+      text-align: right;
     }
     .exchangeCont{
       margin: 30/40rem;

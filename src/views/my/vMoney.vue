@@ -33,12 +33,25 @@
             </div>
           </flexbox-item>
         </flexbox>
+        <div v-transfer-dom>
+          <x-dialog v-model='showTip'>
+            <div>
+              <p>V币换酒元啦</p>
+              <p>我们V币习题已升级为“酒元”啦，原V币可一键兑换为酒元继续使用</p>
+              <x-button class='' mini @click.native="showTip=false">取消</x-button>
+              <x-button class='' mini @click.native="exchange">立即兑换</x-button>
+            </div>
+          </x-dialog>
+        </div>
   </div>
 </template>
 <script>
-import {Group,Cell,Flexbox, FlexboxItem,XButton} from 'vux'
+import {Group,Cell,Flexbox, FlexboxItem,XButton,XDialog,TransferDomDirective as TransferDom} from 'vux'
 // var url = require('aUrl')
 export default {
+  directives: {
+    TransferDom
+  },
   mounted(){
     let  self=this;
     self.setTitle('我的V币');
@@ -46,8 +59,8 @@ export default {
   data () {
     return {
       purseData:{},
-      vbNum:this.$route.query.vbNum
-     
+      vbNum:this.$route.query.vbNum,
+      showTip:true,
     }
   },
   methods:{
@@ -58,11 +71,14 @@ export default {
     goFunds:function(){
       let self=this;
       self.$router.push({path:'/account/funds'})
+    },
+    exchange:function(){
+      this.$router.push({path:'/my/vUpdate'})
     }
     
   },
    components: {
-    Group,Cell,Flexbox, FlexboxItem,XButton
+    Group,Cell,Flexbox, FlexboxItem,XButton,XDialog
   },
 }
 

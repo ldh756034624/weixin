@@ -39,6 +39,21 @@ export default [
       path:'/shop',
       component (resolve) {require(['@/views/shop/index'], resolve)} //商城
     },{
+      path:'/shopList',
+      component (resolve) {require(['@/views/shop/list'], resolve)} //商品列表
+    },{
+      path:'/shopDataile',
+      component (resolve) {require(['@/views/shop/detaile'], resolve)} //商品详情
+    },{
+      path:'/shopOrder',
+      component (resolve) {require(['@/views/shop/order'], resolve)} //商品订单
+    },{
+      path:'/addrList',
+      component (resolve) {require(['@/views/address/list'], resolve)} //地址列表
+    },{
+      path:'/addrChange',
+      component (resolve) {require(['@/views/address/change'], resolve)} //地址编辑
+    },{
       path:'/account/personal',
       name:'accountPersonal',
       meta: { auth: true },
@@ -87,6 +102,9 @@ export default [
     },{
       path:'/my/vMoneyParticulars',
       component (resolve) {require(['@/views/my/vMoneyParticulars'], resolve)} //V币明细
+    },{
+      path:'/my/vUpdate',
+      component (resolve) {require(['@/views/my/vUpdate'], resolve)} //V币升级
     },{
       path:'/my/cupon',
       component (resolve) {require(['@/views/my/cupon'], resolve)} //我的卡券
