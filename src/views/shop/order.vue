@@ -147,7 +147,7 @@ export default {
           if(res.data.code==0){
             this.$router.replace({
               path:'/account/result',
-              query: {type: 'shopExchange', money: res.data.data.price, goodsName: res.data.data.goodsName,}
+              query: {type: 'shopExchange', money: res.data.data.price, goodsName: res.data.data.goodsName}
             })
           }
         }) 

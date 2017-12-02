@@ -32,9 +32,12 @@
             </router-link>
           </flexbox-item>
           <flexbox-item>
-            <div class="purseItemBox">
-
-            </div>
+            <router-link :to="{path:'/shop'}">
+              <div class="purseItemBox">
+                <img src="../../assets/img/account/tabbar_mall_normal.png"/>
+                <p>酒元商城</p>
+              </div>
+            </router-link>
           </flexbox-item>
         </flexbox>
   </div>

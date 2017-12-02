@@ -3,7 +3,7 @@
     <div class="resultImgBox">
       <img class="resultImg" src="../../assets/img/account/tixian_img_success@2x.png"/>
       <p class="typeBox">{{title}}成功</p>
-      <p class="moneyBox"><i>￥</i>{{money}}</p>
+      <p class="moneyBox" v-if='money'><i>￥</i>{{money}}</p>
     </div>
     <div class="resultText" v-if="type==='funds'">
       <p>申请时间:{{time}}</p>
@@ -15,6 +15,9 @@
     </div>
     <div class="resultText" v-if="type==='exchange' || type === 'indexddExchange'">
       <p>券号:{{num}}</p>
+    </div>
+    <div class="resultText" v-if="type==='vMoneyExchange'">
+      <p style="margin-top:30px">V币将成功兑换为酒元，请到我的钱包页查看</p>
     </div>
     <div class="resultText" v-if="type==='shopExchange'">
       <!-- <p>兑换价格:{{money}}酒元</p> -->
@@ -31,12 +34,19 @@
       <router-link :to="{path:'/my/myOrder',query:{type:'shopExchange'}}">
         <x-button mini class='gradientBtn'>查看订单</x-button>
       </router-link>
-       
     </div>
     <div class="fundsBtnBox" v-else>
-      <x-button class='gradientBtn' v-if="(type==='exchange' || type==='indexddExchange') && coponShow" @click.native="copy">复制券号</x-button>
-      <x-button class='gradientBtn' v-if="type!=='exchange' && type!=='indexddExchange'" @click.native="goBack">完成</x-button>
-      <x-button class='gradientBtn' v-if="!coponShow" @click.native="goBackDD">完成</x-button>  <!--和复制券号联合使用的按钮-->
+      <div v-if="type==='vMoneyExchange'">
+        <router-link to='/account/purse'>
+          <x-button class='gradientBtn'>进入我的钱包</x-button>
+        </router-link>
+      </div>
+      <div v-else>
+        <x-button class='gradientBtn' v-if="(type==='exchange' || type==='indexddExchange') && coponShow" @click.native="copy">复制券号</x-button>
+        <x-button class='gradientBtn' v-if="type!=='exchange' && type!=='indexddExchange'" @click.native="goBack">完成</x-button>
+        <x-button class='gradientBtn' v-if="!coponShow" @click.native="goBackDD">完成</x-button>  <!--和复制券号联合使用的按钮-->
+      </div>
+      
     </div>
     <input type="text" ref="copyInput" class="copy-input">
   </div>
@@ -51,7 +61,7 @@
         self.title = '提现'
       } else if (self.type === 'recharge' || self.type === 'indexRecharge') {
         self.title = '充值'
-      } else if (self.type === 'exchange' || self.type === 'indexddExchange') {
+      } else if (self.type === 'exchange' || self.type === 'indexddExchange' || self.type === 'vMoneyExchange' || self.type === 'shopExchange') {
         self.title = '兑换'
       }
       self.setTitle(self.title + '成功');
