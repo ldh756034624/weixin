@@ -15,13 +15,17 @@
         :pulldown-status="pulldownStatus"
         @input="getCurrentValue">
         <div class="mrgT10">
-          <div v-for='(item,index) in particularsData' class="shopListBox flexBox">
-            <img :src="item.img"/>
-            <div class='flex1'>
-              <p>{{item.name}}</p>
-              <p class="joyMoney">{{item.price}}酒元</p>
-            </div>
-            <x-button class='exchangeBtn' mini @click.native="">兑换</x-button>
+          <div v-for='(item,index) in particularsData'  >
+            <router-link :to="{path:'/shopOrder',query:{id:item.id}}">
+              <div class="shopListBox flexBox">
+                <img :src="item.img"/>
+                <div class='flex1'>
+                  <p>{{item.name}}</p>
+                  <p class="joyMoney">{{item.price}}酒元</p>
+                </div>
+                <x-button class='exchangeBtn' mini>兑换</x-button>
+              </div>
+            </router-link>
           </div>
         </div>
         <pull-header-footer :status-up="pullupStatus" :status-down="pulldownStatus"></pull-header-footer>
@@ -38,8 +42,8 @@
 
   export default {
     mounted() {
-      let self = this;
-      self.init(1)
+      this.init(1)
+      this.setTitle(this.$route.query.title)
     },
     props: {
       particularsUrl: {
@@ -54,7 +58,7 @@
       return {
         particularsData: [],
         hasItem: false,
-        type: 'particulars'
+        type: 'particulars',
       }
     },
     methods: {

@@ -73,6 +73,7 @@ export default {
     this.init();
     if(this.orderAddrObj){ //编辑状态赋值
       var Obj=JSON.parse(this.orderAddrObj)
+       this.exchangeParams.addressId=Obj.id
       this.addressData.name=Obj.name
       this.addressData.phone=Obj.phone
       if(Obj.distict){
@@ -144,7 +145,10 @@ export default {
       this.$http.post('h9/store/goods/convert',this.exchangeParams)
         .then((res)=>{
           if(res.data.code==0){
-            
+            this.$router.replace({
+              path:'/account/result',
+              query: {type: 'shopExchange', money: res.data.data.price, goodsName: res.data.data.goodsName,}
+            })
           }
         }) 
     }
@@ -156,6 +160,7 @@ export default {
 </script>
 <style scoped lang='less'>
   .shopOrderPage{
+    overflow-y:auto;
     .title{
       padding: 30/40rem;
     }
@@ -239,6 +244,7 @@ export default {
     }
     .shopPayBox{
       background: #fff;
+      margin-bottom: 100/40rem;
       p{
         padding: 35/40rem 30/40rem;
         font-size: 30/40rem;

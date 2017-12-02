@@ -1,10 +1,10 @@
 <template>
 		<div class="page addrChangePage">
       <group class='groupNoTop groupNoLine'>
-        <x-input title='收货人' v-model='addressParams.name'></x-input>
-        <x-input title='联系方式' v-model='addressParams.phone'></x-input>
+        <x-input title='收货人' v-model='addressParams.name' :min='2' :max='20'></x-input>
+        <x-input title='联系方式' v-model='addressParams.phone' is-type='china-mobile'></x-input>
         <addr ref='addres'></addr>
-        <x-textarea title="详细地址" v-model="addressParams.address" placeholder='街道、楼牌号等'></x-textarea>
+        <x-textarea title="详细地址" v-model="addressParams.address" :max='200' placeholder='街道、楼牌号等'></x-textarea>
         <p class="default" @click='isDefault=!isDefault'><span class='defaultIcon ' :class="[isDefault ? 'hasSet':'unSet']"></span> 设为默认</p>
       </group>
       <footer>
@@ -155,6 +155,19 @@ export default {
     }
     .vux-cell-box:before{
       border-top: none;
+    }
+    .weui-icon-warn,.weui-cell_warn{
+      color: #4d4d4d;
+    }
+    .weui-icon-warn:before{
+      content: '';
+    }
+    .vux-x-input .weui-icon{
+      padding: 0;
+    }
+    .vux-x-input .vux-input-icon{
+      font-size: 0;
+      width: 0;
     }
   }
 </style>

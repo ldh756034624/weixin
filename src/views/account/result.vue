@@ -16,7 +16,24 @@
     <div class="resultText" v-if="type==='exchange' || type === 'indexddExchange'">
       <p>券号:{{num}}</p>
     </div>
-    <div class="fundsBtnBox">
+    <div class="resultText" v-if="type==='shopExchange'">
+      <!-- <p>兑换价格:{{money}}酒元</p> -->
+      <p>兑换商品:{{goodsName}}</p>
+    </div>
+    <!-- <div class="shopResultText" v-if="type==='shopExchange'">
+      <p>兑换价格:<label>{{money}}酒元</label></p>
+      <p>兑换商品:<label>{{goodsName}}</label></p>
+    </div> -->
+    <div class="fundsBtnBox shopResultBtnBox" v-if="type==='shopExchange'">
+      <router-link to='/shop'>
+        <x-button mini class='backIndex'>回到首页</x-button>
+      </router-link>
+      <router-link :to="{path:'/my/myOrder',query:{type:'shopExchange'}}">
+        <x-button mini class='gradientBtn'>查看订单</x-button>
+      </router-link>
+       
+    </div>
+    <div class="fundsBtnBox" v-else>
       <x-button class='gradientBtn' v-if="(type==='exchange' || type==='indexddExchange') && coponShow" @click.native="copy">复制券号</x-button>
       <x-button class='gradientBtn' v-if="type!=='exchange' && type!=='indexddExchange'" @click.native="goBack">完成</x-button>
       <x-button class='gradientBtn' v-if="!coponShow" @click.native="goBackDD">完成</x-button>  <!--和复制券号联合使用的按钮-->
@@ -48,6 +65,7 @@
         time: this.$route.query.time,
         tel: this.$route.query.tel,
         num: this.$route.query.num,
+        goodsName:this.$route.query.goodsName,
       }
     },
     methods: {
@@ -114,6 +132,17 @@
       line-height: 40/40rem;
       text-align: center;
     }
+    .shopResultText{
+      border-top: 1px solid #f2f2f2;
+      border-bottom: 1px solid #f2f2f2;
+      font-size: 30/40rem;
+      p{
+        padding: 30/40rem;
+      }
+      label{
+        float: right;
+      }
+    }
     .copy-input {
       position: absolute;
       left: 0;
@@ -122,5 +151,18 @@
       width: 1px;
       opacity: 0;
     }
+    .shopResultBtnBox{
+      text-align: center;
+      .backIndex{
+        background: #fff;
+      }
+      .backIndex,.gradientBtn{
+        height: 2.5rem;
+        font-size: 30/40rem;
+        padding: 0 70/40rem;
+        margin: 0 35/40rem;
+      }
+    }
+    
   }
 </style>

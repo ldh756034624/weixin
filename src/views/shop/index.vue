@@ -14,7 +14,7 @@
             </div>
           </flexbox-item>
           <flexbox-item>
-            <router-link to="/my/myOrder">
+            <router-link :to="{path:'/my/myOrder',query:{type:'shopExchange'}}">
               <div class="shopMoneyBox">
                 <img src="../../assets/img/shop/group_3.png"/>
                 <span>兑换记录</span>
@@ -92,7 +92,7 @@ export default {
           }else if(item.link==='todayNewGoods'){
             type=1
           }
-          this.$router.push({path:'/shopList',query:{type:type}})
+          this.$router.push({path:'/shopList',query:{type:type,title:item.title}})
         }
      },
   },
@@ -149,6 +149,7 @@ export default {
     }
     .exchangeBox{
       background: #fff;
+      margin-bottom: 110/40rem;
       font-size: 30/40rem;
       line-height: 45/40rem;
       .title{
@@ -163,7 +164,12 @@ export default {
       }
       .shopBox{
         padding: 16/40rem;
+        height: 340/40rem;
         box-sizing:border-box;
+        border-bottom: 2/40rem solid #f2f2f2;
+      }
+      .shopBox:nth-child(2n+1){
+        border-right: 2/40rem solid #f2f2f2;
       }
       .shopImg{
         width: 220/40rem;
@@ -171,15 +177,13 @@ export default {
         margin-bottom: 16/40rem;
         float: right;
       }
-      .shopLine{
-        border-bottom: 2/40rem solid #f2f2f2;
-      }
-      .shopLine:nth-child(2n+1){
-        border-right: 2/40rem solid #f2f2f2;
-      }
     }
   }
-  
+  @media screen and (max-width: 340px){
+    .exchangeBox{
+      margin-bottom: 140/40rem!important;
+    }
+  }
 </style>
 <style type="text/css" lang='less'>
   .shopPage{

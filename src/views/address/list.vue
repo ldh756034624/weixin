@@ -35,6 +35,7 @@
               </div>
             </div>
           </div>
+          <pull-header-footer :status-up="pullupStatus" :status-down="pulldownStatus"></pull-header-footer>
         </scroller>
       </div>
       <footer>
@@ -154,7 +155,7 @@ export default {
       padding: 50/40rem 30/40rem 0
     }
     .marginB{
-      margin-bottom: 120/40rem;
+      padding-bottom: 110/40rem;
     }
     .name{
       margin-right: 50/40rem;
