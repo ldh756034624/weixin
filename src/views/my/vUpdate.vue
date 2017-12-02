@@ -67,7 +67,7 @@ export default {
       let self=this;
       this.$http.post('h9/api/account/vb/convert')
         .then((res) => {
-          if(res.data.code==1){
+          if(res.data.code==0){
             _g.toastMsg('error',res.data.msg)
             setTimeout(function(){
               self.$router.replace({
