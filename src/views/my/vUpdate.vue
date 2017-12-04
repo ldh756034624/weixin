@@ -109,6 +109,7 @@ export default {
 </script>
 <style scoped lang='less'>
   .vMoneyUpdataPage{
+    overflow-y: auto;
     background: #fff;
     .announce{
       padding: 50/40rem;
