@@ -26,14 +26,22 @@ export default {
   mounted() {
     let self=this;
     this.setTitle('添加新地址');
-    
-    if(this.$route.query.isEdit==='true'){ //编辑状态赋值
+    console.log(this.$route.query.isEdit)
+    if(this.$route.query.isEdit){
+      console.log("1111111")
+    }
+    if(this.$route.query.isEdit){ //编辑状态赋值
       var editObj=JSON.parse(this.addrEditObj)
+      console.log(editObj.distict)
       this.addressParams=editObj;
-      this.$refs.addres.addr=editObj.province+editObj.city+editObj.distict
       this.$refs.addres.province=editObj.province
       this.$refs.addres.city=editObj.city
-      this.$refs.addres.distict=editObj.distict
+      if(editObj.distict){
+        this.$refs.addres.addr=editObj.province+editObj.city+editObj.distict
+        this.$refs.addres.distict=editObj.distict
+      }else{
+        this.$refs.addres.addr=editObj.province+editObj.city
+      }
       if(editObj.defaultAddress==1){
         this.isDefault=true
       }
