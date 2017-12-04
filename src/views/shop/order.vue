@@ -5,7 +5,7 @@
           
           <span slot='title' v-if='hasAddress'>
             <p>收货人:{{addressData.name}} <i class='phone'>{{addressData.phone}}</i></p>
-            <p>地址:{{addressData.address}}</p>
+            <p>地址:{{addressData.province}}{{addressData.city}}{{addressData.distict}}{{addressData.address}}</p>
           </span>
           <span slot='title' v-else>
             请添加收货地址
@@ -76,10 +76,11 @@ export default {
        this.exchangeParams.addressId=Obj.id
       this.addressData.name=Obj.name
       this.addressData.phone=Obj.phone
+      this.addressData.address=Obj.address
+      this.addressData.province=Obj.province
+      this.addressData.city=Obj.city
       if(Obj.distict){
-        this.addressData.address=Obj.province+Obj.city+Obj.distict+Obj.address
-      }else{
-        this.addressData.address=Obj.province+Obj.city+Obj.address
+        this.addressData.distict=Obj.distict
       }
       this.hasAddress=true
     }else{

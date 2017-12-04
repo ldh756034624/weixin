@@ -46,7 +46,7 @@ export default {
   },
   methods:{
     init(){
-      this.$http.get('h9/api/address/allAreas')
+      this.$http.get('h9/api/address/allArea')
         .then((res)=>{
           if(res.data.code==0){
             this.popupData=res.data.data

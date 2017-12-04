@@ -59,7 +59,7 @@ export default {
 
     },
     exchangeFn:function(item){
-      if (item.price > this.balance) {
+      if (parseInt(item.price) > parseInt(this.balance)) {
         _g.toastMsg('error', '余额不足!')
         return
       }
