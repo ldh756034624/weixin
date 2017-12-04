@@ -111,9 +111,9 @@
       },
       codeAlertFn: function (data) {
         let self = this
-//        if (data.show === false) {
-//          self.codeAlert = false;
-//        }
+        if (data.show === false) {
+          self.codeAlert = false;
+        }
         if (data.show === false && data.codeNum.length === 4) {
           _g.showLoading()
           self.$http.post('h9/api/consume/withdraw/' + self.bankId + '/' + data.codeNum)

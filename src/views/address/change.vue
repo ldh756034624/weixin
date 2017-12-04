@@ -26,10 +26,6 @@ export default {
   mounted() {
     let self=this;
     this.setTitle('添加新地址');
-    console.log(this.$route.query.isEdit)
-    if(this.$route.query.isEdit){
-      console.log("1111111")
-    }
     if(this.$route.query.isEdit){ //编辑状态赋值
       var editObj=JSON.parse(this.addrEditObj)
       console.log(editObj.distict)

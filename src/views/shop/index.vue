@@ -82,17 +82,7 @@ export default {
           window.open(item.link)
         }else{
           //所有商品'allGoods',食品'foods',日常家居'everydayGoods',今日新品'todayNewGoods')
-          var type
-          if(item.link==='allGoods'){
-            type=4
-          }else if(item.link==='foods'){
-            type=3
-          }else if(item.link==='everydayGoods'){
-            type=2
-          }else if(item.link==='todayNewGoods'){
-            type=1
-          }
-          this.$router.push({path:'/shopList',query:{type:type,title:item.title}})
+          this.$router.push({path:'/shopList',query:{type:item.link.split(':')[1],title:item.title}})
         }
      },
   },

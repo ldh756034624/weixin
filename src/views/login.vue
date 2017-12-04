@@ -19,7 +19,7 @@
      </group>
      <div v-transfer-dom>
         <popup v-model="showUserDeal" height="100%" class='dealPopup'>
-          <platformDeal v-model="showUserDeal" v-on:listenToDealShow='dealShowFn'></platformDeal>
+          <platformDeal v-model="showUserDeal" :dealType='dealStr' v-on:listenToDealShow='dealShowFn'></platformDeal>
         </popup>
      </div>
   </div>
@@ -52,6 +52,7 @@ export default {
     return {
       blur: false,
       showUserDeal:false,
+      dealStr:'serviceProtocol',
       codeTip:'获取验证码',
       _user:{},
       sending: false,

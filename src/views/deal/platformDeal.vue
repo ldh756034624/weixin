@@ -18,12 +18,13 @@ export default {
   },
   mounted () {
     let self=this;
-    self.getDeal('serviceProtocol').then(function(data){
+    self.getDeal(this.dealType).then(function(data){
       self.DealData=data.data
     })
   },
   props:{
   	value:'',
+    dealType:'',
   },
   data () {
     return {
@@ -61,6 +62,7 @@ export default {
       overflow: auto;
       line-height: 50/40rem;
       height: 100%;
+      width: 100%;
       position: absolute;
       z-index: 999;
     }

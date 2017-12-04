@@ -1,12 +1,12 @@
 <template>
 		<div class="page vMoneyUpdataPage">
       <main>
-        <div class="announce">
-          <p>亲爱的高炉家用户</p>
+        <div class="announce" v-html='DealData'>
+          <!-- <p>亲爱的高炉家用户</p>
           <p>
              我们从2017年12月12日将使用“酒元”代替现有的积分的发放和使用，原V币获取渠道和兑换服务将停止，同时酒元的获取和使用将变得更加的丰富，您将更容易获取和使用酒元，希望这次升级能给你带来更好的用户体验。
         您账户剩余的V币可以按 10V币 = 1酒元 的比例兑换成酒元，赶快兑换成酒元换取各类好礼吧！
-          </p>
+          </p> -->
         </div>
         <div class="exchangeRate flexBox">
           <div class="flex1">
@@ -29,17 +29,23 @@
           <div class="vMoneyAlert">
             <p class='alertTitle'>确定要兑换吗?</p>
             <p class='alertCont'>{{vUpdateData.vb}}V币将兑换为{{vUpdateData.jiuYuan}}酒元,完成立即生效,此过程不可逆。</p>
-            <p class='alertState'>[查看酒元使用说明]</p>
+            <p class='alertState' @click='watchDeal'>[查看酒元使用说明]</p>
             <x-button class='alertBtn' mini @click.native="showTip=false">取消</x-button>
             <x-button class='alertBtn exchangeBtn' mini @click.native="exchangeFn">兑换成酒元</x-button>
           </div>
         </x-dialog>
       </div> 
+      <div v-transfer-dom>
+        <popup v-model="showUserDeal" height="100%" class='dealPopup'>
+          <platformDeal v-model="showUserDeal" :dealType='dealStr' v-on:listenToDealShow='dealShowFn'></platformDeal>
+        </popup>
+     </div>
 		</div>
 </template>
 
 <script>
-import { XButton,XDialog,TransferDomDirective as TransferDom} from 'vux'
+import { XButton,XDialog,Popup,TransferDomDirective as TransferDom} from 'vux'
+import platformDeal from '../deal/platformDeal'
 export default {
   directives: {
     TransferDom
@@ -47,11 +53,17 @@ export default {
   mounted() {
     this.setTitle('v币升级');
     this.init()
+    this.getDeal('vbConvetDescription').then(data=>{
+      this.DealData=data.data
+    })
   },
   data() {
     return {
       vUpdateData:{},
+      DealData:'',
       showTip:false,
+      showUserDeal:false,
+      dealStr:'moneyUseDescription',
     }
   },
   methods:{
@@ -77,10 +89,21 @@ export default {
             },1500)
           }
         })
-    }
+    },
+    watchDeal:function(){
+      this.showUserDeal=true;
+      this.showTip=false;
+    },
+    dealShowFn:function(data){
+      let self=this;
+      if(data==false){
+        self.showUserDeal=false
+        this.showTip=true
+      }
+    },
   },
   components: {
-    XButton,XDialog
+    XButton,XDialog,Popup,platformDeal
   }
 }
 </script>
@@ -93,14 +116,14 @@ export default {
       border:2/40rem solid #ddd;
       box-shadow:  0  0 18/40rem 0 rgba(204,204,204,0.5);
       line-height: 50/40rem;
+      font-size:28/40rem;
       p:nth-child(1){
-        font-size:36/40rem;
-        color: #222;
-        margin: 20/40rem 0;
+        font-size:36/40rem!important;
+        color: #222!important;
+        margin: 20/40rem 0!important;
       }
       p:nth-child(2){
-        font-size:28/40rem;
-        color: #999;
+        color: #999!important;
       }
     }
     .exchangeRate{
@@ -186,4 +209,20 @@ export default {
     }
   }
 
+</style>
+<style lang='less'>
+  .announce{
+      padding: 50/40rem;
+      margin: 50/40rem 50/40rem 80/40rem;
+      border:2/40rem solid #ddd;
+      box-shadow:  0  0 18/40rem 0 rgba(204,204,204,0.5);
+      line-height: 50/40rem;
+      font-size:28/40rem;
+      color: #999;
+      p:nth-child(1){
+        font-size:36/40rem!important;
+        color: #222!important;
+        margin: 20/40rem 0!important;
+      }
+    }
 </style>
