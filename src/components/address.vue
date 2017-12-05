@@ -15,7 +15,7 @@
               <span @click="chooseTopArea(2)" :class="[areaIndex==2? 'isActive' : '']">{{distict}}</span>
             </p>
             <p v-for='(item,index) in popupData' @click='chooseArea(item,index)'>{{item.name}}</p>
-            <p @click='showPopup=false'>取消</p>
+            <!-- <p @click='showPopup=false'>取消</p> -->
           </div>
         </popup>
       </div>
