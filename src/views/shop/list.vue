@@ -30,7 +30,7 @@
         </div>
         <pull-header-footer :status-up="pullupStatus" :status-down="pulldownStatus"></pull-header-footer>
       </scroller>
-      <blankPage v-show='!hasItem' :blankType='type'></blankPage>
+      <blankPage v-show='!hasItem' ></blankPage>
 
     </div>
   </div>
@@ -58,7 +58,6 @@
       return {
         particularsData: [],
         hasItem: false,
-        type: 'particulars',
       }
     },
     methods: {

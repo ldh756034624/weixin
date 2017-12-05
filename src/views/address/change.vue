@@ -93,11 +93,16 @@ export default {
       this.$http.post(postUrl,this.addressParams)
         .then((res)=>{
           if(res.data.code==0){
-            if(this.$route.query.isEdit==='true'){
-              console.log(this.goodsId)
-              this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(this.addressParams)}})
+
+            _g.toastMsg('error','保存成功')
+            if(this.$route.query.isEdit){
+              setTimeout(()=>{
+                this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(this.addressParams)}})
+              },1500)
             }else{
-              this.$router.replace({path:'/addrList',query:{goodsId:this.goodsId}})
+              setTimeout(()=>{
+                this.$router.replace({path:'/addrList',query:{goodsId:this.goodsId}})
+              },1500)
             }
           }
         })

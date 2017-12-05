@@ -14,7 +14,7 @@
             </div>
           </flexbox-item>
           <flexbox-item>
-            <router-link :to="{path:'/my/myOrder',query:{type:'shopExchange'}}">
+            <router-link :to="{path:'/my/myOrder',query:{fromShop:true}}">
               <div class="shopMoneyBox">
                 <img src="../../assets/img/shop/group_3.png"/>
                 <span>兑换记录</span>
