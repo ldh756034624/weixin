@@ -109,7 +109,7 @@ export default {
         })
     },
     editFn:function(item){
-      this.$router.push({path:'/addrChange',query:{isEdit:true,addrObj:JSON.stringify(item)}})
+      this.$router.replace({path:'/addrChange',query:{id:this.goodsId,isEdit:true,addrObj:JSON.stringify(item)}})
     },
     delFn:function(item){
       let self=this;

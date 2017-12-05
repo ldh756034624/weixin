@@ -30,11 +30,12 @@ export default {
       var editObj=JSON.parse(this.addrEditObj)
       console.log(editObj.distict)
       this.addressParams=editObj;
-      this.$refs.addres.province=editObj.province
-      this.$refs.addres.city=editObj.city
+      this.$refs.addres.pid=editObj.pid
+      this.$refs.addres.cid=editObj.cid
+      
       if(editObj.distict){
         this.$refs.addres.addr=editObj.province+editObj.city+editObj.distict
-        this.$refs.addres.distict=editObj.distict
+        this.$refs.addres.aid=editObj.aid
       }else{
         this.$refs.addres.addr=editObj.province+editObj.city
       }
@@ -49,26 +50,26 @@ export default {
       addressParams:{},
       address:[],
       isDefault:false,
-      goodsId:this.$route.query.goodsId,
+      goodsId:this.$route.query.id,
       addrEditObj:this.$route.query.addrObj
     }
   },
   methods:{
     save:function(){
       
-      console.log(this.$refs.addres.province)
-      console.log(this.$refs.addres.city)
-      console.log(this.$refs.addres.distict)
+      console.log(this.$refs.addres.pid)
+      console.log(this.$refs.addres.cid)
+      console.log(this.$refs.addres.aid)
       if(!this.$refs.addres.addr){
         _g.toastMsg('error','请选择地区')
         return;
       }
-      this.addressParams.province=this.$refs.addres.province
-      this.addressParams.city=this.$refs.addres.city
-      this.addressParams.distict=this.$refs.addres.distict
-      if(this.$refs.addres.distict.indexOf('所在')!=-1){
-        this.addressParams.distict=''
-      }
+      this.addressParams.pid=this.$refs.addres.pid
+      this.addressParams.cid=this.$refs.addres.cid
+      this.addressParams.aid=this.$refs.addres.aid
+      // if(this.$refs.addres.aid.indexOf('所在')!=-1){
+      //   this.addressParams.aid=''
+      // }
       if(this.isDefault===true){
         this.addressParams.defaultAddress=1
       }else{
@@ -84,9 +85,10 @@ export default {
         .then((res)=>{
           if(res.data.code==0){
             if(this.$route.query.isEdit==='true'){
-              this.$router.replace({path:'/addrList',query:{id:this.goodsId}})
-            }else{
+              console.log(this.goodsId)
               this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(this.addressParams)}})
+            }else{
+              this.$router.replace({path:'/addrList',query:{id:this.goodsId}})
             }
           }
         })

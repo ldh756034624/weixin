@@ -10,7 +10,7 @@
           <flexbox-item>
             <div class="shopMoneyBox lineRight">
               <img src="../../assets/img/shop/money.png"/>
-              <span>酒元</span><i class='ft'>182</i>
+              <span>酒元</span><i class='ft'>{{shopData.balance}}</i>
             </div>
           </flexbox-item>
           <flexbox-item>

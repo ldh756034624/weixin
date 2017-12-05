@@ -16,7 +16,7 @@
         @input="getCurrentValue">
         <div class="mrgT10">
           <div v-for='(item,index) in particularsData'  >
-            <router-link :to="{path:'/shopOrder',query:{id:item.id}}">
+            <router-link :to="{path:'/shopDataile',query:{id:item.id}}">
               <div class="shopListBox flexBox">
                 <img :src="item.img"/>
                 <div class='flex1'>

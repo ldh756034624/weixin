@@ -229,7 +229,9 @@ Vue.http.interceptors.response.use(
       }
       window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
     }else if(response.data.code!=0){
-      _g.toastMsg('error', response.data.msg)
+      if(response.data.msg){
+        _g.toastMsg('error', response.data.msg)
+      }
     }else{
       store.commit("setLoading",false)
     }

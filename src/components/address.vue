@@ -7,9 +7,12 @@
         <popup v-model="showPopup" height='60%'>
           <div class="addrInfoPopup">
             <p class="area">
+              <!-- <span @click="chooseTopArea(0)" :class="[areaIndex==0? 'isActive' : '']">{{province}}</span>
+              <span @click="chooseTopArea(1)" v-if='hasCity==true' :class="[areaIndex==1? 'isActive' : '']">{{city}}</span>
+              <span @click="chooseTopArea(2)" v-if='hasDistict==true' :class="[areaIndex==2? 'isActive' : '']">{{distict}}</span> -->
               <span @click="chooseTopArea(0)" :class="[areaIndex==0? 'isActive' : '']">{{province}}</span>
-              <span @click="chooseTopArea(1)" :class="[areaIndex==1? 'isActive' : '']">{{city}}</span>
-              <span @click="chooseTopArea(2)" v-if='hasDistict==true' :class="[areaIndex==2? 'isActive' : '']">{{distict}}</span>
+              <span @click="chooseTopArea(1)"  :class="[areaIndex==1? 'isActive' : '']">{{city}}</span>
+              <span @click="chooseTopArea(2)" :class="[areaIndex==2? 'isActive' : '']">{{distict}}</span>
             </p>
             <p v-for='(item,index) in popupData' @click='chooseArea(item,index)'>{{item.name}}</p>
             <p @click='showPopup=false'>取消</p>
@@ -31,7 +34,7 @@ export default {
   },
   data() {
     return {
-      addr:'',
+      addr:'请选择',
       showPopup:false,
       popupData:[],
       areaIndex:0,
@@ -39,8 +42,12 @@ export default {
       province:'所在省',
       city:'所在市',
       distict:'所在区',
+      pid:'',
+      cid:'',
+      aid:'',
       proviceIndex:0,
       cityIndex:0,
+      hasCity:false,
       hasDistict:false,
     }
   },
@@ -51,10 +58,6 @@ export default {
           if(res.data.code==0){
             this.popupData=res.data.data
             this.addressDataNew=res.data.data
-            if(this.addressDataNew[0].list[0].list){
-              this.hasDistict=true
-            }
-            
           }
         })
     },
@@ -69,27 +72,36 @@ export default {
       }
     },
     chooseArea:function(item,index){
-      if(this.areaIndex===0){
+      if(this.areaIndex===0){ //选择省
         this.province=item.name
-        this.areaIndex=1
+        this.pid=item.id
         this.proviceIndex=index
+
+
+        this.areaIndex=1
+        this.hasCity=true
         this.city=this.popupData[index].list[0].name
-        this.popupData=this.popupData[index].list
-      }else if(this.areaIndex===1){
+        this.popupData=this.popupData[index].list //对省下的市赋值
+      }else if(this.areaIndex===1){ //选择市 
         this.city=item.name
+        this.cid=item.id
         this.cityIndex=index
+
+
         if(this.popupData[index].list){
           this.areaIndex=2
+          this.hasDistict=true
           this.distict=this.popupData[index].list[0].name
           this.popupData=this.popupData[index].list
         }else{
           this.showPopup=false
           this.addr=this.province+this.city
         }
-      }else{
+      }else{ //选择区
         this.distict=item.name
+        this.aid=item.id
         this.showPopup=false
-        this.addr=this.province+this.city
+        this.addr=this.province+this.city+this.distict
       }
     },
   },
