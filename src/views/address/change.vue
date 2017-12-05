@@ -2,7 +2,7 @@
 		<div class="page addrChangePage">
       <group class='groupNoTop groupNoLine'>
         <x-input title='收货人' v-model='addressParams.name' :min='2' :max='20'></x-input>
-        <x-input title='联系方式' v-model='addressParams.phone' is-type='china-mobile'></x-input>
+        <x-input title='联系方式' v-model='addressParams.phone' :min='7' :max='16' is-type='china-mobile'></x-input>
         <addr ref='addres'></addr>
         <x-textarea title="详细地址" v-model="addressParams.address" :max='200' placeholder='街道、楼牌号等'></x-textarea>
         <p class="default" @click='isDefault=!isDefault'><span class='defaultIcon ' :class="[isDefault ? 'hasSet':'unSet']"></span> 设为默认</p>
@@ -50,33 +50,42 @@ export default {
       addressParams:{},
       address:[],
       isDefault:false,
-      goodsId:this.$route.query.id,
+      goodsId:this.$route.query.goodsId,
       addrEditObj:this.$route.query.addrObj
     }
   },
   methods:{
     save:function(){
-      
-      console.log(this.$refs.addres.pid)
-      console.log(this.$refs.addres.cid)
-      console.log(this.$refs.addres.aid)
-      if(!this.$refs.addres.addr){
-        _g.toastMsg('error','请选择地区')
+      if(!this.addressParams.name){
+        _g.toastMsg('error','请输入收货人')
+        return;
+      }
+      if(!this.addressParams.phone){
+        _g.toastMsg('error','请输入联系方式')
+        return;
+      }
+      if(this.addressParams.phone.length<7 || this.addressParams.phone.length>16 ){
+        _g.toastMsg('error','请正确输入联系方式')
+        return;
+      }
+      if(!this.$refs.addres.addr || this.$refs.addres.addr=='请选择'){
+        _g.toastMsg('error','请填写地区')
+        return;
+      }
+      if(!this.addressParams.address){
+        _g.toastMsg('error','请填写详细地址')
         return;
       }
       this.addressParams.pid=this.$refs.addres.pid
       this.addressParams.cid=this.$refs.addres.cid
       this.addressParams.aid=this.$refs.addres.aid
-      // if(this.$refs.addres.aid.indexOf('所在')!=-1){
-      //   this.addressParams.aid=''
-      // }
       if(this.isDefault===true){
         this.addressParams.defaultAddress=1
       }else{
         this.addressParams.defaultAddress=0
       }
       var postUrl=''
-      if(this.$route.query.isEdit==='true'){
+      if(this.$route.query.isEdit){
         postUrl='h9/api/address/update/'+this.addressParams.id
       }else{
         postUrl='h9/api/address/add'
@@ -88,7 +97,7 @@ export default {
               console.log(this.goodsId)
               this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(this.addressParams)}})
             }else{
-              this.$router.replace({path:'/addrList',query:{id:this.goodsId}})
+              this.$router.replace({path:'/addrList',query:{goodsId:this.goodsId}})
             }
           }
         })
@@ -155,6 +164,9 @@ export default {
     .weui-label{
       font-size: 30/40rem;
       width: 150/40rem!important;
+    }
+    .weui-input{
+      text-align: right;
     }
     .weui-input,.vux-popup-picker-value,.weui-textarea{
       font-size: 30/40rem;
