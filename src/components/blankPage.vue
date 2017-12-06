@@ -14,6 +14,14 @@
             <img src='../assets/img/blank/img_detailerror@2x.png' >
             <p>目前没有交易明细</p>
           </div>
+          <div v-if="blankType==='address'">
+            <img src='../assets/img/addr/kongbai.png' >
+            <p>目前还没有添加地址</p>
+          </div>
+          <div v-if="!blankType">
+            <img src='../assets/img/blank/img_pageerror@2x.png' >
+            <p>暂无数据</p>
+          </div>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,13 @@
+diff a/src/views/account/setting.vue b/src/views/account/setting.vue	(rejected hunks)
+@@ -4,10 +4,8 @@
+ 
+       <cell title="常见问题" link='/account/problems' is-link></cell>
+       <p class="flexBox">版本信息 <span class='flex1 alignR'>V4.0</span></p>
+-      <!--测试用-->
+-      <cell title="退出登录" @click.native='logOut' is-link></cell>
+     </group>
+-    <x-button class='bottomBtn gradientBtn' @click.native="">退出当前帐号</x-button>
++    <!-- <x-button class='bottomBtn gradientBtn' @click.native="logOut">退出当前帐号</x-button> -->
+ 
+   </div>
+ </template>

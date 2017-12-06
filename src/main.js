@@ -8,11 +8,12 @@ import {encode} from '@/util/base64Code'
 import RouterConfig from './router/index'
 import App from './App'
 import Home from './components/HelloFromVux'
-import { AlertPlugin, ToastPlugin, AjaxPlugin,LoadingPlugin } from 'vux'
+import { AlertPlugin, ConfirmPlugin,ToastPlugin, AjaxPlugin,LoadingPlugin } from 'vux'
 import wx from 'weixin-js-sdk'
 import _g from './helpers/global'
 
 Vue.use(AlertPlugin)
+Vue.use(ConfirmPlugin)
 Vue.use(ToastPlugin)
 Vue.use(LoadingPlugin)
 Vue.use(AjaxPlugin)
@@ -228,7 +229,9 @@ Vue.http.interceptors.response.use(
       }
       window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
     }else if(response.data.code!=0){
-      _g.toastMsg('error', response.data.msg)
+      if(response.data.msg){
+        _g.toastMsg('error', response.data.msg)
+      }
     }else{
       store.commit("setLoading",false)
     }

@@ -56,12 +56,18 @@ export default {
       if (page === 1) {
         self.myOrderData = []
       }
-      self.$http.get('/h9/api/orders?page='+page+'&limit='+self.page.limit)
+      let pageUrl=''
+      if(this.$route.query.fromShop){
+        pageUrl='h9/store/orders'
+      }else{
+        pageUrl='/h9/api/orders'
+      }
+      self.$http.get(pageUrl+'?page='+page+'&limit='+self.page.limit)
         .then(function(res) {
           if(res.data.code==0){
               if(res.data.data.data.length>0){
-                self.myOrderData = [...self.myOrderData, ...res.data.data.data]
                 self.hasItem=true
+                self.myOrderData = [...self.myOrderData, ...res.data.data.data]
               }else{
                 self.hasItem=false
               }
@@ -79,7 +85,7 @@ export default {
             if (res.data.data.currPage==1) {
               self.$refs.detailScroller.reset({top: 0},500, 'ease');
             }
-          });
+          })
         })
     },
     loadMore () {

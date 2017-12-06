@@ -6,10 +6,10 @@
           <img slot="icon" src="../assets/img/index/tabbar_mainpage_selected@2x.png" class="active">
           <span slot="label">首页</span>
       </tabbar-item>
-      <tabbar-item :selected="/shop/.test($route.path)" link="/active/hongbao">
-          <img slot="icon" src="../assets/img/index/tabbar_hongbao_normal@2x.png" class="default">
-          <img slot="icon" src="../assets/img/index/tabbar_hongbao_selected@2x.png" class="active">
-          <span slot="label">红包</span>
+      <tabbar-item :selected="/shop/.test($route.path)" link="/shop">
+          <img slot="icon" src="../assets/img/index/tabbar_mall_normal@2x.png" class="default">
+          <img slot="icon" src="../assets/img/index/tabbar_mall_selected@2x.png" class="active">
+          <span slot="label">商城</span>
       </tabbar-item>
       <tabbar-item :selected="/account/.test($route.path)" @click.native="hasPhone('/account/personal')">
           <img slot="icon" src="../assets/img/index/tabbar_my_normal@2x.png" class="default">

@@ -60,42 +60,38 @@ export default {
     self.$watch('showCodeAlert',function(val){
       if(val){
        self.showCodeBlur=true;
-       self.init();
+       //self.init();
       } else {
         _g.hideLoading()
       }
     })
-//    self.$watch('showCodeBlur',function(val){
-//      if(val==false){
-//        self.$emit("CodeAlertStatus",{show:false,codeNum:self.changeCode})
-//      }
-//    })
+    if(self.phoneNum){
+      self.phone=self.phoneNum;
+    }else if(localStorage.getItem('tel')){
+      self.phone=localStorage.getItem('tel')
+    }else{
+      var userObj=JSON.parse(localStorage.getItem('_user'))
+      self.phone=userObj.tel
+    }
+    var strLen=self.phone.length;
+    self.phoneLast=self.phone.substr(strLen-4,strLen)
   },
   data () {
     return {
       showCodeBlur:false,
       changeCode:'',
       phoneLast:'',
-      canUse:false,
+      canUse:true,
       codeTip:'发送验证码',
       count:60,
+      phone:'',
     }
   },
   methods:{
     init(){
       let self = this
-      var phone;
-      if(self.phoneNum){
-        phone=self.phoneNum;
-      }else if(localStorage.getItem('tel')){
-        phone=localStorage.getItem('tel')
-      }else{
-        var userObj=JSON.parse(localStorage.getItem('_user'))
-        phone=userObj.tel
-      }
-      var strLen=phone.length;
-      self.phoneLast=phone.substr(strLen-4,strLen)
-      self.$http.get('h9/api/user/sms/'+phone+'/'+self.type)
+      
+      self.$http.get('h9/api/user/sms/'+self.phone+'/'+self.type)
         .then(function(res) {
           if(res.data.code==0){
             //_g.toastMsg('error','验证码发送成功')
@@ -124,6 +120,7 @@ export default {
     },
     hide() {
       this.showCodeBlur = false
+      this.$emit("CodeAlertStatus",{show:false,codeNum:this.changeCode})
       _g.hideLoading()
     },
     show() {

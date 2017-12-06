@@ -162,15 +162,6 @@ export default {
             }
 
             self.$nextTick(() => {
-//              let imgs = self.$refs.articleImg
-//              let lastImg = imgs[imgs.length - 1]
-//              let timer = setInterval(() => {
-//                if (lastImg.complete) {
-//                  self.$refs.detailScroller.reset()
-//                  clearInterval(timer)
-//                  console.log('图片加载完成')
-//                }
-//              }, 50)
               setTimeout(() => {    // 图片加载完成后刷新高度
                 self.$refs.detailScroller.reset()
               },1000)
