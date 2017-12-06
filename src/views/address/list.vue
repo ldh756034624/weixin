@@ -114,7 +114,7 @@ export default {
     delFn:function(item){
       let self=this;
       this.$vux.confirm.show({
-        content:'确定删除地址吗?',
+        content:'确定要删除该地址吗?',
         onConfirm () {
           self.$http.put('h9/api/address/delete/'+item.id)
         .then((res)=> {

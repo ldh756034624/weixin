@@ -96,7 +96,7 @@ export default {
           if(res.data.code==0){
 
             _g.toastMsg('error','保存成功')
-            if(this.$route.query.isEdit){
+            if(this.$route.query.fromOrder){
               setTimeout(()=>{
                 this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(this.addressParams)}})
               },1500)
