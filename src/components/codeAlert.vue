@@ -5,7 +5,7 @@
         <div class="img-box">
           <i class="closeDialog" @click="hide">x</i>
           <p class="codeText">输入验证码</p>
-          <p class="money">
+          <p class="money" v-if='money'>
             ￥{{money | price2}}
           </p>
           <p class="codePhone">接收手机尾号({{phoneLast}})短信
@@ -82,7 +82,7 @@ export default {
       changeCode:'',
       phoneLast:'',
       canUse:true,
-      codeTip:'发送验证码',
+      codeTip:'立即发送',
       count:60,
       phone:'',
     }
@@ -167,6 +167,7 @@ export default {
       border-bottom: 1px solid #f2f2f2;
     }
     .codePhone{
+      margin-top: 25/40rem;
       padding: 0 0 15/40rem;
       font-size: 28/40rem;
     }

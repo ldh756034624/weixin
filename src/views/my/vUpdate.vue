@@ -80,13 +80,10 @@ export default {
       this.$http.post('h9/api/account/vb/convert')
         .then((res) => {
           if(res.data.code==0){
-            _g.toastMsg('error',res.data.msg)
-            setTimeout(function(){
-              self.$router.replace({
-                path:'/account/result',
-                query: {type: 'vMoneyExchange'}
-              })
-            },1500)
+            self.$router.replace({
+              path:'/account/result',
+              query: {type: 'vMoneyExchange'}
+            })
           }
         })
     },
@@ -198,10 +195,10 @@ export default {
     .alertBtn{
       height: 80/40rem;
       line-height: 80/40rem;
-      width: 200/40rem;
+      width: 220/40rem;
       font-size: 28/40rem;
       background: #fff;
-      margin: 10/40rem 30/40rem 30/40rem;
+      margin: 10/40rem 15/40rem 30/40rem;
       border: 2/40rem solid #999;
       padding: 0;
     }
