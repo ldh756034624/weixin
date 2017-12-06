@@ -57,6 +57,7 @@ import { Flexbox, FlexboxItem,Swiper, SwiperItem} from 'vux'
 import Bottombar from '@/components/BottomBar'
 export default {
   mounted() {
+    this.setTitle('酒元商城');
     this.init()
   },
   data() {

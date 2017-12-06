@@ -46,7 +46,7 @@ export default {
   data () {
     return {
       myOrderData:[],
-      hasItem:false,
+      hasItem:true,
       type:'order'
     }
   },
