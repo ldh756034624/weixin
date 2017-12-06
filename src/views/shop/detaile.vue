@@ -8,7 +8,7 @@
         </div>
         <section>
           <div  class="descBox">
-            <p class="desc">详情说明</p>
+            <p class="desc">商品详情</p>
             <div class="descCont">
               {{shopData.desc}}
             </div>

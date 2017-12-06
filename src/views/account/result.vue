@@ -3,7 +3,7 @@
     <div class="resultImgBox">
       <img class="resultImg" src="../../assets/img/account/tixian_img_success@2x.png"/>
       <p class="typeBox">{{title}}成功</p>
-      <p class="moneyBox" v-if='money'><i>￥</i>{{money}}</p>
+      <p class="moneyBox" v-if="type!=='shopExchange'"><i>￥</i>{{money}}</p>
     </div>
     <div class="resultText" v-if="type==='funds'">
       <p>申请时间:{{time}}</p>
@@ -19,19 +19,19 @@
     <div class="resultText" v-if="type==='vMoneyExchange'">
       <p style="margin-top:30px">V币将成功兑换为酒元，请到我的钱包页查看</p>
     </div>
-    <div class="resultText" v-if="type==='shopExchange'">
-      <!-- <p>兑换价格:{{money}}酒元</p> -->
+    <!-- <div class="resultText" v-if="type==='shopExchange'">
+      <p>兑换价格:{{money}}酒元</p>
       <p>兑换商品:{{goodsName}}</p>
-    </div>
-    <!-- <div class="shopResultText" v-if="type==='shopExchange'">
+    </div> -->
+    <div class="shopResultText" v-if="type==='shopExchange'">
       <p>兑换价格:<label>{{money}}酒元</label></p>
       <p>兑换商品:<label>{{goodsName}}</label></p>
-    </div> -->
-    <div class="fundsBtnBox shopResultBtnBox" v-if="type==='shopExchange'">
+    </div>
+    <div class="shopResultBtnBox" v-if="type==='shopExchange'">
       <router-link to='/shop'>
         <x-button mini class='backIndex'>回到首页</x-button>
       </router-link>
-      <router-link :to="{path:'/my/myOrder',query:{type:'shopExchange'}}">
+      <router-link :to="{path:'/my/myOrder',query:{fromShop:true}}">
         <x-button mini class='gradientBtn'>查看订单</x-button>
       </router-link>
     </div>
@@ -143,6 +143,7 @@
       text-align: center;
     }
     .shopResultText{
+      margin: 120/40rem 0;
       border-top: 1px solid #f2f2f2;
       border-bottom: 1px solid #f2f2f2;
       font-size: 30/40rem;
@@ -163,8 +164,13 @@
     }
     .shopResultBtnBox{
       text-align: center;
+      margin: 40/40rem 0 30/40rem;
       .backIndex{
         background: #fff;
+        border: 2/40rem solid #f2f2f2;
+      }
+      .gradientBtn{
+        color: #fff;
       }
       .backIndex,.gradientBtn{
         height: 2.5rem;

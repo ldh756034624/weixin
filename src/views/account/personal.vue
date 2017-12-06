@@ -63,11 +63,10 @@
                         <i class='arrow'></i>
                       </span>
                   </cell>
-                  <cell title="收货地址"  value='暂未开放'>
+                  <cell title="收货地址"  link='/addrList'>
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_adress@2x.png">
-                      <span class='cellValueBox'>
-                        <i>暂未开放</i>
+                      <span class='cellValueBox' style="margin-right:-12px;">
                         <i class='arrow'></i>
                       </span>
                   </cell>
