@@ -6,7 +6,7 @@
               <img src=""/>
               <div class="purseMoney flex1 redFont">
                 {{vbNum}}
-              </div> 
+              </div>
               <!-- <x-button mini class='purseFundBtn' @click.native="goFunds()" >提现</x-button> -->
           </div>
           <cell title="V币记录" link='/my/vMoneyParticulars' is-link>
@@ -29,12 +29,12 @@
           </flexbox-item>
           <flexbox-item>
             <div class="purseItemBox">
-              
+
             </div>
           </flexbox-item>
         </flexbox>
         <div v-transfer-dom>
-          <x-dialog v-model='showTip'>
+          <x-dialog :show.sync="showTip">
             <div class="vMoneyAlert">
               <p class='alertTitle'>V币换酒元啦</p>
               <p class='alertCont'>我们V币已升级为“酒元”啦，原V币可一键兑换为酒元继续使用。</p>
@@ -54,20 +54,26 @@ export default {
   },
   mounted(){
     let  self=this;
-    self.setTitle('我的V币');
+    self.setTitle('我的V币')
+    this.initShowTip()
   },
   data () {
     return {
       purseData:{},
       vbNum:this.$route.query.vbNum,
       //vbNum:,
-      showTip:true,
+      showTip:false,
     }
   },
   methods:{
     init(){
       let self = this
-      
+    },
+    initShowTip(){
+      if (localStorage.showTip == 'true') {
+        this.showTip = true
+      }
+      localStorage.showTip = false
     },
     goFunds:function(){
       let self=this;
@@ -76,7 +82,7 @@ export default {
     exchange:function(){
       this.$router.push({path:'/my/vUpdate'})
     }
-    
+
   },
    components: {
     Group,Cell,Flexbox, FlexboxItem,XButton,XDialog
@@ -156,7 +162,7 @@ export default {
       color: #fff;
     }
   }
-  
+
 </style>
 <style lang='less'>
   .purseBox .weui-cells p{
