@@ -9,8 +9,7 @@
         <section>
           <div  class="descBox">
             <p class="desc">商品详情</p>
-            <div class="descCont">
-              {{shopData.desc}}
+            <div class="descCont" v-html='shopData.desc'>
             </div>
           </div>
         </section>

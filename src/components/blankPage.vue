@@ -19,7 +19,7 @@
             <p>目前还没有添加地址</p>
           </div>
           <div v-if="!blankType">
-            <img src='../assets/img/blank/img_pageerror@2x.png' >
+            <img src='../assets/img/blank/img_ordererror@2x.png' >
             <p>暂无数据</p>
           </div>
 				</div>

@@ -37,7 +37,7 @@
           <x-dialog v-model='showTip'>
             <div class="vMoneyAlert">
               <p class='alertTitle'>V币换酒元啦</p>
-              <p class='alertCont'>我们V币已升级为“酒元”啦，原V币可一键兑换为酒元继续使用</p>
+              <p class='alertCont'>我们V币已升级为“酒元”啦，原V币可一键兑换为酒元继续使用。</p>
               <x-button class='alertBtn' mini @click.native="showTip=false">取消</x-button>
               <x-button class='alertBtn exchangeBtn' mini @click.native="exchange">立即兑换</x-button>
             </div>
@@ -60,6 +60,7 @@ export default {
     return {
       purseData:{},
       vbNum:this.$route.query.vbNum,
+      //vbNum:,
       showTip:true,
     }
   },

@@ -22,7 +22,7 @@
             </router-link>
           </flexbox-item>
           <flexbox-item>
-            <router-link :to="{path:'/my/vMoney',query:{vbNum:personalData.vb}}">
+            <router-link :to="{path:'/my/vMoney',query:{vbNum:personalData.vb,showAlert:true}}">
               <div class="personalItemBox ItemBorder">
                 <p class="redFont">{{personalData.vb || 0.00}}</p>
                 <p>V币</p>
@@ -86,7 +86,7 @@ import Bottombar from '@/components/BottomBar'
 
 export default {
   mounted(){
-    this.setTitle('个人中心');
+    this.setTitle('我的');
     this.init();
     if(localStorage.getItem('img')){
       this.userHeadImg=localStorage.getItem('img')

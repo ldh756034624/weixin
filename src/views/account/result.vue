@@ -3,7 +3,7 @@
     <div class="resultImgBox">
       <img class="resultImg" src="../../assets/img/account/tixian_img_success@2x.png"/>
       <p class="typeBox">{{title}}成功</p>
-      <p class="moneyBox" v-if="type!=='shopExchange'"><i>￥</i>{{money}}</p>
+      <p class="moneyBox" v-if="type!=='shopExchange' && type!=='vMoneyExchange'"><i>￥</i>{{money}}</p>
     </div>
     <div class="resultText" v-if="type==='funds'">
       <p>申请时间:{{time}}</p>
@@ -38,7 +38,7 @@
     <div class="fundsBtnBox" v-else>
       <div v-if="type==='vMoneyExchange'">
         <router-link to='/account/purse'>
-          <x-button class='gradientBtn'>进入我的钱包</x-button>
+          <x-button class='gradientBtn'>进入钱包</x-button>
         </router-link>
       </div>
       <div v-else>

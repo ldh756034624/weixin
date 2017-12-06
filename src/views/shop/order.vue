@@ -8,7 +8,7 @@
             <p>地址:{{addressData.province}}{{addressData.city}}{{addressData.distict}}{{addressData.address}}</p>
           </span>
           <span slot='title' v-else>
-            请添加收货地址
+            请填写收货地址
           </span>
         </cell>
       </group>
@@ -124,7 +124,11 @@ export default {
         })
     },
     goAddrList:function(){
-      this.$router.push({path:'/addrList',query:{goodsId:this.goodsId}})
+      if (this.hasAddress) {
+        this.$router.replace({path:'/addrList',query:{goodsId:this.goodsId}})
+      }else{
+        this.$router.replace({path:'/addrChange',query:{goodsId:this.goodsId}})
+      }
     },
     count:function(type){
 

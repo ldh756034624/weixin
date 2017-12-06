@@ -27,6 +27,7 @@ export default {
     let self=this;
     this.setTitle('添加新地址');
     if(this.$route.query.isEdit){ //编辑状态赋值
+      this.setTitle('修改地址');
       var editObj=JSON.parse(this.addrEditObj)
       console.log(editObj.distict)
       this.addressParams=editObj;

@@ -8,7 +8,7 @@ import Particulars from '@/components/particulars'
 export default {
   mounted(){
     let  self=this;
-    self.setTitle('钱包明细');
+    self.setTitle('V币明细');
   },
   data () {
     return {

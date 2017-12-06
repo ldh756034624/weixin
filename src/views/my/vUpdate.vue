@@ -203,6 +203,7 @@ export default {
       background: #fff;
       margin: 10/40rem 30/40rem 30/40rem;
       border: 2/40rem solid #999;
+      padding: 0;
     }
     .exchangeBtn{
       background: #627984;
