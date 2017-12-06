@@ -22,12 +22,10 @@
             </router-link>
           </flexbox-item>
           <flexbox-item>
-            <router-link :to="{path:'/my/vMoney',query:{vbNum:personalData.vb,showAlert:true}}">
-              <div class="personalItemBox ItemBorder">
+              <div class="personalItemBox ItemBorder" @click="goVB">
                 <p class="redFont">{{personalData.vb || 0.00}}</p>
                 <p>V币</p>
               </div>
-            </router-link>
           </flexbox-item>
           <flexbox-item>
             <router-link to="/my/cupon">
@@ -114,7 +112,11 @@ export default {
               }
           }
         })
-    }
+    },
+    goVB() {  // 去V币
+      localStorage.showTip = true
+      this.$router.push({path:'/my/vMoney',query:{vbNum:this.personalData.vb,showAlert:true}})
+    },
   },
    components: {
     Flexbox, FlexboxItem,Group,Cell,Bottombar
