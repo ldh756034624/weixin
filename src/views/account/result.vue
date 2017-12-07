@@ -81,7 +81,7 @@
     },
     methods: {
       goPurse() {
-        sessionStorage.isInResult = false
+//        sessionStorage.isInResult = false
         this.$router.push('/account/purse')
       },
       goBack: function () {
