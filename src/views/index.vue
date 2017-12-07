@@ -11,7 +11,7 @@
                         </swiper-item>
                       </swiper>
                     </div>
-                    <div class="flexBox verticalScroll" v-if='homeData.noticeArticle.length > 0'>
+                    <div class="flexBox verticalScroll" v-if='homeData.noticeArticle'>
                       <img src="../assets/img/index/mainpage_icon_notification_@2x.png" class="indexRadio" />
                       <div class="flex1">
                         <swiper auto height="40px" direction="vertical" :interval=2000 class="" :show-dots="false">
@@ -118,6 +118,7 @@ export default {
     }else{
       self.init();
     }
+    //console.log( self.loadingShow)
     self.loadingShow=self.$store.state.showLoading
     //self.init();
     // self.$watch('showAdverBlur',function(val){
@@ -328,7 +329,8 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #fff;
+    /*background: #fff;*/
+    background:red;
     display: table;
     .cellBox{
       display: table-cell;
@@ -359,5 +361,8 @@ export default {
   }
   .pulldown-arrow{
     font-size: 24/40rem;
+  }
+  .vux-slider > .vux-indicator > a > .vux-icon-dot.active, .vux-slider .vux-indicator-right > a > .vux-icon-dot.active{
+    background-color: #627984!important;
   }
 </style>

@@ -16,7 +16,7 @@
           <img src="../../assets/img/account/jiantou.png">
           <div class="flex1 rateNew">
             <p class="num">{{vUpdateData.jiuYuan}}</p>
-            <p><img :src='vUpdateData.jiuYuanIcon'/>酒元</p>
+            <p><img src='../../assets/img/account/group_3copy.png'/>酒元</p>
           </div>
         </div>
         <p class="endTime">截止{{vUpdateData.endTimeTip}}</p>
