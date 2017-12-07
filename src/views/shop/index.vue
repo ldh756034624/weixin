@@ -1,6 +1,8 @@
 <template>
 		<div class="page shopPage">
-      <main>
+    <div class="scroll-wrap">
+      <scroller lock-x scrollbar-y ref="detailScroller" use-pulldown height="100%" @on-pulldown-loading="refresh"  v-model="status1">
+      <div>
         <swiper dots-position="center" auto dots-class="custom-bottom">
           <swiper-item class="swiper-demo-img"  v-for="(item, index) in shopTop" height="12.5rem" :key="index" @click.native='goLinkFn(item)'>
             <img :src="item.imgUrl">
@@ -47,13 +49,20 @@
           </div>
           
         </section>
-      </main> 
+      </div>
+      <div slot="pulldown" class="xs-plugin-pulldown-container xs-plugin-pulldown-down" style="position: absolute; width: 100%; height: 60px; line-height: 60px; top: -60px; text-align: center;">
+        <span v-show="status1.pulldownStatus === 'default'"></span>
+        <span class="pulldown-arrow" v-show="status1.pulldownStatus === 'down' || status1.pulldownStatus === 'up'" :class="{'rotate': status1.pulldownStatus === 'up'}">下拉刷新</span>
+        <span v-show="status1.pulldownStatus === 'loading'"><spinner type="ios-small"></spinner></span>
+      </div>
+    </scroller>
+  </div>   
       <Bottombar :index="1"></Bottombar>
 		</div>
 </template>
 
 <script>
-import { Flexbox, FlexboxItem,Swiper, SwiperItem} from 'vux'
+import { Flexbox, FlexboxItem,Swiper, SwiperItem,Scroller,Spinner} from 'vux'
 import Bottombar from '@/components/BottomBar'
 export default {
   mounted() {
@@ -65,6 +74,9 @@ export default {
       shopTop:[],
       navBanner:[],
       shopData:{},
+      status1: {
+        pulldownStatus: 'default'
+      },
     }
   },
   methods:{
@@ -76,6 +88,11 @@ export default {
             this.navBanner=this.shopData.banners.storeNavigationBanner
             this.shopTop=this.shopData.banners.convertStoreTopBanner
           }
+          this.$nextTick(() => {
+            setTimeout(() => {    // 图片加载完成后刷新高度
+              this.$refs.detailScroller.reset()
+            },1000)
+          })
         })
     },
     goLinkFn:function(item){
@@ -86,9 +103,15 @@ export default {
           this.$router.push({path:'/shopList',query:{type:item.link.split(':')[1],title:item.title}})
         }
      },
+     refresh() {
+      setTimeout(() => {
+        this.init();
+        this.$refs.detailScroller.reset({top: 0}, 500, 'ease');
+      }, 2000)
+    },
   },
   components: {
-    Flexbox, FlexboxItem,Bottombar,Swiper, SwiperItem
+    Flexbox, FlexboxItem,Bottombar,Swiper, SwiperItem,Scroller,Spinner
   }
 }
 </script>
@@ -181,5 +204,8 @@ export default {
     .vux-slider  .vux-indicator{
       bottom: 0;
     }
+  }
+  .pulldown-arrow{
+    font-size: 24/40rem;
   }
 </style>

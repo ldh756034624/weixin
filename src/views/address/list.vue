@@ -20,7 +20,7 @@
                 <p class="area">{{item.province}}{{item.city}}{{item.distict}}{{item.address}}</p>
               </div>
               <div class="flexBox editBox">
-                <p class="flex1" @click='defaultFn(item)'>
+                <p class="flex1" @click='defaultFn(item)' v-if='!fromOrder'>
                   <i class='icon' :class="[item.defaultAddress===1 ? 'hasSet':'unSet']"></i>
                   默认地址
                 </p>
@@ -28,7 +28,7 @@
                   <i class='editIcon'></i>
                   编辑
                 </span>
-                <span @click='delFn(item)'>
+                <span @click='delFn(item)' v-if='!fromOrder'>
                   <i class='delIcon'></i>
                   删除
                 </span>
@@ -63,6 +63,7 @@ export default {
       type: 'address',
       hasItem:false,
       goodsId:this.$route.query.goodsId,
+      fromOrder:this.$route.query.fromOrder,
       addressListData:[]
     }
   },
@@ -99,7 +100,9 @@ export default {
         })
     },
     chooseAddrFn:function(item){
-      this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(item)}})
+      if(this.$route.query.fromOrder){
+        this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(item)}})
+      }
     },
     defaultFn:function(item){
       this.$http.put('h9/api/address/default/'+item.id)
@@ -118,7 +121,7 @@ export default {
         onConfirm () {
           self.$http.put('h9/api/address/delete/'+item.id)
         .then((res)=> {
-          _g.toastMsg('error','删除成功')
+          //_g.toastMsg('error','删除成功')
           self.init(1)
         })
         }

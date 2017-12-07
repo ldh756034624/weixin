@@ -2,14 +2,14 @@
 		<div class="page addrChangePage">
       <group class='groupNoTop groupNoLine'>
         <x-input title='收货人' v-model='addressParams.name' :min='2' :max='20'></x-input>
-        <x-input title='联系方式' v-model='addressParams.phone' :min='7' :max='16' is-type='china-mobile'></x-input>
+        <x-input title='联系方式' v-model='addressParams.phone' :min='7' :max='16' type='tel' is-type='china-mobile'></x-input>
         <addr ref='addres'></addr>
         <x-textarea title="详细地址" v-model="addressParams.address" :max='200' :show-counter='false' placeholder='街道、楼牌号等'></x-textarea>
         <p class="default" @click='isDefault=!isDefault'><span class='defaultIcon ' :class="[isDefault ? 'hasSet':'unSet']"></span> 设为默认</p>
       </group>
       <footer>
         <div>
-          <x-button class='bottomBtn gradientBtn' @click.native="save">保存</x-button>
+          <x-button class='bottomBtn gradientBtn' :disabled='!canUse' @click.native="save">保存</x-button>
         </div>
       </footer>
 		</div>
@@ -51,6 +51,7 @@ export default {
       addressParams:{},
       address:[],
       isDefault:false,
+      canUse:true,
       goodsId:this.$route.query.goodsId,
       addrEditObj:this.$route.query.addrObj
     }
@@ -91,6 +92,7 @@ export default {
       }else{
         postUrl='h9/api/address/add'
       }
+      this.canUse=false
       this.$http.post(postUrl,this.addressParams)
         .then((res)=>{
           if(res.data.code==0){

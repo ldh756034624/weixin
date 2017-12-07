@@ -125,9 +125,9 @@ export default {
     },
     goAddrList:function(){
       if (this.hasAddress) {
-        this.$router.replace({path:'/addrList',query:{goodsId:this.goodsId}})
+        this.$router.push({path:'/addrList',query:{goodsId:this.goodsId,fromOrder:true}})
       }else{
-        this.$router.replace({path:'/addrChange',query:{goodsId:this.goodsId,fromOrder:true}})
+        this.$router.push({path:'/addrChange',query:{goodsId:this.goodsId,fromOrder:true}})
       }
     },
     count:function(type){
