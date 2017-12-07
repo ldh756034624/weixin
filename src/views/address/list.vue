@@ -24,7 +24,7 @@
                   <i class='icon' :class="[item.defaultAddress===1 ? 'hasSet':'unSet']"></i>
                   默认地址
                 </p>
-                <span @click='editFn(item)'>
+                <span @click='editFn(item)' class='flex1'>
                   <i class='editIcon'></i>
                   编辑
                 </span>
@@ -173,6 +173,7 @@ export default {
       padding: 25/40rem 0;
       span{
         margin-left: 50/40rem;
+        text-align: right;
       }
     }
     .icon,.editIcon,.delIcon{

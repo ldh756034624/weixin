@@ -2,7 +2,7 @@
 		<div class="page shopPage">
     <div class="scroll-wrap">
       <scroller lock-x scrollbar-y ref="detailScroller" use-pulldown height="100%" @on-pulldown-loading="refresh"  v-model="status1">
-      <div>
+      <div class="mrgb">
         <swiper dots-position="center" auto dots-class="custom-bottom">
           <swiper-item class="swiper-demo-img"  v-for="(item, index) in shopTop" height="12.5rem" :key="index" @click.native='goLinkFn(item)'>
             <img :src="item.imgUrl">
@@ -118,6 +118,9 @@ export default {
 <style scoped lang='less'>
   .shopPage{
     overflow-y: auto;
+    .mrgb{
+      padding-bottom: 110/40rem;
+    }
     .shopTopImg{
       height: 400/40rem;
       width: 100%;
@@ -163,7 +166,7 @@ export default {
     }
     .exchangeBox{
       background: #fff;
-      margin-bottom: 110/40rem;
+      margin-bottom: 20/40rem;
       font-size: 30/40rem;
       line-height: 45/40rem;
       .title{
@@ -195,7 +198,7 @@ export default {
   }
   @media screen and (max-width: 340px){
     .exchangeBox{
-      margin-bottom: 140/40rem!important;
+      margin-bottom: 40/40rem!important;
     }
   }
 </style>

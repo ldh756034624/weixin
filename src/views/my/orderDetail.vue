@@ -31,7 +31,7 @@
           <label>面值</label>{{orderDetailData.rechargeMoney}}
         </p>
         <p>
-          <label>券号</label>{{orderDetailData.couponsNumber.substr(0,25)}}...
+          <label>券号</label><span class='cuponNum'>{{orderDetailData.couponsNumber}}</span>
         </p>
       </div>
     </div>
@@ -149,6 +149,11 @@ export default {
       color: #999;
       display: inline-block;
       width: 160/40rem;
+    }
+    .cuponNum{
+      display: inline-block;
+      width: 440/40rem;
+      vertical-align: middle;
     }
   }
   .orderBottomBtn{
