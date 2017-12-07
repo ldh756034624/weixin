@@ -46,7 +46,7 @@
         <x-button class='gradientBtn' v-if="type!=='exchange' && type!=='indexddExchange'" @click.native="goBack">完成</x-button>
         <x-button class='gradientBtn' v-if="!coponShow" @click.native="goBackDD">完成</x-button>  <!--和复制券号联合使用的按钮-->
       </div>
-      
+
     </div>
     <input type="text" ref="copyInput" class="copy-input">
   </div>
@@ -55,6 +55,9 @@
   import {Group, Cell, XInput, XButton} from 'vux'
 
   export default {
+    created() {
+      sessionStorage.isInResult = true
+    },
     mounted() {
       let self = this;
       if (self.type === 'funds') {
@@ -179,6 +182,6 @@
         margin: 0 35/40rem;
       }
     }
-    
+
   }
 </style>

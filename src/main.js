@@ -28,6 +28,19 @@ const routes = RouterConfig
 const router = new VueRouter({
   routes
 })
+router.beforeEach((to, from, next) => {
+  // 下面这段拦截用于处理：如果处于结果页，手机点击返回，直接跳转到个人中心
+  if (sessionStorage.isInResult === 'true') {
+    if (from.path === '/account/result') {
+      sessionStorage.isInResult = false
+      next('/account/personal')
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
 let store = new Vuex.Store({
   state:{
     longitude:0,
