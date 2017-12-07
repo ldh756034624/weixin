@@ -29,9 +29,10 @@ const router = new VueRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
-  // 下面这段拦截用于处理：如果处于结果页，手机点击返回，直接跳转到个人中心
+  // 下面这段拦截用于处理：如果处于结果页，手机点击返回，分别做跳转
+  console.log('from',from)
   if (sessionStorage.isInResult === 'true') {
-    if (from.path === '/account/result') {
+    if (from.path === '/account/result' && from.query.type === 'vMoneyExchange') {  // 如果来自v币兑换，点返回到个人中心
       sessionStorage.isInResult = false
       next('/account/personal')
     } else {
