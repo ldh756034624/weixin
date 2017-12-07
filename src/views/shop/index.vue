@@ -5,7 +5,7 @@
       <div class="mrgb">
         <swiper dots-position="center" auto dots-class="custom-bottom">
           <swiper-item class="swiper-demo-img"  v-for="(item, index) in shopTop" height="12.5rem" :key="index" @click.native='goLinkFn(item)'>
-            <img :src="item.imgUrl">
+            <img :src="item.imgUrl" width="100%" height="100%">
           </swiper-item>
         </swiper>
         <flexbox :gutter="0" class='shopMoneyFlexBox'>
@@ -47,7 +47,7 @@
               </flexbox-item>
             </flexbox>
           </div>
-          
+
         </section>
       </div>
       <div slot="pulldown" class="xs-plugin-pulldown-container xs-plugin-pulldown-down" style="position: absolute; width: 100%; height: 60px; line-height: 60px; top: -60px; text-align: center;">
@@ -56,7 +56,7 @@
         <span v-show="status1.pulldownStatus === 'loading'"><spinner type="ios-small"></spinner></span>
       </div>
     </scroller>
-  </div>   
+  </div>
       <Bottombar :index="1"></Bottombar>
 		</div>
 </template>

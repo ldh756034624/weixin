@@ -17,7 +17,7 @@
       </main>
       <footer>
         <div>
-          <x-button class='bottomBtn gradientBtn' @click.native="goExchange">立即兑换</x-button>
+          <x-button class='bottomBtn gradientBtn' :class="shopData.stock == 0 && 'grayBtn'" @click.native="goExchange">立即兑换</x-button>
         </div>
       </footer>
 		</div>
@@ -47,6 +47,17 @@ export default {
         })
     },
     goExchange:function(){
+//      let userBalance =  parseFloat(this.shopData.balance)
+//      let price = parseFloat(this.shopData.price)
+      let {price, balance, stock} = this.shopData
+      if(balance < price) {
+        _g.toastMsg('error', '余额不足')
+        return
+      }
+      if(stock == 0) {
+        _g.toastMsg('error', '库存不足')
+        return
+      }
       this.$router.push({path:'/shopOrder',query:{id:this.$route.query.id}})
     },
     deviceFn:function(){
@@ -81,7 +92,7 @@ export default {
     }
     .joyMoney{
       color: #627984;
-      font-size: 36/40rem; 
+      font-size: 36/40rem;
     }
     .descBox{
       background: #fff;
@@ -115,6 +126,9 @@ export default {
       text-align: center;
       font-size: 32/40rem;
     }
+    .grayBtn{
+      background: #ccc;
+    }
   }
-  
+
 </style>
