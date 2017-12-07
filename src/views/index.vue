@@ -329,8 +329,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    /*background: #fff;*/
-    background:red;
+    background: #fff;
     display: table;
     .cellBox{
       display: table-cell;
