@@ -13,7 +13,7 @@
           </router-link>
       </div>
        <flexbox :gutter="0">
-          <flexbox-item>
+          <flexbox-item class="item-wrapper">
             <router-link :to="{path:'/account/purse',query:{balance:personalData.balance,limit:personalData.withdrawalCount}}">
               <div class="personalItemBox">
                 <p class="redFont">{{personalData.balance  || 0 | price2}}</p>
@@ -21,15 +21,15 @@
               </div>
             </router-link>
           </flexbox-item>
-          <flexbox-item>
-              <div class="personalItemBox ItemBorder" @click="goVB">
+          <flexbox-item v-if="personalData.vb != 0">
+         <div class="personalItemBox border-left" @click="goVB">
                 <p class="redFont">{{personalData.vb || 0.00}}</p>
                 <p>V币</p>
               </div>
           </flexbox-item>
           <flexbox-item>
             <router-link to="/my/cupon">
-              <div class="personalItemBox">
+              <div class="personalItemBox border-left">
                 <p class="redFont">{{personalData.cardNum || 0}}</p>
                 <p>卡券</p>
               </div>
@@ -178,9 +178,8 @@ export default {
     .personalItemBox p:last-child{
       margin-top: 55/40rem;
     }
-    .ItemBorder{
+    .border-left{
       border-left:1px solid #d9d9d9;
-      border-right:1px solid #d9d9d9;
     }
     @media screen and (max-width: 360px){
       .accountCont{
