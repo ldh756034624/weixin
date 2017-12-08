@@ -1,8 +1,8 @@
 <template>
 		<div class="page addrChangePage">
       <group class='groupNoTop groupNoLine'>
-        <x-input title='收货人' v-model='addressParams.name' :min='2' :max='20'></x-input>
-        <x-input title='联系方式' v-model='addressParams.phone' :min='7' :max='16' type='tel' is-type='china-mobile'></x-input>
+        <x-input title='收货人' :show-clear="false" v-model='addressParams.name' :min='2' :max='20'></x-input>
+        <x-input title='联系方式' :show-clear="false" v-model='addressParams.phone' :min='7' :max='16' type='tel' is-type='china-mobile'></x-input>
         <addr ref='addres'></addr>
         <x-textarea title="详细地址" v-model="addressParams.address" :max='200' :show-counter='false' placeholder='街道、楼牌号等'></x-textarea>
         <p class="default" @click='isDefault=!isDefault'><span class='defaultIcon ' :class="[isDefault ? 'hasSet':'unSet']"></span> 设为默认</p>
@@ -33,7 +33,7 @@ export default {
       this.addressParams=editObj;
       this.$refs.addres.pid=editObj.pid
       this.$refs.addres.cid=editObj.cid
-      
+
       if(editObj.distict){
         this.$refs.addres.addr=editObj.province+editObj.city+editObj.distict
         this.$refs.addres.aid=editObj.aid
@@ -149,7 +149,7 @@ export default {
       background-size: 100%;
     }
   }
-  
+
   .bottomBtn {
     height: 100/40rem;
     line-height: 100/40rem;

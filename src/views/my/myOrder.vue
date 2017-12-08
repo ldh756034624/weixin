@@ -21,9 +21,9 @@
                     <span class='redFont' :class="{'redFt':item.status==='已完成'}">{{item.status}}</span>
                   </div>
                   <div class="flexBox orderContBox" @click='goOrderDetail(item)'>
-                    <img class="orderImg" :src="item.goodsInfoList[0].imgUrl"/>
+                    <img class="orderImg" v-if="item.goodsInfoList.length > 0" :src="item.goodsInfoList[0].imgUrl"/>
                     <div class="flex1">
-                      <p class="orderText">{{item.goodsInfoList[0].goodsName}}</p>
+                      <p class="orderText" v-if="item.goodsInfoList.length > 0">{{item.goodsInfoList[0].goodsName}}</p>
                     </div>
                   </div>
                 </div>
@@ -35,8 +35,8 @@
   </div>
 </template>
 <script>
-import blankPage from '@/components/blankPage' 
-import PullHeaderFooter from '@/components/pullHeaderFooter' 
+import blankPage from '@/components/blankPage'
+import PullHeaderFooter from '@/components/pullHeaderFooter'
 import {Scroller} from 'vux'
 export default {
   mounted(){
@@ -105,7 +105,7 @@ export default {
     goOrderDetail:function(item){
       this.$router.push({path:'/my/orderDetail',query:{orderId:item.orderId}})
     }
-    
+
   },
   components: {
     PullHeaderFooter,Scroller,blankPage
