@@ -26,6 +26,7 @@
           .then(function (res) {
             if (res.data.code == 0) {
               self.articleData = res.data.data
+              console.log(res.data)
               console.log(res.data.data)
               if (self.articleData.content.indexOf('div') != -1 || self.articleData.content.indexOf('p') != -1) {
                 self.isHtml = true
