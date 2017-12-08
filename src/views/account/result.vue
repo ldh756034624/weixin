@@ -36,10 +36,8 @@
       </router-link>
     </div>
     <div class="fundsBtnBox" v-else>
-      <div v-if="type==='vMoneyExchange'">
-        <router-link to='/account/purse'>
-          <x-button class='gradientBtn'>进入钱包</x-button>
-        </router-link>
+      <div v-if="type==='vMoneyExchange'" @click="goPurse">
+        <x-button class='gradientBtn'>进入钱包</x-button>
       </div>
       <div v-else>
         <x-button class='gradientBtn' v-if="(type==='exchange' || type==='indexddExchange') && coponShow" @click.native="copy">复制券号</x-button>
@@ -82,6 +80,10 @@
       }
     },
     methods: {
+      goPurse() {
+//        sessionStorage.isInResult = false
+        this.$router.push('/account/purse')
+      },
       goBack: function () {
         if(this.type==='indexRecharge'){
           this.$router.replace({path:'/account/phoneRecharge'})
