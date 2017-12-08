@@ -38,6 +38,9 @@
 </script>
 <style lang='less' scoped>
   .dealPage {
-    padding: 20/40rem;
+    width: 96%;
+    height:100%;
+    overflow-y: scroll;
+    padding:3% 3%;
   }
 </style>
