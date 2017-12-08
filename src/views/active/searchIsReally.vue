@@ -64,7 +64,7 @@
       self.setTitle('查询真伪');
       self.init();
       self.getDeal('queryCode').then(function (data) {
-        self.DealData = data.data
+        self.DealData = data.data.content
       })
     },
     data() {

@@ -5,11 +5,11 @@
           <p v-show='show' @click='show=false' class="alignR"><span class='close'></span></p>
           <!-- <p class='dealName'>用户协议</p> -->
           <div v-html='DealData'>
-            
+
           </div>
         </div>
   </div>
-</template>    
+</template>
 <script>
 import { Popup,TransferDom} from 'vux'
 export default {
@@ -19,7 +19,7 @@ export default {
   mounted () {
     let self=this;
     self.getDeal(this.dealType).then(function(data){
-      self.DealData=data.data
+      self.DealData=data.data.content
     })
   },
   props:{
@@ -49,7 +49,7 @@ export default {
 	},
    components: {
     Popup,
-    TransferDom,  
+    TransferDom,
   },
 }
 

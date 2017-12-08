@@ -59,7 +59,7 @@ export default {
     self.setTitle('抢红包');
 
     self.getDeal('lotterySimple').then(function(data){
-      self.DealData=data.data
+      self.DealData=data.data.content
     })
     self.getdata();
     self.$watch('differentDate',function(val){

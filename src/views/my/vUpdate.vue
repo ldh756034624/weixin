@@ -23,7 +23,7 @@
         <div class="vUpdateBtnBox">
           <x-button class='exchangeBtn' @click.native="showTip=true">立即兑换  </x-button>
         </div>
-      </main> 
+      </main>
       <div v-transfer-dom>
         <x-dialog v-model='showTip'>
           <div class="vMoneyAlert">
@@ -34,7 +34,7 @@
             <x-button class='alertBtn exchangeBtn' mini @click.native="exchangeFn">兑换成酒元</x-button>
           </div>
         </x-dialog>
-      </div> 
+      </div>
       <div v-transfer-dom>
         <popup v-model="showUserDeal" height="100%" class='dealPopup'>
           <platformDeal v-model="showUserDeal" :dealType='dealStr' v-on:listenToDealShow='dealShowFn'></platformDeal>
@@ -54,7 +54,7 @@ export default {
     this.setTitle('v币升级');
     this.init()
     this.getDeal('vbConvetDescription').then(data=>{
-      this.DealData=data.data
+      this.DealData=data.data.content
     })
   },
   data() {
