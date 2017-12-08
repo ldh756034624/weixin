@@ -170,6 +170,7 @@ export default {
       margin:46/40rem 0;
       .redFont{
         font-size: 48/40rem;
+        color: #627984;
       }
       .font12{
         font-size: 24/40rem;
