@@ -68,13 +68,17 @@ export default [
       component (resolve) {require(['@/views/account/setting'], resolve)} //设置
     },{
       path:'/account/problems',
-      component (resolve) {require(['@/views/account/problems'], resolve)} //常见问题 
+      component (resolve) {require(['@/views/account/problems'], resolve)} //常见问题
     },{
       path:'/account/articleDetail',
       component (resolve) {require(['@/views/account/articleDetail'], resolve)} //文章详情
     },{
       path:'/account/noticeDetail',
-      component (resolve) {require(['@/views/account/noticeDetail'], resolve)} //公告详情 
+      component (resolve) {require(['@/views/account/noticeDetail'], resolve)} //公告详情
+    },
+    {
+      path:'/account/descDetail',
+      component (resolve) {require(['@/views/account/descDetail'], resolve)} //酒元说明
     },{
       path:'/account/purseParticulars',
       component (resolve) {require(['@/views/account/purseParticulars'], resolve)} //钱包明细
@@ -83,10 +87,10 @@ export default [
       component (resolve) {require(['@/views/account/funds'], resolve)} //提现
     },{
       path:'/account/chooseBank',
-      component (resolve) {require(['@/views/account/chooseBank'], resolve)} //选择银行卡 
+      component (resolve) {require(['@/views/account/chooseBank'], resolve)} //选择银行卡
     },{
       path:'/account/addBank',
-      component (resolve) {require(['@/views/account/addBank'], resolve)} //添加银行卡 
+      component (resolve) {require(['@/views/account/addBank'], resolve)} //添加银行卡
     },{
       path:'/account/phoneRecharge',
       component (resolve) {require(['@/views/account/phoneRecharge'], resolve)} //手机充值
