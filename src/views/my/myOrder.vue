@@ -18,7 +18,7 @@
                   <div class="flexBox">
                     <img class="orderIcons" :src="item.companyIcon"/>
                     <p class="flex1">{{item.company}}</p>
-                    <span class='redFont' :class="{'redFt':item.status==='已完成'}">{{item.status}}</span>
+                    <span class='redFt'>{{item.status}}</span>
                   </div>
                   <div class="flexBox orderContBox" @click='goOrderDetail(item)'>
                     <img class="orderImg" v-if="item.goodsInfoList.length > 0" :src="item.goodsInfoList[0].imgUrl"/>
