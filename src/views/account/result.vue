@@ -19,14 +19,14 @@
     <div class="resultText" v-if="type==='vMoneyExchange'">
       <p style="margin-top:30px">V币将成功兑换为酒元，请到我的钱包页查看</p>
     </div>
-    <div class="resultText" v-if="type==='shopExchange'">
+    <!-- <div class="resultText" v-if="type==='shopExchange'">
       <p>兑换商品:{{goodsName}}</p>
       <p>我们将尽快为您发货,请留意订单信息</p>
-    </div>
-    <!-- <div class="shopResultText" v-if="type==='shopExchange'">
+    </div> -->
+    <div class="shopResultText" v-if="type==='shopExchange'">
       <p>兑换价格:<label>{{money}}酒元</label></p>
       <p>兑换商品:<label>{{goodsName}}</label></p>
-    </div> -->
+    </div>
     <div class="shopResultBtnBox" v-if="type==='shopExchange'">
       <router-link to='/shop'>
         <x-button mini class='backIndex'>回到首页</x-button>
