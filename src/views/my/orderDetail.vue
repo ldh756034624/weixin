@@ -4,7 +4,7 @@
       <div class="flexBox">
         <img class="orderIcons" :src="orderDetailData.companyIcon"/>
         <p class="flex1">{{orderDetailData.company}}</p>
-        <span class='redFont' :class="{'redFt':orderDetailData.orderStatus==='已完成'}">{{orderDetailData.orderStatus}}</span>
+        <span class='redFt'>{{orderDetailData.orderStatus}}</span>
       </div>
       <div class="flexBox orderContBox" @click='goOrderDetail()'>
         <img class="orderImg" :src="orderDetailData.goodsInfoList[0].imgUrl"/>
