@@ -108,7 +108,7 @@
           return;
         }
         if(this.fundMoney == 0) {
-          _g.toastMsg('error', '您今日可提现金额已用完')
+          _g.toastMsg('error', '您今日可提现金额已达每日提现额度，请明日再来')
           return
         }
         this.codeAlert = true

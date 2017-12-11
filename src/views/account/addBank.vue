@@ -82,7 +82,13 @@ export default {
         _g.toastMsg('error', '请填写完整信息!')
         return;
       }
-      this.codeAlert = true
+      this.$http.post('h9/api/bank/verify',this.cardData).then(res => {   // 校验银行信息通过再打开验证码发送
+        if (res.data.code === 0) {
+          this.codeAlert = true
+        } else {
+          _g.toastMsg('error', res.data.msg)
+        }
+      })
     },
     dealShowFn:function(data){
       let self=this;
@@ -113,7 +119,7 @@ export default {
               }else{  // 跳到 选择银行卡
                 self.$router.replace({path:'/my/myCard'})
               }
-          }else if(res.data.code ===  1){  // 次数过多
+          }else if(res.data.code ===  3){  // 次数过多
             _g.hideLoading()
             self.$refs.codeAlert.hide()
           } else {  // 验证码不正确

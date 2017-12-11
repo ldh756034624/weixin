@@ -90,7 +90,7 @@ export default {
   methods:{
     init(){
       let self = this
-      
+
       self.$http.get('h9/api/user/sms/'+self.phone+'/'+self.type)
         .then(function(res) {
           if(res.data.code==0){
@@ -120,12 +120,12 @@ export default {
     },
     hide() {
       this.showCodeBlur = false
-      this.$emit("CodeAlertStatus",{show:false,codeNum:this.changeCode})
+//      this.$emit("CodeAlertStatus",{show:false,codeNum:this.changeCode})
       _g.hideLoading()
     },
     show() {
       this.showCodeBlur = true
-      this.init()
+//      this.init()
     },
     clearCode() {
       this.changeCode = ''
