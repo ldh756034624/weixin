@@ -117,7 +117,7 @@ export default {
             _g.hideLoading()
             if(res.data.code==0){
               if (res.data.data.lottery) {
-                self.$router.replace({path:'/active/prizeResult',query:{'code':result}})
+                self.$router.push({path:'/active/prizeResult',query:{'code':result}})
                 return
               }
               self.$router.push({path:'/active/hongbaoCode',query:{'code':result}})
