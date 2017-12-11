@@ -79,7 +79,8 @@ export default {
           .then(function(res) {
             if(res.data.code==0){
               _g.hideLoading()
-                 if(self.$route.query.type){
+              self.$refs.codeAlert.hide()
+              if(self.$route.query.type){
                   self.$router.replace({path:'/account/result',query:{type:self.$route.query.type,money:res.data.data.money,num:res.data.data.didiCardNumber}})
                  }else{
                   self.$router.replace({path:'/account/result',query:{type:'exchange',money:res.data.data.money,num:res.data.data.didiCardNumber}})

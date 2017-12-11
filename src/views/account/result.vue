@@ -89,7 +89,9 @@
           this.$router.replace({path:'/account/phoneRecharge'})
         }else if(this.type === 'exchange' || this.type === 'indexddExchange'){
           this.$router.replace({path:'/my/cupon'})
-        }else{
+        }else if (this.type === 'funds') {
+          this.$router.replace({path:'/account/funds'})
+        } else{
           this.$router.replace({path:'/account/purse'})
         }
       },
