@@ -107,6 +107,10 @@
           _g.toastMsg('error', '请选择银行卡!')
           return;
         }
+        if(this.fundMoney == 0) {
+          _g.toastMsg('error', '您今日可提现金额已用完')
+          return
+        }
         this.codeAlert = true
       },
       codeAlertFn: function (data) {

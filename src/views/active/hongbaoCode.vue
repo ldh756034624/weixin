@@ -34,7 +34,7 @@
             </flexbox-item>
           </flexbox>
         </div>
-        <p class="activeNum">当前参与人数:{{prizeData.userCount}}人</p>
+        <p class="activeNum">当前参与人数：{{prizeData.userCount}}人</p>
         <div v-if="prizeData.roomUser" class="prizeBtnBox">
           <p>开奖倒计时: <span>{{countDownTime}}</span></p>
           <x-button mini class='prizeBtn'  @click.native="StarPrizeFn">开始抽奖</x-button>
@@ -246,6 +246,7 @@ export default {
       padding: 20/40rem 0;
       color: #999;
       text-align: right;
+      font-size: 24/40rem;
     }
     .exchangeCont{
       margin: 30/40rem;

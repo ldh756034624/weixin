@@ -101,7 +101,7 @@
         input.value = this.num
         input.select()
         document.execCommand('Copy')
-        _g.toastMsg('error', '复制成功')
+        _g.toastMsg('error', '券号复制成功，打开滴滴出行兑换')
         input.blur()
         this.coponShow = false
       },
