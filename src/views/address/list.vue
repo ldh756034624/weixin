@@ -39,7 +39,7 @@
         </scroller>
       </div>
       <footer>
-        <router-link :to="{path:'addrChange',query:{goodsId:goodsId}}">
+        <router-link :to="{path:'addrChange',query:{goodsId:goodsId, fromOrder}}">
           <div>
             <x-button class='bottomBtn gradientBtn'>添加新地址</x-button>
           </div>
@@ -101,6 +101,7 @@ export default {
     },
     chooseAddrFn:function(item){
       if(this.$route.query.fromOrder){
+        console.log('item', item)
         this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(item)}})
       }
     },

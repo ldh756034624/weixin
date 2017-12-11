@@ -80,7 +80,6 @@ export default {
   .shopDatailePage{
     font-size: 30/40rem;
     .shopImg{
-      height: 400/40rem;
       width: 100%;
     }
     .shopTitleBox{

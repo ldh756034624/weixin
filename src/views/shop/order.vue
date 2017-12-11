@@ -2,10 +2,10 @@
 		<div class="page shopOrderPage">
       <group class=" groupNoTop groupNoLine">
         <cell title="" class='orderAddr' @click.native="goAddrList" is-link>
-          
+
           <span slot='title' v-if='hasAddress'>
             <p>收货人:{{addressData.name}} <i class='phone'>{{addressData.phone}}</i></p>
-            <p>地址:{{addressData.province}}{{addressData.city}}{{addressData.distict}}{{addressData.address}}</p>
+            <p>地址:{{addressData.address}}</p>
           </span>
           <span slot='title' v-else>
             请填写收货地址
@@ -32,7 +32,7 @@
                 <span class='numAdd' @click="count('add')"></span>
               </span>
             </p>
-            <p class="total">共<span>{{countNum}}</span>件商品 
+            <p class="total">共<span>{{countNum}}</span>件商品
               <span class='totalMoney'>小计 : <i class='joyMoney'>{{shopPrice | price2}} 酒元</i></span>
             </p>
           </div>
@@ -61,7 +61,7 @@
         实付酒元:<span class='joyMoney'>{{shopPrice | price2}}酒元</span>
         <x-button class='exchangeBtn' mini @click.native="exchangeFn">立即兑换</x-button>
       </div>
-        
+
 		</div>
 </template>
 
@@ -79,8 +79,14 @@ export default {
       this.addressData.address=Obj.address
       this.addressData.province=Obj.province
       this.addressData.city=Obj.city
-      if(Obj.distict){
-        this.addressData.distict=Obj.distict
+      if(Obj.proCity) { //　如果是从新添加的地址跳过来，就直接显示拼合地址
+        this.addressData.address = Obj.proCity + Obj.address
+      } else {  // 否则就拼一堆
+        if(Obj.distict){  //　如果有区
+          this.addressData.address = Obj.province +Obj.city + Obj.distict + Obj.address
+        } else {
+          this.addressData.address = Obj.province +Obj.city + Obj.address
+        }
       }
       this.hasAddress=true
     }else{
@@ -155,7 +161,7 @@ export default {
               query: {type: 'shopExchange', money: res.data.data.price, goodsName: res.data.data.goodsName}
             })
           }
-        }) 
+        })
     }
   },
   components: {
@@ -288,7 +294,7 @@ export default {
       }
     }
   }
-  
+
 </style>
 <style lang='less'>
   .orderAddr .vux-label{

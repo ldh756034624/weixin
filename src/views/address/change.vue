@@ -100,6 +100,7 @@ export default {
             _g.toastMsg('error','保存成功')
             if(this.$route.query.fromOrder){
               setTimeout(()=>{
+                this.addressParams.proCity = this.$refs.addres.addr
                 this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(this.addressParams)}})
               },1500)
             }else{
