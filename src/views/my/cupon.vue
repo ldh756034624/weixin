@@ -56,7 +56,7 @@
     data() {
       return {
         mycuponData: [],
-        hasItem: false,
+        hasItem: true,
         type: 'cupon'
       }
     },

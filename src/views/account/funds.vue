@@ -97,9 +97,9 @@
       goCard: function () {
         let self = this;
         if (this.hasCard) {
-          self.$router.replace({path: '/account/chooseBank'})
+          self.$router.push({path: '/account/chooseBank'})
         } else {
-          self.$router.replace({path: '/account/addBank', query: {type: 'funds'}})
+          self.$router.push({path: '/account/addBank', query: {type: 'funds'}})
         }
       },
       fundsFn: function () {

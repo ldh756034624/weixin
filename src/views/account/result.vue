@@ -62,8 +62,10 @@
         self.title = '提现'
       } else if (self.type === 'recharge' || self.type === 'indexRecharge') {
         self.title = '充值'
-      } else if (self.type === 'exchange' || self.type === 'indexddExchange' || self.type === 'vMoneyExchange' || self.type === 'shopExchange') {
+      } else if (self.type === 'vMoneyExchange' || self.type === 'shopExchange') {
         self.title = '兑换'
+      } else if (self.type === 'indexddExchange' || self.type === 'exchange') {
+        self.title = '滴滴券兑换'
       }
       self.setTitle(self.title + '成功');
     },
