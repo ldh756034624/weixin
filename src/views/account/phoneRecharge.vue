@@ -82,7 +82,18 @@ export default {
         return;
       }
 //      this.codeAlert=true;
-      this.$refs.codeAlert.show()
+      let data = {
+        id: this.rechargeParams.id,
+        tel: this.reChargePhoneNum
+      }
+      this.$http.post('h9/api/consume/mobile/verify/recharge/', data).then(res => { // 数量和其他校验，通过再发短信
+        if (res.data.code === 0) {
+          this.$refs.codeAlert.show()
+        } else {
+          _g.toastMsg('error', res.msg)
+        }
+      })
+
     },
     hideLoading() {
       _g.hideLoading()

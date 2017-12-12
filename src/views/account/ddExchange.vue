@@ -64,8 +64,17 @@ export default {
         return
       }
       this.couponMoney = item.price
-      this.codeAlert=true;
       this.ddCuponParams.id=item.goodId
+      let data = {
+        id: item.goodId
+      }
+      this.$http.put('h9/api/consume/coupons/convert/verify', data).then(res => { // 数量和其他校验，通过再发短信
+        if (res.data.code === 0) {
+          this.codeAlert=true;
+        } else {
+          _g.toastMsg('error', res.msg)
+        }
+      })
     },
     codeAlertFn:function(data){
       let self = this

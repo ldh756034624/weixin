@@ -111,7 +111,13 @@
           _g.toastMsg('error', '您今日可提现金额已达每日提现额度，请明日再来')
           return
         }
-        this.codeAlert = true
+        this.$http.put(`h9/api/consume/withdraw/verify/${this.bankId}`).then(res => { // 数量和其他校验，通过再发短信
+          if (res.data.code === 0) {
+            this.codeAlert=true
+          } else {
+            _g.toastMsg('error', res.msg)
+          }
+        })
       },
       codeAlertFn: function (data) {
         let self = this
