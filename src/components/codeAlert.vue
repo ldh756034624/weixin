@@ -120,7 +120,11 @@ export default {
     },
     hide() {
       this.showCodeBlur = false
-//      this.$emit("CodeAlertStatus",{show:false,codeNum:this.changeCode})
+      this.canUse=true;
+      this.codeTip='立即发送';
+      this.count=60;
+      clearInterval(this.timer);
+      this.$emit("CodeAlertStatus",{show:false,codeNum:this.changeCode})
       _g.hideLoading()
     },
     show() {

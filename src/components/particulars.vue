@@ -65,7 +65,7 @@
     data() {
       return {
         particularsData: [],
-        hasItem: false,
+        hasItem: true,
         type: 'particulars'
       }
     },

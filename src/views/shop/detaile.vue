@@ -50,7 +50,7 @@ export default {
 //      let userBalance =  parseFloat(this.shopData.balance)
 //      let price = parseFloat(this.shopData.price)
       let {price, balance, stock} = this.shopData
-      if(balance < price) {
+      if(parseInt(balance) < parseInt(price)) {
         _g.toastMsg('error', '余额不足')
         return
       }
@@ -126,7 +126,7 @@ export default {
       font-size: 32/40rem;
     }
     .grayBtn{
-      background: #ccc;
+      background: #999;
     }
   }
 

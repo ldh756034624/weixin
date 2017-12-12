@@ -62,6 +62,10 @@ export default {
         _g.toastMsg('error','请输入收货人')
         return;
       }
+      if(this.addressParams.phone.length<2 || this.addressParams.phone.length>20 ){
+        _g.toastMsg('error','请正确填写收货人')
+        return;
+      }
       if(!this.addressParams.phone){
         _g.toastMsg('error','请输入联系方式')
         return;

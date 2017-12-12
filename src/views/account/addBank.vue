@@ -84,7 +84,9 @@ export default {
       }
       this.$http.post('h9/api/bank/verify',this.cardData).then(res => {   // 校验银行信息通过再打开验证码发送
         if (res.data.code === 0) {
+          console.log(this.codeAlert)
           this.codeAlert = true
+          console.log(this.codeAlert)
         } else {
           _g.toastMsg('error', res.data.msg)
         }

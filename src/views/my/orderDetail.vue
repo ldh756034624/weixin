@@ -1,5 +1,5 @@
 <template>
-	<div class="page">
+	<div class="page orderDetailPage">
     <div class="orderBox">
       <div class="flexBox">
         <img class="orderIcons" :src="orderDetailData.companyIcon"/>
@@ -53,7 +53,7 @@
       </div>
     </div>
     <p class="blockTips">订单信息</p>
-    <div class="orderMsgBox">
+    <div class="orderMsgBox mrgBt">
       <p>
         <label>订单号</label>{{orderDetailData.orderId}}
       </p>
@@ -110,6 +110,9 @@ export default {
 </script>
 
 <style scoped lang='less'>
+  .orderDetailPage{
+    overflow-y: auto;
+  }
   .orderBox{
     font-size: 24/40rem;
     background: #fff;
@@ -163,6 +166,9 @@ export default {
     bottom: 0;
     width: 100%;
     text-align: right;
+  }
+  .mrgBt{
+    margin-bottom: 40/40rem;
   }
 </style>
 <style type="text/css" lang='less'>
