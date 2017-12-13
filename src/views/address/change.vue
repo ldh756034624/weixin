@@ -103,14 +103,14 @@ export default {
           if(res.data.code==0){
             _g.toastMsg('error','保存成功')
             if(this.$route.query.fromOrder){
-              if(this.$route.query.isEdit){
-                this.$router.replace({path:'/addrList',query:{goodsId:this.goodsId,fromOrder:this.$route.query.fromOrder}})
-              }else{
+//              if(this.$route.query.isEdit){
+//                this.$router.replace({path:'/addrList',query:{goodsId:this.goodsId,fromOrder:this.$route.query.fromOrder}})
+//              }else{
                 setTimeout(()=>{
                   this.addressParams.proCity = this.$refs.addres.addr
                   this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(this.addressParams)}})
                 },1500)
-              }
+//              }
 
             }else{
               setTimeout(()=>{

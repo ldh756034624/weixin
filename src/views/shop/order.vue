@@ -124,6 +124,8 @@ export default {
             if(res.data.data){
               this.hasAddress=true;
               this.addressData=res.data.data
+              let data = res.data.data
+              this.addressData.address = data.province +data.city + data.distict + data.address
               this.exchangeParams.addressId=res.data.data.id
             }
           }
