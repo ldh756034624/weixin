@@ -107,9 +107,10 @@ export default {
     codeAlertFn:function(data){
       let self = this
       if(data.show===false){
-        self.codeAlert=false;
+        self.codeAlert=false
+        return
       }
-      if(data.show===false && data.codeNum.length===4){
+      if(data.codeNum.length===4){
         self.cardData.smsCode=data.codeNum
         _g.showLoading()
         self.$http.post('h9/api/bankCard/add',this.cardData)

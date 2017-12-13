@@ -57,6 +57,7 @@ export default {
   mounted() {
     this.setTitle('收货地址');
     this.init(1);
+    console.log('goodid', this.$route.query.goodsId)
   },
   data() {
     return {

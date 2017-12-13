@@ -54,7 +54,7 @@ export default {
     self.$watch('changeCode',function(val){
       if(self.changeCode.length==4){
         document.getElementById('codeInput').blur()
-        self.$emit("CodeAlertStatus",{show:false,codeNum:self.changeCode})
+        self.$emit("CodeAlertStatus",{codeNum:self.changeCode})
       }
     })
     self.$watch('showCodeAlert',function(val){

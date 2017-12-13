@@ -78,10 +78,11 @@ export default {
     },
     codeAlertFn:function(data){
       let self = this
-      if(data.show===false){
-        self.codeAlert=false;
+      if(data.show === false){
+        self.codeAlert = false
+        return
       }
-      if(data.show===false && data.codeNum.length===4){
+      if(data.codeNum.length===4){
         self.ddCuponParams.code=data.codeNum
         _g.showLoading()
         self.$http.put('h9/api/consume/didiCard/convert',self.ddCuponParams)

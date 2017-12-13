@@ -98,9 +98,10 @@ export default {
     codeAlertFn:function(data){
       let self = this
       if(data.show===false){
-        self.codeAlert=false;
+        self.codeAlert=false
+        return
       }
-      if(data.show===false && data.codeNum.length===4){
+      if(data.codeNum.length===4){
         self.bindPhoneParam.code=data.codeNum
         self.$http.post('h9/api/user/phone/bind',self.bindPhoneParam)
           .then(function(res) {
