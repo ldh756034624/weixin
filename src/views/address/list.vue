@@ -113,7 +113,7 @@ export default {
         })
     },
     editFn:function(item){
-      this.$router.replace({path:'/addrChange',query:{goodsId:this.goodsId,isEdit:true,addrObj:JSON.stringify(item)}})
+      this.$router.replace({path:'/addrChange',query:{goodsId:this.goodsId,isEdit:true,fromOrder:this.$route.query.fromOrder,addrObj:JSON.stringify(item)}})
     },
     delFn:function(item){
       let self=this;

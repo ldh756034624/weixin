@@ -26,6 +26,7 @@ export default {
   mounted() {
     let self=this;
     this.setTitle('添加新地址');
+    console.log(this.$route.query.fromOrder)
     if(this.$route.query.isEdit){ //编辑状态赋值
       this.setTitle('修改地址');
       var editObj=JSON.parse(this.addrEditObj)
@@ -103,10 +104,15 @@ export default {
 
             _g.toastMsg('error','保存成功')
             if(this.$route.query.fromOrder){
-              setTimeout(()=>{
-                this.addressParams.proCity = this.$refs.addres.addr
-                this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(this.addressParams)}})
-              },1500)
+              if(this.$route.query.isEdit){
+                this.$router.replace({path:'/addrList',query:{id:this.goodsId,fromOrder:this.$route.query.fromOrder}})
+              }else{
+                setTimeout(()=>{
+                  this.addressParams.proCity = this.$refs.addres.addr
+                  this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(this.addressParams)}})
+                },1500)
+              }
+
             }else{
               setTimeout(()=>{
                 this.$router.replace({path:'/addrList',query:{goodsId:this.goodsId}})
