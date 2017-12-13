@@ -65,6 +65,7 @@
       } else if (self.type === 'vMoneyExchange' || self.type === 'shopExchange') {
         self.title = '兑换'
       } else if (self.type === 'indexddExchange' || self.type === 'exchange') {
+        self.title = '兑换'
         self.setTitle('滴滴券兑换')
         return
       }
