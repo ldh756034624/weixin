@@ -116,8 +116,9 @@ export default {
         self.$http.post('h9/api/bankCard/add',this.cardData)
         .then(function(res) {
           if(res.data.code==0){
-              _g.toastMsg('error','绑定成功')
-              if(self.$route.query.type){
+            _g.hideLoading()
+            _g.toastMsg('error','绑定成功')
+            if(self.$route.query.type){
                 self.$router.replace({path:'/account/funds'})
               }else{  // 跳到 选择银行卡
                 self.$router.replace({path:'/my/myCard'})
