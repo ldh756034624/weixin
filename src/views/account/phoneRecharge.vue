@@ -106,7 +106,7 @@ export default {
       if(data.show===false){
         self.codeAlert=false;
       }
-      if(data.show===false && data.codeNum.length===4){
+      if(data.codeNum.length===4){
         this.showLoading()
         self.rechargeParams.code=data.codeNum
         self.$http.post('h9/api/consume/mobile/recharge',self.rechargeParams)
