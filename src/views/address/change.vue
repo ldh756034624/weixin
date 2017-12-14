@@ -108,6 +108,7 @@ export default {
 //              }else{
                 setTimeout(()=>{
                   this.addressParams.proCity = this.$refs.addres.addr
+                  this.addressParams.addressId = res.data.data.id
                   this.$router.replace({path:'/shopOrder',query:{id:this.goodsId,addrObj:JSON.stringify(this.addressParams)}})
                 },1500)
 //              }
