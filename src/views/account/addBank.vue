@@ -125,7 +125,7 @@ export default {
               }
           }else if(res.data.code ===  3){  // 次数过多
             _g.hideLoading()
-            self.$refs.codeAlert.hide()
+//            self.$refs.codeAlert.hide()
           } else {  // 验证码不正确
             _g.hideLoading()
             self.$refs.codeAlert.clearCode()
