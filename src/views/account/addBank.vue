@@ -118,11 +118,11 @@ export default {
           if(res.data.code==0){
             _g.hideLoading()
             _g.toastMsg('error','绑定成功')
-//            if(self.$route.query.type){
-//                self.$router.replace({path:'/account/funds'})
-//              }else{  // 跳到 选择银行卡
-                self.$router.replace({path:'/my/myCard'}) // 只要添加银行卡就跳到选择银行卡页面
-//              }
+            if(self.$route.query.type){
+                self.$router.replace({path:'/account/chooseBank'})
+              }else{  // 跳到 选择银行卡
+                self.$router.replace({path:'/my/myCard'})
+              }
           }else if(res.data.code ===  3){  // 次数过多
             _g.hideLoading()
             self.$refs.codeAlert.hide()
