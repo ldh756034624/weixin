@@ -36,7 +36,8 @@
             </div>
           </div>
         </div>
-        <pull-header-footer v-if="showStatusFooter" :status-up="pullupStatus" :status-down="pulldownStatus"></pull-header-footer>
+        <pull-header-footer v-if="showStatusFooter" :status-up="pullupStatus"
+                            :status-down="pulldownStatus"></pull-header-footer>
       </scroller>
       <blankPage v-show='!hasItem' :blankType='type'></blankPage>
 
@@ -71,11 +72,11 @@
       }
     },
     methods: {
-    /**
-     * @param page [页码]
-     * @param isPullUp [是否上拉，如果上拉，就显示footerStatus]
-     */
-    init(page, isPullUp) {
+      /**
+       * @param page [页码]
+       * @param isPullUp [是否上拉，如果上拉，就显示footerStatus]
+       */
+      init(page, isPullUp) {
         let self = this
         if (page === 1) {
           self.particularsData = []
@@ -83,7 +84,9 @@
         self.$http.get(self.particularsUrl + '?page=' + page + '&limit=10')
           .then(function (res) {
             if (res.data.code == 0) {
-              isPullUp && (this.showStatusFooter = true)  // 是否上拉，如果上拉，就显示footerStatus
+              if (isPullUp) {
+                this.showStatusFooter = true
+              }
               if (res.data.data.data.length > 0) {
                 self.particularsData = [...self.particularsData, ...res.data.data.data]
                 self.hasItem = true
