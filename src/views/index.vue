@@ -171,7 +171,7 @@ export default {
         })
      },
      goLinkFn:function(item){
-        if((item.link).indexOf('http')!=-1){
+        if((item.link).indexOf('http')!=-1 || (item.link).indexOf('https')!=-1){
           window.open(item.link)
         }else{
           //抢红包 "link:"lottery"/滴滴兑换 "link:"exchange_didi"/手机充值"link:"exchange_telephoneFare"/查询真伪 “link”:"validate"
