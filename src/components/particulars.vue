@@ -85,7 +85,7 @@
           .then(function (res) {
             if (res.data.code == 0) {
               if (isPullUp) {
-                this.showStatusFooter = true
+                self.showStatusFooter = true
               }
               if (res.data.data.data.length > 0) {
                 self.particularsData = [...self.particularsData, ...res.data.data.data]
