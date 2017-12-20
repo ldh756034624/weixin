@@ -74,9 +74,8 @@
     methods: {
       /**
        * @param page [页码]
-       * @param isPullUp [是否上拉，如果上拉，就显示footerStatus]
        */
-      init(page, isPullUp) {
+      init(page) {
         let self = this
         if (page === 1) {
           self.particularsData = []
@@ -84,9 +83,6 @@
         self.$http.get(self.particularsUrl + '?page=' + page + '&limit=10')
           .then(function (res) {
             if (res.data.code == 0) {
-              if (isPullUp) {
-                self.showStatusFooter = true
-              }
               if (res.data.data.data.length > 0) {
                 self.particularsData = [...self.particularsData, ...res.data.data.data]
                 self.hasItem = true
@@ -118,9 +114,10 @@
       },
       loadMore() {
         let self = this;
+        self.showStatusFooter = true
         if (self.page.hasNext) {
           setTimeout(() => {
-            self.init(self.page.currPage, true)
+            self.init(self.page.currPage)
           }, 2000)
         }
       },
