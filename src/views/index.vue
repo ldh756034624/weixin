@@ -106,7 +106,7 @@ export default {
   },
   mounted () {
     let self=this;
-    self.setTitle('快乐之家');
+    self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
     let userObj = JSON.parse(localStorage.getItem('_user'))
     if(!userObj){
