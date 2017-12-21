@@ -11,7 +11,7 @@
                         </swiper-item>
                       </swiper>
                     </div>
-                    <div class="flexBox verticalScroll" v-if='homeData.noticeArticle'>
+                    <div class="flexBox verticalScroll" v-if='homeData.noticeArticle && homeData.noticeArticle.length > 0'>
                       <img src="../assets/img/index/mainpage_icon_notification_@2x.png" class="indexRadio" />
                       <div class="flex1">
                         <swiper auto height="40px" direction="vertical" :interval=2000 class="" :show-dots="false">
@@ -106,7 +106,7 @@ export default {
   },
   mounted () {
     let self=this;
-    self.setTitle('快乐之家');
+    self.setTitle('欢乐之家');
     self.WxCode = self.$route.query.code;
     let userObj = JSON.parse(localStorage.getItem('_user'))
     if(!userObj){
@@ -171,7 +171,7 @@ export default {
         })
      },
      goLinkFn:function(item){
-        if((item.link).indexOf('http')!=-1){
+        if((item.link).indexOf('http')!=-1 || (item.link).indexOf('https')!=-1){
           window.open(item.link)
         }else{
           //抢红包 "link:"lottery"/滴滴兑换 "link:"exchange_didi"/手机充值"link:"exchange_telephoneFare"/查询真伪 “link”:"validate"

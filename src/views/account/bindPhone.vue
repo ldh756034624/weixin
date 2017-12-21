@@ -9,7 +9,7 @@
           <x-button slot="right" class='codeBtn' mini @click.native="getCodeFn()" :disabled='!canUse'>{{codeTip}}</x-button>
         </x-input>
         <div class="dealBox">
-          温馨提示:未注册快乐之家账号的手机号，登录时将自动注册，且代表您已同意
+          温馨提示:未注册欢乐之家账号的手机号，登录时将自动注册，且代表您已同意
           <span v-on:click="showUserDeal=true" class='blueFont'>《用户服务协议》</span>
         </div>
         <div class="fundsBtnBox">

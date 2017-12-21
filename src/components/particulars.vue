@@ -36,7 +36,8 @@
             </div>
           </div>
         </div>
-        <pull-header-footer :status-up="pullupStatus" :status-down="pulldownStatus"></pull-header-footer>
+        <pull-header-footer v-if="showStatusFooter" :status-up="pullupStatus"
+                            :status-down="pulldownStatus"></pull-header-footer>
       </scroller>
       <blankPage v-show='!hasItem' :blankType='type'></blankPage>
 
@@ -66,10 +67,14 @@
       return {
         particularsData: [],
         hasItem: true,
-        type: 'particulars'
+        type: 'particulars',
+        showStatusFooter: false  // 底部没有更多等数据状态栏
       }
     },
     methods: {
+      /**
+       * @param page [页码]
+       */
       init(page) {
         let self = this
         if (page === 1) {
@@ -109,6 +114,7 @@
       },
       loadMore() {
         let self = this;
+        self.showStatusFooter = true
         if (self.page.hasNext) {
           setTimeout(() => {
             self.init(self.page.currPage)

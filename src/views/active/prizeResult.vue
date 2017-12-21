@@ -18,7 +18,7 @@
           </div>
           <div v-else class="prizeGet">
             <p class="account">红包已放置账户:{{prizeAccount}}</p>
-            <p>登录App或快乐之家社区即可使用</p>
+            <p>登录App或欢乐之家社区即可使用</p>
           </div>
 
         </div>
