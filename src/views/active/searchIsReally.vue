@@ -51,7 +51,7 @@
         {{errMsg}}
       </div>
     </div>
-    <div class="searchDesc" v-html='DealData'>
+    <div class="searchDesc" v-if="DealData" v-html='DealData'>
     </div>
   </div>
 </template>
