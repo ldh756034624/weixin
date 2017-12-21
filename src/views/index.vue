@@ -11,7 +11,7 @@
                         </swiper-item>
                       </swiper>
                     </div>
-                    <div class="flexBox verticalScroll" v-if='homeData.noticeArticle'>
+                    <div class="flexBox verticalScroll" v-if='homeData.noticeArticle && homeData.noticeArticle.length > 0'>
                       <img src="../assets/img/index/mainpage_icon_notification_@2x.png" class="indexRadio" />
                       <div class="flex1">
                         <swiper auto height="40px" direction="vertical" :interval=2000 class="" :show-dots="false">
