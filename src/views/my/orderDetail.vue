@@ -9,7 +9,7 @@
       <div class="flexBox orderContBox" @click='goOrderDetail()'>
         <img class="orderImg" :src="orderDetailData.goodsInfoList[0].imgUrl"/>
         <div class="flex1">
-          <p class="orderText">{{orderDetailData.goodsInfoList[0].goodsName}}</p>
+          <p class="orderText">{{orderDetailData.goodsInfoList[0].goodsName}}x{{orderDetailData.goodsInfoList.length}}</p>
         </div>
       </div>
     </div>
