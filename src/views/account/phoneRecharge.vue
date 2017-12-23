@@ -121,7 +121,7 @@ export default {
                 }
             } else if(res.data.code ===  3){  // 如果提现次数过多
               this.hideLoading()
-//              self.$refs.codeAlert.hide()
+              self.$refs.codeAlert.hide()
             } else {  // 验证码不正确
               this.hideLoading()
               self.$refs.codeAlert.clearCode()
