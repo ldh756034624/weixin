@@ -58,9 +58,6 @@
       let self = this;
       self.setTitle('抢红包');
       self.init();  // 初始化
-      this.$http.get('/h9/api/redirect?client=' + 1).then(res => {  // todo
-        console.log(res)
-      })
     },
     data() {
       return {
@@ -126,14 +123,27 @@
         var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
         var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
         if (isAndroid) {
-          _g.toastMsg('error', '开发中!')
-          this.$http.get('/h9/api/redirect?client=' + 1).then(res => { // todo
-            console.log(res)
-          })
+          this.goDownAppLink(1)
         } else {
-          window.location = "https://itunes.apple.com/cn/app/%E7%8C%AA%E7%8C%AA%E9%9B%86%E5%B8%82/id1173387307?mt=8"
+          this.goDownAppLink(2)
         }
       },
+      /**
+       * 获取下载app的链接并跳转
+       * @param type [IOS：2 安卓：1]
+       */
+      goDownAppLink(type) {
+        this.$http.get('/h9/api/redirect?client=' + type).then(res => {
+          if (res.data.code === 0) {
+            let link = res.data.data.redirect
+            if (link) {
+              window.location.href = link
+            } else {
+              _g.toastMsg('error', '暂时没有下载链接')
+            }
+          }
+        })
+      }
     },
     components: {
       XInput, XButton, codeAlert
