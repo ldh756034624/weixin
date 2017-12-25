@@ -106,6 +106,9 @@ export default {
       if(data.show===false){
         self.codeAlert=false;
       }
+      if (data.justHide) {
+        return
+      }
       if(data.codeNum.length===4){
         this.showLoading()
         self.rechargeParams.code=data.codeNum
@@ -121,7 +124,7 @@ export default {
                 }
             } else if(res.data.code ===  3){  // 如果提现次数过多
               this.hideLoading()
-              self.$refs.codeAlert.hide()
+              self.$refs.codeAlert.hide(true)
             } else {  // 验证码不正确
               this.hideLoading()
               self.$refs.codeAlert.clearCode()
