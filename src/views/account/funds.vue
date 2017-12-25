@@ -11,8 +11,8 @@
               </div>
             </span>
         <!--<span v-else>-->
-              <!--添加银行卡-->
-            <!--</span>-->
+        <!--添加银行卡-->
+        <!--</span>-->
       </cell>
     </group>
     <group class="fundsBox  groupNoLine">
@@ -107,13 +107,13 @@
           _g.toastMsg('error', '请选择银行卡!')
           return;
         }
-        if(this.fundMoney == 0) {
+        if (this.fundMoney == 0) {
           _g.toastMsg('error', '您今日可提现金额已达每日提现额度，请明日再来')
           return
         }
         this.$http.post(`h9/api/consume/withdraw/verify/${this.bankId}`).then(res => { // 数量和其他校验，通过再发短信
           if (res.data.code === 0) {
-            this.codeAlert=true
+            this.codeAlert = true
           } else {
             _g.toastMsg('error', res.msg)
           }
@@ -123,6 +123,9 @@
         let self = this
         if (data.show === false) {
           self.codeAlert = false;
+        }
+        if (data.justHide) {
+          return
         }
         if (data.codeNum.length === 4) {
           _g.showLoading()
@@ -136,9 +139,9 @@
                   path: '/account/result',
                   query: {type: 'funds', money: res.data.data.money, time: res.data.data.time}
                 })
-              } else if(res.data.code ===  3){  // 如果提现次数过多
+              } else if (res.data.code === 3) {  // 如果提现次数过多
                 _g.hideLoading()
-//                self.$refs.codeAlert.hide()
+                self.$refs.codeAlert.hide(true)
               } else {  // 验证码不正确
                 _g.hideLoading()
                 self.$refs.codeAlert.clearCode()

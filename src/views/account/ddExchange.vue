@@ -80,6 +80,8 @@ export default {
       let self = this
       if(data.show === false){
         self.codeAlert = false
+      }
+      if (data.justHide) {
         return
       }
       if(data.codeNum.length===4){

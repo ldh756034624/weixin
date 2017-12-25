@@ -118,14 +118,18 @@ export default {
         clearInterval(this.timer);
       }
     },
-    hide() {
+    hide(justHide) {
       this.showCodeBlur = false
       this.canUse=true;
       this.codeTip='立即发送';
       this.count=60;
       clearInterval(this.timer);
-      this.$emit("CodeAlertStatus",{show:false,codeNum:this.changeCode})
       _g.hideLoading()
+      if (justHide) { // justHide 单纯的隐藏，不触发外面的回调事件
+        this.$emit("CodeAlertStatus",{show:false,codeNum:this.changeCode, justHide: true})
+      } else {
+        this.$emit("CodeAlertStatus",{show:false,codeNum:this.changeCode})
+      }
     },
     show() {
       this.showCodeBlur = true
