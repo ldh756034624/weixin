@@ -78,7 +78,7 @@ export default {
                 self.userHeadImg=self.userimg
               }
               if(!self.infoData.birthday){
-                self.infoData.birthday='1980-01-01'
+                self.infoData.birthday='无'
               }
           }else{
              _g.toastMsg('error',res.data.msg);
