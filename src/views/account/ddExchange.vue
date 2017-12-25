@@ -72,7 +72,7 @@ export default {
         if (res.data.code === 0) {
           this.codeAlert=true;
         } else {
-          _g.toastMsg('error', res.msg)
+          _g.toastMsg('error', res.data.msg)
         }
       })
     },
