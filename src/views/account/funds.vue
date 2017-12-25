@@ -134,7 +134,7 @@
               if (res.data.code == 0) {
                 _g.hideLoading()
                 _g.toastMsg('error', '提现成功!')
-                self.$refs.codeAlert.hide()
+                self.$refs.codeAlert.hide(true)
                 self.$router.replace({
                   path: '/account/result',
                   query: {type: 'funds', money: res.data.data.money, time: res.data.data.time}

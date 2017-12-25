@@ -91,7 +91,7 @@ export default {
           .then(function(res) {
             if(res.data.code==0){
               _g.hideLoading()
-              self.$refs.codeAlert.hide()
+              self.$refs.codeAlert.hide(true)
               if(self.$route.query.type){
                   self.$router.replace({path:'/account/result',query:{type:self.$route.query.type,money:res.data.data.money,num:res.data.data.didiCardNumber}})
                  }else{
@@ -99,7 +99,7 @@ export default {
                  }
             }else if(res.data.code ===  3){  // 如果提现次数过多
               _g.hideLoading()
-              self.$refs.codeAlert.hide()
+              self.$refs.codeAlert.hide(true)
             } else {  // 验证码不正确
               _g.hideLoading()
               self.$refs.codeAlert.clearCode()
