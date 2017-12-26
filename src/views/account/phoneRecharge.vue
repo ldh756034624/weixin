@@ -63,7 +63,7 @@ export default {
     chooseMoney:function(item,index){
       this.rechargeParams.id=item.id
       this.rechargeMoney=item.realPrice
-      if(parseInt(this.rechargeData.balance) > parseInt(this.rechargeMoney)){
+      if(parseFloat(this.rechargeData.balance) >= parseFloat(this.rechargeMoney)){
         this.canUse=true;
         this.rechargeChoosed=index;
       }else{
