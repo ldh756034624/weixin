@@ -9,7 +9,7 @@
       </group>
       <footer>
         <div>
-          <x-button class='bottomBtn gradientBtn' :disabled='!canUse' @click.native="save">保存</x-button>
+          <x-button class='bottomBtn gradientBtn' @click.native="save">保存</x-button>
         </div>
       </footer>
 		</div>
@@ -30,7 +30,6 @@ export default {
     if(this.$route.query.isEdit){ //编辑状态赋值
       this.setTitle('修改地址');
       var editObj=JSON.parse(this.addrEditObj)
-      console.log(editObj.distict)
       this.addressParams=editObj;
       this.$refs.addres.pid=editObj.pid
       this.$refs.addres.cid=editObj.cid
@@ -52,7 +51,6 @@ export default {
       addressParams:{},
       address:[],
       isDefault:false,
-      canUse:true,
       goodsId:this.$route.query.goodsId,
       addrEditObj:this.$route.query.addrObj
     }
@@ -97,7 +95,6 @@ export default {
       }else{
         postUrl='h9/api/address/add'
       }
-      this.canUse=false
       this.$http.post(postUrl,this.addressParams)
         .then((res)=>{
           if(res.data.code==0){
