@@ -99,7 +99,7 @@
         if (this.hasCard) {
           self.$router.push({path: '/account/chooseBank'})
         } else {
-          self.$router.push({path: '/account/addBank', query: {type: 'funds'}})
+          self.$router.push({path: '/account/addBank', query: {type: 'funds', hasCard: 0}})
         }
       },
       fundsFn: function () {
