@@ -30,6 +30,13 @@
                   <p>{{item.title}}</p>
                 </div>
               </flexbox-item>
+              <flexbox-item :span="1/4">
+                <router-link to="/my/sign" style="width:100%;">
+                  <div class="indexItemBox">
+                    <p>每日签到</p>
+                  </div>
+                </router-link>
+              </flexbox-item>
             </flexbox>
             <div class="indexLinkBox">
               <flexbox :gutter="0" wrap="wrap">

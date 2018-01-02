@@ -100,6 +100,9 @@ export default [
     },{
       path:'/account/result',
       component (resolve) {require(['@/views/account/result'], resolve)} //手机充值,滴滴券兑换结果页
+    }, {
+      path:'/account/feedback',
+      component (resolve) {require(['@/views/account/feedback'], resolve)} // 意见反馈
     },{
       path:'/my/vMoney',
       component (resolve) {require(['@/views/my/vMoney'], resolve)} //V币
@@ -121,6 +124,9 @@ export default [
     },{
       path:'/my/orderDetail',
       component (resolve) {require(['@/views/my/orderDetail'], resolve)} //订单详情
+    }, {
+      path:'/my/sign',
+      component (resolve) {require(['@/views/my/sign'], resolve)} // 签到
     },{
       path:'/account/infoChange',
       component (resolve) {require(['@/views/account/infoChange'], resolve)} //资料修改
