@@ -1,33 +1,33 @@
 <template>
   <div class="page">
     <div class="brand">
-      <p class="money">258</p>
+      <p class="money" v-if="userInfo">{{userInfo.balance || 0}}</p>
       <p class="unit">酒元</p>
     </div>
-    <div class="sign-wrapper">
+    <div class="sign-wrapper" v-if="userInfo">
       <div class="sign-count">
         <div class="count">
-          <p class="number">1</p>
+          <p class="number">{{userInfo.signDays || 0}}</p>
           <p class="desc">连续签到天数</p>
         </div>
         <div class="count">
-          <p class="number">8</p>
+          <p class="number">{{userInfo.signCount || 0}}</p>
           <p class="desc">总共签到天数</p>
         </div>
       </div>
       <div class="sign-btn-wrapper">
-        <span class="sing-btn" @click="handleSign" :class="hasSign ? 'hasSign' : ''">{{hasSign ? '已签到' : '签到'}}</span>
+        <span class="sing-btn" @click="handleSign" :class="hasSign ? 'hasSign' : ''">{{hasSign ? '今日已签到' : '签到'}}</span>
       </div>
     </div>
     <div class="info-block m_b10">
       <h3 class="title">最新签到</h3>
       <div class="people-wrapper">
-        <scroller lock-x height="250px">
+        <scroller lock-x height="250px" ref="scroll">
           <ul>
-            <li class="people-list" v-for="(item, index) in 10">
-              <span class="left">张三</span>
-              <span class="middle">+{{3 * index}}</span>
-              <span class="right">12天</span>
+            <li class="people-list" v-for="(item, index) in signList">
+              <span class="left">{{item.nickName}}</span>
+              <span class="middle">+{{item.cashBack}}</span>
+              <span class="right">{{item.signDays}}天</span>
             </li>
           </ul>
         </scroller>
@@ -48,37 +48,65 @@
               hide-on-blur>
       <div class="sign-alert">
         <p class="title">签到成功</p>
-        <p class="count">+1.5</p>
+        <p class="count">+{{userInfo.cashBack}}</p>
         <p class="desc">连续签到得额外奖励</p>
       </div>
     </x-dialog>
+    <!--页面加载过渡-->
+    <fullLoading :loadingShow="loadingShow"></fullLoading>
   </div>
 </template>
 <script>
   import {Scroller, XDialog, XButton} from 'vux'
+  import FullLoading from '@/components/fullLoading'
 
   export default {
+    created() {
+      this.initData()
+    },
     mounted() {
       this.setTitle('我的签到');
     },
     data() {
       return {
+        loadingShow: true,
         showAlert: false,
-        canSign: true,
-        hasSign: false
+        hasSign: false,
+        userInfo: {}, // 用户签到相关信息
+        signList: []  // 签到用户列表展示信息
       }
     },
     methods: {
+      initData() {
+        this.$http.get('h9/api/sign/signMessage').then(res => {
+          if (res.data.code === 0) {
+            let data = res.data.data
+            this.userInfo = data
+            this.signList = data.list
+            if (data.isSign === 1) {
+              this.hasSign = true
+            } else {
+              this.hasSign = false
+            }
+            this.loadingShow = false
+          }
+        })
+      },
       handleSign() { // 点击签到
         if (this.hasSign) {
           return
         }
-        this.hasSign = true
-        this.showAlert = true
+        this.$http.get('/h9/api/sign/daySign').then(res => {
+          if (res.data.code === 0) {
+            this.hasSign = true
+            this.showAlert = true
+            this.initData()
+          }
+        })
       }
     },
     components: {
-      XDialog, Scroller, XButton
+      XDialog, Scroller, XButton, FullLoading
     },
   }
 
