@@ -1,0 +1,264 @@
+<template>
+  <div class="page">
+    <!--顶部搜索框-->
+    <div class="top-wrapper">
+      <i class="icon-back" @click="goBack"></i>
+      <div class="search-wrapper">
+        <div class="select-city" @click="handleCityList">
+          <span class="city-name">深圳</span>
+          <i class="icon-arrow-bottom" :class="showCity ? 'selecting' : ''"></i>
+        </div>
+        <div class="search-input">
+          <input type="text" placeholder="酒店名/地址/关键词" v-model="searchText">
+        </div>
+      </div>
+    </div>
+    <!--城市列表栏-->
+    <transition name="fade">
+      <div class="city-wrapper" v-if="showCity">
+        <div class="city-list">
+          <ul>
+            <li v-for="item in 5" @click="handleChooseCity(item)">深圳</li>
+          </ul>
+        </div>
+        <div class="mask" @click="showCity = false"></div>
+      </div>
+    </transition>
+    <!--酒店搜索出来的列表-->
+    <div class="list-wrapper">
+      <scroller lock-x ref="scroll" height="-46">
+        <div>
+          <ul>
+            <li class="hotel-item" v-for="item in 20">
+              <img src="" class="hotel-img">
+              <div class="hotel-info">
+                <p class="top">
+                  <span class="name">合肥东哥假日酒店</span>
+                  <span class="rate">5分</span>
+                </p>
+                <p class="middle">
+                  庐阳区苏州北路318号近光明路
+                </p>
+                <p class="bottom">
+                  <span class="brand">8.7折</span>
+                </p>
+              </div>
+              <div class="hotel-price">
+                <span>99</span>起
+              </div>
+            </li>
+          </ul>
+        </div>
+      </scroller>
+    </div>
+  </div>
+</template>
+<script>
+  import {Scroller} from 'vux'
+
+  export default {
+    data() {
+      return {
+        searchText: '',
+        showCity: false,  // 显示城市列表
+      }
+    },
+    created() {
+      this.setTitle('酒店列表');
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.$refs.scroll.reset()
+      })
+    },
+    methods: {
+      goBack() {
+        this.$router.back()
+      },
+      handleCityList() {  // 展开城市列表
+        this.showCity = !this.showCity
+      },
+      handleChooseCity(item) { // 选择城市
+        this.showCity = false
+      }
+    },
+    watch: {
+      searchText() {
+        clearTimeout(this.timer)
+        this.timer = setTimeout(() => {
+          // 发起请求
+        })
+      },
+    },
+    components: {
+      Scroller
+    },
+  }
+
+</script>
+
+<style scoped lang='less'>
+  .page {
+    height: 100%;
+    position: relative;
+    line-height: 1;
+    background: #fff;
+  }
+
+  .top-wrapper {
+    padding: 5px 15px 6px 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f2f2f2;
+    background: #fff;
+    .icon-back {
+      margin-right: 4px;
+      height: 30px;
+      width: 30px;
+      background-size: 100% 100%;
+      background-image: url("../../assets/img/account/btn_back.png");
+    }
+    .search-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: #f1f1f1;
+      .select-city {
+        flex: 0 0 53px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 53px;
+        height: 22px;
+        line-height: 22px;
+        text-align: center;
+        border-right: 1px solid #d8d8d8;
+        font-size: 14px;
+        color: #627984;
+        .icon-arrow-bottom {
+          display: inline-block;
+          margin-left: 3px;
+          width: 8px;
+          height: 6px;
+          background-size: 100% 100%;
+          background-image: url("../../assets/img/hotel/arrow_bottom.png");
+          &.selecting {
+            background-image: url("../../assets/img/hotel/arrow_top.png");
+          }
+        }
+      }
+      .search-input {
+        flex: 1;
+        input {
+          height: 34px;
+          width: 100%;
+          font-size: 14px;
+          background: #f1f1f1;
+          border: none;
+          text-indent: 10px;
+        }
+      }
+    }
+  }
+
+  .list-wrapper {
+    position: absolute;
+    top: 46px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    .hotel-item {
+      position: relative;
+      padding: 12px 0;
+      margin: 0 15px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #f2f2f2;
+      .hotel-img {
+        width: 80px;
+        height: 80px;
+        margin-right: 15px;
+      }
+      .hotel-info {
+        .top {
+          margin-bottom: 12px;
+          font-size: 15px;
+          font-weight: bold;
+          .name {
+            margin-right: 8px;
+            color: #333333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .rate {
+            color: #627984;
+          }
+        }
+        .middle {
+          margin-bottom: 12px;
+          font-size: 12px;
+          color: #999999;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .bottom {
+          & > span {
+            display: inline-block;
+            height: 16px;
+            line-height: 16px;
+            padding: 0 5px;
+            background: #E57B7B;
+            color: #fff;
+            font-size: 10px;
+          }
+        }
+      }
+      .hotel-price {
+        position: absolute;
+        right: 0;
+        bottom: 12px;
+        font-size: 12px;
+        color: #999999;
+        & > span {
+          font-size: 24px;
+          color: #E57B7B;
+        }
+      }
+    }
+  }
+
+  .city-wrapper {
+    position: fixed;
+    top: 46px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    z-index: 10;
+    .city-list {
+      background: #fff;
+      li {
+        height: 50px;
+        line-height: 50px;
+        padding-left: 30px;
+        font-size: 15px;
+        color: #627984;
+      }
+    }
+    .mask {
+      height: 100%;
+      background: rgba(0, 0, 0, .4);
+    }
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: all 0.3s;
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
+</style>

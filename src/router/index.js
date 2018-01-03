@@ -137,5 +137,9 @@ export default [
       path:'/deal/platformDeal',
       name:'aboutUs',
       component (resolve) {require(['@/views/deal/platformDeal'], resolve)} //平台规范
+    },{
+      path:'/hotel/list',
+      name:'酒店列表',
+      component (resolve) {require(['@/views/hotel/list'], resolve)} // 酒店列表
     }
   ]

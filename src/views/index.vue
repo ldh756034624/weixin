@@ -30,10 +30,18 @@
                   <p>{{item.title}}</p>
                 </div>
               </flexbox-item>
+              <!--todo 后台给予标签-->
               <flexbox-item :span="1/4">
                 <router-link to="/my/sign" style="width:100%;">
                   <div class="indexItemBox">
                     <p>每日签到</p>
+                  </div>
+                </router-link>
+              </flexbox-item>
+              <flexbox-item :span="1/4">
+                <router-link to="/hotel/list" style="width:100%;">
+                  <div class="indexItemBox">
+                    <p>酒店预订</p>
                   </div>
                 </router-link>
               </flexbox-item>

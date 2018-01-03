@@ -11,6 +11,11 @@
           <img slot="icon" src="../assets/img/index/tabbar_mall_selected@2x.png" class="active">
           <span slot="label">商城</span>
       </tabbar-item>
+      <tabbar-item :selected="/community/.test($route.path)" link="/community">
+        <img slot="icon" src="../assets/img/index/tabbar_community_normal@2x.png" class="default">
+        <img slot="icon" src="../assets/img/index/tabbar_community_selected@2x.png" class="active">
+        <span slot="label">社区</span>
+      </tabbar-item>
       <tabbar-item :selected="/account/.test($route.path)" @click.native="hasPhone('/account/personal')">
           <img slot="icon" src="../assets/img/index/tabbar_my_normal@2x.png" class="default">
           <img slot="icon" src="../assets/img/index/tabbar_my_selected@2x.png" class="active">
@@ -39,7 +44,7 @@ export default {
     }
   },
   methods: {
-    
+
   }
 }
 
