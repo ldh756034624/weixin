@@ -28,8 +28,27 @@ const routes = RouterConfig
 const router = new VueRouter({
   routes
 })
+
+// 设置标题
+function setTitle(title){
+  document.title = title;
+  var iframe = document.createElement('iframe');
+  iframe.style.visibility = 'hidden';
+  iframe.style.width = '1px';
+  iframe.style.height = '1px';
+  iframe.onload = function () {
+    setTimeout(function () {
+      document.body.removeChild(iframe);
+    }, 0);
+  };
+  document.body.appendChild(iframe);
+}
+
 router.beforeEach((to, from, next) => {
   // 下面这段拦截用于处理：如果处于结果页，手机点击返回，分别做跳转
+  if(to.name) { // 设置标题
+    setTitle(to.name)
+  }
   if (sessionStorage.isInResult === 'true') {
     if (from.path === '/account/result' && from.query.type === 'vMoneyExchange' && to.path === '/my/vUpdate' || from.path === '/account/purse' && to.path === '/account/result') {  // 如果来自v币兑换，点返回到个人中心
       sessionStorage.isInResult = false

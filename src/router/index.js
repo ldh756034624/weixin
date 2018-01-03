@@ -141,5 +141,9 @@ export default [
       path:'/hotel/list',
       name:'酒店列表',
       component (resolve) {require(['@/views/hotel/list'], resolve)} // 酒店列表
+    },{
+      path:'/hotel/detail',
+      name:'酒店详情',
+      component (resolve) {require(['@/views/hotel/detail'], resolve)} // 酒店详情
     }
   ]

@@ -29,7 +29,7 @@
       <scroller lock-x ref="scroll" height="-46">
         <div>
           <ul>
-            <li class="hotel-item" v-for="item in 20">
+            <li class="hotel-item" v-for="item in 20" @click="handleHotel(item)">
               <img src="" class="hotel-img">
               <div class="hotel-info">
                 <p class="top">
@@ -72,14 +72,21 @@
       })
     },
     methods: {
+      // 后退
       goBack() {
         this.$router.back()
       },
-      handleCityList() {  // 展开城市列表
+      // 展开城市列表
+      handleCityList() {
         this.showCity = !this.showCity
       },
-      handleChooseCity(item) { // 选择城市
+      // 选择城市区域
+      handleChooseCity(item) {
         this.showCity = false
+      },
+      // 选择酒店
+      handleHotel(item) {
+        this.$router.push({path: '/hotel/detail', query: {id: item.id}})
       }
     },
     watch: {
