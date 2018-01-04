@@ -14,15 +14,20 @@
     </div>
     <!--预定时间-->
     <div class="choose-time">
-      <div class="time">
+      <div class="time" @click="handleDatePicker(1)">
         <p class="desc">入住</p>
-        <p class="date">12月13日</p>
+        <p class="date">{{startShowTime}}</p>
       </div>
-      <div class="time">
+      <div class="time" @click="handleDatePicker(2)">
         <p class="desc">离店</p>
-        <p class="date">12月13日</p>
+        <p class="date">{{endShowTime}}</p>
       </div>
     </div>
+    <!--开始结束时间选择-->
+    <group style="display: none">
+      <datetime v-model="startTime" :start-date="limitStartTime" :end-date="limitEndTime" @on-change="startChange" :show.sync="startShow"></datetime>
+      <datetime v-model="endTime" :start-date="limitStartTime" :end-date="limitEndTime" @on-change="endChange" :show.sync="endShow"></datetime>
+    </group>
     <!--预定列表-->
     <group class="hotel-detail-link">
       <cell title="预定(2)" value="详情" is-link></cell>
@@ -39,7 +44,7 @@
               <p class="org-price">门市价：<span class="del">740</span></p>
               <p class="now-price">￥<span>420</span></p>
             </div>
-            <div class="brand">
+            <div class="brand" @click="handleBook(i)">
               <p class="title">订</p>
               <p class="desc">不可取消</p>
             </div>
@@ -47,29 +52,84 @@
         </li>
       </ul>
     </div>
-    <group>
-      <datetime v-model="startTime" @on-change="change" :show.sync="startshow"></datetime>
-      <datetime v-model="endTime" @on-change="change" :show.sync="endshow"></datetime>
-    </group>
   </div>
 </template>
 <script>
   import {Cell, Group, Datetime} from 'vux'
+  import {formatDate} from '../../util/index'
 
   export default {
     data() {
       return {
-        startTime: '2017-01-01',
-        endTime:'2017-01-02',
-        startshow: false,
-        endshow: false,
-        searchText: '',
-        showCity:
-          false,  // 显示城市列表
+        startTime: null, // 传给后台的时间
+        endTime: null, // 传给后台的时间
+        startShow: false, // 控制时间控件显示
+        endShow: false, // 控制时间控件显示
+        startShowTime: null, // 展示给顾客的时间
+        endShowTime: null, // 展示给顾客的时间
+        limitStartTime: null, // 选择器限制时间范围
+        limitEndTime: null  // 选择器限制时间范围
       }
     },
     created() {
+      this.initDate()
     },
+    methods: {
+      // 点击预订
+      handleBook(item) {
+        let startTime = new Date(this.startTime).getTime()
+        let endTime = new Date(this.endTime).getTime()
+        if(startTime > endTime) {
+          _g.toastMsg('cancel', '入住时间不能大于离店时间')
+        }
+      },
+      // 初始化各种时间参数
+      initDate() {
+        let date = new Date() // 当天
+        this.initToday(date)
+        let tomorrow = date.setDate(date.getDate() + 1) // 明天
+        this.initTomorrow(tomorrow)
+        let sixDate = date.setMonth(date.getMonth() + 5) // 6个月后的
+        this.setSixMonth(sixDate)
+      },
+      initToday(date) { // 初始化今天相关数据
+        this.startTime = this.limitStartTime = formatDate(date, 'yyyy-MM-dd') // 开始时间
+        this.startShowTime = this.getMD(date) // 开始时间
+      },
+      initTomorrow(date) {  // 初始化明天相关数据
+        this.endTime  = formatDate(date, 'yyyy-MM-dd') // 结束时间 默认明天
+        this.endShowTime = this.getMD(date) // 结束时间 默认明天
+      },
+      setSixMonth(date) { // 设置结束时间的6个月内的范围
+        this.limitEndTime = formatDate(date, 'yyyy-MM-dd')
+      },
+      handleDatePicker(type) { // 1 显示开始时间， 2 显示结束时间
+        if (type === 1) {
+          this.startShow = true
+        } else {
+          this.endShow = true
+        }
+      },
+      // 触发时间选择后 开始时间， 2 结束时间
+      startChange(value) {
+        this.startTime = value  // 传给后台的字段赋值
+        let showTime = this.getMD(value)
+        this.startShowTime = showTime
+      },
+      endChange(value) {
+        this.endTime = value  // 传给后台的字段赋值
+        let showTime = this.getMD(value)
+        this.endShowTime = showTime
+      },
+      // 根据年月日获取月份日期
+      getMD(date) {
+        let newDate = new Date(date)
+        let month = newDate.getMonth() + 1
+        let day = newDate.getDate()
+        return `${month}月${day}日`
+      }
+    }
+    ,
     components: {
       Cell,
       Group,

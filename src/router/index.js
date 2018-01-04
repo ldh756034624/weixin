@@ -145,5 +145,9 @@ export default [
       path:'/hotel/detail',
       name:'酒店详情',
       component (resolve) {require(['@/views/hotel/detail'], resolve)} // 酒店详情
+    },{
+      path:'/hotel/fill',
+      name:'订单填写',
+      component (resolve) {require(['@/views/hotel/fill'], resolve)} // 酒店订单填写
     }
   ]

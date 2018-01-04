@@ -29,6 +29,13 @@ const commonFn = {
           time: 1500
         })
         break
+      case 'cancel':
+        bus.$vux.toast.show({
+          text: msg,
+          type: 'cancel',
+          time: 1500
+        })
+        break
     }
   },
   showLoading(txt){
