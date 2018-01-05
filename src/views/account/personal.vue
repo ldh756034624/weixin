@@ -46,11 +46,10 @@
                         <i class='arrow'></i>
                       </span>
                   </cell>
-                  <cell title="H9酒店记录"  value='暂未开放'>
+                  <cell title="开房记录" link="/hotel/orderList">
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_hotel@2x.png">
-                      <span class='cellValueBox'>
-                        <i>暂未开放</i>
+                      <span class='cellValueBox' style="margin-right:-12px;">
                         <i class='arrow'></i>
                       </span>
                   </cell>

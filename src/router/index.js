@@ -161,5 +161,13 @@ export default [
       path:'/hotel/fail',
       name:'支付失败',
       component (resolve) {require(['@/views/hotel/fail'], resolve)} // 酒店支付失败
+    },{
+      path:'/hotel/orderDetail',
+      name:'订单详情',
+      component (resolve) {require(['@/views/hotel/order_detail'], resolve)} // 酒店订单详情
+    },{
+      path:'/hotel/orderList',
+      name:'酒店订单',
+      component (resolve) {require(['@/views/hotel/order_list'], resolve)} // 酒店订单列表
     }
   ]
