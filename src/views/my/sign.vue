@@ -65,7 +65,7 @@
       this.initData()
     },
     mounted() {
-      this.setTitle('我的签到');
+      this.setTitle('每日签到');
     },
     data() {
       return {

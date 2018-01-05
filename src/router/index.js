@@ -149,5 +149,17 @@ export default [
       path:'/hotel/fill',
       name:'订单填写',
       component (resolve) {require(['@/views/hotel/fill'], resolve)} // 酒店订单填写
+    },{
+      path:'/hotel/pay',
+      name:'在线支付',
+      component (resolve) {require(['@/views/hotel/pay'], resolve)} // 酒店订单支付
+    },{
+      path:'/hotel/success',
+      name:'支付成功',
+      component (resolve) {require(['@/views/hotel/success'], resolve)} // 酒店支付成功
+    },{
+      path:'/hotel/fail',
+      name:'支付失败',
+      component (resolve) {require(['@/views/hotel/fail'], resolve)} // 酒店支付失败
     }
   ]

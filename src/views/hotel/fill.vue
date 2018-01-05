@@ -43,7 +43,7 @@
           <span>订单金额：</span>
           <span class="count">￥<span>420</span></span>
         </div>
-        <div class="btn">立即预订</div>
+        <div class="btn" @click="handleBook">立即预订</div>
       </div>
     </div>
   </div>
@@ -72,7 +72,16 @@
     methods: {
       onChange(val) { // val对应list里的key
         console.log('select', val)
-      }
+      },
+      handleBook() { // 点击预订按钮
+        _g.showLoading('订单创建中')
+        setTimeout(() => {
+          _g.hideLoading()
+          this.$router.push({
+            path: '/hotel/pay'
+          })
+        }, 1500)
+      },
     },
     components: {
       Group,
