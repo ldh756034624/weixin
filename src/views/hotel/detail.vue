@@ -25,8 +25,10 @@
     </div>
     <!--开始结束时间选择-->
     <group style="display: none">
-      <datetime v-model="startTime" :start-date="limitStartTime" :end-date="limitEndTime" @on-change="startChange" :show.sync="startShow"></datetime>
-      <datetime v-model="endTime" :start-date="limitStartTime" :end-date="limitEndTime" @on-change="endChange" :show.sync="endShow"></datetime>
+      <datetime v-model="startTime" :start-date="limitStartTime" :end-date="limitEndTime" @on-change="startChange"
+                :show.sync="startShow"></datetime>
+      <datetime v-model="endTime" :start-date="limitStartTime" :end-date="limitEndTime" @on-change="endChange"
+                :show.sync="endShow"></datetime>
     </group>
     <!--预定列表-->
     <group class="hotel-detail-link">
@@ -79,9 +81,20 @@
       handleBook(item) {
         let startTime = new Date(this.startTime).getTime()
         let endTime = new Date(this.endTime).getTime()
-        if(startTime > endTime) {
+        if (startTime > endTime) {
           _g.toastMsg('cancel', '入住时间不能大于离店时间')
         }
+
+        let rangeDay = (endTime - startTime) / 1000 / 60 / 60 / 24  // 过几晚
+        let timeData = {  // 给下一个页面用的时间数据
+          startTime: this.startTime,
+          endTime: this.endTime,
+          startShowTime: this.startShowTime,
+          endShowTime: this.endShowTime,
+          rangeDay
+        }
+        timeData = JSON.stringify(timeData)
+        this.$router.push({path: '/hotel/fill', query: {timeData}}) // 去订单填写
       },
       // 初始化各种时间参数
       initDate() {
@@ -97,7 +110,7 @@
         this.startShowTime = this.getMD(date) // 开始时间
       },
       initTomorrow(date) {  // 初始化明天相关数据
-        this.endTime  = formatDate(date, 'yyyy-MM-dd') // 结束时间 默认明天
+        this.endTime = formatDate(date, 'yyyy-MM-dd') // 结束时间 默认明天
         this.endShowTime = this.getMD(date) // 结束时间 默认明天
       },
       setSixMonth(date) { // 设置结束时间的6个月内的范围

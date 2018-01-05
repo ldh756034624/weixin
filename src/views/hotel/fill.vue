@@ -1,131 +1,193 @@
 <template>
-		<div class="addressBox">
-			<group class='groupNoTop groupNoLine'>
-        <cell title='所在地区' :value='addr' is-link @click.native='showPopup=true'></cell>   
-      </group>
-      <div v-transfer-dom>
-        <popup v-model="showPopup" height='60%'>
-          <div class="addrInfoPopup">
-            <p class="area">
-              <!-- <span @click="chooseTopArea(0)" :class="[areaIndex==0? 'isActive' : '']">{{province}}</span>
-              <span @click="chooseTopArea(1)" v-if='hasCity==true' :class="[areaIndex==1? 'isActive' : '']">{{city}}</span>
-              <span @click="chooseTopArea(2)" v-if='hasDistict==true' :class="[areaIndex==2? 'isActive' : '']">{{distict}}</span> -->
-              <span @click="chooseTopArea(0)" :class="[areaIndex==0? 'isActive' : '']">{{province}}</span>
-              <span @click="chooseTopArea(1)"  :class="[areaIndex==1? 'isActive' : '']">{{city}}</span>
-              <span @click="chooseTopArea(2)" :class="[areaIndex==2? 'isActive' : '']">{{distict}}</span>
-            </p>
-            <p v-for='(item,index) in popupData' @click='chooseArea(item,index)'>{{item.name}}</p>
-            <!-- <p @click='showPopup=false'>取消</p> -->
-          </div>
-        </popup>
+  <div class="page">
+    <div class="abstract-wrapper">
+      <p class="name">合肥融侨皇冠假日酒店</p>
+      <p class="hr"></p>
+      <p class="range-time">
+        <span class="time-desc">入住</span>
+        <span class="time">{{timeData.startShowTime}}</span>
+        <span class="time-desc">离店</span>
+        <span class="time">{{timeData.endShowTime}}</span>
+        <span>{{timeData.rangeDay}}晚</span>
+      </p>
+      <div class="desc">
+        <span class="title">皇冠高级床</span>
+        <div class="bed">
+          <span>大床</span>
+          <span>单早</span>
+        </div>
+        <span>不可取消</span>
       </div>
-		</div>
+    </div>
+    <p class="warning">订单确认后即视为消费，将不可以更改和退款。</p>
+    <div class="info-wrapper">
+      <group>
+        <selector title="房间数" v-model="value" :options="list" @on-change="onChange"></selector>
+        <x-input label-width="105px" v-model="people" title="入住人" placeholder="入住人姓名"></x-input>
+        <x-input label-width="105px" v-model="phone" title="手机" placeholder="请输入手机号"></x-input>
+        <selector title="保留到" v-model="value" :options="list" @on-change="onChange"></selector>
+      </group>
+    </div>
+
+    <div class="info-wrapper">
+      <group>
+        <selector title="住宿偏好" v-model="value" :options="list" @on-change="onChange"></selector>
+        <x-input label-width="105px" v-model="invoice" title="发票" :readonly="true"></x-input>
+        <x-input label-width="105px" v-model="phone" title="备注" placeholder="请输入您的个性需求"></x-input>
+      </group>
+    </div>
+
+    <div class="bottom">
+      <div class="content">
+        <div class="count-wrapper">
+          <span>订单金额：</span>
+          <span class="count">￥<span>420</span></span>
+        </div>
+        <div class="btn">立即预订</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 
-import {Group,Cell,Popup,TransferDom} from 'vux'
-export default {
-  directives: {
-    TransferDom
-  },
-  mounted() {
-    this.init();
-  },
-  data() {
-    return {
-      addr:'请选择',
-      showPopup:false,
-      popupData:[],
-      areaIndex:0,
-      addressDataNew:[],
-      province:'所在省',
-      city:'所在市',
-      distict:'所在区',
-      pid:'',
-      cid:'',
-      aid:'',
-      proviceIndex:0,
-      cityIndex:0,
-      hasCity:false,
-      hasDistict:false,
+  import {Group, XInput, Selector} from 'vux'
+
+  export default {
+    created() {
+      this.$nextTick(() => {
+        this.timeData = JSON.parse(this.$route.query.timeData)
+      })
+    },
+    data() {
+      return {
+        timeData: {}, // 上一个页面传来的时间相关信息
+        list: [{key: '1', value: '一间'}, {key: '2', value: '二间'}],
+        value: '1',
+        invoice: '请到酒店前台索取放票',
+        people: null, // 入住人
+        phone: null // 手机
+      }
+    },
+    methods: {
+      onChange(val) { // val对应list里的key
+        console.log('select', val)
+      }
+    },
+    components: {
+      Group,
+      XInput,
+      Selector
     }
-  },
-  methods:{
-    init(){
-      this.$http.get('h9/api/address/allArea')
-        .then((res)=>{
-          if(res.data.code==0){
-            this.popupData=res.data.data
-            this.addressDataNew=res.data.data
-          }
-        })
-    },
-    chooseTopArea:function(index){
-      this.areaIndex=index
-      if(this.areaIndex==0){
-        this.popupData=this.addressDataNew
-      }else if(this.areaIndex==1){
-        this.popupData=this.addressDataNew[this.proviceIndex].list
-      }else{
-        this.popupData=this.addressDataNew[this.proviceIndex].list[this.cityIndex].list
-      }
-    },
-    chooseArea:function(item,index){
-      if(this.areaIndex===0){ //选择省
-        this.province=item.name
-        this.pid=item.id
-        this.proviceIndex=index
-
-
-        this.areaIndex=1
-        this.hasCity=true
-        this.city=this.popupData[index].list[0].name
-        this.popupData=this.popupData[index].list //对省下的市赋值
-      }else if(this.areaIndex===1){ //选择市 
-        this.city=item.name
-        this.cid=item.id
-        this.cityIndex=index
-
-
-        if(this.popupData[index].list){
-          this.areaIndex=2
-          this.hasDistict=true
-          this.distict=this.popupData[index].list[0].name
-          this.popupData=this.popupData[index].list
-        }else{
-          this.showPopup=false
-          this.addr=this.province+this.city
-        }
-      }else{ //选择区
-        this.distict=item.name
-        this.aid=item.id
-        this.showPopup=false
-        this.addr=this.province+this.city+this.distict
-      }
-    },
-  },
-  components: {
-    Group,Cell,Popup
   }
-}
 </script>
 <style scoped lang='less'>
-  .addrInfoPopup{
+  .page {
+    padding-top: 10px;
+    height: 100%;
+    line-height: 1;
+    background: #EDF1F2;
+  }
+
+  .abstract-wrapper {
+    margin: 0 15px;
     background: #fff;
-    font-size: 30/40rem;
-    .isActive{
-      border-bottom: 4/40rem solid #627984;
+    .name {
+      padding: 13px 10px 0;
+      font-size: 15px;
+      color: #333333;
+      font-weight: bold;
     }
-    p{
-      padding: 15/40rem 30/40rem;
+
+    .range-time {
+      font-size: 12px;
+      padding: 12px;
+      .time-desc {
+        color: #999;
+        margin-right: 10px;
+      }
+      .time {
+        color: #333;
+        margin-right: 35px;
+      }
     }
-    .area{
-      border-bottom: 2/40rem solid #f2f2f2;
-      margin-bottom: 20/40rem;
+
+    .desc {
+      padding-left: 12px;
+      padding-bottom: 14px;
+      display: flex;
+      font-size: 12px;
+      color: #999;
+      .title {
+        margin-right: 30px;
+        color: #333;
+      }
+      .bed {
+        margin-right: 15px;
+        padding-right: 10px;
+        border-right: 1px solid #f1f1f1;
+      }
     }
-    .area span{
-      margin-left: 20/40rem;padding-bottom: 20/40rem;
+  }
+
+  .warning {
+    margin: 10px 0;
+    padding-left: 15px;
+    height: 44px;
+    line-height: 44px;
+    background: #fff;
+    font-size: 12px;
+    color: #627984;
+  }
+
+  .info-wrapper {
+    margin-bottom: 10px;
+  }
+
+  .bottom {
+    height: 60px;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    .content {
+      float: right;
+      display: flex;
+      .count-wrapper {
+        margin-top: 24px;
+        margin-right: 10px;
+        font-size: 12px;
+        color: #999;
+        .count {
+          color: #E57B7B;
+          & > span {
+            font-size: 20px;
+          }
+        }
+      }
+      .btn {
+        width: 120px;
+        height: 60px;
+        line-height: 60px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        background: #E57B7B;
+      }
+    }
+  }
+</style>
+
+<style lang="less">
+  .info-wrapper {
+    .weui-cells {
+      font-size: 15px;
+      .weui-label {
+        color: #999;
+      }
     }
   }
 </style>
