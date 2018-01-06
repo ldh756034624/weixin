@@ -5,11 +5,11 @@
       <i class="icon-back" @click="goBack"></i>
       <div class="search-wrapper">
         <div class="select-city" @click="handleCityList">
-          <span class="city-name">深圳</span>
+          <span class="city-name">{{query.city}}</span>
           <i class="icon-arrow-bottom" :class="showCity ? 'selecting' : ''"></i>
         </div>
         <div class="search-input">
-          <input type="text" placeholder="酒店名/地址/关键词" v-model="searchText">
+          <input type="text" placeholder="酒店名/地址/关键词" v-model="query.queryKey">
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
       <div class="city-wrapper" v-if="showCity">
         <div class="city-list">
           <ul>
-            <li v-for="item in 5" @click="handleChooseCity(item)">深圳</li>
+            <li v-for="item in cityList" @click="handleChooseCity(item)">{{item}}</li>
           </ul>
         </div>
         <div class="mask" @click="showCity = false"></div>
@@ -29,22 +29,22 @@
       <scroller lock-x ref="scroll" height="-46">
         <div>
           <ul>
-            <li class="hotel-item" v-for="item in 20" @click="handleHotel(item)">
+            <li class="hotel-item" v-for="item in hotelList" @click="handleHotel(item)">
               <img src="" class="hotel-img">
               <div class="hotel-info">
                 <p class="top">
-                  <span class="name">合肥东哥假日酒店</span>
-                  <span class="rate">5分</span>
+                  <span class="name">{{item.hotelName}}</span>
+                  <span class="rate">{{item.grade}}分</span>
                 </p>
                 <p class="middle">
-                  庐阳区苏州北路318号近光明路
+                  {{item.detailAddress}}
                 </p>
                 <p class="bottom">
-                  <span class="brand">8.7折</span>
+                  <span class="brand">{{item.discount}}折</span>
                 </p>
               </div>
               <div class="hotel-price">
-                <span>99</span>起
+                <span>{{item.mixConsumer}}</span>起
               </div>
             </li>
           </ul>
@@ -59,12 +59,18 @@
   export default {
     data() {
       return {
-        searchText: '',
-        showCity: false,  // 显示城市列表
+        hotelList: [], // 酒店列表
+        cityList: [], // 待选择的城市列表
+        query: {
+          queryKey: '对酒当歌酒店',
+          city: '深圳' // todo 默认值？
+        },
+        showCity: false  // 显示城市列表
       }
     },
     created() {
-      this.setTitle('酒店列表');
+      this.getCityList()
+      this.getHotelList()
     },
     mounted() {
       this.$nextTick(() => {
@@ -72,6 +78,25 @@
       })
     },
     methods: {
+      // 获取酒店列表
+      getHotelList() {
+        let params = this.query
+        this.$http.get('/h9/api/hotels', {params}).then(res => {
+          let data = res.data
+          if (data.code === 0) {
+            this.hotelList = data.data.data
+          }
+        })
+      },
+      // 获取城市列表
+      getCityList() {
+        this.$http.get('/h9/api/hotel/city').then(res => {
+          let data = res.data
+          if (data.code === 0) {
+            this.cityList = data.data
+          }
+        })
+      },
       // 后退
       goBack() {
         this.$router.back()
@@ -82,6 +107,8 @@
       },
       // 选择城市区域
       handleChooseCity(item) {
+        console.log(item)
+        this.query.city = item
         this.showCity = false
       },
       // 选择酒店
@@ -90,11 +117,13 @@
       }
     },
     watch: {
-      searchText() {
+      // 监听输入框关键字
+      'query.queryKey'() {
         clearTimeout(this.timer)
         this.timer = setTimeout(() => {
           // 发起请求
-        })
+          this.getHotelList()
+        }, 1000)
       },
     },
     components: {
