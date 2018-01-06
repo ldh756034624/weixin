@@ -1,5 +1,3 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
@@ -7,7 +5,6 @@ import Vuex from 'vuex'
 import {encode} from '@/util/base64Code'
 import RouterConfig from './router/index'
 import App from './App'
-import Home from './components/HelloFromVux'
 import { AlertPlugin, ConfirmPlugin,ToastPlugin, AjaxPlugin,LoadingPlugin } from 'vux'
 import wx from 'weixin-js-sdk'
 import _g from './helpers/global'
