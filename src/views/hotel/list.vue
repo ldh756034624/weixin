@@ -113,7 +113,7 @@
       },
       // 选择酒店
       handleHotel(item) {
-        this.$router.push({path: '/hotel/detail', query: {id: item.id}})
+        this.$router.push({path: '/hotel/detail', query: {id: item.id, hotelName: item.hotelName}})
       }
     },
     watch: {

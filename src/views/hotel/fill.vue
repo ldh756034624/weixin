@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="abstract-wrapper">
-      <p class="name">合肥融侨皇冠假日酒店</p>
+      <p class="name">{{hotelInfo.hotelName}}</p>
       <p class="hr"></p>
       <p class="range-time">
         <span class="time-desc">入住</span>
@@ -11,29 +11,29 @@
         <span>{{timeData.rangeDay}}晚</span>
       </p>
       <div class="desc">
-        <span class="title">皇冠高级床</span>
+        <span class="title">{{hotelInfo.roomInfo.typeName}}</span>
         <div class="bed">
-          <span>大床</span>
-          <span>单早</span>
+          <span>{{hotelInfo.roomInfo.bedSize}}</span>
+          <span>{{hotelInfo.roomInfo.include}}</span>
         </div>
-        <span>不可取消</span>
+        <span>{{hotelInfo.roomInfo.canCancel}}</span>
       </div>
     </div>
     <p class="warning">订单确认后即视为消费，将不可以更改和退款。</p>
     <div class="info-wrapper">
       <group>
-        <selector title="房间数" v-model="value" :options="list" @on-change="onChange"></selector>
-        <x-input label-width="105px" v-model="people" title="入住人" placeholder="入住人姓名"></x-input>
-        <x-input label-width="105px" v-model="phone" title="手机" placeholder="请输入手机号"></x-input>
-        <selector title="保留到" v-model="value" :options="list" @on-change="onChange"></selector>
+        <selector title="房间数" v-model="orderForm.roomCount" :options="roomList"></selector>
+        <x-input label-width="105px" v-model="orderForm.stayRoomer" title="入住人" placeholder="入住人姓名"></x-input>
+        <x-input label-width="105px" v-model="orderForm.phone" title="手机" placeholder="请输入手机号"></x-input>
+        <selector title="保留到" v-model="orderForm.keepTime" :options="keepList"></selector>
       </group>
     </div>
 
     <div class="info-wrapper">
       <group>
-        <selector title="住宿偏好" v-model="value" :options="list" @on-change="onChange"></selector>
+        <selector title="住宿偏好" v-model="orderForm.roomStyle" :options="favoriteList"></selector>
         <x-input label-width="105px" v-model="invoice" title="发票" :readonly="true"></x-input>
-        <x-input label-width="105px" v-model="phone" title="备注" placeholder="请输入您的个性需求"></x-input>
+        <x-input label-width="105px" v-model="orderForm.remark" title="备注" placeholder="请输入您的个性需求"></x-input>
       </group>
     </div>
 
@@ -55,32 +55,74 @@
 
   export default {
     created() {
-      this.$nextTick(() => {
-        this.timeData = JSON.parse(this.$route.query.timeData)
-      })
+      this.getBookSelectList()  // 初始化选择框列表
+      this.timeData = JSON.parse(this.$route.query.timeData)
     },
     data() {
       return {
         timeData: {}, // 上一个页面传来的时间相关信息
-        list: [{key: '1', value: '一间'}, {key: '2', value: '二间'}],
-        value: '1',
-        invoice: '请到酒店前台索取放票',
-        people: null, // 入住人
-        phone: null // 手机
+        hotelInfo: JSON.parse(this.$route.query.hotelInfo), // 酒店相关信息
+        orderForm: {
+          comeRoomTime: '', // 入住时间
+          keepTime: '',   // 保留时间
+          outRoomTime: '',  // 离开时间
+          phone: '',  // 电话
+          remark: '', // 备注
+          roomCount: '',  // 房间数量
+          roomStyle: '',  // 烟房/无烟房
+          roomTypeId: this.$route.query.id, // roomTypeId
+          stayRoomer: '', // 入住人
+        },
+        roomList: [], // 房间数下拉框的内容
+        favoriteList: [], // 喜好类型下拉框的内容
+        keepList: [], // 保留时间下拉框的内容
+        invoice: '请到酒店前台索取发票',
       }
     },
     methods: {
-      onChange(val) { // val对应list里的key
-        console.log('select', val)
+      // 获取酒店下拉相关信息
+      getBookSelectList() {
+        this.$http.get('/h9/api/hotel/reserve').then(res => {
+          let data = res.data
+          if (data.code === 0) {
+            let selectType = data.data
+            this.roomList = this.createSelectList(selectType.roomCountOptions)
+            this.orderForm.roomCount = selectType.roomCountOptions[0] // 初始化下拉框默认值
+            this.favoriteList = this.createSelectList(selectType.roomTypeOptions)
+            this.orderForm.roomStyle = selectType.roomTypeOptions[0] // 初始化下拉框默认值
+            this.keepList = this.createSelectList(selectType.keepTimeOptions)
+            this.orderForm.keepTime = selectType.keepTimeOptions[0] // 初始化下拉框默认值
+          }
+        })
+      },
+      // 生成给select用的数据格式
+      createSelectList(data) {
+        let tmp = []
+        data.forEach(item => {
+            tmp.push({
+              key: item,
+              value: item
+            })
+          }
+        )
+
+        return tmp
       },
       handleBook() { // 点击预订按钮
         _g.showLoading('订单创建中')
-        setTimeout(() => {
+        let data = this.orderForm
+        data.comeRoomTime = this.timeData.startTime
+        data.outRoomTime = this.timeData.endTime
+        this.$http.post('/h9/api/hotel/order', data).then(res => {
           _g.hideLoading()
-          this.$router.push({
-            path: '/hotel/pay'
-          })
-        }, 1500)
+          let data = res.data
+          if (data.code === 0) {
+            this.$router.push({
+              path: '/hotel/pay',
+              query: {orderInfo: data.data}
+            })
+          }
+        })
       },
     },
     components: {

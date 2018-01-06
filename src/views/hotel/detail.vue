@@ -83,7 +83,7 @@
     methods: {
       // 获取酒店详细信息
       getHotelInfo() {
-        this.$http.get('/h9/api/hotelDetail?hotelId=' + this.id).then(res => {
+        this.$http.get('/h9/api/hotel/detail?hotelId=' + this.id).then(res => {
           let data = res.data
           if (data.code === 0) {
             this.hotelInfo = data.data
@@ -107,9 +107,15 @@
           endShowTime: this.endShowTime,
           rangeDay
         }
-        let id = this.id  // 房间id
-        timeData = JSON.stringify(timeData)
-        this.$router.push({path: '/hotel/fill', query: {timeData, id}}) // 去订单填写
+        timeData = JSON.stringify(timeData) // 时间信息
+        let hotelInfo = { // 给下个页面用的酒店信息
+          hotelName: this.$route.query.hotelName,
+          roomInfo: item
+        }
+        hotelInfo = JSON.stringify(hotelInfo) // 酒店信息
+        let id = item.id  // 预定房间id
+
+        this.$router.push({path: '/hotel/fill', query: {timeData, id, hotelInfo}}) // 去订单填写
       },
       // 初始化各种时间参数
       initDate() {
