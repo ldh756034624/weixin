@@ -62,7 +62,7 @@
         hotelList: [], // 酒店列表
         cityList: [], // 待选择的城市列表
         query: {
-          queryKey: '对酒当歌酒店',
+          queryKey: '龙',
           city: '深圳' // todo 默认值？
         },
         showCity: false  // 显示城市列表

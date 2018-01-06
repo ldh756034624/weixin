@@ -2,15 +2,15 @@
   <div class="page">
     <!--顶部大图-->
     <div class="hotel-img">
-      <img src="">
+      <img :src="hotelInfo.images">
     </div>
     <!--酒店地址信息评分等-->
     <div class="hotel-info">
       <p class="top">
-        <span class="address">庐阳区宿州北路318号近明光路</span>
-        <span class="rate">5.0分</span>
+        <span class="address">{{hotelInfo.detailAddress}}</span>
+        <span class="rate">{{hotelInfo.grade}}分</span>
       </p>
-      <p class="bottom">酒店预定时间为08:00至20:00，其他时间暂不支持预定！</p>
+      <p class="bottom">{{hotelInfo.tips}}</p>
     </div>
     <!--预定时间-->
     <div class="choose-time">
@@ -32,23 +32,23 @@
     </group>
     <!--预定列表-->
     <group class="hotel-detail-link">
-      <cell title="预定(2)" value="详情" is-link></cell>
+      <cell :title="'预定('+bookLength+')'" value="详情" is-link></cell>
     </group>
     <div class="list-wrapper">
       <ul>
-        <li class="bed-item" v-for="i in 10">
+        <li class="bed-item" v-for="item in hotelInfo.roomList">
           <div class="left">
-            <p class="title">皇冠高级房(单早）</p>
-            <p class="desc">单早 ︳大床</p>
+            <p class="title">{{item.typeName}}</p>
+            <p class="desc">{{item.include}} | {{item.bedSize}}</p>
           </div>
           <div class="right">
             <div class="price">
-              <p class="org-price">门市价：<span class="del">740</span></p>
-              <p class="now-price">￥<span>420</span></p>
+              <p class="org-price">门市价：<span class="del">{{item.originalPrice}}</span></p>
+              <p class="now-price">￥<span>{{item.realPrice}}</span></p>
             </div>
-            <div class="brand" @click="handleBook(i)">
+            <div class="brand" @click="handleBook(item)">
               <p class="title">订</p>
-              <p class="desc">不可取消</p>
+              <p class="desc">{{item.canCancel}}</p>
             </div>
           </div>
         </li>
@@ -63,6 +63,8 @@
   export default {
     data() {
       return {
+        bookLength: null, // 预定房间数
+        hotelInfo: {}, // 酒店详细信息
         startTime: null, // 传给后台的时间
         endTime: null, // 传给后台的时间
         startShow: false, // 控制时间控件显示
@@ -74,9 +76,21 @@
       }
     },
     created() {
-      this.initDate()
+      this.id = this.$route.query.id   // 酒店id
+      this.initDate() // 初始化时间
+      this.getHotelInfo()
     },
     methods: {
+      // 获取酒店详细信息
+      getHotelInfo() {
+        this.$http.get('/h9/api/hotelDetail?hotelId=' + this.id).then(res => {
+          let data = res.data
+          if (data.code === 0) {
+            this.hotelInfo = data.data
+            this.bookLength = data.data.roomList.length
+          }
+        })
+      },
       // 点击预订
       handleBook(item) {
         let startTime = new Date(this.startTime).getTime()
@@ -93,8 +107,9 @@
           endShowTime: this.endShowTime,
           rangeDay
         }
+        let id = this.id  // 房间id
         timeData = JSON.stringify(timeData)
-        this.$router.push({path: '/hotel/fill', query: {timeData}}) // 去订单填写
+        this.$router.push({path: '/hotel/fill', query: {timeData, id}}) // 去订单填写
       },
       // 初始化各种时间参数
       initDate() {
