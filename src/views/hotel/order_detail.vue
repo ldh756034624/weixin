@@ -1,25 +1,25 @@
 <template>
   <div class="page">
     <div class="top">
-      <p class="name">7天优品酒店</p>
-      <p class="addr">庐阳区宿州北路318号近明光路</p>
-      <p class="rang-time">2017年12月13至2017年12月14日</p>
+      <p class="name">{{orderInfo.hotelName}}</p>
+      <p class="addr">{{orderInfo.hotelAddress}}</p>
+      <p class="rang-time">{{orderInfo.comeRoomTime}}至{{orderInfo.outRoomTime}}</p>
       <p class="desc">
-        <span>共1晚</span>
-        <span>1间</span>
-        <span>无早</span>
-        <span>豪华大床房</span>
+        <span>共{{orderInfo.stayNightCount}}晚</span>
+        <span>{{orderInfo.roomCount}}间</span>
+        <span>{{orderInfo.include}}</span>
+        <span>{{orderInfo.roomTypeName}}</span>
       </p>
     </div>
     <div class="title">支付信息</div>
     <div class="info-block">
-      <p class="item">
-        <span class="left">酒店支付</span>
-        <span class="right">￥58.21</span>
+      <p class="item" v-if="orderInfo.payMoney4Wechat">
+        <span class="left">酒元支付</span>
+        <span class="right">￥{{orderInfo.payMoney4JiuYuan}}</span>
       </p>
-      <p class="item">
+      <p class="item" v-if="orderInfo.payMoney4Wechat">
         <span class="left">微信支付</span>
-        <span class="right">￥58.21</span>
+        <span class="right">￥{{orderInfo.payMoney4Wechat}}</span>
       </p>
     </div>
 
@@ -27,19 +27,19 @@
     <div class="info-block">
       <p class="item">
         <span class="left">入住人</span>
-        <span class="right">张三</span>
+        <span class="right">{{orderInfo.roomer}}</span>
       </p>
       <p class="item">
         <span class="left">手机号</span>
-        <span class="right">1231231231213</span>
+        <span class="right">{{orderInfo.phone}}</span>
       </p>
       <p class="item">
         <span class="left">订单号</span>
-        <span class="right">1231231231213</span>
+        <span class="right">{{orderInfo.id}}</span>
       </p>
       <p class="item">
         <span class="left">下单时间</span>
-        <span class="right">2017-08-26 14:22</span>
+        <span class="right">{{orderInfo.createTime}}</span>
       </p>
     </div>
 
@@ -55,10 +55,25 @@
 <script>
   export default {
     created() {
+      this.id = this.$route.query.id
+      this.getDetail()
     },
     data() {
-      return {}
+      return {
+        orderInfo: {} // 订单详情信息
+      }
     },
+    methods: {
+      // 获取订单详情
+      getDetail() {
+        this.$http.get('/h9/api/hotel/order/detail?orderId=' + this.id).then(res => {
+          let data = res.data
+          if (data.code === 0) {
+            this.orderInfo = data.data
+          }
+        })
+      }
+    }
   }
 </script>
 <style scoped lang='less'>
@@ -105,11 +120,11 @@
     background: #fff;
     font-size: 15px;
     color: #333333;
-    .item{
+    .item {
       height: 50px;
       line-height: 50px;
       padding-left: 15px;
-      .left{
+      .left {
         display: inline-block;
         width: 100px;
         color: #999;
