@@ -39,7 +39,7 @@
                 <p class="middle">
                   {{item.detailAddress}}
                 </p>
-                <p class="bottom">
+                <p class="bottom" v-if="item.discount">
                   <span class="brand">{{item.discount}}折</span>
                 </p>
               </div>
@@ -107,9 +107,9 @@
       },
       // 选择城市区域
       handleChooseCity(item) {
-        console.log(item)
         this.query.city = item
         this.showCity = false
+        this.getHotelList()
       },
       // 选择酒店
       handleHotel(item) {

@@ -1,8 +1,10 @@
 <template>
   <div class="page">
-    <!--顶部大图-->
+    <!--顶部滚动大图-->
     <div class="hotel-img">
-      <img :src="hotelInfo.images">
+      <!--<img :src="hotelInfo.images">-->
+      <swiper :list="imgList" auto style="width:100%;margin:0 auto;" height="180px" dots-class="custom-bottom"
+              dots-position="center"></swiper>
     </div>
     <!--酒店地址信息评分等-->
     <div class="hotel-info">
@@ -57,12 +59,26 @@
   </div>
 </template>
 <script>
-  import {Cell, Group, Datetime} from 'vux'
+  import {Cell, Group, Datetime, Swiper, SwiperItem} from 'vux'
   import {formatDate} from '../../util/index'
 
   export default {
     data() {
       return {
+        imgList: [
+          {
+            url: 'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
+            img: 1
+          },
+          {
+            url: 'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
+            img: 2
+          },
+          {
+            url: 'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
+            img: 3
+          }
+        ],
         bookLength: null, // 预定房间数
         hotelInfo: {}, // 酒店详细信息
         startTime: null, // 传给后台的时间
@@ -167,7 +183,9 @@
     components: {
       Cell,
       Group,
-      Datetime
+      Datetime,
+      Swiper,
+      SwiperItem
     }
   }
 

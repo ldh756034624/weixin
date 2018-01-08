@@ -24,7 +24,8 @@
       <group>
         <selector title="房间数" v-model="orderForm.roomCount" :options="roomList"></selector>
         <x-input label-width="105px" v-model="orderForm.stayRoomer" title="入住人" placeholder="入住人姓名"></x-input>
-        <x-input label-width="105px" v-model="orderForm.phone" title="手机" placeholder="请输入手机号"></x-input>
+        <x-input label-width="105px" mask="999 9999 9999" :max="13" v-model="orderForm.phone"
+                 title="手机" placeholder="请输入手机号"></x-input>
         <selector title="保留到" v-model="orderForm.keepTime" :options="keepList"></selector>
       </group>
     </div>
@@ -50,7 +51,6 @@
 </template>
 
 <script>
-
   import {Group, XInput, Selector} from 'vux'
 
   export default {
@@ -86,8 +86,8 @@
           let data = res.data
           if (data.code === 0) {
             let selectType = data.data
-            this.roomList = this.createSelectList(selectType.roomCountOptions)
-            this.orderForm.roomCount = selectType.roomCountOptions[0] // 初始化下拉框默认值
+            this.roomList = this.createSelectList(selectType.roomCountOptions, 1)
+            this.orderForm.roomCount = 1 // 初始化下拉框默认值
             this.favoriteList = this.createSelectList(selectType.roomTypeOptions)
             this.orderForm.roomStyle = selectType.roomTypeOptions[0] // 初始化下拉框默认值
             this.keepList = this.createSelectList(selectType.keepTimeOptions)
@@ -96,7 +96,7 @@
         })
       },
       // 生成给select用的数据格式
-      createSelectList(data) {
+      createSelectList(data, type) { // type=1, 为特殊处理数据，后台为1间，key,处理为1
         let tmp = []
         data.forEach(item => {
             tmp.push({
@@ -105,6 +105,11 @@
             })
           }
         )
+        if (type === 1) {
+          tmp.forEach((item, index) => {
+            item.key = index + 1
+          })
+        }
 
         return tmp
       },
