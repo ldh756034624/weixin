@@ -25,22 +25,44 @@
     </div>
 
     <p class="confirm" @click="confirm">确认支付</p>
+
+    <!--页面加载过渡-->
+    <fullLoading :loadingShow="loadingShow"></fullLoading>
   </div>
 </template>
 
 <script>
+  import FullLoading from '@/components/fullLoading'
+
   export default {
     created() {
+      if (this.$route.query.orderInfo) {  // 从填写订单跳过来
+        this.orderInfo = JSON.parse(this.$route.query.orderInfo)
+        this.loadingShow = false
+      } else { // 从未支付订单聊表过来
+        this.getPayInfo()
+      }
     },
     data() {
       return {
-        orderInfo: JSON.parse(this.$route.query.orderInfo),
+        loadingShow: true,
+        orderInfo: {},  // 支付信息,两个来源，一个从填写页面，一个从订单列表
         wexinBalance: 0, // 微信需要支付的价格
         useJy: false,  // 选择使用酒元
         useRmb: false // 选择使用微信支付
       }
     },
     methods: {
+      // 根据id获取支付信息
+      getPayInfo() {
+        this.$http.get('/h9/api/hotel/order/pay?hotelOrderId=' + this.$route.query.id).then(res => {
+          let data = res.data
+          if (data.code === 0) {
+            this.orderInfo = data.data
+            this.loadingShow = false
+          }
+        })
+      },
       /** 选择支付方法
        * @param type [1酒元， 2微信]
        */
@@ -68,6 +90,9 @@
           this.$router.push({path: '/hotel/success'})
         }, 1500)
       }
+    },
+    components: {
+      FullLoading
     }
   }
 </script>

@@ -49,10 +49,15 @@
         <span class="right">请到酒店前台索取发票</span>
       </p>
     </div>
+
+    <!--页面加载过渡-->
+    <fullLoading :loadingShow="loadingShow"></fullLoading>
   </div>
 </template>
 
 <script>
+  import FullLoading from '@/components/fullLoading'
+
   export default {
     created() {
       this.id = this.$route.query.id
@@ -60,6 +65,7 @@
     },
     data() {
       return {
+        loadingShow: true,
         orderInfo: {} // 订单详情信息
       }
     },
@@ -70,9 +76,13 @@
           let data = res.data
           if (data.code === 0) {
             this.orderInfo = data.data
+            this.loadingShow = false
           }
         })
       }
+    },
+    components: {
+      FullLoading
     }
   }
 </script>

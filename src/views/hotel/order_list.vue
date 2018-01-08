@@ -26,7 +26,7 @@
               </div>
               <div class="right">￥{{item.orderMoney}}</div>
             </div>
-            <div class="bottom" v-if="listQuery.type === 3">
+            <div class="bottom" v-if="listQuery.type === 3" @click.stop="goPay(item.id)">
               <span class="confirm">确认支付</span>
             </div>
           </li>
@@ -115,6 +115,10 @@
             this.showLoading = false
           }, 1500)
         }
+      },
+      // 去支付
+      goPay(id) {
+        this.$router.push({path: '/hotel/pay', query: {id}})
       }
     },
     components: {
