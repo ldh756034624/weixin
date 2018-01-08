@@ -119,7 +119,7 @@
           if (data.code === 0) {
             this.$router.push({
               path: '/hotel/pay',
-              query: {orderInfo: data.data}
+              query: {orderInfo: JSON.stringify(data.data)}
             })
           }
         })

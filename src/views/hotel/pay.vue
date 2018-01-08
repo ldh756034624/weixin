@@ -1,16 +1,16 @@
 <template>
   <div class="page">
     <p class="tips">
-      请在23：59之前完成支付，过期将自动取消订单
+      {{orderInfo.tips}}
     </p>
     <p class="count">
       <span>订单总金额</span>
-      <span class="count-money">￥<span>{{total}}</span></span>
+      <span class="count-money">￥<span>{{orderInfo.orderMoney}}</span></span>
     </p>
     <p class="title">使用酒元支付</p>
     <div class="pay-block">
       <div class="left">
-        酒元余额(￥23.23)
+        酒元余额(￥{{orderInfo.balance}})
       </div>
       <i class="right" :class="useJy ? 'checked' : ''" @click="handlePayWay(1)"></i>
     </div>
@@ -34,9 +34,8 @@
     },
     data() {
       return {
-        total: 400, // 支付总价
+        orderInfo: JSON.parse(this.$route.query.orderInfo),
         wexinBalance: 0, // 微信需要支付的价格
-        jyCount: 23.23, // 所持有酒元
         useJy: false,  // 选择使用酒元
         useRmb: false // 选择使用微信支付
       }
@@ -56,9 +55,9 @@
       // 计算微信需要支付的金额
       calcWeixinBalance() {
         if (this.useJy) {
-          this.wexinBalance = this.total - this.jyCount
+          this.wexinBalance = this.orderInfo.orderMoney - this.orderInfo.balance
         } else {
-          this.wexinBalance = this.total
+          this.wexinBalance = this.orderInfo.orderMoney
         }
       },
       confirm() { // 确认支付
