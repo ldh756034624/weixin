@@ -38,7 +38,7 @@
       </group>
     </div>
 
-    <div class="bottom">
+    <div class="bottom" ref="bottom">
       <div class="content">
         <div class="count-wrapper">
           <span>订单金额：</span>
@@ -57,6 +57,11 @@
     created() {
       this.getBookSelectList()  // 初始化选择框列表
       this.timeData = JSON.parse(this.$route.query.timeData)
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.listenBottomButton()
+      })
     },
     data() {
       return {
@@ -138,11 +143,23 @@
           }
         })
       },
+      // 安卓键盘弹起时，把底部fixed顶起问题
+      listenBottomButton() {
+        let _this = this
+        let h = document.body.scrollHeight;
+        window.onresize = function () {
+          if (document.body.scrollHeight < h) {
+            _this.$refs.bottom.style.display = "none";
+          } else {
+            _this.$refs.bottom.style.display = "block";
+          }
+        }
+      }
     },
     computed: {
       // 订单需支付金额
       shouldPay() {
-        return this.orderForm.roomCount * this.hotelInfo.roomInfo.realPrice
+        return this.orderForm.roomCount * this.hotelInfo.roomInfo.realPrice * this.timeData.rangeDay
       }
     },
     components: {

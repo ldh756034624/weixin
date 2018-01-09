@@ -102,6 +102,7 @@ export default [
       component (resolve) {require(['@/views/account/result'], resolve)} //手机充值,滴滴券兑换结果页
     }, {
       path:'/account/feedback',
+      name: '意见反馈',
       component (resolve) {require(['@/views/account/feedback'], resolve)} // 意见反馈
     },{
       path:'/my/vMoney',
@@ -127,6 +128,10 @@ export default [
     }, {
       path:'/my/sign',
       component (resolve) {require(['@/views/my/sign'], resolve)} // 签到
+    }, {
+      path:'/my/signRecord',
+      name: '签到记录',
+      component (resolve) {require(['@/views/my/signRecord'], resolve)} // 签到记录
     },{
       path:'/account/infoChange',
       component (resolve) {require(['@/views/account/infoChange'], resolve)} //资料修改

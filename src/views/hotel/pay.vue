@@ -48,7 +48,7 @@
         loadingShow: true,
         orderInfo: {},  // 支付信息,两个来源，一个从填写页面，一个从订单列表
         wexinBalance: 0, // 微信需要支付的价格
-        useJy: false,  // 选择使用酒元
+        useJy: true,  // 选择使用酒元
         useRmb: false // 选择使用微信支付
       }
     },

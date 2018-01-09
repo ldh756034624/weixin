@@ -5,7 +5,7 @@
       <p class="unit">酒元</p>
     </div>
     <div class="sign-wrapper" v-if="userInfo">
-      <div class="sign-count">
+      <div class="sign-count" @click="handleSignList">
         <div class="count">
           <p class="number">{{userInfo.signDays || 0}}</p>
           <p class="desc">连续签到天数</p>
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="info-block">
-      <h3 class="title">最新签到</h3>
+      <h3 class="title">签到规则</h3>
       <div class="desc-wrapper">
         每日签到即可获得0-99酒元；<br>
         连续签到有机会获得额外的酒元奖励，天数越多，金额越大；<br>
@@ -106,7 +106,11 @@
             }, 1500)
           }
         })
-      }
+      },
+      // 去签到列表
+      handleSignList() {
+        this.$router.push('/my/signRecord')
+      },
     },
     components: {
       XDialog, Scroller, XButton, FullLoading
