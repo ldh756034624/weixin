@@ -120,8 +120,8 @@
           _g.toastMsg('error', '请填写入住人')
           return
         }
-        if (!data.phone) {
-          _g.toastMsg('error', '请输入手机号码')
+        if (!data.phone || data.phone.length !== 13) {
+          _g.toastMsg('error', '请输入正确的手机号码')
           return
         }
         data.comeRoomTime = this.timeData.startTime
