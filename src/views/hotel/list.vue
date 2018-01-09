@@ -62,7 +62,7 @@
         hotelList: [], // 酒店列表
         cityList: [], // 待选择的城市列表
         query: {
-          queryKey: '龙',
+          queryKey: '',
           city: '深圳' // todo 默认值？
         },
         showCity: false  // 显示城市列表
@@ -174,12 +174,13 @@
         .icon-arrow-bottom {
           display: inline-block;
           margin-left: 3px;
-          width: 8px;
-          height: 6px;
+          margin-top: -2px;
+          width: 10px;
+          height: 12px;
           background-size: 100% 100%;
-          background-image: url("../../assets/img/hotel/arrow_bottom.png");
+          background-image: url("../../assets/img/hotel/xia@2x.png");
           &.selecting {
-            background-image: url("../../assets/img/hotel/arrow_top.png");
+            background-image: url("../../assets/img/hotel/shang@2x.png");
           }
         }
       }

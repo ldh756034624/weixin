@@ -21,8 +21,8 @@
     </div>
 
     <div class="btn-wrapper">
-      <span class="home">回到首页</span>
-      <span class="purse">进入钱包</span>
+      <span class="home" @click="handleHome">回到首页</span>
+      <span class="purse" @click="handlePurse">进入钱包</span>
     </div>
   </div>
 </template>
@@ -33,6 +33,16 @@
     },
     data() {
       return {}
+    },
+    methods: {
+      // 回到首页
+      handleHome() {
+        this.$router.replace('/index')
+      },
+      // 回到钱包
+      handlePurse() {
+        this.$router.replace('/account/purse')
+      }
     }
   }
 </script>
@@ -99,10 +109,10 @@
       font-size: 16px;
       border-radius: 4px;
     }
-    .home{
+    .home {
       color: #627984;
     }
-    .purse{
+    .purse {
       color: #fff;
       background: #627984;
     }

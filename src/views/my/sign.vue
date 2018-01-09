@@ -101,6 +101,9 @@
             this.hasSign = true
             this.showAlert = true
             this.initData()
+            setTimeout(() => {
+              this.showAlert = false
+            }, 1500)
           }
         })
       }

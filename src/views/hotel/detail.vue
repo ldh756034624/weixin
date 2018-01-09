@@ -45,7 +45,7 @@
           </div>
           <div class="right">
             <div class="price">
-              <p class="org-price">门市价：<span class="del">{{item.originalPrice}}</span></p>
+              <p class="org-price" v-if="item.originalPrice">门市价：<span class="del">{{item.originalPrice}}</span></p>
               <p class="now-price">￥<span>{{item.realPrice}}</span></p>
             </div>
             <div class="brand" @click="handleBook(item)">

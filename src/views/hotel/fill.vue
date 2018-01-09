@@ -42,7 +42,7 @@
       <div class="content">
         <div class="count-wrapper">
           <span>订单金额：</span>
-          <span class="count">￥<span>420</span></span>
+          <span class="count">￥<span>{{shouldPay}}</span></span>
         </div>
         <div class="btn" @click="handleBook">立即预订</div>
       </div>
@@ -114,10 +114,19 @@
         return tmp
       },
       handleBook() { // 点击预订按钮
-        _g.showLoading('订单创建中')
         let data = this.orderForm
+        // 必填判断
+        if (!data.stayRoomer) {
+          _g.toastMsg('error', '请填写入住人')
+          return
+        }
+        if (!data.phone) {
+          _g.toastMsg('error', '请输入手机号码')
+          return
+        }
         data.comeRoomTime = this.timeData.startTime
         data.outRoomTime = this.timeData.endTime
+        _g.showLoading('订单创建中')
         this.$http.post('/h9/api/hotel/order', data).then(res => {
           _g.hideLoading()
           let data = res.data
@@ -129,6 +138,12 @@
           }
         })
       },
+    },
+    computed: {
+      // 订单需支付金额
+      shouldPay() {
+        return this.orderForm.roomCount * this.hotelInfo.roomInfo.realPrice
+      }
     },
     components: {
       Group,

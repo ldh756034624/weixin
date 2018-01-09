@@ -87,8 +87,8 @@
         setTimeout(() => {
           _g.hideLoading()
 
-          this.$router.push({path: '/hotel/success'})
-        }, 1500)
+          this.$router.replace({path: '/hotel/success'})
+        }, 1000)
       }
     },
     components: {
