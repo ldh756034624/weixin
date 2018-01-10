@@ -67,7 +67,9 @@
         codeAlert: false,
         codeType: '2',
         prizeAccount: '',
-        bindPhoneParam: {}
+        bindPhoneParam: {
+          phone: null
+        }
       }
     },
     methods: {
@@ -100,6 +102,8 @@
         let self = this
         if (data.show === false) {
           self.codeAlert = false
+        }
+        if (data.justHide) {
           return
         }
         if (data.codeNum.length === 4) {
