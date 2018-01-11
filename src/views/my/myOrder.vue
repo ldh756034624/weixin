@@ -30,7 +30,7 @@
               </div>
               <pull-header-footer :status-up="pullupStatus" :status-down="pulldownStatus"></pull-header-footer>
       </scroller>
-      <blankPage v-show='!hasItem' :blankType='type'></blankPage>
+      <blank-page v-show='!hasItem' :blankType='type'></blank-page>
     </div>
   </div>
 </template>
