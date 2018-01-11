@@ -90,11 +90,9 @@ export default {
   methods:{
     init(){
       let self = this
-
       self.$http.get('h9/api/user/sms/'+self.phone+'/'+self.type)
         .then(function(res) {
           if(res.data.code==0){
-            //_g.toastMsg('error','验证码发送成功')
             self.count=60
             self.countTime();
           } else {  // 如果发送过于频繁，就不弹窗，直接消失
@@ -144,6 +142,12 @@ export default {
       if (!newVal) {
         this.changeCode = ''
       }
+    },
+    // 输入手机号码时
+    phoneNum(newVal) {
+      this.phone = newVal
+      let strLen=this.phone.length;
+      this.phoneLast=this.phone.substr(strLen-4,strLen)
     }
   },
   components: {
