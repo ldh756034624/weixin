@@ -93,9 +93,9 @@ export default {
               _g.hideLoading()
               self.$refs.codeAlert.hide(true)
               if(self.$route.query.type){
-                  self.$router.replace({path:'/account/result',query:{type:self.$route.query.type,money:res.data.data.money,num:res.data.data.didiCardNumber}})
+                  self.$router.push({path:'/account/result',query:{type:self.$route.query.type,money:res.data.data.money,num:res.data.data.didiCardNumber}})
                  }else{
-                  self.$router.replace({path:'/account/result',query:{type:'exchange',money:res.data.data.money,num:res.data.data.didiCardNumber}})
+                  self.$router.push({path:'/account/result',query:{type:'exchange',money:res.data.data.money,num:res.data.data.didiCardNumber}})
                  }
             }else if(res.data.code ===  3){  // 如果提现次数过多
               _g.hideLoading()

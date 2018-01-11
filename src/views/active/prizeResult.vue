@@ -23,6 +23,7 @@
 
         </div>
       </div>
+
       <div class="prizeBtnBox" :class="{'prizeBtnMrg' : prizeData.money===0}">
         <x-button mini class='miniBtn' @click.native="goIndex">进入社区</x-button>
         <x-button mini class='miniBtn' @click.native="downApp">下载APP</x-button>
@@ -45,7 +46,7 @@
         </div>
       </div>
     </div>
-    <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='bindPhoneParam.phone' ref='codeAlert'
+    <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum="bindPhoneParam.phone" ref='codeAlert'
                v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
   </div>
 </template>
@@ -113,6 +114,7 @@
               console.log(JSON.parse(localStorage.getItem('_user')))
               if (res.data.code == 0) {
                 _g.toastMsg('error', '领取成功!')
+                self.$refs.codeAlert.hide(true)
                 self.noGetPrize = false
                 self.prizeAccount = self.bindPhoneParam.phone
               }
