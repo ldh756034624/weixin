@@ -135,5 +135,14 @@ export default [
       path:'/recharge/index',
       name:'充值',
       component (resolve) {require(['@/views/recharge/index'], resolve)} // 充值
+    },{
+      path:'/recharge/success',
+      name:'充值成功',
+      component (resolve) {require(['@/views/recharge/success'], resolve)}
+    },{
+      path:'/recharge/fail',
+      name:'充值失败',
+      component (resolve) {require(['@/views/recharge/fail'], resolve)}
     }
+
   ]
