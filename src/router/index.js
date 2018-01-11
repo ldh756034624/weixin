@@ -131,5 +131,9 @@ export default [
       path:'/deal/platformDeal',
       name:'aboutUs',
       component (resolve) {require(['@/views/deal/platformDeal'], resolve)} //平台规范
+    },{
+      path:'/recharge/index',
+      name:'充值',
+      component (resolve) {require(['@/views/recharge/index'], resolve)} // 充值
     }
   ]
