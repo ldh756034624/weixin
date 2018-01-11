@@ -111,12 +111,12 @@
           self.bindPhoneParam.code = data.codeNum
           self.$http.post('h9/api/user/phone/bind', self.bindPhoneParam)
             .then(function (res) {
-              console.log(JSON.parse(localStorage.getItem('_user')))
               if (res.data.code == 0) {
                 _g.toastMsg('error', '领取成功!')
                 self.$refs.codeAlert.hide(true)
                 self.noGetPrize = false
                 self.prizeAccount = self.bindPhoneParam.phone
+                localStorage.setItem("_user", JSON.stringify(res.data.data));
               }
             })
         }
