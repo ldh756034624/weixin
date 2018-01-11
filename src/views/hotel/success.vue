@@ -22,7 +22,7 @@
 
     <div class="btn-wrapper">
       <span class="home" @click="handleHome">回到首页</span>
-      <span class="purse" @click="handlePurse">进入钱包</span>
+      <span class="purse" @click="handleOrder">查看订单</span>
     </div>
   </div>
 </template>
@@ -30,6 +30,7 @@
 <script>
   export default {
     created() {
+      sessionStorage.paySuccess = 'true'
     },
     data() {
       return {}
@@ -37,10 +38,10 @@
     methods: {
       // 回到首页
       handleHome() {
-        this.$router.replace('/index')
+        this.$router.replace('/hotel/list')
       },
-      // 回到钱包
-      handlePurse() {
+      // 查看订单
+      handleOrder() {
         this.$router.replace('/account/purse')
       }
     }

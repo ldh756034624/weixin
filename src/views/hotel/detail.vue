@@ -116,6 +116,7 @@
         }
 
         let rangeDay = (endTime - startTime) / 1000 / 60 / 60 / 24  // 过几晚
+        rangeDay === 0 && (rangeDay = 1)  // 当天走当天住也算一天
         let timeData = {  // 给下一个页面用的时间数据
           startTime: this.startTime,
           endTime: this.endTime,

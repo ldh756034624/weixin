@@ -8,24 +8,10 @@
 
     <div class="edit-wrapper">
       <div class="text-area">
-        <textarea v-model="text" placeholder="我们力求向您提供更优质的服务，期待您的宝贵意见！"></textarea>
+        <textarea v-model="formData.advice" placeholder="我们力求向您提供更优质的服务，期待您的宝贵意见！"></textarea>
       </div>
-      <div class="edit-bottom">
-        <uploader
-          :max="3"
-          :images="images"
-          :handle-click="false"
-          :show-header="false"
-          :readonly="false"
-          :upload-url="uploadUrl"
-          :params="params"
-          size="normal"
-          @add-image="addImageMethod"
-          @remove-image="removeImageMethod"
-        ></uploader>
-      </div>
-      <div class="hidename-wrapper" @click="isHideName = !isHideName">
-        <i class="check-box" :class="isHideName ? 'checked' : ''"></i>
+      <div class="hidename-wrapper" @click="formData.anonymous = !formData.anonymous">
+        <i class="check-box" :class="formData.anonymous ? 'checked' : ''"></i>
         匿名
       </div>
     </div>
@@ -35,7 +21,7 @@
     </p>
 
     <div class="input-wrapper">
-      <input type="text" v-model="phone" class="phone-input" placeholder="手机号/QQ号/微信号">
+      <input type="text" v-model="formData.connect" class="phone-input" placeholder="手机号/QQ号/微信号">
     </div>
 
     <div class="submit-wrapper" @click="submit">
@@ -48,39 +34,57 @@
   import Uploader from 'vux-uploader'
 
   export default {
-    mounted() {
-      this.setTitle('意见反馈');
+    created() {
+      this.getTypeList()
     },
     data() {
       return {
-        actionMenu: {
-          value1: '功能建议',
-          value2: '程序错误',
-          value3: '数据问题',
-          value4: '其他'
+        actionMenu: {}, // 类型选择列表
+        formData: {
+          advice: '', // 意见内容
+          anonymous: true,  // 是否匿名
+          connect: null,  // 联系方式
+          adviceType: 1 // adviceType
         },
         actionShow: false,
-        actionVal: '功能建议',
-        text: '',
-        uploadUrl: 'sdjfiodsjifo',
-        // images数据格式[ { url: '/url/of/img.ong' }, ...]
-        images: [],
-        // 上传图片时带的参数
-        params: {},
-        isHideName: true,
-        phone: null,
+        actionVal: '功能建议'
       }
     },
     methods: {
+      // 获取反馈类型
+      getTypeList() {
+        this.$http.get('h9/api/advice/adviceType').then(res => {
+          let data = res.data
+          if (data.code === 0) {
+            data.data.forEach((item, index) => {
+              this.actionMenu[item.key] = item.val
+              if (index === 0) {
+                this.formData.adviceType = item.key
+                this.actionVal = item.val
+              }
+            })
+          }
+        })
+      },
+      // 选择类型时
       actionClick(key) {
+        this.formData.adviceType = key
         this.actionVal = this.actionMenu[key]
       },
-      addImageMethod() {
-      },
-      removeImageMethod() {
-      },
+      // 提交
       submit() {
-        _g.toastMsg('success','提交成功')
+        if (!this.formData.advice) {
+          _g.toastMsg('error', '请输入反馈内容')
+        }
+        let data = this.formData
+        data.anonymous = data.anonymous ? 1 : 0  // 是否匿名
+        console.log(this.formData)
+        this.$http.post('h9/api/advice/sendAdvice', {data}).then(res => {
+          let data = res.data
+          if (data.code === 0) {
+            _g.toastMsg('success', data.msg)
+          }
+        })
       }
     },
     components: {
