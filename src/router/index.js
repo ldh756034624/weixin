@@ -1,10 +1,6 @@
 
 export default [
     {
-    	path:'*',
-    	name:'home',
-    	component (resolve) {require(['@/views/index'], resolve)}
-    },{
       path:'/index',
       name:'homeIndex',
       component (resolve) {require(['@/views/index'], resolve)}
@@ -169,5 +165,17 @@ export default [
       path:'/hotel/orderList',
       name:'酒店订单',
       component (resolve) {require(['@/views/hotel/order_list'], resolve)} // 酒店订单列表
+    },{
+      path:'/bbs',
+      name:'社区BBS',
+      component (resolve) {require(['@/views/bbs/home'], resolve)} // 社区BBS
+    },{
+      path:'/bbs/search',
+      name:'社区BBS搜索',
+      component (resolve) {require(['@/views/bbs/search'], resolve)} // 社区BBS搜索
+    },{
+      path:'*',
+      name:'home',
+      component (resolve) {require(['@/views/index'], resolve)}
     }
   ]
