@@ -23,6 +23,7 @@
 
         </div>
       </div>
+
       <div class="prizeBtnBox" :class="{'prizeBtnMrg' : prizeData.money===0}">
         <x-button mini class='miniBtn' @click.native="goIndex">进入社区</x-button>
         <x-button mini class='miniBtn' @click.native="downApp">下载APP</x-button>
@@ -45,7 +46,7 @@
         </div>
       </div>
     </div>
-    <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum='bindPhoneParam.phone' ref='codeAlert'
+    <codeAlert :showCodeAlert='codeAlert' :type='codeType' :phoneNum="bindPhoneParam.phone" ref='codeAlert'
                v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
   </div>
 </template>
@@ -67,7 +68,9 @@
         codeAlert: false,
         codeType: '2',
         prizeAccount: '',
-        bindPhoneParam: {}
+        bindPhoneParam: {
+          phone: null
+        }
       }
     },
     methods: {
@@ -100,17 +103,20 @@
         let self = this
         if (data.show === false) {
           self.codeAlert = false
+        }
+        if (data.justHide) {
           return
         }
         if (data.codeNum.length === 4) {
           self.bindPhoneParam.code = data.codeNum
           self.$http.post('h9/api/user/phone/bind', self.bindPhoneParam)
             .then(function (res) {
-              console.log(JSON.parse(localStorage.getItem('_user')))
               if (res.data.code == 0) {
                 _g.toastMsg('error', '领取成功!')
+                self.$refs.codeAlert.hide(true)
                 self.noGetPrize = false
                 self.prizeAccount = self.bindPhoneParam.phone
+                localStorage.setItem("_user", JSON.stringify(res.data.data));
               }
             })
         }

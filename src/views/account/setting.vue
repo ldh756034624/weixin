@@ -6,7 +6,7 @@
       <cell title="意见反馈" link='/account/feedback' is-link></cell>
       <p class="flexBox">版本信息 <span class='flex1 alignR'>V4.0</span></p>
     </group>
-    <!-- <x-button class='bottomBtn gradientBtn' @click.native="logOut">退出当前帐号</x-button> -->
+    <!--<x-button class='bottomBtn gradientBtn' @click.native="logOut">退出当前帐号</x-button>-->
 
   </div>
 </template>
@@ -24,6 +24,7 @@
       logOut: function () {
         delete localStorage._user;
         _g.toastMsg('success', '清除！')
+        this.$router.push('/')
       }
     },
     components: {
