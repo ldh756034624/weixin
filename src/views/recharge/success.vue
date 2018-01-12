@@ -24,16 +24,24 @@
 <script>
   export default {
     created() {
+      this.orderId = this.$route.query.orderId
+      this.getResult()
     },
     data() {
-      return {}
+      return {
+        result: null // 充值结果
+      }
     },
     methods: {
       // 完成
       handleDone() {
         // todo
-//        this.$router.replace('/hotel/list')
-      }
+      },
+      getResult() {
+        this.$http.get('/h9/api/recharge/order/' + this.orderId).then(res => {
+          console.log(res.data)
+        })
+      },
     }
   }
 </script>

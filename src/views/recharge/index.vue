@@ -40,8 +40,7 @@
             let data = res.data
             if (data.code === 0) {
               console.log('data', data)
-              return
-              let callbackurl = 'https://weixin-test-h9.thy360.com/h9-weixin/?#/recharge/success' // 成功回调 test环境
+              let callbackurl = 'https://weixin-test-h9.thy360.com/h9-weixin/?#/recharge/success?orderId=' + data.data.orderId // 成功回调 test环境
               callbackurl = encodeURIComponent(callbackurl) // encode
               location.replace(data.data.payUrl + '&callback=' + callbackurl)
             }
