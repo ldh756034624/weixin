@@ -36,7 +36,7 @@
     methods: {
       handleRecharge() {
         if (this.fundMoney > 0) {
-          this.$http.get(' /h9/api/recharge/order?money=' + this.fundMoney).then(res => {
+          this.$http.get('/h9/api/recharge/order?money=' + this.fundMoney).then(res => {
             let data = res.data
             if (data.code === 0) {
               console.log('data', data)
