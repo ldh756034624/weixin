@@ -7,11 +7,11 @@
     <div class="info-wrapper">
       <p class="info-item">
         <span class="left">充值时间</span>
-        <span class="right">2017-10-30 12:32:11</span>
+        <span class="right">{{result.time}}</span>
       </p>
       <p class="info-item">
         <span class="left">充值金额</span>
-        <span class="right">￥20.00</span>
+        <span class="right">￥{{result.money}}</span>
       </p>
     </div>
 
@@ -23,23 +23,28 @@
 
 <script>
   export default {
+    mounted() {
+      this.setTitle('充值成功');
+    },
     created() {
       this.orderId = this.$route.query.orderId
       this.getResult()
     },
     data() {
       return {
-        result: null // 充值结果
+        result: {} // 充值结果
       }
     },
     methods: {
       // 完成
       handleDone() {
-        // todo
+        this.$router.replace({path:'/account/personal'})
       },
       getResult() {
         this.$http.get('/h9/api/recharge/order/' + this.orderId).then(res => {
-          console.log(res.data)
+          if (res.data.code === 0) {
+            this.result = res.data.data
+          }
         })
       },
     }

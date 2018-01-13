@@ -5,18 +5,28 @@
       <span class="tip1">充值失败</span>
     </div>
     <div class="btn-wrapper">
-      <span class="home">重新充值</span>
-      <span class="purse">返回首页</span>
+      <span class="home" @click="handleRecharge">重新充值</span>
+      <span class="purse" @click="handleHome">返回首页</span>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    created() {
+    mounted() {
+      this.setTitle('充值失败');
     },
     data() {
       return {}
+    },
+    methods: {
+      // 完成
+      handleHome() {
+        this.$router.replace({path:'/index'})
+      },
+      handleRecharge() {
+        this.$router.replace({path:'/recharge/index'})
+      }
     }
   }
 </script>

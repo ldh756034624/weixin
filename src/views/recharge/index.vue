@@ -13,7 +13,7 @@
       </div>
       <div class="middle">
         <p class="title">充值金额</p>
-        <x-input v-model="fundMoney" title='￥' :show-clear="false" keyboard="number" placeholder="请输入充值金额">
+        <x-input v-model.number="fundMoneyt" title='￥' :value="fundMoneyt" :show-clear="false" keyboard="number" placeholder="请输入充值金额" class="fundMoney">
         </x-input>
       </div>
       <div class="pay-btn" @click="handleRecharge">
@@ -27,6 +27,7 @@
 
   export default {
     mounted() {
+      this.setTitle('充值');
     },
     data() {
       return {
@@ -39,14 +40,28 @@
           this.$http.get('/h9/api/recharge/order?money=' + this.fundMoney).then(res => {
             let data = res.data
             if (data.code === 0) {
-              console.log('data', data)
-              let callbackurl = 'https://weixin-test-h9.thy360.com/h9-weixin/?#/recharge/success?orderId=' + data.data.orderId // 成功回调 test环境
+              const url = window.location.href.split("#")[0]
+              let callbackurl = url + '#/recharge/success?orderId=' + data.data.orderId // 成功回调
+              let callbackFail = url + '#/recharge/fail' // 失败回调
               callbackurl = encodeURIComponent(callbackurl) // encode
-              location.replace(data.data.payUrl + '&callback=' + callbackurl)
+              callbackFail = encodeURIComponent(callbackFail) // encode
+              location.replace(data.data.payUrl + '&callback=' + callbackurl + '&callbackFail=' + callbackFail)
             }
           })
         } else {
           _g.toastMsg('error', '输入充值金额')
+        }
+      }
+    },
+    computed: {
+      fundMoneyt: {
+        get: function () {
+          return this.fundMoney
+        },
+        set: function (val) {
+          if (!val) return null
+          if (!/^\d+(?:.\d{1,2})?$/.test(val)) _g.toastMsg('error', '不能超过两位小数点')
+          this.fundMoney = Number(val.toFixed(2))
         }
       }
     },
@@ -122,7 +137,9 @@
     font-size: 16px;
     color: #FFFFFF;
   }
-
+    .fundMoney {
+    font-size: 26px;
+  }
 </style>
 <style lang="less">
   .middle {
@@ -141,4 +158,5 @@
       }
     }
   }
+
 </style>

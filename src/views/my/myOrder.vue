@@ -127,10 +127,11 @@ export default {
       padding: 30/40rem 0;
       margin: 0 30/40rem;
       border-top: 1px solid #f2f2f2;
+      align-items: center;
     }
     .orderText{
       font-size: 32/40rem;
-      line-height: 120/40rem;
+      line-height: 1rem;
     }
   }
   .orderIcons{
