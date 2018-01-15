@@ -22,7 +22,7 @@
     methods: {
       // 完成
       handleHome() {
-        this.$router.replace({path:'/index'})
+        this.$router.replace({path:'/account/purse'})
       },
       handleRecharge() {
         this.$router.replace({path:'/recharge/index'})
