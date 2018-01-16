@@ -1,9 +1,15 @@
 <template>
   <div class="articlePage">
-    <p class="title">{{articleData.title}}</p>
-    <p class="date"><span>{{articleData.createTime}}</span>{{articleData.userName}}</p>
-    <div class="content" v-if="isHtml" v-html='articleData.content'></div>
-    <div class="content" v-else>{{articleData.content}}</div>
+    <div v-if="isArticle">
+      <p class="title">{{articleData.title}}</p>
+      <p class="date"><span>{{articleData.createTime}}</span>{{articleData.userName}}</p>
+      <div class="content" v-if="isHtml" v-html='articleData.content'></div>
+      <div class="content" v-else>{{articleData.content}}</div>
+    </div>
+    <div v-else>
+      <!--todo 到时候改成html-->
+      <div class="content">{{articleData}}</div>
+    </div>
   </div>
 </template>
 <script>
@@ -20,16 +26,19 @@
         articleType: this.$route.query.type,
         articleData: {},
         isHtml: false,
+        isArticle: true // 是否是文章
       }
     },
     methods: {
       init() {
         let self = this
         if (this.articleType === 'hotel') {
+          this.isArticle = false
           this.$http.get('h9/api/hotel/info?hotelId=' + self.id).then(res => {
-            console.log(res.data)
+            this.articleData = res.data
           })
         } else {
+          this.isArticle = true
           self.$http.get('h9/api/article/' + self.id)
             .then(function (res) {
               if (res.data.code == 0) {
