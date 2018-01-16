@@ -8,7 +8,7 @@
 
     <div class="edit-wrapper">
       <div class="text-area">
-        <textarea v-model="formData.advice" placeholder="我们力求向您提供更优质的服务，期待您的宝贵意见！"></textarea>
+        <textarea maxlength="200" v-model="formData.advice" placeholder="我们力求向您提供更优质的服务，期待您的宝贵意见！"></textarea>
       </div>
       <div class="hidename-wrapper" @click="formData.anonymous = !formData.anonymous">
         <i class="check-box" :class="formData.anonymous ? 'checked' : ''"></i>
@@ -75,11 +75,15 @@
       submit() {
         if (!this.formData.advice) {
           _g.toastMsg('error', '请输入反馈内容')
+          return
+        }
+        if (!this.formData.connect) {
+          _g.toastMsg('error', '请输入联系方式')
+          return
         }
         let data = this.formData
         data.anonymous = data.anonymous ? 1 : 0  // 是否匿名
-        console.log(this.formData)
-        this.$http.post('h9/api/advice/sendAdvice', {data}).then(res => {
+        this.$http.post('h9/api/advice/sendAdvice', data).then(res => {
           let data = res.data
           if (data.code === 0) {
             _g.toastMsg('success', data.msg)
@@ -102,9 +106,10 @@
 
   .edit-wrapper {
     position: relative;
+    overflow: hidden;
     margin-top: 10px;
     background: #fff;
-    padding: 18px 15px 0;
+    padding: 18px 15px 15px;
     .text-area {
       margin-bottom: 18px;
       textarea {
@@ -119,7 +124,9 @@
       }
     }
     .hidename-wrapper {
-      position: absolute;
+      /*position: absolute;*/
+      float: right;
+      clear: both;
       right: 16px;
       bottom: 15px;
       display: flex;
