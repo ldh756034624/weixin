@@ -209,7 +209,7 @@ Vue.http.defaults.headers['client'] = '3'
 if(userdata){
   Vue.http.defaults.headers['imei'] = userdata.openId
 }
-Vue.http.defaults.headers['version'] = 'v1.0.0'   // 固定版本号给后台
+Vue.http.defaults.headers['version'] = '4.0'   // 固定版本号给后台
 
 // Vue.http.defaults.headers.token = userdata ? userdata.token : ''
 Vue.http.interceptors.request.use(
