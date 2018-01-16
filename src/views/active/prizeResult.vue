@@ -58,6 +58,7 @@
     mounted() {
       let self = this;
       self.setTitle('抢红包');
+      _g.showLoading()  // 加载
       self.init();  // 初始化
     },
     data() {
@@ -78,6 +79,7 @@
         let self = this
         self.$http.get('h9/lottery/room?code=' + self.code)
           .then(function (res) {
+            _g.hideLoading()
             if (res.data.code == 0) {
               self.prizeData = res.data.data
               if (self.prizeData.tel) {

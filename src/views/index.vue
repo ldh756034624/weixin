@@ -203,6 +203,9 @@
           })
       },
       goLinkFn: function (item) {
+        if (!item.link) {
+          return
+        }
         if ((item.link).indexOf('http') != -1 || (item.link).indexOf('https') != -1) {
 //          window.open(item.link)
 //          return
