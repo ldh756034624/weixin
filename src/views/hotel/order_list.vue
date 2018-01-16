@@ -26,7 +26,7 @@
               </div>
               <div class="right">￥{{item.orderMoney}}</div>
             </div>
-            <div class="bottom" v-if="listQuery.type === 3" @click.stop="goPay(item.id)">
+            <div class="bottom" v-if="item.showPayBtn" @click.stop="goPay(item.id)">
               <span class="confirm">确认支付</span>
             </div>
           </li>
