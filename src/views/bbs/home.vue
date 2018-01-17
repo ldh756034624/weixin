@@ -6,7 +6,7 @@
         <div>
           <div class="top vux-1px-b">
             <div class="search" @click="search"><i class="weui-icon weui_icon_search weui-icon-search"></i><span>搜索</span></div>
-            <div class="add"></div>
+            <div class="add" @click="add"></div>
           </div>
           <main class="home_main">
   <tab :line-width="2" custom-bar-width="20px" bar-active-color="#627984" active-color='#627984'>
@@ -56,7 +56,7 @@
               </flexbox-item>
             </flexbox>
             <div class="blockContBox" v-if='homeData'>
-              <div class="stickItem" v-for='item in homeData' @click='goLinkFn(item)'>
+              <div class="stickItem" v-for='item in homeData' :key="item.id" @click='goLinkFn(item)'>
                 <div class="stickBox">
                   <div class="stickName">
                     <img :src="item.userAvatar">
@@ -125,7 +125,7 @@
     },
     data() {
       return {
-        homeData: {},
+        homeData: [],
         topBannerList: [],
         WxCode: '',
         showAdverBlur: false,
@@ -193,7 +193,11 @@
         self.$http.get('h9/api/stick/config_home/list')
           .then(res => {
             if (res.data.code == 0) {
-              self.homeData = [self.homeData, ...res.data.data.data];
+              if (self.homeData.length < 1) {
+                self.homeData = res.data.data.data
+              } else {
+                self.homeData = [self.homeData, ...res.data.data.data];
+              }
               self.$nextTick(() => {
                 setTimeout(() => {    // 图片加载完成后刷新高度
                   self.$refs.detailScroller.reset()
@@ -229,6 +233,9 @@
           self.init();
           self.$refs.detailScroller.reset({top: 0}, 500, 'ease');
         }, 2000)
+      },
+      add () {
+        this.$router.push({ path: 'bbs/add' })
       },
       search () {
         this.$router.push({ path: 'bbs/search' })

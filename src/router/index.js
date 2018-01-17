@@ -179,6 +179,10 @@ export default [
       name:'社区BBS搜索',
       component (resolve) {require(['@/views/bbs/search'], resolve)} // 社区BBS搜索
     },{
+      path:'/bbs/add',
+      name:'发帖',
+      component (resolve) {require(['@/views/bbs/add'], resolve)} // 新增帖子
+    },{
       path:'*',
       name:'home',
       component (resolve) {require(['@/views/index'], resolve)}

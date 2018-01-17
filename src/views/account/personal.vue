@@ -91,7 +91,9 @@ export default {
   },
   data () {
     return {
-      personalData:{},
+      personalData:{
+        vb: 0
+      },
       userok: false,
       userHeadImg: userimg,
       styles: {},
