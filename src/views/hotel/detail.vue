@@ -33,7 +33,7 @@
                 :show.sync="endShow"></datetime>
     </group>
     <!--预定列表-->
-    <group class="hotel-detail-link">
+    <group class="hotel-detail-link" @click.native="handleHotelDetail">
       <cell :title="'预定('+bookLength+')'" value="详情" is-link></cell>
     </group>
     <div class="list-wrapper">
@@ -97,6 +97,10 @@
       this.getHotelInfo()
     },
     methods: {
+      // 前往酒店详情介绍
+      handleHotelDetail() {
+        this.$router.push({path: '/account/articleDetail', query: {id: this.id, type: 'hotel'}})
+      },
       // 获取酒店详细信息
       getHotelInfo() {
         this.$http.get('/h9/api/hotel/detail?hotelId=' + this.id).then(res => {

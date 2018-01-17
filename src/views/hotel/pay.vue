@@ -39,7 +39,7 @@
       if (this.$route.query.orderInfo) {  // 从填写订单跳过来
         this.orderInfo = JSON.parse(this.$route.query.orderInfo)
         this.loadingShow = false
-      } else { // 从未支付订单聊表过来
+      } else { // 从未支付订单列表过来
         this.getPayInfo()
       }
     },

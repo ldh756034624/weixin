@@ -102,6 +102,9 @@
       },
       goLinkFn: function (item) {
         console.log('item', item)
+        if (!item.link) {
+          return
+        }
         if ((item.link).indexOf('http') != -1) {
           window.open(item.link)
         } else {
