@@ -39,6 +39,7 @@
       if (this.$route.query.orderInfo) {  // 从填写订单跳过来
         this.orderInfo = JSON.parse(this.$route.query.orderInfo)
         this.loadingShow = false
+        this.payParams.hotelOrderId = this.orderInfo.hotelOrderId
       } else { // 从未支付订单列表过来
         this.getPayInfo()
       }
@@ -49,7 +50,12 @@
         orderInfo: {},  // 支付信息,两个来源，一个从填写页面，一个从订单列表
         wexinBalance: 0, // 微信需要支付的价格
         useJy: true,  // 选择使用酒元
-        useRmb: false // 选择使用微信支付
+        useRmb: false, // 选择使用微信支付
+        payParams: { // 公众号支付跳转请求参数
+          hotelOrderId: null, // 订单Id
+          payMethod: 1, // 支付方式 (1, "余额支付"),(2,"微信支付"),(3,"混合支付")
+          payPlatform: 'wxjs' // 支付平台 'wx'(微信APP）'wxjs'(公众号)
+        }
       }
     },
     methods: {
@@ -59,6 +65,7 @@
           let data = res.data
           if (data.code === 0) {
             this.orderInfo = data.data
+            this.payParams.hotelOrderId = this.orderInfo.hotelOrderId
             this.loadingShow = false
           }
         })
@@ -73,6 +80,7 @@
           this.useRmb = !this.useRmb
         }
         this.calcWeixinBalance()
+        this.createPayMethod()
       },
       // 计算微信需要支付的金额
       calcWeixinBalance() {
@@ -82,13 +90,35 @@
           this.wexinBalance = this.orderInfo.orderMoney
         }
       },
+      // 判断支付方式 (1, "余额支付"),(2,"微信支付"),(3,"混合支付")
+      createPayMethod() {
+        if (this.useJy && this.useRmb) {
+          this.payParams.payMethod = 3
+        } else if (this.useJy) {
+          this.payParams.payMethod = 1
+        } else {
+          this.payParams.payMethod = 2
+        }
+      },
       confirm() { // 确认支付
         _g.showLoading('支付中')
-        setTimeout(() => {
-          _g.hideLoading()
+        _g.hideLoading()
 
-          this.$router.replace({path: '/hotel/success'})
-        }, 1000)
+
+        this.$http.post('/h9/api/hotel/order/pay', this.payParams).then(res => {
+          _g.hideLoading()
+          if (!res.data.data) { // 空data，代表余额支付
+
+          } else {
+            const url = window.location.href.split("#")[0]
+            let callbackurl = url + '#/pay/success?orderId=' + this.orderInfo.hotelOrderId // 成功回调
+            let callbackFail = url + '#/pay/fail' // 失败回调
+            callbackurl = encodeURIComponent(callbackurl) // encode
+            callbackFail = encodeURIComponent(callbackFail) // encode
+            let link = res.data.data.payUrl + '&callback=' + callbackurl + '&callbackFail=' + callbackFail
+            window.location.replace(link)
+          }
+        })
       }
     },
     components: {
