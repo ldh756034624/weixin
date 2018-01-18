@@ -212,8 +212,8 @@ let userdata = JSON.parse(localStorage.getItem('_user'))
 let url = document.location.href.split('#')[0]
 let seturl = ''
 
-if (url.indexOf('weixin-test-h9.thy360.com') != -1) {
-  seturl = 'https://weixin-test-h9.thy360.com'
+if (url.indexOf('weixin-testnew-h9.thy360.com') != -1) {
+  seturl = 'https://weixin-testnew-h9.thy360.com'
 } else if (url.indexOf('weixin-dev-h9.thy360.com') != -1 || url.indexOf('localhost') != -1 || url.indexOf('172.16') != -1) {
   seturl = 'https://weixin-dev-h9.thy360.com'
 } else {
