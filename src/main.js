@@ -197,7 +197,7 @@ let url = document.location.href.split('#')[0]
 let seturl = ''
 
 if (url.indexOf('weixin-test-h9.thy360.com')!=-1 || url.indexOf('localhost')!=-1) {
-  seturl = 'https://weixin-test-h9.thy360.com'
+  seturl = 'https://weixin-testnew-h9.thy360.com'
 }else if (url.indexOf('weixin-dev-h9.thy360.com')!=-1){
   seturl = 'https://weixin-dev-h9.thy360.com'
 }else{
