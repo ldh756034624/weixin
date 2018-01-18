@@ -13,7 +13,9 @@
             </div>
           </div>
         </section>
-        <p v-show='isApple' class="isApple">{{shopData.tip}}</p>
+        <p v-if='isApple' class="isApple">{{shopData.tip}}</p>
+        <!--垫底用-->
+        <p v-else style="height: 2.7rem;width: 100%"></p>
       </main>
       <footer>
         <div>
@@ -114,7 +116,7 @@ export default {
     .isApple{
       text-align: center;
       font-size: 24/40rem;
-      padding: 20/40rem 0;
+      padding: 20/40rem 0 2.7rem;
       color: #999;
     }
     .bottomBtn {
