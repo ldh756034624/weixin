@@ -138,7 +138,6 @@ export default {
       background:url('../../assets/img/index/my_img_bg@2x.png') no-repeat;
       background-size: 100%;
       height: 470/40rem;
-      border-bottom: 1px solid #f2f2f2;
     }
     .settingIcon{
       width: 60/40rem;
