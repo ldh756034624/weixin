@@ -191,7 +191,7 @@ export default {
     }
     @media screen and (max-width: 360px){
       .accountCont{
-        padding-bottom: 120/40rem;
+        padding-bottom: 130/40rem;
       }
     }
     .personBox{
