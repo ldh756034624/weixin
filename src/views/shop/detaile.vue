@@ -77,6 +77,9 @@ export default {
 }
 </script>
 <style scoped lang='less'>
+  .page{
+    overflow: auto;
+  }
   .shopDatailePage{
     font-size: 30/40rem;
     .shopImg{
@@ -130,4 +133,13 @@ export default {
     }
   }
 
+</style>
+
+<style lang='less'>
+  .descCont {
+    img {
+      width: 100% !important;
+      height: auto !important;
+    }
+  }
 </style>
