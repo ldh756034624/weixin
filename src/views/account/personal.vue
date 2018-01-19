@@ -17,21 +17,7 @@
             <router-link :to="{path:'/account/purse',query:{balance:personalData.balance,limit:personalData.withdrawalCount}}">
               <div class="personalItemBox">
                 <p class="redFont">{{personalData.balance | price2}}</p>
-                <p>酒元</p>
-              </div>
-            </router-link>
-          </flexbox-item>
-          <flexbox-item v-if="personalData.vb != 0">
-         <div class="personalItemBox border-left" @click="goVB">
-                <p class="redFont">{{personalData.vb}}</p>
-                <p>V币</p>
-              </div>
-          </flexbox-item>
-          <flexbox-item>
-            <router-link to="/my/cupon">
-              <div class="personalItemBox border-left">
-                <p class="redFont">{{personalData.cardNum}}</p>
-                <p>卡券</p>
+                <p class="desc">旅游建康基金（酒元)</p>
               </div>
             </router-link>
           </flexbox-item>
@@ -39,6 +25,22 @@
       <div class="accountCont">
               <group class='personBox'>
 
+                <cell title="我的卡券" link="/my/cupon">
+                  <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                       src="../../assets/img/index/cupon_icon@2x.png">
+                  <span class='cellValueBox' style="margin-right:-12px;">
+                        <i>{{personalData.cardNum}}</i>
+                        <i class='arrow'></i>
+                      </span>
+                </cell>
+                <cell title="我的V币" @click.native="goVB" v-if="personalData.vb != 0">
+                  <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                       src="../../assets/img/index/vb@2x.png">
+                  <span class='cellValueBox'>
+                        <i>{{personalData.vb}}</i>
+                        <i class='arrow'></i>
+                      </span>
+                </cell>
                   <cell title="我的订单" link='/my/myOrder'>
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_order@2x.png">
@@ -168,7 +170,10 @@ export default {
       text-align: center;
       font-size: 24/40rem;
       line-height: 0;
-      margin:46/40rem 0;
+      margin:30/40rem 0;
+      .desc{
+        font-size: 12px;
+      }
       .redFont{
         font-size: 48/40rem;
         color: #627984;
@@ -183,11 +188,11 @@ export default {
     .border-left{
       border-left:1px solid #d9d9d9;
     }
-    @media screen and (max-width: 360px){
+    /*@media screen and (max-width: 360px){
       .accountCont{
-        padding-bottom: 120/40rem;
+        padding-bottom: 130/40rem;
       }
-    }
+    }*/
     .personBox{
       .cellValueBox{
         display: inline-block;
@@ -206,6 +211,10 @@ export default {
         background-size: 100%;
       }
     }
+
+  .emptyBox{
+    height: 130/40rem;
+  }
 
 </style>
 <style lang='less'>
