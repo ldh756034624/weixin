@@ -3,8 +3,13 @@
     <!--顶部滚动大图-->
     <div class="hotel-img">
       <!--<img :src="hotelInfo.images">-->
-      <swiper :list="imgList" auto style="width:100%;margin:0 auto;" height="180px" dots-class="custom-bottom"
-              dots-position="center"></swiper>
+      <swiper auto style="width:100%;margin:0 auto;" dots-class="custom-bottom"
+              dots-position="center">
+        <swiper-item v-for="(item, index) in imgList"
+                     :key="index">
+          <img :src="item">
+        </swiper-item>
+      </swiper>
     </div>
     <!--酒店地址信息评分等-->
     <div class="hotel-info">
@@ -65,20 +70,7 @@
   export default {
     data() {
       return {
-        imgList: [
-          {
-            url: 'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
-            img: 1
-          },
-          {
-            url: 'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
-            img: 2
-          },
-          {
-            url: 'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
-            img: 3
-          }
-        ],
+        imgList: [],
         bookLength: null, // 预定房间数
         hotelInfo: {}, // 酒店详细信息
         startTime: null, // 传给后台的时间
@@ -107,6 +99,7 @@
           let data = res.data
           if (data.code === 0) {
             this.hotelInfo = data.data
+            this.imgList = data.data.images
             this.bookLength = data.data.roomList.length
           }
         })

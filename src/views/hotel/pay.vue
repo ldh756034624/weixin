@@ -7,6 +7,14 @@
       <span>订单总金额</span>
       <span class="count-money">￥<span>{{orderInfo.orderMoney}}</span></span>
     </p>
+    <p class="count">
+      <span>已支付</span>
+      <span class="count-money">￥<span>{{orderInfo.paidMoney}}</span></span>
+    </p>
+    <p class="count">
+      <span>待支付</span>
+      <span class="count-money">￥<span>{{orderInfo.unpaidMoney}}</span></span>
+    </p>
     <p class="title">使用酒元支付</p>
     <div class="pay-block">
       <div class="left">
@@ -41,7 +49,7 @@
         this.loadingShow = false
         this.payParams.hotelOrderId = this.orderInfo.hotelOrderId
       } else { // 从未支付订单列表过来
-        this.getPayInfo()
+        this.getPayInfo(this.$route.query.id)
       }
     },
     data() {
@@ -60,8 +68,8 @@
     },
     methods: {
       // 根据id获取支付信息
-      getPayInfo() {
-        this.$http.get('/h9/api/hotel/order/pay?hotelOrderId=' + this.$route.query.id).then(res => {
+      getPayInfo(id) {
+        this.$http.get('/h9/api/hotel/order/pay?hotelOrderId=' + id).then(res => {
           let data = res.data
           if (data.code === 0) {
             this.orderInfo = data.data
@@ -85,9 +93,13 @@
       // 计算微信需要支付的金额
       calcWeixinBalance() {
         if (this.useJy) {
-          this.wexinBalance = this.orderInfo.orderMoney - this.orderInfo.balance
+          this.wexinBalance = this.orderInfo.unpaidMoney - this.orderInfo.balance
         } else {
-          this.wexinBalance = this.orderInfo.orderMoney
+          this.wexinBalance = this.orderInfo.unpaidMoney
+        }
+
+        if(this.wexinBalance <=0) { // 如果金额小于0不需要微信支付
+          this.useRmb = false
         }
       },
       // 判断支付方式 (1, "余额支付"),(2,"微信支付"),(3,"混合支付")
