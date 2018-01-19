@@ -111,8 +111,8 @@
 
           } else {
             const url = window.location.href.split("#")[0]
-            let callbackurl = url + '#/pay/success?orderId=' + this.orderInfo.hotelOrderId // 成功回调
-            let callbackFail = url + '#/pay/fail' // 失败回调
+            let callbackurl = url + '#/hotel/success?orderId=' + this.orderInfo.hotelOrderId // 成功回调
+            let callbackFail = url + '#/hotel/fail' // 失败回调
             callbackurl = encodeURIComponent(callbackurl) // encode
             callbackFail = encodeURIComponent(callbackFail) // encode
             let link = res.data.data.payUrl + '&callback=' + callbackurl + '&callbackFail=' + callbackFail

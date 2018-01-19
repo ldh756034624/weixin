@@ -6,8 +6,8 @@
       <span class="tip2">请在23:59之前完成支付，过期将自动取消订单</span>
     </div>
     <div class="btn-wrapper">
-      <span class="home">重新支付</span>
-      <span class="purse">查看订单</span>
+      <span class="home" @click="repay">重新支付</span>
+      <span class="purse" @click="viewOrder">查看订单</span>
     </div>
   </div>
 </template>
@@ -15,9 +15,18 @@
 <script>
   export default {
     created() {
+      this.orderId = this.$route.query.orderId
     },
     data() {
       return {}
+    },
+    methods: {
+      repay() {
+        this.$router.replace('/hotel/pay?id=' + this.orderId)
+      },
+      viewOrder() {
+        alert('查看订单？？')
+      }
     }
   }
 </script>

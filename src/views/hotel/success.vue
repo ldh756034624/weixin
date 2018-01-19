@@ -8,15 +8,15 @@
     <div class="info-wrapper">
       <p class="info-item">
         <span class="left">入住酒店</span>
-        <span class="right">合肥融侨皇冠假日酒店</span>
+        <span class="right">{{orderInfo.hotelName}}</span>
       </p>
       <p class="info-item">
         <span class="left">入住时间</span>
-        <span class="right"><span class="time-range">12月13日-12月14日</span>共1晚</span>
+        <span class="right"><span class="time-range">{{orderInfo.comeRoomTime}}-{{orderInfo.outRoomTime}}</span>共{{orderInfo.stayNightCount}}晚</span>
       </p>
       <p class="info-item">
         <span class="left">入住房型</span>
-        <span class="right">皇冠高级房</span>
+        <span class="right">{{orderInfo.roomTypeName}}</span>
       </p>
     </div>
 
@@ -31,13 +31,23 @@
   export default {
     created() {
       sessionStorage.paySuccess = 'true'
-      this.hotelId = this.$route.query.orderId
-      alert('酒店id' + this.hotelId)
+      this.orderId = this.$route.query.orderId
+      this.getOrderInfo()
     },
     data() {
-      return {}
+      return {
+        orderInfo: {} // 酒店详情
+      }
     },
     methods: {
+      getOrderInfo() {
+        this.$http.get('/h9/api/hotel/order/detail?orderId=' + this.orderId).then(res => {
+          let data = res.data
+          if (data.code === 0) {
+            this.orderInfo = data.data
+          }
+        })
+      },
       // 回到首页
       handleHome() {
         this.$router.replace('/hotel/list')
