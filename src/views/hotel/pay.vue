@@ -102,21 +102,24 @@
       },
       confirm() { // 确认支付
         _g.showLoading('支付中')
-        _g.hideLoading()
-
-
         this.$http.post('/h9/api/hotel/order/pay', this.payParams).then(res => {
           _g.hideLoading()
-          if (!res.data.data) { // 空data，代表余额支付
-
+          if (res.data.code === 0) {
+            // 支付成功
+            if (!res.data.data) { // 空data，代表余额支付成功
+              this.$router.replace('/hotel/success?orderId=' + this.orderInfo.hotelOrderId)
+            } else {
+              const url = window.location.href.split("#")[0]
+              let callbackurl = url + '#/hotel/success?orderId=' + this.orderInfo.hotelOrderId // 成功回调
+              let callbackFail = url + '#/hotel/fail?orderId=' + this.orderInfo.hotelOrderId // 失败回调
+              callbackurl = encodeURIComponent(callbackurl) // encode
+              callbackFail = encodeURIComponent(callbackFail) // encode
+              let link = res.data.data.payUrl + '&callback=' + callbackurl + '&callbackFail=' + callbackFail
+              window.location.replace(link)
+            }
           } else {
-            const url = window.location.href.split("#")[0]
-            let callbackurl = url + '#/hotel/success?orderId=' + this.orderInfo.hotelOrderId // 成功回调
-            let callbackFail = url + '#/hotel/fail' // 失败回调
-            callbackurl = encodeURIComponent(callbackurl) // encode
-            callbackFail = encodeURIComponent(callbackFail) // encode
-            let link = res.data.data.payUrl + '&callback=' + callbackurl + '&callbackFail=' + callbackFail
-            window.location.replace(link)
+            // 支付失败
+            this.$router.replace('/hotel/fail?orderId=' + this.orderInfo.hotelOrderId)
           }
         })
       }

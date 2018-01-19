@@ -25,7 +25,7 @@
         this.$router.replace('/hotel/pay?id=' + this.orderId)
       },
       viewOrder() {
-        alert('查看订单？？')
+        this.$router.replace('/hotel/orderDetail?id=' + this.orderId)
       }
     }
   }

@@ -54,7 +54,7 @@
       },
       // 查看订单
       handleOrder() {
-        this.$router.replace('/account/purse')
+        this.$router.replace('/hotel/orderDetail?id=' + this.orderId)
       }
     }
   }
