@@ -171,7 +171,7 @@ export default {
       text-align: center;
       font-size: 24/40rem;
       line-height: 0;
-      margin:46/40rem 0;
+      margin:30/40rem 0;
       .desc{
         font-size: 12px;
       }
@@ -189,11 +189,11 @@ export default {
     .border-left{
       border-left:1px solid #d9d9d9;
     }
-    @media screen and (max-width: 360px){
+    /*@media screen and (max-width: 360px){
       .accountCont{
         padding-bottom: 130/40rem;
       }
-    }
+    }*/
     .personBox{
       .cellValueBox{
         display: inline-block;
@@ -212,6 +212,10 @@ export default {
         background-size: 100%;
       }
     }
+
+  .emptyBox{
+    height: 130/40rem;
+  }
 
 </style>
 <style lang='less'>
