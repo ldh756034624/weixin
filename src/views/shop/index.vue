@@ -184,6 +184,9 @@
       }
       .desc {
         font-size: 24/40rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
       .joyMoney {
         color: #627984;
