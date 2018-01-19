@@ -38,13 +38,6 @@
                   </div>
                 </router-link>
               </flexbox-item>
-              <flexbox-item :span="1/4">
-                <router-link to="/hotel/list" style="width:100%;">
-                  <div class="indexItemBox">
-                    <p>酒店预订</p>
-                  </div>
-                </router-link>
-              </flexbox-item>
             </flexbox>
             <div class="indexLinkBox">
               <flexbox :gutter="0" wrap="wrap">
@@ -150,14 +143,7 @@
       } else {
         self.init();
       }
-      //console.log( self.loadingShow)
       self.loadingShow = self.$store.state.showLoading
-      //self.init();
-      // self.$watch('showAdverBlur',function(val){
-      //   if(!val){
-      //     sessionStorage.setItem('AdverBlur',false)
-      //   }
-      // })
     },
     beforeUpdate: function () {
       let self = this;
@@ -207,8 +193,6 @@
           return
         }
         if ((item.link).indexOf('http') != -1 || (item.link).indexOf('https') != -1) {
-//          window.open(item.link)
-//          return
           window.location.href = item.link
         } else {
           //抢红包 "link:"lottery"/滴滴兑换 "link:"exchange_didi"/手机充值"link:"exchange_telephoneFare"/查询真伪 “link”:"validate"
@@ -220,6 +204,8 @@
             this.hasPhone('/account/phoneRecharge')
           } else if (item.link === 'validate') {
             this.$router.push({path: '/active/searchIsReally'})
+          } else if (item.link === 'hotel') { // 酒店预定
+            this.$router.push({path: '/hotel/list'})
           } else {
             this.$router.push({path: item.link})
           }

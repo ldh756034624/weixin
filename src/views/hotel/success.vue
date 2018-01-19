@@ -31,6 +31,8 @@
   export default {
     created() {
       sessionStorage.paySuccess = 'true'
+      this.hotelId = this.$route.query.orderId
+      alert('酒店id' + this.hotelId)
     },
     data() {
       return {}
