@@ -17,7 +17,7 @@
             <router-link :to="{path:'/account/purse',query:{balance:personalData.balance,limit:personalData.withdrawalCount}}">
               <div class="personalItemBox">
                 <p class="redFont">{{personalData.balance | price2}}</p>
-                <p class="desc">旅游建康基金（酒元)</p>
+                <p class="desc">旅游健康基金（酒元)</p>
               </div>
             </router-link>
           </flexbox-item>
