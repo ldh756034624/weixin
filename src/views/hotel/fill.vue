@@ -24,7 +24,7 @@
       <group>
         <selector title="房间数" v-model="orderForm.roomCount" :options="roomList"></selector>
         <x-input label-width="105px" v-model="orderForm.stayRoomer" title="入住人" placeholder="入住人姓名"></x-input>
-        <x-input label-width="105px" mask="999 9999 9999" :max="13" v-model="orderForm.phone"
+        <x-input label-width="105px" type="tel" mask="999 9999 9999" :max="13" v-model="orderForm.phone"
                  title="手机" placeholder="请输入手机号"></x-input>
         <selector title="保留到" v-model="orderForm.keepTime" :options="keepList"></selector>
       </group>

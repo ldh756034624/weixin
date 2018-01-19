@@ -50,10 +50,12 @@
       },
       // 回到首页
       handleHome() {
+        sessionStorage.paySuccess = 'false' // 去除返回跳转到list
         this.$router.replace('/hotel/list')
       },
       // 查看订单
       handleOrder() {
+        sessionStorage.paySuccess = 'false' // 去除返回跳转到list
         this.$router.replace('/hotel/orderDetail?id=' + this.orderId)
       }
     }
