@@ -208,24 +208,7 @@
           })
       },
       goLinkFn: function (item) {
-        if ((item.link).indexOf('http') != -1 || (item.link).indexOf('https') != -1) {
-//          window.open(item.link)
-//          return
-          window.location.href = item.link
-        } else {
-          //抢红包 "link:"lottery"/滴滴兑换 "link:"exchange_didi"/手机充值"link:"exchange_telephoneFare"/查询真伪 “link”:"validate"
-          if (item.link === 'lottery') {
-            this.$router.push({path: '/active/hongbao'})
-          } else if (item.link === 'exchange_didi') {
-            this.hasPhone('/account/ddExchange')
-          } else if (item.link === 'exchange_telephoneFare') {
-            this.hasPhone('/account/phoneRecharge')
-          } else if (item.link === 'validate') {
-            this.$router.push({path: '/active/searchIsReally'})
-          } else {
-            this.$router.push({path: item.link})
-          }
-        }
+          this.$router.push({path: '/bbs/detail/'+item.id})
       },
       refresh() {
         let self = this;

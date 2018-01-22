@@ -183,9 +183,13 @@ export default [
       name:'发帖',
       component (resolve) {require(['@/views/bbs/add'], resolve)} // 新增帖子
     },{
-      path:'*',
-      name:'home',
-      component (resolve) {require(['@/views/index'], resolve)}
+      path:'/bbs/detail/:id',
+      name:'文章内文',
+      component (resolve) {require(['@/views/bbs/detail'], resolve)} // 文章内文
+    },{
+      path:'/bbs/report/:id',
+      name:'文章举报',
+      component (resolve) {require(['@/views/bbs/report'], resolve)} // 文章举报
     },{
       path:'/recharge/index',
       name:'充值',
@@ -198,5 +202,9 @@ export default [
       path:'/recharge/fail',
       name:'充值失败',
       component (resolve) {require(['@/views/recharge/fail'], resolve)}
+    },{
+      path:'*',
+      name:'home',
+      component (resolve) {require(['@/views/index'], resolve)}
     }
   ]
