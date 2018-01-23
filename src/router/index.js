@@ -191,6 +191,10 @@ export default [
       name:'文章举报',
       component (resolve) {require(['@/views/bbs/report'], resolve)} // 文章举报
     },{
+      path:'/bbs/list/:id',
+      name:'文章分类',
+      component (resolve) {require(['@/views/bbs/list'], resolve)} // 文章分类
+    },{
       path:'/recharge/index',
       name:'充值',
       component (resolve) {require(['@/views/recharge/index'], resolve)} // 充值
