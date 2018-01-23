@@ -24,7 +24,13 @@
         </flexbox>
       <div class="accountCont">
               <group class='personBox'>
-
+                <cell title="我的社区" link='/bbs/history'>
+                  <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                       src="../../assets/img/index/icon_my_post@2x.png">
+                  <span class='cellValueBox'  style="margin-right:-12px;">
+                        <i class='arrow'></i>
+                      </span>
+                </cell>
                 <cell title="我的卡券" link="/my/cupon">
                   <img slot="icon" width="30" style="display:block;margin-right:10px;"
                        src="../../assets/img/index/cupon_icon@2x.png">

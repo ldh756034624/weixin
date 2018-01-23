@@ -190,6 +190,11 @@ export default [
       path:'/bbs/report/:id',
       name:'文章举报',
       component (resolve) {require(['@/views/bbs/report'], resolve)} // 文章举报
+    },
+    {
+      path:'/bbs/history',
+      name:'我的帖子',
+      component (resolve) {require(['@/views/bbs/history'], resolve)} // 我的帖子
     },{
       path:'/recharge/index',
       name:'充值',
