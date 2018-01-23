@@ -10,19 +10,19 @@
           </div>
           <main class="home_main">
   <tab :line-width="2" custom-bar-width="20px" bar-active-color="#627984" active-color='#627984'>
-              <tab-item selected>首页</tab-item>
-              <tab-item>热门</tab-item>
+              <tab-item selected @on-item-click="init(0)">首页</tab-item>
+              <tab-item @on-item-click="init(1)">热门</tab-item>
             </tab>
-            <div class="header-wrap" v-if='topBannerList'>
+            <div class="header-wrap" v-if='topBannerList && index === 0'>
               <swiper dots-position="center" auto dots-class="custom-bottom" height="5rem">
                 <swiper-item class="swiper-demo-img" v-for="(item, index) in topBannerList" :key="index" @click.native='goLinkFn(item)'>
                   <img :src="item.img" class="homeImg">
                 </swiper-item>
               </swiper>
             </div>
-            <flexbox :gutter="0" wrap="wrap" style="background-color:#fff;">
+            <flexbox :gutter="0" wrap="wrap" style="background-color:#fff;" v-if="index === 0">
               <flexbox-item :span="1/4">
-                <router-link to="/my/sign" style="width:100%;">
+                <router-link to="/bbs/list/1" style="width:100%;">
                   <div class="indexItemBox">
                     <img src="../../assets/img/bbs/icon_zuixinhuodong@2x.png"/>
                     <p>最新活动</p>
@@ -31,7 +31,7 @@
               </flexbox-item>
               <!--todo 后台给予标签-->
               <flexbox-item :span="1/4">
-                <router-link to="/my/sign" style="width:100%;">
+                <router-link to="/bbs/list/2" style="width:100%;">
                   <div class="indexItemBox">
                     <img src="../../assets/img/bbs/icon_cangjiujiaoliu@2x.png"/>
                     <p>藏酒交流</p>
@@ -39,7 +39,7 @@
                 </router-link>
               </flexbox-item>
               <flexbox-item :span="1/4">
-                <router-link to="/hotel/list" style="width:100%;">
+                <router-link to="/bbs/list/3" style="width:100%;">
                   <div class="indexItemBox">
                     <img src="../../assets/img/bbs/icon_@2x.png"/>
                     <p>文史影趣</p>
@@ -47,7 +47,7 @@
                 </router-link>
               </flexbox-item>
               <flexbox-item :span="1/4">
-                <router-link to="/hotel/list" style="width:100%;">
+                <router-link to="/bbs/list/4" style="width:100%;">
                   <div class="indexItemBox">
                     <img src="../../assets/img/bbs/icon_chihewanle@2x.png"/>
                     <p>吃喝玩乐</p>
@@ -128,6 +128,7 @@
         homeData: [],
         topBannerList: [],
         WxCode: '',
+        index: null,
         showAdverBlur: false,
         status1: {
           pulldownStatus: 'default'
@@ -144,12 +145,24 @@
       let userObj = JSON.parse(localStorage.getItem('_user'))
       if (!userObj) {
         if (!self.WxCode) {
-          self.getWxCode()
+          // self.getWxCode()
         } else {
           self.weChatLogin();
         }
       } else {
-        self.init();
+        self.$http.get('h9/api/stick/home')
+          .then(res => {
+            if (res.data.code == 0 && res.data.data.stickHomeTopBanner) {
+              for (var i = 0; i < res.data.data.stickHomeTopBanner.length; i++) {
+                self.topBannerList.push({
+                  url: res.data.data.stickHomeTopBanner[i].link,
+                  img: res.data.data.stickHomeTopBanner[i].imgUrl,
+                })
+              }
+              console.log(self.topBannerList)
+            }
+          })
+        self.init(0);
       }
       //console.log( self.loadingShow)
       self.loadingShow = self.$store.state.showLoading
@@ -176,21 +189,19 @@
             }
           })
       },
-      init() {
+      init(num) {
         let self = this;
-        self.$http.get('h9/api/stick/home')
-          .then(res => {
-            if (res.data.code == 0) {
-              for (var i = 0; i < res.data.data.stickHomeTopBanner.length; i++) {
-                self.topBannerList.push({
-                  url: res.data.data.stickHomeTopBanner[i].link,
-                  img: res.data.data.stickHomeTopBanner[i].imgUrl,
-                })
-              }
-              console.log(self.topBannerList)
-            }
-          })
-        self.$http.get('h9/api/stick/config_home/list')
+        if (self.index !== num ){
+          self.homeData = []
+        } else {
+          return
+        }
+        self.index = num
+        let url = 'h9/api/stick/config_home/list'
+        if (num === 1) {
+          url = 'h9/api/stick/config_hot/list'
+        }
+        self.$http.get(url)
           .then(res => {
             if (res.data.code == 0) {
               if (self.homeData.length < 1) {

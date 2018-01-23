@@ -196,6 +196,10 @@ export default [
       name:'我的帖子',
       component (resolve) {require(['@/views/bbs/history'], resolve)} // 我的帖子
     },{
+      path:'/bbs/list/:id',
+      name:'文章分类',
+      component (resolve) {require(['@/views/bbs/list'], resolve)} // 文章分类
+    },{
       path:'/recharge/index',
       name:'充值',
       component (resolve) {require(['@/views/recharge/index'], resolve)} // 充值
