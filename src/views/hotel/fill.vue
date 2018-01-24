@@ -29,8 +29,7 @@
         <selector title="保留到" v-model="orderForm.keepTime" :options="keepList"></selector>
       </group>
     </div>
-
-    <div class="info-wrapper">
+    <div class="info-wrapper" style="margin-bottom:150px;">
       <group>
         <selector title="住宿偏好" v-model="orderForm.roomStyle" :options="favoriteList"></selector>
         <x-input label-width="105px" v-model="invoice" title="发票" :readonly="true"></x-input>
