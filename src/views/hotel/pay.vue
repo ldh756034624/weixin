@@ -118,16 +118,16 @@
           _g.hideLoading()
           if (res.data.code === 0) {
             // 支付成功
-            if (!res.data.data) { // 空data，代表余额支付成功
-              this.$router.replace('/hotel/success?orderId=' + this.orderInfo.hotelOrderId)
-            } else {
+            if (res.data.data.payResult.resumePay) { // resumePay为true，继续使用微信支付
               const url = window.location.href.split("#")[0]
               let callbackurl = url + '#/hotel/success?orderId=' + this.orderInfo.hotelOrderId // 成功回调
               let callbackFail = url + '#/hotel/fail?orderId=' + this.orderInfo.hotelOrderId // 失败回调
               callbackurl = encodeURIComponent(callbackurl) // encode
               callbackFail = encodeURIComponent(callbackFail) // encode
-              let link = res.data.data.payUrl + '&callback=' + callbackurl + '&callbackFail=' + callbackFail
+              let link = res.data.data.wxPayInfo.payUrl + '&callback=' + callbackurl + '&callbackFail=' + callbackFail
               window.location.replace(link)
+            } else {
+              this.$router.replace('/hotel/success?orderId=' + this.orderInfo.hotelOrderId)
             }
           } else {
             // 支付失败
