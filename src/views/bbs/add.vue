@@ -41,6 +41,7 @@ import { quillEditor } from 'vue-quill-editor'
     data () {
       return {
         show: false,
+        id: this.$route.query.id,
         form: {
           title: '',
           content: '',
@@ -54,6 +55,7 @@ import { quillEditor } from 'vue-quill-editor'
     },
     mounted() {
       const self = this
+
       self.$http.get('h9/api/stick/type/sample')
         .then(function (res) {
           if (res.data.code == 0) {
@@ -61,6 +63,20 @@ import { quillEditor } from 'vue-quill-editor'
             self.form.typeId = res.data.data[0].id
           }
         })
+        if (self.id) {
+          self.$http.get('h9/api/stick/detail/'+self.id)
+          .then(function (res) {
+            if (res.data.code == 0) {
+              self.form = {
+                title: res.data.data.title,
+                content: res.data.data.content,
+                typeId: res.data.data.typeId,
+                latitude: res.data.data.latitude,
+                longitude: res.data.data.longitude
+              }
+            }
+          })
+        }
     },
     methods: {
       onSubmit() {
@@ -74,6 +90,15 @@ import { quillEditor } from 'vue-quill-editor'
           return;
         }
         const data = self.form
+        if (self.id) {
+          self.$http.post('h9/api/stick/update/'+self.id, data)
+          .then(function (res) {
+            if (res.data.code == 0) {
+              _g.toastMsg('success', '修改成功')
+            }
+          })
+          return
+        }
         self.$http.post('h9/api/stick/', data)
         .then(function (res) {
           if (res.data.code == 0) {
@@ -138,7 +163,7 @@ import { quillEditor } from 'vue-quill-editor'
 <style>
   .quill-editor:not(.bubble) .ql-container,
   .quill-editor:not(.bubble) .ql-container .ql-editor {
-    height: 24rem;
+    height: 21rem;
     padding-bottom: 1rem;
   }
 </style>

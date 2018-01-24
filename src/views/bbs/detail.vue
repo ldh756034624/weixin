@@ -12,13 +12,13 @@
     <div class="content" v-html="detailData.content">
     </div>
     <div class="reward" @click="showToast = true">打赏</div>
-    <div class="rewardBox">
+    <div class="rewardBox" v-if="detailData.stickRewardUserList">
       <p>{{detailData.stickRewardUserList.length}}人打赏</p>
       <div class="rewardUser">
         <img v-for="item in detailData.stickRewardUserList" :src="item.avatar">
       </div>
     </div>
-    <div class="banner"><img :src="detailData.userAvatar"></div>
+    <div class="banner" v-if="detailData.images"><img :src="detailData.images"></div>
     <div class="tool">
       <div class="toolL">
         <span>阅读 {{detailData.readCount}}</span>
@@ -30,38 +30,38 @@
       </div>
     </div>
     <div class="Comment">
-       <!-- v-for="item in commentData" :key="item.id" -->
-      <div class="userItem">
-        <div class="userImg"><img :src="detailData.userAvatar" alt=""></div>
+
+      <div class="userItem" v-for="item in commentData" :key="item.id">
+        <div class="userImg"><img :src="item.avatar" alt=""></div>
         <div style="width: 100%;overflow: hidden;">
         <div class="userBox">
           <div class="userL">
-            <div class="userName">3213123 <i class="sexIcon"></i></div>
-            <div class="usercomment">感觉中国棒棒哒</div>
-            <div class="userB">30分钟前 3楼</div>
+            <div class="userName">{{item.nickName}} <i class="sexIcon" v-if="item.sex"></i></div>
+            <div class="usercomment">{{item.content}}</div>
+            <div class="userB">{{item.spaceTime + ' ' + item.floor+'楼'}}</div>
           </div>
           <div class="userR">
-            <div class="zan"><i class="zanIcon"></i> 3</div>
-            <div class=""><span>回复</span> <span>删除</span></div>
+            <div class="zan" @click="onlike(item.id, 2)"><i class="zanIcon"></i> {{item.likeCount}}</div>
+            <div class=""><span @click="addCommentFloor(item)">回复</span> <span v-if="userId === item.commentUserId" @click="deleteFloor(item.id)">删除</span></div>
           </div>
         </div>
-        <div class="reCont">
-          <p><span class="reName">得失发生：</span><span class="reCon">不错</span> <span class="reDate">11-20 12:30</span></p>
+        <div class="reCont" v-if="item.list.length > 0">
+          <p v-for="list in item.list"><span class="reName">{{list.nickName+'：'}} </span><span class="reCon"> {{list.content}}</span> <span class="reDate">{{list.spaceTime}}</span><span class="reDelete" v-if="userId === list.commentUserId" @click="deleteFloor(list.commentId)">删除</span></p>
         </div>
         </div>
       </div>
     </div>
     <div class="addComment">
       <div class="addCommentBox">
-        <input type="text" name="" v-model="content">
+        <input type="text" name="" :placeholder="placeholderTxt" v-model="content" v-focus="focusStatus">
         <div class="addBtn" @click="addComment">发表</div>
       </div>
     </div>
     <div v-transfer-dom>
       <popup v-model="show" is-transparent>
         <div style="width: 100%;background: #F2F2F2;">
-          <div class="popupItem" @click="show = false">编辑</div>
-          <div class="popupItem" @click="deleteDetail">删除</div>
+          <div class="popupItem" @click="onEdit" v-if="userId === detailData.userId">编辑</div>
+          <div class="popupItem" @click="deleteDetail" v-if="userId === detailData.userId">删除</div>
           <div class="popupItem" @click="goReport">举报</div>
          <div class="popupItem" style="margin-top:4px;" @click="show = false">取消</div>
         </div>
@@ -101,7 +101,14 @@ import {
   } from 'vux'
   export default {
     directives: {
-      TransferDom
+      TransferDom,
+      focus: {
+        inserted: function (el, {value}) {
+          if (value) {
+            el.focus();
+          }
+        }
+      }
     },
     data () {
       return {
@@ -110,8 +117,13 @@ import {
         words: '', // 打赏留言
         show: false,
         showToast: false,
+        placeholderTxt: '说点什么',
         playshow: false,
+        focusStatus: false,
         id: this.$route.params.id,
+        userId: JSON.parse(localStorage.getItem('_user')).id,
+        stickCommentId: '',
+        notifyUserId: '',
         detailData: {},
         commentData: [],
         rewardList: [1, 2, 5, 10 ,20 ,50],
@@ -149,7 +161,7 @@ import {
       onPlay () {
         const self = this
         const data = {
-          money: self.rewardData.rewardMoney,
+          reward: self.rewardData.rewardMoney,
           words: self.rewardData.words,
           stickId: self.id
         }
@@ -161,6 +173,9 @@ import {
           }
         })
       },
+      onEdit () {
+        this.$router.push({ path: '/bbs/add?id='+this.id, replace: true })
+      },
       deleteDetail () {
         const self = this
         self.$http.post('h9/api/stick/delete/'+self.id)
@@ -170,6 +185,15 @@ import {
             setTimeout(() => {
               self.$router.push({ path: '/bbs', replace: true })
             }, 1500)
+          }
+        })
+      },
+      deleteFloor (id) {
+        const self = this
+        self.$http.post('h9/api/stick/commentDelete/'+id)
+        .then(function (res) {
+          if (res.data.code == 0) {
+            _g.toastMsg('success', '删除成功')
           }
         })
       },
@@ -203,16 +227,30 @@ import {
           }
         })
       },
+      addCommentFloor (item) {
+        this.placeholderTxt = '回复: '+ item.nickName
+        this.notifyUserId = item.commentUserId
+        this.stickCommentId = item.id
+        this.focusStatus = true
+      },
       addComment () {
         const self = this
-        const data = {
+        let data = {
           content: self.content,
           stickId: self.id
+        }
+        if (self.stickCommentId) {
+          data.notifyUserId = self.notifyUserId
+          data.stickCommentId = self.stickCommentId
         }
         self.$http.post('h9/api/stick/addComment', data)
         .then(function (res) {
           if (res.data.code == 0) {
             self.content = ''
+            self.notifyUserId = ''
+            self.stickCommentId = ''
+            self.focusStatus = false
+            self.placeholderTxt = '说点什么'
             _g.toastMsg('success', '回复成功')
           }
         })
@@ -363,7 +401,7 @@ justify-content: space-between;
   .userR {
     /*width: 76px;*/
     text-align: right;
-    margin-top: 14px;
+    margin-top: 4px;
     font-size: 14px;
 color: #627984;
 line-height: 14px;
@@ -549,6 +587,11 @@ color: #666666;
   .payitem.ok {
     color: #fff;
     background: #627984;
+  }
+  .reDelete {
+    float: right;
+    margin-right: 20px;
+        color: #627984;
   }
 </style>
 <style type="text/css">
