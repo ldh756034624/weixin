@@ -8,7 +8,8 @@
     </div>
     <div v-else>
       <!--todo 到时候改成html-->
-      <div class="content">{{articleData}}</div>
+      <div v-if="articleType=='hotel'" v-html="articleData"></div>
+      <div v-else class="content">{{articleData}}</div>
     </div>
   </div>
 </template>
@@ -33,11 +34,13 @@
       init() {
         let self = this
         if (this.articleType === 'hotel') {
+          this.setTitle('酒店介绍');
           this.isArticle = false
           this.$http.get('h9/api/hotel/info?hotelId=' + self.id).then(res => {
             this.articleData = res.data
           })
         } else {
+          this.setTitle('文章详情');
           this.isArticle = true
           self.$http.get('h9/api/article/' + self.id)
             .then(function (res) {

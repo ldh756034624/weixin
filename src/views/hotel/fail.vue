@@ -25,7 +25,7 @@
         this.$router.replace('/hotel/pay?id=' + this.orderId)
       },
       viewOrder() {
-        this.$router.replace('/hotel/orderDetail?id=' + this.orderId)
+        this.$router.replace('/hotel/orderList?id=' + this.orderId)
       }
     }
   }

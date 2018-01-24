@@ -4,24 +4,27 @@
       <x-input v-model="form.title" placeholder="请输入标题"></x-input>
     </group>
     <quill-editor v-model="form.content"
-                ref="myQuillEditor"
-                :options="editorOption">
-  </quill-editor>
-        <div class="botBox"><div class="addr">所在位置</div><div class="classly" @click="show = true">帖子分类 ></div></div>
-        <div class="btnBox" @click="onSubmit">发布</div>
-        <div v-transfer-dom>
+                  ref="myQuillEditor"
+                  :options="editorOption">
+    </quill-editor>
+    <div class="botBox">
+      <div class="addr">所在位置</div>
+      <div class="classly" @click="show = true">帖子分类 ></div>
+    </div>
+    <div class="btnBox" @click="onSubmit">发布</div>
+    <div v-transfer-dom>
       <popup v-model="show" is-transparent>
         <div style="width: 100%;background: #F2F2F2;">
           <div class="popupItem" style="text-align:center;font-size: 18px;">帖子分类</div>
           <div class="popupItem" @click="onType(item.id)" v-for="item in CategoryList">{{item.name}}</div>
-         <div class="popupItem" style="margin-top:4px;text-align:center;" @click="show = false">取消</div>
+          <div class="popupItem" style="margin-top:4px;text-align:center;" @click="show = false">取消</div>
         </div>
       </popup>
     </div>
   </div>
 </template>
 <script>
-import {
+  import {
     Group,
     XInput,
     Popup,
@@ -29,16 +32,17 @@ import {
     TransferDom
   } from 'vux'
   import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
+  import 'quill/dist/quill.snow.css'
+  import 'quill/dist/quill.bubble.css'
 
-import {quillRedefine} from 'vue-quill-editor-upload'
-import { quillEditor } from 'vue-quill-editor'
+  import {quillRedefine} from 'vue-quill-editor-upload'
+  import {quillEditor} from 'vue-quill-editor'
+
   export default {
     directives: {
       TransferDom
     },
-    data () {
+    data() {
       return {
         show: false,
         id: this.$route.query.id,
@@ -81,11 +85,11 @@ import { quillEditor } from 'vue-quill-editor'
     methods: {
       onSubmit() {
         const self = this
-        if(!this.form.title){
+        if (!this.form.title) {
           _g.toastMsg('error', '请输入标题!')
           return;
         }
-        if(!this.form.content){
+        if (!this.form.content) {
           _g.toastMsg('error', '请输入内容!')
           return;
         }
@@ -100,25 +104,25 @@ import { quillEditor } from 'vue-quill-editor'
           return
         }
         self.$http.post('h9/api/stick/', data)
-        .then(function (res) {
-          if (res.data.code == 0) {
-            self.form = {
-              title: '',
-              content: '',
-              typeId: '',
-              latitude: '',
-              longitude: ''
+          .then(function (res) {
+            if (res.data.code == 0) {
+              self.form = {
+                title: '',
+                content: '',
+                typeId: '',
+                latitude: '',
+                longitude: ''
+              }
+              _g.toastMsg('success', '发布成功')
             }
-            _g.toastMsg('success', '发布成功')
-          }
-        })
+          })
       },
-      onType (id) {
+      onType(id) {
         this.form.typeId = id
         this.show = false
       }
     },
-    created () {
+    created() {
       this.editorOption = quillRedefine(
         {
           // 图片上传的设置
@@ -138,7 +142,7 @@ import { quillEditor } from 'vue-quill-editor'
           // 以下所有设置都和vue-quill-editor本身所对应
           placeholder: '分享新鲜事',  // 可选参数 富文本框内的提示语
           theme: '',  // 可选参数 富文本编辑器的风格
-          toolOptions: ['image'],  // 可选参数  选择工具栏的需要哪些功能  默认是全部
+          toolOptions: ['image', 'bold', 'italic'],  // 可选参数  选择工具栏的需要哪些功能  默认是全部
           handlers: {}  // 可选参数 重定义的事件，比如link等事件
         }
       )
@@ -163,8 +167,13 @@ import { quillEditor } from 'vue-quill-editor'
 <style>
   .quill-editor:not(.bubble) .ql-container,
   .quill-editor:not(.bubble) .ql-container .ql-editor {
-    height: 21rem;
+    height: 20rem;
     padding-bottom: 1rem;
+  }
+
+  .addBox .ql-snow.ql-toolbar button, .addBox .ql-snow .ql-toolbar button {
+    height: 30px;
+    width: 30px;
   }
 </style>
 <style scoped>
@@ -174,31 +183,35 @@ import { quillEditor } from 'vue-quill-editor'
     height: 100%;
     overflow: hidden;
   }
+
   .botBox {
-  padding-top: 10px;
-  padding-bottom: 8px;
-  overflow: hidden;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    overflow: hidden;
   }
+
   .addr {
     background: #F2F2F2;
-  border-radius: 30px;
-  max-width: 100px;
-  height: 22px;
-  line-height: 22px;
-  font-size: 12px;
-  color: #999999;
-  text-align: center;
-  overflow: hidden;
-  padding: 0 10px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  float: left;
+    border-radius: 30px;
+    max-width: 100px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 12px;
+    color: #999999;
+    text-align: center;
+    overflow: hidden;
+    padding: 0 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
   }
+
   .classly {
     font-size: 12px;
-  color: #627984;
-  float: right;
+    color: #627984;
+    float: right;
   }
+
   .btnBox {
     background: #627984;
     border-radius: 4px;
@@ -210,6 +223,7 @@ import { quillEditor } from 'vue-quill-editor'
     line-height: 38px;
     float: right;
   }
+
   .popupItem {
     height: 60px;
     line-height: 60px;

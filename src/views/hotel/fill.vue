@@ -29,12 +29,11 @@
         <selector title="保留到" v-model="orderForm.keepTime" :options="keepList"></selector>
       </group>
     </div>
-
-    <div class="info-wrapper">
+    <div class="info-wrapper" style="margin-bottom:100px;">
       <group>
         <selector title="住宿偏好" v-model="orderForm.roomStyle" :options="favoriteList"></selector>
         <x-input label-width="105px" v-model="invoice" title="发票" :readonly="true"></x-input>
-        <x-input label-width="105px" v-model="orderForm.remark" title="备注" placeholder="请输入您的个性需求"></x-input>
+        <x-textarea v-model="orderForm.remark" :max="200" :show-counter="false" title="备注" placeholder="请输入您的个性需求"></x-textarea>
       </group>
     </div>
 
@@ -51,7 +50,7 @@
 </template>
 
 <script>
-  import {Group, XInput, Selector} from 'vux'
+  import {Group, XInput, XTextarea, Selector} from 'vux'
 
   export default {
     created() {
@@ -165,6 +164,7 @@
     components: {
       Group,
       XInput,
+      XTextarea,
       Selector
     }
   }
@@ -175,8 +175,36 @@
     height: 100%;
     line-height: 1;
     background: #EDF1F2;
-  }
+    .hr{
+      padding-top: 10px;
+      position: relative;
+      border-bottom:1px dashed #F2F2F2; 
+    }
+    &::before{
+      content:'';
+      position: absolute;
+      left: 10px;
+      top: 43px;
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #EDF1F2;
+    }
+    &::after{
+      content:'';
+      position: absolute;
+      right: 10px;
+      top: 43px;
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #EDF1F2;
+    }
 
+  }
+  
   .abstract-wrapper {
     margin: 0 15px;
     background: #fff;
@@ -275,6 +303,10 @@
       font-size: 15px;
       .weui-label {
         color: #999;
+      }
+      .weui-textarea{
+        width: 80%;
+        padding-left: 60px;
       }
     }
   }
