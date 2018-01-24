@@ -12,7 +12,7 @@
       </p>
       <p class="info-item">
         <span class="left">入住时间</span>
-        <span class="right"><span class="time-range">{{orderInfo.comeRoomTime}}-{{orderInfo.outRoomTime}}</span>共{{orderInfo.stayNightCount}}晚</span>
+        <span class="right"><span class="time-range">{{orderInfo.comeRoomTime}} {{orderInfo.outRoomTime}}</span>共{{orderInfo.stayNightCount}}晚</span>
       </p>
       <p class="info-item">
         <span class="left">入住房型</span>
@@ -41,7 +41,7 @@
     },
     methods: {
       getOrderInfo() {
-        this.$http.get('/h9/api/hotel/order/detail?orderId=' + this.orderId).then(res => {
+        this.$http.get('/h9/api/hotel/order/orderList?orderId=' + this.orderId).then(res => {
           let data = res.data
           if (data.code === 0) {
             this.orderInfo = data.data

@@ -34,7 +34,7 @@
       <group>
         <selector title="住宿偏好" v-model="orderForm.roomStyle" :options="favoriteList"></selector>
         <x-input label-width="105px" v-model="invoice" title="发票" :readonly="true"></x-input>
-        <x-textarea v-model="orderForm.remark" :max="200" title="备注" placeholder="请输入您的个性需求"></x-textarea>
+        <x-textarea v-model="orderForm.remark" :max="200" :show-counter="false" title="备注" placeholder="请输入您的个性需求"></x-textarea>
       </group>
     </div>
 
