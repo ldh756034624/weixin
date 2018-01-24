@@ -8,7 +8,7 @@
                   :options="editorOption">
     </quill-editor>
     <div class="botBox">
-      <div class="addr">所在位置</div>
+      <div class="addr" @click="getLocation">所在位置</div>
       <div class="classly" @click="show = true">帖子分类 ></div>
     </div>
     <div class="btnBox" @click="onSubmit">发布</div>
@@ -78,6 +78,9 @@
                 latitude: res.data.data.latitude,
                 longitude: res.data.data.longitude
               }
+              if (self.form.longitude && self.form.latitude) {
+                self.txMap(self.form.latitude, self.form.longitude)
+              }
             }
           })
         }
@@ -120,6 +123,44 @@
       onType(id) {
         this.form.typeId = id
         this.show = false
+      },
+      getLocation (){
+        if (navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(this.showPosition,this.showError);
+        }else{
+          _g.toastMsg('error', '浏览器不支持地理定位。')
+        }
+      },
+      showPosition (position) {
+        this.form.latitude = position.coords.latitude
+        this.form.longitude = position.coords.longitude
+        this.txMap(this.form.latitude, this.form.longitude)
+      },
+      showError (error) {
+        console.log(error)
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            _g.toastMsg('error', '定位失败,用户拒绝请求地理定位')
+            break;
+          case error.POSITION_UNAVAILABLE:
+            _g.toastMsg('error', '定位失败,位置信息是不可用')
+            break;
+          case error.TIMEOUT:
+            _g.toastMsg('error', '定位失败,请求获取用户位置超时')
+            break;
+          case error.UNKNOWN_ERROR:
+            _g.toastMsg('error', '定位失败,定位系统失效')
+            break;
+          }
+      },
+      txMap (latitude, longitude) {
+        this.$http.get('http://apis.map.qq.com/ws/geocoder/v1/?location= '+latitude+','+longitude+'&coord_type=1&get_poi=1&poi_options=address_format=short&key=JRTBZ-J5RKW-CRXRW-OSMHF-LNGPT-W3FV3')
+          .then(function (res) {
+            console.log(res)
+            if (res.data.status == 0) {
+              _g.toastMsg('success', '获取成功')
+            }
+          })
       }
     },
     created() {
