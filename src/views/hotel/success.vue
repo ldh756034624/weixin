@@ -12,7 +12,7 @@
       </p>
       <p class="info-item">
         <span class="left">入住时间</span>
-        <span class="right"><span class="time-range">{{orderInfo.comeRoomTime}} {{orderInfo.outRoomTime}}</span>共{{orderInfo.stayNightCount}}晚</span>
+        <span class="right"><span class="time-range">{{orderInfo.comeRoomTime}}&nbsp;&nbsp;&nbsp;{{orderInfo.outRoomTime}}</span>共{{orderInfo.stayNightCount}}晚</span>
       </p>
       <p class="info-item">
         <span class="left">入住房型</span>

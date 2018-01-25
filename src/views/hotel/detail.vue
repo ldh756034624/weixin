@@ -216,8 +216,10 @@
       justify-content: space-between;
       .address {
         color: #333;
+        line-height: 20px;
       }
       .rate {
+        width: 15%;
         font-weight: bold;
         font-size: 18px;
         color: #627984;
@@ -260,7 +262,6 @@
       border-bottom: 1px solid #f2f2f2;
       .left {
         flex: 1;
-        border-right: 1px solid #f2f2f2;
         .title {
           margin-bottom: 14px;
           font-size: 15px;
