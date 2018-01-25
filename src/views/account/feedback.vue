@@ -182,6 +182,9 @@
     .weui-cells:before, .weui-cells:after, .weui-cell:before {
       border: none;
     }
+    .weui-cell__ft{
+      font-size: 30/40rem;
+    }
     .weui-cell {
       padding: 30/40rem;
     }

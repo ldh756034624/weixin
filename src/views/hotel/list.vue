@@ -16,11 +16,13 @@
     <!--城市列表栏-->
     <transition name="fade">
       <div class="city-wrapper" v-if="showCity">
-        <div class="city-list">
-          <ul>
-            <li v-for="item in cityList" @click="handleChooseCity(item)">{{item}}</li>
-          </ul>
-        </div>
+        <scroller lock-x :bounce="false">
+          <div class="city-list">
+            <ul>
+              <li v-for="item in cityList" @click="handleChooseCity(item)">{{item}}</li>
+            </ul>
+          </div>
+        </scroller>
         <div class="mask" @click="showCity = false"></div>
       </div>
     </transition>
@@ -160,7 +162,7 @@
       align-items: center;
       background: #f1f1f1;
       .select-city {
-        flex: 0 0 53px;
+        flex: 0 0 83px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -275,9 +277,13 @@
     bottom: 0;
     flex-direction: column;
     z-index: 10;
+    overflow: hidden;
+    height: 100%;
     .city-list {
+      
       background: #fff;
       li {
+        overflow-y: auto;
         height: 50px;
         line-height: 50px;
         padding-left: 30px;

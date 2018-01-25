@@ -264,7 +264,6 @@
     height: 60px;
     background: #fff;
     position: fixed;
-    background-color: #ffffff;
     z-index: 22;
     bottom: 0;
     left: 0;

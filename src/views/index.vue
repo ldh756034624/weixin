@@ -206,7 +206,10 @@
             this.$router.push({path: '/active/searchIsReally'})
           } else if (item.link === 'hotel') { // 酒店预定
             this.$router.push({path: '/hotel/list'})
-          } else {
+          }else if(item.link === "dailySign"){
+            this.$router.push({path:'/my/sign'})
+          }
+           else {
             this.$router.push({path: item.link})
           }
         }
