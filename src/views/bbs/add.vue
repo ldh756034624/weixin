@@ -176,7 +176,6 @@
           }
         }
         this.$http.get('https://api.map.baidu.com/geocoder/v2/', params).then(function (res) {
-            console.log(res)
             if (res.data.status == 0) {
               _g.toastMsg('success', '获取成功')
             }
