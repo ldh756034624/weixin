@@ -118,6 +118,7 @@
       },
       // 去支付
       goPay(id) {
+        sessionStorage.orderListPaySuccess = 'true'
         this.$router.push({path: '/hotel/pay', query: {id}})
       }
     },

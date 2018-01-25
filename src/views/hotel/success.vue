@@ -30,7 +30,6 @@
 <script>
   export default {
     created() {
-      sessionStorage.paySuccess = 'true'
       this.orderId = this.$route.query.orderId
       this.getOrderInfo()
     },
@@ -56,6 +55,7 @@
       // 查看订单
       handleOrder() {
         sessionStorage.paySuccess = 'false' // 去除返回跳转到list
+        sessionStorage.payCheckOrder = "true"
         this.$router.replace('/hotel/orderDetail?id=' + this.orderId)
       }
     }

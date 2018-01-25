@@ -56,9 +56,12 @@ router.beforeEach((to, from, next) => {
   } else if (from.path === '/hotel/success' && sessionStorage.paySuccess == 'true') { // 如果从酒店支付成功页来
     sessionStorage.paySuccess = 'false'
     next('/index')
-  } else if(from.path === 'orderDetail' && sessionStorage.payCheckOrder == 'true'){
+  } else if(from.path === '/hotel/orderDetail' && sessionStorage.payCheckOrder == 'true' && sessionStorage.orderListPaySuccess == null){
     sessionStorage.payCheckOrder = 'false'
     next('/index')
+  } else if(from.path === '/hotel/orderDetail' && sessionStorage.payCheckOrder == 'true' && sessionStorage.orderListPaySuccess == "true"){
+    sessionStorage.orderListPaySuccess = 'false'
+    next('/hotel/orderList')
   } else {
     next()
   }

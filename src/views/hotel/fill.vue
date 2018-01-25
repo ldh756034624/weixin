@@ -118,6 +118,8 @@
         return tmp
       },
       handleBook() { // 点击预订按钮
+
+        sessionStorage.paySuccess = 'true'
         let data = this.orderForm
         // 必填判断
         if (!data.stayRoomer) {
