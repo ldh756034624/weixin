@@ -54,7 +54,7 @@
                         <i class='arrow'></i>
                       </span>
                   </cell>
-                  <cell title="h9酒店记录" link="/hotel/orderList">
+                  <cell title="H9酒店记录" link="/hotel/orderList">
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_hotel@2x.png">
                       <span class='cellValueBox' style="margin-right:-12px;">

@@ -41,7 +41,7 @@
     },
     methods: {
       getOrderInfo() {
-        this.$http.get('/h9/api/hotel/order/orderList?orderId=' + this.orderId).then(res => {
+        this.$http.get('/h9/api/hotel/order/detail?orderId=' + this.orderId).then(res => {
           let data = res.data
           if (data.code === 0) {
             this.orderInfo = data.data
@@ -56,7 +56,7 @@
       // 查看订单
       handleOrder() {
         sessionStorage.paySuccess = 'false' // 去除返回跳转到list
-        this.$router.replace('/hotel/orderDetail?id=' + this.orderId)
+        this.$router.replace('/hotel/orderList?id=' + this.orderId)
       }
     }
   }

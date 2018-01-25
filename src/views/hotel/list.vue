@@ -30,7 +30,7 @@
         <div>
           <ul>
             <li class="hotel-item" v-for="item in hotelList" @click="handleHotel(item)">
-              <img src="" class="hotel-img">
+              <img :src="item.image" class="hotel-img">
               <div class="hotel-info">
                 <p class="top">
                   <span class="name">{{item.hotelName}}</span>
@@ -44,7 +44,7 @@
                 </p>
               </div>
               <div class="hotel-price">
-                <span>{{item.mixConsumer}}</span>起
+                <span>{{item.minConsumer}}</span>起
               </div>
             </li>
           </ul>
@@ -217,6 +217,7 @@
         margin-right: 15px;
       }
       .hotel-info {
+        width: 70%;
         .top {
           margin-bottom: 12px;
           font-size: 15px;
