@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import FastClick from 'fastclick'
+// import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import {encode} from '@/util/base64Code'
@@ -281,7 +281,7 @@ Vue.http.interceptors.response.use(
   });
 
 
-FastClick.attach(document.body)
+// FastClick.attach(document.body)
 
 Vue.config.productionTip = false
 
