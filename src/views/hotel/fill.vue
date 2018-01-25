@@ -118,8 +118,6 @@
         return tmp
       },
       handleBook() { // 点击预订按钮
-
-        sessionStorage.paySuccess = 'true'
         let data = this.orderForm
         // 必填判断
         if (!data.stayRoomer) {
@@ -137,6 +135,7 @@
           _g.hideLoading()
           let data = res.data
           if (data.code === 0) {
+            sessionStorage.paySuccess = 'true'
             this.$router.push({
               path: '/hotel/pay',
               query: {orderInfo: JSON.stringify(data.data)}

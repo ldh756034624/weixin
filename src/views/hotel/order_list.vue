@@ -43,6 +43,7 @@
 
   export default {
     created() {
+      sessionStorage.orderListPaySuccess = 'false'
       this.getList()
     },
     data() {
@@ -118,8 +119,8 @@
       },
       // 去支付
       goPay(id) {
-        sessionStorage.orderListPaySuccess = 'true'
         this.$router.push({path: '/hotel/pay', query: {id}})
+        sessionStorage.orderListPaySuccess = 'true'
       }
     },
     components: {
