@@ -175,7 +175,7 @@
             ak: 'sBX3VV2ZhxOeU5vfnE7laqq3'
           }
         }
-        this.$http.get('http://api.map.baidu.com/geocoder/v2/', params).then(function (res) {
+        this.$http.get('https://api.map.baidu.com/geocoder/v2/', params).then(function (res) {
             console.log(res)
             if (res.data.status == 0) {
               _g.toastMsg('success', '获取成功')
