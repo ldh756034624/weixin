@@ -170,17 +170,17 @@
         const params = {
           params: {
             location: latitude + ','+ longitude,
-            output: 'json',
-            pois: 1,
-            ak: 'sBX3VV2ZhxOeU5vfnE7laqq3'
+            coord_type: 1,
+            get_poi: 1,
+            poi_options: 'address_format=short',
+            key: 'JRTBZ-J5RKW-CRXRW-OSMHF-LNGPT-W3FV3'
           }
         }
-        this.$http.get('https://api.map.baidu.com/geocoder/v2/', params).then(function (res) {
+        this.$http.get('http://apis.map.qq.com/ws/geocoder/v1/', params).then(function (res) {
+            console.log(res)
             if (res.data.status == 0) {
               _g.toastMsg('success', '获取成功')
             }
-          }).catch(function (err) {
-            console.log(err)
           })
       }
     },
