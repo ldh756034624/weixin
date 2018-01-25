@@ -1,5 +1,5 @@
 import Vue from 'vue'
-// import FastClick from 'fastclick'
+import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import {encode} from '@/util/base64Code'
@@ -55,6 +55,9 @@ router.beforeEach((to, from, next) => {
     }
   } else if (from.path === '/hotel/success' && sessionStorage.paySuccess == 'true') { // 如果从酒店支付成功页来
     sessionStorage.paySuccess = 'false'
+    next('/index')
+  } else if(from.path === 'orderDetail' && sessionStorage.payCheckOrder == 'true'){
+    sessionStorage.payCheckOrder = 'false'
     next('/index')
   } else {
     next()
@@ -275,7 +278,7 @@ Vue.http.interceptors.response.use(
   });
 
 
-// FastClick.attach(document.body)
+FastClick.attach(document.body)
 
 Vue.config.productionTip = false
 

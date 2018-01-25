@@ -60,6 +60,7 @@
 
   export default {
     created() {
+      sessionStorage.payCheckOrder = "true"
       this.id = this.$route.query.id
       this.getDetail()
     },
