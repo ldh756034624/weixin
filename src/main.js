@@ -55,7 +55,7 @@ router.beforeEach((to, from, next) => {
     }
   } else if (from.path === '/hotel/success' && sessionStorage.paySuccess == 'true') { // 如果从酒店支付成功页来
     sessionStorage.paySuccess = 'false'
-    next('/hotel/list')
+    next('/index')
   } else {
     next()
   }
