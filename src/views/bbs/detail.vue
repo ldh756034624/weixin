@@ -112,7 +112,6 @@ import {
     },
     data () {
       return {
-        value: '',
         content: '',
         words: '', // 打赏留言
         show: false,

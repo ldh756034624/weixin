@@ -21,6 +21,12 @@
         </div>
       </popup>
     </div>
+    <div class="loading" v-show='loadingShow'>
+      <div class="cellBox">
+        <img :src="lodingImg">
+        <p>图片上传中</p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -45,6 +51,8 @@
     data() {
       return {
         show: false,
+        loadingShow: false,
+        lodingImg: require('../../assets/img/blank/loading.gif'),
         id: this.$route.query.id,
         form: {
           title: '',
@@ -74,12 +82,14 @@
               self.form = {
                 title: res.data.data.title,
                 content: res.data.data.content,
-                typeId: res.data.data.typeId,
+                typeId: res.data.data.stickTypeId,
                 latitude: res.data.data.latitude,
                 longitude: res.data.data.longitude
               }
               if (self.form.longitude && self.form.latitude) {
                 self.txMap(self.form.latitude, self.form.longitude)
+              } else {
+                self.txMap(22.556952, 113.933716)
               }
             }
           })
@@ -131,6 +141,9 @@
           _g.toastMsg('error', '浏览器不支持地理定位。')
         }
       },
+      mapOut (res) {
+        console.log(res)
+      },
       showPosition (position) {
         this.form.latitude = position.coords.latitude
         this.form.longitude = position.coords.longitude
@@ -154,12 +167,21 @@
           }
       },
       txMap (latitude, longitude) {
-        this.$http.get('http://apis.map.qq.com/ws/geocoder/v1/?location= '+latitude+','+longitude+'&coord_type=1&get_poi=1&poi_options=address_format=short&key=JRTBZ-J5RKW-CRXRW-OSMHF-LNGPT-W3FV3')
-          .then(function (res) {
+        const params = {
+          params: {
+            location: latitude + ','+ longitude,
+            output: 'json',
+            pois: 1,
+            ak: 'sBX3VV2ZhxOeU5vfnE7laqq3'
+          }
+        }
+        this.$http.get('http://api.map.baidu.com/geocoder/v2/', params).then(function (res) {
             console.log(res)
             if (res.data.status == 0) {
               _g.toastMsg('success', '获取成功')
             }
+          }).catch(function (err) {
+            console.log(err)
           })
       }
     },
@@ -178,7 +200,18 @@
             // token: sessionStorage.token,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
             name: 'file',  // 可选参数 文件的参数名 默认为img
             size: 20480,  // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
-            accept: 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon'
+            accept: 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon',
+            start: () => {
+              this.loadingShow = true
+            },  // 可选参数 接收一个函数 开始上传数据时会触发
+            end: () => {
+            },  // 可选参数 接收一个函数 上传数据完成（成功或者失败）时会触发
+            success: () => {
+              this.loadingShow = false
+            },  // 可选参数 接收一个函数 上传数据成功时会触发
+            error: () => {
+              this.loadingShow = false
+            }  // 可选参数 接收一个函数 上传数据中断时会触发
           },
           // 以下所有设置都和vue-quill-editor本身所对应
           placeholder: '分享新鲜事',  // 可选参数 富文本框内的提示语
@@ -217,7 +250,7 @@
     width: 30px;
   }
 </style>
-<style scoped>
+<style scoped  lang='less'>
   .addBox {
     padding: 0 15px;
     background-color: #fff;
@@ -272,5 +305,34 @@
     background-color: #fff;
     font-size: 15px;
     color: #333333;
+  }
+
+  .loading {
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: table;
+    .cellBox {
+      display: table-cell;
+      vertical-align: middle;
+      width: 3rem;
+      text-align: center;
+      margin: 0 auto;
+      font-size: 24/40rem;
+    }
+    img {
+      width: 60/40rem;
+      height: 60/40rem;
+    }
+    .loadingImg {
+      display: inline-block;
+      width: 60/40rem;
+      height: 60/40rem;
+      background: url('../../assets/img/blank/loading.gif');
+    }
   }
 </style>
