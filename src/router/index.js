@@ -101,6 +101,12 @@ export default [
       path:'/account/result',
       component (resolve) {require(['@/views/account/result'], resolve)} //手机充值,滴滴券兑换结果页
     },{
+      path:'/account/hongbao',
+      component (resolve) {require(['@/views/account/hongbao'], resolve)} //红包活动
+    },{
+      path:'/account/bankto',
+      component (resolve) {require(['@/views/account/bankto'], resolve)} //转账
+    },{
       path:'/my/vMoney',
       component (resolve) {require(['@/views/my/vMoney'], resolve)} //V币
     },{
