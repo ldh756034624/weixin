@@ -32,15 +32,16 @@
           </li>
         </ul>
         <load-more tip="加载更多" v-if="showLoading"></load-more>
-        <divider v-if="!hasMore">没有更多</divider>
+        
       </div>
     </scroller>
+    <list-empty v-if="showEmpty" :text="emptyMsg()" state="1"></list-empty>
   </div>
 </template>
 
 <script>
-  import {Tab, TabItem, Scroller, LoadMore, Divider} from 'vux'
-
+  import {Tab, TabItem, Scroller, LoadMore} from 'vux'
+  import listEmpty from '../../components/listEmpty.vue'
   export default {
     created() {
       sessionStorage.orderListPaySuccess = 'false'
@@ -54,6 +55,7 @@
           page: 1,  // 第几页
           type: 1 // 订单类型
         },
+        state: 1,
         hasMore: false, // 是否有更多
         showLoading: false, // 显示加载更多提示
         getBarWidth: function (index) { // 动态计算每个bar条的宽
@@ -62,7 +64,29 @@
           } else {
             return 44 + 'px'
           }
-        }
+        },
+        emptyMsg(){
+          let msg;
+          switch(parseInt(this.listQuery.type)){
+            case 1:
+              msg = '目前没有交易明细';
+              break;
+            case 2:
+              msg = '目前没有交易明细';
+              break;
+            case 3:
+              msg = '目前没有交易明细';
+              break;
+            case 5:
+              msg = '目前没有交易明细';
+              break;
+            default:
+              msg = '目前没有交易明细'
+              break;
+          }
+          return msg;
+        },
+        showEmpty:false,
       }
     },
     methods: {
@@ -81,6 +105,11 @@
         this.$http.get('/h9/api/hotel/order', {params}).then(res => {
           let data = res.data
           if (data.code === 0) {
+            if(data.data.data.length == 0){
+              this.showEmpty = true
+            }else{
+              this.showEmpty = false
+            }
             this.hasMore = data.data.hasNext
             if (more) {
               this.list = [...this.list, ...data.data.data]
@@ -128,7 +157,7 @@
       TabItem,
       Scroller,
       LoadMore,
-      Divider
+      listEmpty
     }
   }
 </script>
@@ -145,7 +174,7 @@
   }
 
   .box2 {
-    padding-bottom: 30px;
+    padding-bottom: 30px;;
   }
 
   .order-item {
