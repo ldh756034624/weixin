@@ -118,13 +118,20 @@
         return tmp
       },
       handleBook() { // 点击预订按钮
+        /* 是否是手机号码 */
+       
         let data = this.orderForm
+        const reg = /^1[3|4|5|8][0-9]\d{4,8}$/
         // 必填判断
         if (!data.stayRoomer) {
           _g.toastMsg('error', '请填写入住人')
           return
         }
-        if (!data.phone || data.phone.length !== 13) {
+        if(2 > data.stayRoomer.length || data.stayRoomer.length> 30 ){
+          _g.toastMsg('error', '请正确填写入住人')
+          return
+        }
+        if (!data.phone || data.phone.length !== 13 || !reg.test(data.phone)) {
           _g.toastMsg('error', '请输入正确的手机号码')
           return
         }
