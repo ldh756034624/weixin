@@ -22,7 +22,7 @@
   export default {
     mounted() {
       let self = this;
-      self.setTitle('转账');
+      self.setTitle('转账金额');
       // self.init();
     },
     data() {
@@ -140,6 +140,7 @@
     border:none;
   }
   .weui-input{
+    font-size: 48/40rem!important;
     color: #333!important;
   }
     
