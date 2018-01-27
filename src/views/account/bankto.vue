@@ -112,6 +112,7 @@
     }
     .vux-x-input {
       margin:0 30/40rem;
+
       background-color: #F2F2F2;
     }
     .weui-label {
@@ -137,6 +138,7 @@
     border:none;
   }
   .weui-input{
+    line-height: 48/40rem!important;
     font-size: 48/40rem!important;
     color: #333!important;
   }
