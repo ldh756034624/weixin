@@ -2,7 +2,7 @@
   <div class="page">
     <group class="fundsBox  groupNoLine">
       <p class="flexBox fundsMoneyTips">红包金额 <span class='flex1 alignR'> 可用余额{{fundsData.balance}}</span></p>
-      <x-input v-model="fundMoney" title='￥' class="fundMoney" :show-clear="false" keyboard="number" placeholder='请输入红包金额'>
+      <x-input v-model="fundMoney" type="number" title='￥' class="fundMoney" :show-clear="false" placeholder='请输入红包金额'>
       </x-input>
     </group>
     <div class="fundsBtnBox">
@@ -22,7 +22,7 @@
     },
     data() {
       return {
-        fundMoney: this.$route.query.money || '',
+        fundMoney: Number(this.$route.query.money) || null,
         moneyMark: '',
         isFocus: false,
         fundsData: {}
@@ -39,11 +39,11 @@
           })
       },
       fundsFn: function () {
-        if (!this.fundMoney || this.fundMoney == '0') {
-          _g.toastMsg('error', '设置的金额不能为0或空')
+        if (!this.fundMoney || this.fundMoney < 1) {
+          _g.toastMsg('error', '设置的金额不能小于1或空')
           return
         }
-        if (this.fundMoney > this.fundsData.balance) {
+        if (this.fundMoney > Number(this.fundsData.balance)) {
           _g.toastMsg('error', '您设置的红包金额大于可用余额')
           return
         }
