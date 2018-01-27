@@ -10,40 +10,25 @@
               <img :src="item.imgUrl" width="100%" height="100%">
             </swiper-item>
           </swiper>
-          <flexbox :gutter="0" class='shopMoneyFlexBox'>
-            <flexbox-item>
-              <div class="shopMoneyBox lineRight">
-                <img src="../../assets/img/shop/money.png"/>
-                <span>酒元</span><i class='ft'>{{shopData.balance}}</i>
-              </div>
-            </flexbox-item>
-            <flexbox-item>
-              <router-link :to="{path:'/my/myOrder',query:{fromShop:true}}">
-                <div class="shopMoneyBox">
-                  <img src="../../assets/img/shop/group_3.png"/>
-                  <span>兑换记录</span>
-                </div>
-              </router-link>
-            </flexbox-item>
-          </flexbox>
           <flexbox :gutter="0" wrap="wrap" class='sortBox'>
-            <flexbox-item :span="1/4" v-for='item in navBanner' @click.native='goLinkFn(item)'>
+            <flexbox-item :span="itembox" v-for='item in navBanner' @click.native='goLinkFn(item)'>
               <div>
                 <img :src="item.imgUrl"/>
-                <p>{{item.title}}</p>
+                <p class="title-bottom">{{item.title}}</p>
               </div>
             </flexbox-item>
           </flexbox>
           <section>
             <div class="exchangeBox" v-if='shopData.hotGoods'>
-              <p class="title">大家都在兑</p>
               <flexbox :gutter="0" wrap="wrap">
                 <flexbox-item :span="1/2" class='shopLine' v-for='item in shopData.hotGoods'>
                   <router-link :to="{path:'/shopDataile',query:{id:item.id}}">
                     <div class='shopBox'>
-                      <p class="desc">{{item.name}}</p>
-                      <p class="joyMoney"><span>{{item.price}}</span>酒元</p>
                       <img class='shopImg' :src="item.img"/>
+                      <div class="bottomBox">
+                        <span class="desc">{{item.name}}</span>
+                        <span class="joyMoney"><span>{{item.price}}</span>酒元</span>
+                      </div>
                     </div>
                   </router-link>
                 </flexbox-item>
@@ -82,6 +67,7 @@
         status1: {
           pulldownStatus: 'default'
         },
+        itembox:`1/2`
       }
     },
     methods: {
@@ -91,6 +77,17 @@
             if (res.data.code == 0) {
               this.shopData = res.data.data
               this.navBanner = this.shopData.banners.storeNavigationBanner
+              if(this.navBanner.length == 0){
+                this.itembox = 1
+              }else if(this.navBanner.length === 2){
+                this.itembox =  0.5
+              }else if(this.navBanner.length === 3){
+                this.itembox = 0.33
+              }
+              else {
+                this.itembox = 0.25
+              }
+              console.log("1"+this.itembox)
               this.shopTop = this.shopData.banners.convertStoreTopBanner
             }
             this.$nextTick(() => {
@@ -170,7 +167,10 @@
         width: 92/40rem;
         height: 92/40rem;
         border-radius: 3rem;
-        margin-bottom: 15/40rem;
+        /*margin-bottom: 15/40rem;*/
+      }
+      .title-bottom{
+        margin-bottom: 20/40rem;
       }
     }
     .exchangeBox {
@@ -182,29 +182,46 @@
         padding: 20/40rem 30/40rem;
         border-bottom: 2/40rem solid #f2f2f2;
       }
-      .desc {
-        font-size: 24/40rem;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
-      .joyMoney {
-        color: #627984;
-      }
       .shopBox {
-        padding: 16/40rem;
+        box-sizing: border-box; 
+        text-align: center;
+        margin:20/40rem;
         height: 340/40rem;
         box-sizing: border-box;
-        border-bottom: 2/40rem solid #f2f2f2;
+        border: 1px solid #C7000A;
+        box-shadow:#4d4d4d 0 0 10px;
+        .bottomBox{
+          line-height: 50/40rem;
+          height: 50/40rem;
+          width: 90%;
+          margin:0 auto;
+          background-color: #C7000A;
+          border-radius: 10/40rem 10/40rem 0 0;
+          .desc {
+            display: inline-block;
+            font-size: 24/40rem;
+            width: 95/40rem;
+            color: #ffffff;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+          .joyMoney {
+            display:inline-block;
+            font-size: 24/40rem;
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
       }
-      .shopBox:nth-child(2n+1) {
-        border-right: 2/40rem solid #f2f2f2;
-      }
+     
       .shopImg {
         width: 220/40rem;
         height: 220/40rem;
         margin-bottom: 16/40rem;
-        float: right;
+        padding-top: 40/40rem;
       }
     }
   }
