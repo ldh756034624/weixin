@@ -39,8 +39,8 @@
           })
       },
       fundsFn: function () {
-        if (!this.fundMoney || this.fundMoney == '0') {
-          _g.toastMsg('error', '设置的金额不能为0或空')
+        if (!this.fundMoney || this.fundMoney < 1) {
+          _g.toastMsg('error', '设置的金额不能小于1或空')
           return
         }
         if (this.fundMoney > this.fundsData.balance) {

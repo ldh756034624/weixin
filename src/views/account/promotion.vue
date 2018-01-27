@@ -96,6 +96,7 @@
       }
     },
     beforeDestroy () {
+      this.$vux.alert.hide()
       // 阻止轮询
       return this.isDestroyed = true
     }
