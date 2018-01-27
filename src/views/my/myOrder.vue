@@ -64,7 +64,7 @@ export default {
         pageUrl='/h9/api/orders'
       }
       pageUrl+='?page='+page+'&limit='+self.page.limit
-      if (self.status) {
+      if (self.status || self.status==0) {
         pageUrl+='&status='+self.status
       }
       self.$http.get(pageUrl)
