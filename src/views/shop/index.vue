@@ -67,7 +67,7 @@
         status1: {
           pulldownStatus: 'default'
         },
-        itembox:`1/2`
+        itembox: 0.5
       }
     },
     methods: {
@@ -77,17 +77,18 @@
             if (res.data.code == 0) {
               this.shopData = res.data.data
               this.navBanner = this.shopData.banners.storeNavigationBanner
-              if(this.navBanner.length == 0){
+              if(this.navBanner != undefined){
+                if(this.navBanner.length == 0){
                 this.itembox = 1
-              }else if(this.navBanner.length === 2){
-                this.itembox =  0.5
-              }else if(this.navBanner.length === 3){
-                this.itembox = 0.33
+                }else if(this.navBanner.length === 2){
+                  this.itembox =  0.5
+                }else if(this.navBanner.length === 3){
+                  this.itembox = 0.33
+                }
+                else {
+                  this.itembox = 0.25
+                }
               }
-              else {
-                this.itembox = 0.25
-              }
-              console.log("1"+this.itembox)
               this.shopTop = this.shopData.banners.convertStoreTopBanner
             }
             this.$nextTick(() => {
