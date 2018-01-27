@@ -12,7 +12,7 @@
       </div>
       <group class="redPaperBox  groupNoLine">
         <x-input type="number" :title="moneyMark"  v-model="transferMoney"
-                 :show-clear="false" keyboard="number" placeholder='0.00'>
+                 :show-clear="false" keyboard="number">
         </x-input>
       </group>
       <div class="fundsBtnBox">
@@ -52,9 +52,10 @@
         this.$http.get('/h9/api/user/transfer/info/' + tel)
         .then(function(res){
           if (res.data.code == 0) {
-              self.transferInfo = res.data.data
-              self.transferInfo.targetUserPhone = self.transferInfo.targetUserPhone.replace(/\B(?=(\d{4})+(?!\d))/g,' ') //转换手机格式999 9999 9999
+            self.transferInfo = res.data.data
+            self.transferInfo.targetUserPhone = self.transferInfo.targetUserPhone.replace(/\B(?=(\d{4})+(?!\d))/g,' ') //转换手机格式999 9999 9999
           } else {
+            _g.toastMsg('error', res.data.msg)
           }
         })
       },
@@ -67,13 +68,13 @@
           targetUserPhone:trim(self.transferInfo.targetUserPhone),
           transferMoney:self.transferMoney
         }
-        console.log(params)
         self.$http.post('/h9/api/user/transfer' ,params)
         .then(function(res){
-          if (res.data.code == 0) {
-            console.log(res.data.data.tips)
+          if (res.data.code === 0) {
              self.$router.push({path:'/account/success',query:{success:res.data.data.tips}})
-          } else {
+          } else if(res.data.code === 1) {
+            _g.toastMsg('error', res.data.msg)
+          }else{
             _g.toastMsg('error', res.data.msg)
           }
         })
@@ -151,6 +152,7 @@
     }
     .weui-label {
       width: 50/40rem !important;
+      font-size: 72/40rem;
     }
     input::-webkit-input-placeholder { /* WebKit browsers */
       font-size: 28/40rem
