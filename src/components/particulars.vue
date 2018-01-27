@@ -61,6 +61,9 @@
       },
       particularsStr: {
         type: String,
+      },
+      typeStr: {
+        type: String,
       }
     },
     data() {
@@ -80,7 +83,7 @@
         if (page === 1) {
           self.particularsData = []
         }
-        self.$http.get(self.particularsUrl + '?page=' + page + '&limit=10')
+        self.$http.get(self.particularsUrl + '?page=' + page + '&limit=10'+'&type='+self.typeStr)
           .then(function (res) {
             if (res.data.code == 0) {
               if (res.data.data.data.length > 0) {

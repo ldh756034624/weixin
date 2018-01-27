@@ -1,6 +1,6 @@
 <template>
 	<div class="page">
-    <Particulars :particularsUrl="url" :particularsStr="particularsType"></Particulars>
+    <Particulars :particularsUrl="url" :particularsStr="particularsType" :typeStr="type"></Particulars>
   </div>
 </template>
 <script>
@@ -12,6 +12,7 @@ export default {
   },
   data () {
     return {
+      type: this.$route.query.type || '1',
       url:'/h9/api/user/transactions',
       particularsType:'Transfer'
     }
