@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <group class="fundsBox  groupNoLine">
-      <p class="flexBox fundsMoneyTips">红包金额 <span class='flex1 alignR'> 可用余额{{fundsData.withdrawalCount}}元</span></p>
+      <p class="flexBox fundsMoneyTips">红包金额 <span class='flex1 alignR'> 可用余额{{fundsData.balance}}元</span></p>
       <x-input v-model="fundMoney" :title='moneyMark' @on-focus='moneyFocus()' @on-blur='moneyBlur()'
                :class="{'fundMoney':isFocus}" :show-clear="false" keyboard="number" placeholder='请输入红包金额'>
       </x-input>
