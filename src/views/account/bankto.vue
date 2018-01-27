@@ -111,9 +111,6 @@
       font-size: 32/40rem;
     }
     .vux-x-input {
-      padding: 30/40rem 30/40rem;
-      font-size: 48/40rem;
-      height: 48/40rem;
       margin:0 30/40rem;
       background-color: #F2F2F2;
     }
