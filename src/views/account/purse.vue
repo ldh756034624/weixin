@@ -16,22 +16,6 @@
     </group>
     <p class="blockTips">增值服务</p>
     <flexbox :gutter="0" class='purseWaiterBox'>
-      <flexbox-item>
-        <router-link :to="{path:'/account/hongbao',query:{balance:purseData.balance}}">
-          <div class="purseItemBox">
-            <img src="../../assets/img/account/hongbao@2x.png"/>
-            <p>推广红包</p>
-          </div>
-        </router-link>
-      </flexbox-item>
-      <flexbox-item class='ItemBorder'>
-        <router-link :to="{path:'/account/bankto',query:{balance:purseData.balance}}">
-          <div class="purseItemBox">
-            <img src="../../assets/img/account/zhuanzhang@2x.png"/>
-            <p>转账</p>
-          </div>
-        </router-link>
-      </flexbox-item>
       <flexbox-item class='ItemBorder'>
         <router-link :to="{path:'/account/phoneRecharge',query:{balance:purseData.balance}}">
           <div class="purseItemBox">
@@ -40,8 +24,6 @@
           </div>
         </router-link>
       </flexbox-item>
-    </flexbox>
-    <flexbox :gutter="0" class='purseWaiterBox'>
       <flexbox-item>
         <router-link :to="{path:'/account/ddExchange',query:{balance:purseData.balance,tel:purseData.tel}}">
           <div class="purseItemBox">
@@ -59,6 +41,28 @@
         </router-link>
       </flexbox-item>
       <flexbox-item v-show="!purseData.canWithdeawal" class='ItemBorder'>
+      </flexbox-item>
+    </flexbox>
+    <flexbox :gutter="0" class='purseWaiterBox'>
+      <flexbox-item v-show="purseData.canTransConfig">
+        <router-link :to="{path:'/account/hongbao',query:{balance:purseData.balance}}">
+          <div class="purseItemBox">
+            <img src="../../assets/img/account/hongbao@2x.png"/>
+            <p>推广红包</p>
+          </div>
+        </router-link>
+      </flexbox-item>
+      <flexbox-item class='ItemBorder' v-show="!purseData.canTransConfig">
+      </flexbox-item>
+      <flexbox-item class='ItemBorder' v-show="purseData.canTransConfig">
+        <router-link :to="{path:'/account/bankto',query:{balance:purseData.balance}}">
+          <div class="purseItemBox">
+            <img src="../../assets/img/account/zhuanzhang@2x.png"/>
+            <p>转账</p>
+          </div>
+        </router-link>
+      </flexbox-item>
+      <flexbox-item class='ItemBorder' v-show="!purseData.canTransConfig">
       </flexbox-item>
       <flexbox-item class='ItemBorder'>
       </flexbox-item>
