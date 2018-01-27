@@ -48,6 +48,10 @@
           })
       },
       fundsFn: function () {
+        if (!this.fundMoney || this.fundMoney == '0') {
+          _g.toastMsg('error', '设置的金额不能为0或空')
+          return
+        }
         if (this.fundMoney > this.fundsData.balance) {
           _g.toastMsg('error', '您设置的红包金额大于可用余额')
           return
