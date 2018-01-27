@@ -9,13 +9,10 @@
     <div class="fundsBtnBox">
       <x-button class='gradientBtn' @click.native="fundsFn">下一步</x-button>
     </div>
-    <codeAlert :showCodeAlert='codeAlert' :type='codeType' ref='codeAlert' :money="fundMoney"
-               v-on:CodeAlertStatus="codeAlertFn"></codeAlert>
   </div>
 </template>
 <script>
   import {Group, Cell, XInput, XButton} from 'vux'
-  import codeAlert from '@/components/codeAlert'
 
   export default {
     mounted() {
@@ -34,18 +31,10 @@
     },
     data() {
       return {
-        fundMoney: '',
-        hasCard: false,
+        fundMoney: this.$route.query.money || '',
         moneyMark: '',
         isFocus: false,
-        fundsData: {},
-        bankImg: '',
-        name: '',
-        no: '',
-        bankId: '',
-        cardLast: '',
-        codeAlert: false,
-        codeType: '3' //1,"注册,登录",2, "绑定手机"),3,"提现"),4,"滴滴卡兑换"),5 手机充值的,0,"其他")
+        fundsData: {}
       }
     },
     methods: {
@@ -55,81 +44,15 @@
           .then(function (res) {
             if (res.data.code == 0) {
               self.fundsData = res.data.data
-              // self.fundMoney = self.fundsData.withdrawMoney
-              if (self.$route.query.cardIcon) {
-                self.name = self.$route.query.cardName
-                self.no = self.$route.query.no
-                self.bankImg = self.$route.query.cardIcon
-                self.bankId = self.$route.query.bankId
-                self.hasCard = true
-              } else {
-                if (self.fundsData.bankList.length > 0) {
-                  self.hasCard = true
-                  self.name = self.fundsData.bankList[0].name
-                  self.no = self.fundsData.bankList[0].no
-                  self.bankImg = self.fundsData.bankList[0].bankImg
-                  self.bankId = self.fundsData.bankList[0].id
-                } else {
-                  self.hasCard = false
-                }
-              }
             }
           })
       },
-      goCard: function () {
-        let self = this;
-        if (this.hasCard) {
-          self.$router.push({path: '/account/chooseBank'})
-        } else {
-          self.$router.push({path: '/account/addBank', query: {type: 'funds', hasCard: 0}})
-        }
-      },
       fundsFn: function () {
-        if (!this.bankId) {
-          _g.toastMsg('error', '请选择银行卡!')
-          return;
-        }
-        if (this.fundMoney == 0) {
-          _g.toastMsg('error', '您今日可提现金额已达每日提现额度，请明日再来')
+        if (this.fundMoney > this.fundsData.withdrawalCount) {
+          _g.toastMsg('error', '您设置的红包金额大于可用余额')
           return
         }
-        this.$http.post(`h9/api/consume/withdraw/verify/${this.bankId}`).then(res => { // 数量和其他校验，通过再发短信
-          if (res.data.code === 0) {
-            this.codeAlert = true
-          } else {
-            _g.toastMsg('error', res.msg)
-          }
-        })
-      },
-      codeAlertFn: function (data) {
-        let self = this
-        if (data.show === false) {
-          self.codeAlert = false;
-        }
-        if (data.justHide) {
-          return
-        }
-        if (data.codeNum.length === 4) {
-          _g.showLoading()
-          self.$http.post('h9/api/consume/withdraw/' + self.bankId + '/' + data.codeNum)
-            .then(function (res) {
-              if (res.data.code == 0) {
-                _g.hideLoading()
-                _g.toastMsg('error', '提现成功!')
-                self.$refs.codeAlert.hide(true)
-                self.$router.replace({
-                  path: '/account/result',
-                  query: {type: 'funds', money: res.data.data.money, time: res.data.data.time}
-                })
-              } else if (res.data.code === 3) {  // 如果提现次数过多
-                _g.hideLoading()
-                self.$refs.codeAlert.hide(true)
-              } else {  // 验证码不正确
-                _g.hideLoading()
-                self.$refs.codeAlert.clearCode()
-              }
-            })
-        }
+        this.$router.push({path:'/account/promotion',query:{money:this.fundMoney}})
       },
       moneyFocus: function () {
         this.moneyMark = '￥'
@@ -144,7 +67,7 @@
 
     },
     components: {
-      Group, Cell, XInput, XButton, codeAlert
+      Group, Cell, XInput, XButton
     },
   }
 
@@ -162,27 +85,8 @@
       font-size: 24/40rem;
       color: #999;
     }
-    .leastMoney {
-      font-size: 24/40rem;
-      margin: 0 30/40rem;
-      padding: 30/40rem 0;
-      border-top: 1px solid #f2f2f2;
-    }
     .fundMoney {
       font-size: 48/40rem;
-    }
-    .fundsCardIcon {
-      width: 100/40rem;
-      height: 100/40rem;
-      margin-right: 20/40rem;
-      border-radius: 4rem;
-    }
-    .fundsCardName {
-      font-size: 32/40rem;
-      line-height: 60/40rem;
-    }
-    .fundsCardNo {
-      font-size: 24/40rem;
     }
   }
 

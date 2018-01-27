@@ -242,7 +242,7 @@ Vue.http.interceptors.response.use(
         redirectUrl=Vue.http.defaults.baseURL+'/h9-weixin/#/index'
       }
       window.location.href=Vue.http.defaults.baseURL+'/h9/api/common/wechat/code?url='+encode(redirectUrl)
-    }else if(response.data.code!=0){
+    }else if(response.data.code!=0 && response.data.msg!="红包未被领取"){
       if(response.data.msg){
         _g.toastMsg('error', response.data.msg)
       }
