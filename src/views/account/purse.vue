@@ -24,7 +24,7 @@
           </div>
         </router-link>
       </flexbox-item>
-      <flexbox-item>
+      <flexbox-item class='ItemBorder'>
         <router-link :to="{path:'/account/ddExchange',query:{balance:purseData.balance,tel:purseData.tel}}">
           <div class="purseItemBox">
             <img src="../../assets/img/account/wallet_icon_didi@2x.png"/>

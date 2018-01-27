@@ -139,7 +139,6 @@
   }
   .weui-input{
     line-height: 48/40rem!important;
-    font-size: 48/40rem!important;
     color: #333!important;
   }
     
