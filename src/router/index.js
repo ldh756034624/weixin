@@ -110,6 +110,16 @@ export default [
       path:'/account/bankto',
       component (resolve) {require(['@/views/account/bankto'], resolve)} //转账
     },{
+      path:'/account/transferInfo',
+      component (resolve) {require(['@/views/account/transferInfo'], resolve)} //转账明细
+    },{
+      path:'/account/success',
+      name:'转账成功',
+      component (resolve) {require(['@/views/account/success'], resolve)}  //转账成功页
+    },{
+      path:'/account/redPaperAmount',
+      component (resolve) {require(['@/views/account/redPaperAmount'],resolve)}  //红包金额
+    },{
       path:'/my/vMoney',
       component (resolve) {require(['@/views/my/vMoney'], resolve)} //V币
     },{

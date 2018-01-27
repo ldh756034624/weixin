@@ -50,12 +50,20 @@
           </div>
         </router-link>
       </flexbox-item>
-      <flexbox-item class='ItemBorder'>
-
+      <flexbox-item v-show="purseData.canWithdeawal" class='ItemBorder' >
+        <router-link :to="{path:'/account/funds'}">
+          <div class="purseItemBox">
+            <img src="../../assets/img/account/tixian@2x.png"/>
+            <p>提现</p>
+          </div>
+        </router-link>
+      </flexbox-item>
+      <flexbox-item v-show="!purseData.canWithdeawal" class='ItemBorder'>
       </flexbox-item>
       <flexbox-item class='ItemBorder'>
       </flexbox-item>
     </flexbox>
+
   </div>
 </template>
 <script>

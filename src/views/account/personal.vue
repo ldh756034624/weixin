@@ -95,7 +95,8 @@ export default {
   data () {
     return {
       personalData:{
-        vb: 0
+        vb: 0,
+        balance:0
       },
       userok: false,
       userHeadImg: userimg,
