@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <group class="fundsBox  groupNoLine">
-      <p class="flexBox fundsMoneyTips">红包金额 <span class='flex1 alignR'> 可用余额{{fundsData.balance}}元</span></p>
+      <p class="flexBox fundsMoneyTips">红包金额 <span class='flex1 alignR'> 可用余额{{fundsData.balance}}</span></p>
       <x-input v-model="fundMoney" :title='moneyMark' @on-focus='moneyFocus()' @on-blur='moneyBlur()'
                :class="{'fundMoney':isFocus}" :show-clear="false" keyboard="number" placeholder='请输入红包金额'>
       </x-input>
@@ -48,7 +48,7 @@
           })
       },
       fundsFn: function () {
-        if (this.fundMoney > this.fundsData.withdrawalCount) {
+        if (this.fundMoney > this.fundsData.balance) {
           _g.toastMsg('error', '您设置的红包金额大于可用余额')
           return
         }

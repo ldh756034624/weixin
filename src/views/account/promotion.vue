@@ -60,7 +60,7 @@
               }
               setTimeout(() => {
                 self.redEnvelope()
-              }, 2000)
+              }, 2500)
             } else if (res.data.code === 0) {
               _g.toastMsg('success', '支付成功')
               self.transferRecord.push(res.data.data)
