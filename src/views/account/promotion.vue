@@ -54,16 +54,16 @@
         const self = this
         self.$http.get('h9/api/user/redEnvelope/code/'+ self.moneyData.tempId)
           .then(function (res) {
-            if (res.data.code === 1) {
+            if (res.data.code === 0) {
               if(self.isDestroyed){
                   return;
               }
               setTimeout(() => {
                 self.redEnvelope()
               }, 2500)
-            } else if (res.data.code === 0) {
+            } else if (res.data.code === 1) {
               _g.toastMsg('success', '支付成功')
-              self.transferRecord.push(res.data.data)
+              self.transferRecord.unshift(res.data.data)
               setTimeout(() => {
                 self.init()
               }, 1500)

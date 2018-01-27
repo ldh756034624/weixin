@@ -2,8 +2,7 @@
   <div class="page">
     <group class="fundsBox  groupNoLine">
       <p class="flexBox fundsMoneyTips">红包金额 <span class='flex1 alignR'> 可用余额{{fundsData.balance}}</span></p>
-      <x-input v-model="fundMoney" :title='moneyMark' @on-focus='moneyFocus()' @on-blur='moneyBlur()'
-               :class="{'fundMoney':isFocus}" :show-clear="false" keyboard="number" placeholder='请输入红包金额'>
+      <x-input v-model="fundMoney" title='￥' class="fundMoney" :show-clear="false" keyboard="number" placeholder='请输入红包金额'>
       </x-input>
     </group>
     <div class="fundsBtnBox">
@@ -19,14 +18,6 @@
       let self = this;
       self.setTitle('红包金额');
       self.init();
-      self.$watch('fundMoney', function (val) {
-        if (val || val === 0) {
-          this.moneyMark = '￥'
-          this.isFocus = true
-        } else {
-          this.moneyMark = ''
-        }
-      })
 
     },
     data() {
@@ -57,16 +48,6 @@
           return
         }
         this.$router.push({path:'/account/promotion',query:{money:this.fundMoney}})
-      },
-      moneyFocus: function () {
-        this.moneyMark = '￥'
-        this.isFocus = true
-      },
-      moneyBlur: function () {
-        if (!this.fundMoney) {
-          this.moneyMark = ''
-        }
-        this.isFocus = false
       }
 
     },
