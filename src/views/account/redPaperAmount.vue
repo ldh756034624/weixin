@@ -152,7 +152,7 @@
     }
     .weui-label {
       width: 50/40rem !important;
-      /*font-size: 48/40rem;*/
+      font-size: 48/40rem;
     }
     input::-webkit-input-placeholder { /* WebKit browsers */
       font-size: 28/40rem
