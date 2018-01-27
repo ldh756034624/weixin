@@ -34,7 +34,7 @@
     mounted() {
       let self = this;
       this.moneyMark = "¥"
-      self.setTitle('转账');
+      self.setTitle('转账金额');
       let tel = this.$route.query.tel
       self.init(tel);
     },

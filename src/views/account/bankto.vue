@@ -22,7 +22,7 @@
   export default {
     mounted() {
       let self = this;
-      self.setTitle('转账金额');
+      self.setTitle('转账');
       // self.init();
     },
     data() {
