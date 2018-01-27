@@ -1,6 +1,23 @@
 <template>
 	<div class="page hongbaoPage">
-    <div class="hongbaoCont">
+    <div class="pageBox">
+      <div class="RecordBox">
+      <div class="RecordCon">
+        <div class="btn" @click="scanFn()">扫码抢红包</div>
+        <div class="descRecord"><span v-on:click="showUserDeal=true">游戏说明 ></span><router-link to='/active/prizeRecord'>
+          <span>游戏记录 ></span>
+        </router-link></div>
+      </div>
+    </div>
+    <div class="RecordBox bg2">
+      <div class="RecordCon">
+        <div class="btn"><x-input  v-model="code" class='inputCode'  placeholder='请输入兑奖码'></x-input></div>
+        <div class="descRecord"><span  @click="prizeFn()">兑奖 ></span></div>
+      </div>
+    </div>
+    <div class="banner"></div>
+    </div>
+    <!-- <div class="hongbaoCont">
       <img class="wine" src="../../assets/img/active/jiajiu@2x.png"/>
       <div class="logoImgBox">
         <img  src="../../assets/img/active/logo_gaolujia@2x.png"/>
@@ -20,7 +37,7 @@
         </router-link>
       </div>
       <img class="bottomLogo" src="../../assets/img/active/bitmap@2x.png"/>
-    </div>
+    </div> -->
     <div v-transfer-dom>
         <popup v-model="showUserDeal" height="100%" class='dealPopup'>
           <userDeal v-model="showUserDeal" v-on:listenToDealShow='dealShowFn'></userDeal>
@@ -39,7 +56,7 @@ export default {
   },
   mounted(){
     let  self=this;
-    self.setTitle('抢红包');
+    self.setTitle('开盖扫红包');
     if (self.barcode) {
       self.code=self.barcode
       if(!self.WxCode){
@@ -143,61 +160,118 @@ export default {
 </style>
 <style type="text/css" lang='less'>
   .hongbaoPage{
-    background: url('../../assets/img/active/bg_dafugui@2x.png') no-repeat;
+    background: url('../../assets/img/active/bg@2x.png') no-repeat;
     background-size: cover;
-    .hongbaoCont{
-      width: 486/40rem;
-      height: 812/40rem;
-      padding: 30/40rem;
-      background: rgba(255,255,255,.35);
-      border-radius: 10/40rem;
-      margin: 0 auto;
-      position: relative;
-      top:50%;
-      margin-top: -430/40rem;
-      text-align: center;
-      .wine{
-        width: 120/40rem;
-        height: 154/40rem;
-      }
-      .logoImgBox{
-        img{
-          width: 158/40rem;
-          height: 52/40rem;
-        }
-      }
-      .inputCode{
-        width: 292/40rem;
-        height: 50/40rem;
-        border:2/40rem solid #ED5954;
-        border-radius: 10/40rem;
-        margin: 40/40rem auto;
-      }
-      .bottomLogo{
-        width: 260/40rem;
-        height: 48/40rem;
-      }
-      .exchangeBtn,.scanBtn{
-        width: 354/40rem;
-        height: 88/40rem;
-        margin: 15/40rem 0;
-        background: #EE5954;
-        color: #fff;
-        border-radius: 4rem;
-        font-size: 36/40rem;
-      }
-      .descRecordBox{
-        font-size: 24/40rem;
-        color: #333;
-        margin: 30/40rem 0;
-        .line{
-          margin: 0 20/40rem;
-        }
-      }
+    .pageBox {
+      margin-top: 47%;
+      width: 100%;
+      height: 100%;
     }
+    .RecordBox {
+      width: 85.733%;
+      margin: 0 auto;
+      height: 24.512%;
+      background: url('../../assets/img/active/shangjuanzhou@2x.png') no-repeat top center;
+      background-size: cover;
+    }
+    .RecordCon {
+      width: 55.987%;
+      height: 86%;
+      margin: 0 auto;
+      padding-top: 14%;
+    }
+    .btn {
+      background: url('../../assets/img/active/kuangkuang@2x.png') no-repeat top center;
+      background-size: cover;
+      width: 100%;
+      height: 25.382%;
+      line-height: 200%;
+      text-align: center;
+      font-size: 19px;
+      color: #595757;
+    }
+    .descRecord {
+      color: #595757;
+      font-size: 12px;
+      display: flex;
+      padding: 0 14px;
+      margin-top: 20px;
+      justify-content: space-between;
+    }
+    .inputCode {
+      font-size: 19px;
+      color: #595757;
+      line-height: 100%;
+    }
+    .banner {
+      background: url('../../assets/img/active/pingzi@2x.png') no-repeat top center;
+      background-size: cover;
+      width: 36.666%;
+      height: 24.812%;
+      position: absolute;
+      top: 65%;
+      left: 40%;
+    }
+    .RecordBox.bg2 {
+      width: 91%;
+      margin-left: 9%;
+      background: url('../../assets/img/active/xiajuanzhou@2x.png') no-repeat top center;
+      background-size: cover;
+    }
+    .RecordBox.bg2 .RecordCon {
+      margin-left: 18%;
+    }
+    // .hongbaoCont{
+    //   width: 486/40rem;
+    //   height: 812/40rem;
+    //   padding: 30/40rem;
+    //   background: rgba(255,255,255,.35);
+    //   border-radius: 10/40rem;
+    //   margin: 0 auto;
+    //   position: relative;
+    //   top:50%;
+    //   margin-top: -430/40rem;
+    //   text-align: center;
+    //   .wine{
+    //     width: 120/40rem;
+    //     height: 154/40rem;
+    //   }
+    //   .logoImgBox{
+    //     img{
+    //       width: 158/40rem;
+    //       height: 52/40rem;
+    //     }
+    //   }
+    //   .inputCode{
+    //     width: 292/40rem;
+    //     height: 50/40rem;
+    //     border:2/40rem solid #ED5954;
+    //     border-radius: 10/40rem;
+    //     margin: 40/40rem auto;
+    //   }
+    //   .bottomLogo{
+    //     width: 260/40rem;
+    //     height: 48/40rem;
+    //   }
+    //   .exchangeBtn,.scanBtn{
+    //     width: 354/40rem;
+    //     height: 88/40rem;
+    //     margin: 15/40rem 0;
+    //     background: #EE5954;
+    //     color: #fff;
+    //     border-radius: 4rem;
+    //     font-size: 36/40rem;
+    //   }
+    //   .descRecordBox{
+    //     font-size: 24/40rem;
+    //     color: #333;
+    //     margin: 30/40rem 0;
+    //     .line{
+    //       margin: 0 20/40rem;
+    //     }
+    //   }
+    // }
   }
-</style>
-<style lang='less'>
   .hongbaoPage{
     .inputCode{
       input{
@@ -228,3 +302,4 @@ export default {
     }
   }
 </style>
+

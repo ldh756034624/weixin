@@ -1,20 +1,20 @@
 <template>
   <div>
     <tabbar class="home_navbar" slot="bottom">
-      <tabbar-item :selected="$route.path == '/' || /index/.test($route.path)" link="/index">
-          <img slot="icon" src="../assets/img/index/tabbar_mainpage_normal@2x.png" class="default">
-          <img slot="icon" src="../assets/img/index/tabbar_mainpage_selected@2x.png" class="active">
-          <span slot="label">首页</span>
+      <tabbar-item link="/active/hongbao">
+          <img slot="icon" src="../assets/img/index/kaigaisaohongbao@2x.png" class="default"><!--
+          <img slot="icon" src="../assets/img/index/tabbar_mainpage_selected@2x.png" class="active"> -->
+          <span slot="label">开盖扫红包</span>
       </tabbar-item>
       <tabbar-item :selected="/shop/.test($route.path)" link="/shop">
           <img slot="icon" src="../assets/img/index/tabbar_mall_normal@2x.png" class="default">
           <img slot="icon" src="../assets/img/index/tabbar_mall_selected@2x.png" class="active">
-          <span slot="label">商城</span>
+          <span slot="label">徽酒商城</span>
       </tabbar-item>
       <tabbar-item :selected="/account/.test($route.path)" @click.native="hasPhone('/account/personal')">
           <img slot="icon" src="../assets/img/index/tabbar_my_normal@2x.png" class="default">
           <img slot="icon" src="../assets/img/index/tabbar_my_selected@2x.png" class="active">
-          <span slot="label">我的</span>
+          <span slot="label">旅游健康卡</span>
       </tabbar-item>
     </tabbar>
   </div>
@@ -39,7 +39,7 @@ export default {
     }
   },
   methods: {
-    
+
   }
 }
 

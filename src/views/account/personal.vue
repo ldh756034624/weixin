@@ -2,17 +2,28 @@
 	<div class="page personalPage">
       <div class="personalTopBg">
 
-          <router-link to='/account/setting'>
+          <!-- <router-link to='/account/setting'>
               <img src="../../assets/img/index/my_btn_setting@2x.png" class="settingIcon">
-          </router-link>
-          <router-link to='/account/infoChange'>
+          </router-link> -->
+
+      </div>
+      <div class="accountBoxT">
+        <div class="accountCon">
+          <div><router-link to='/account/infoChange' class="UserimgBox">
               <div class="accountUserImg">
                   <img :src="userHeadImg">
               </div>
               <p class="nickName">{{personalData.nickName}}</p>
-          </router-link>
+          </router-link></div>
+          <router-link :to="{path:'/account/purse',query:{balance:personalData.balance,limit:personalData.withdrawalCount}}" class="personalBox">
+              <div class="personalItemBox">
+                <p class="redFontt">{{personalData.balance | price2}}</p>
+                <p class="desc">旅游健康卡余额</p>
+              </div>
+            </router-link>
+        </div>
       </div>
-       <flexbox :gutter="0">
+       <!-- <flexbox :gutter="0">
           <flexbox-item class="item-wrapper">
             <router-link :to="{path:'/account/purse',query:{balance:personalData.balance,limit:personalData.withdrawalCount}}">
               <div class="personalItemBox">
@@ -21,55 +32,83 @@
               </div>
             </router-link>
           </flexbox-item>
-        </flexbox>
+        </flexbox> -->
       <div class="accountCont">
+              <group class='personBox' :gutter="0">
+                <cell title="我的订单" link='/my/myOrder'>
+                    <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                    src="../../assets/img/index/dingdan@2x.png">
+                    <span class='cellValueBox'  style="margin-right:-12px;">
+                      <i class='arrow'></i>
+                    </span>
+                </cell>
+                <div class="flexbox vux-1px-t">
+                  <div class="flexboxItem">
+                     <router-link :to="{path:'/my/myOrder',query:{status: 0}}">
+                    <img class="itemImg" src="../../assets/img/index/daifukuan@2x.png"></img>
+                    <p>待付款</p>
+                  </router-link>
+                  </div>
+                  <div class="flexboxItem">
+                    <router-link :to="{path:'/my/myOrder',query:{status: 1}}">
+                    <img class="itemImg" src="../../assets/img/index/daifahuo@2x.png"></img>
+                    <p>待发货</p>
+                  </router-link>
+                  </div>
+                  <div class="flexboxItem">
+                    <router-link :to="{path:'/my/myOrder',query:{status: 2}}">
+                    <img class="itemImg" src="../../assets/img/index/daishouhuo@2x.png"></img>
+                    <p>待收货</p>
+                  </router-link>
+                  </div>
+                </div>
+              </group>
               <group class='personBox'>
-
-                <cell title="我的卡券" link="/my/cupon">
+                <cell title="消费记录" link="/account/purseParticulars">
                   <img slot="icon" width="30" style="display:block;margin-right:10px;"
-                       src="../../assets/img/index/cupon_icon@2x.png">
+                       src="../../assets/img/index/xiaofeijilu@2x.png">
                   <span class='cellValueBox' style="margin-right:-12px;">
-                        <i>{{personalData.cardNum}}</i>
                         <i class='arrow'></i>
                       </span>
                 </cell>
-                <cell title="我的V币" @click.native="goVB" v-if="personalData.vb != 0">
+                <!-- <cell title="我的V币" @click.native="goVB" v-if="personalData.vb != 0">
                   <img slot="icon" width="30" style="display:block;margin-right:10px;"
                        src="../../assets/img/index/vb@2x.png">
                   <span class='cellValueBox'>
                         <i>{{personalData.vb}}</i>
                         <i class='arrow'></i>
                       </span>
-                </cell>
-                  <cell title="我的订单" link='/my/myOrder'>
-                      <img slot="icon" width="30" style="display:block;margin-right:10px;"
-                      src="../../assets/img/index/icon_order@2x.png">
-                      <span class='cellValueBox'  style="margin-right:-12px;">
-                        <i class='arrow'></i>
-                      </span>
-                  </cell>
-                  <cell title="H9酒店记录"  value='暂未开放'>
+                </cell> -->
+                  <!-- <cell title="H9酒店记录"  value='暂未开放'>
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_hotel@2x.png">
                       <span class='cellValueBox'>
                         <i>暂未开放</i>
                         <i class='arrow'></i>
                       </span>
-                  </cell>
-                   <cell title="银行卡" link='/my/myCard'>
+                  </cell> -->
+                   <cell title="我的银行卡" link='/my/myCard'>
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
-                      src="../../assets/img/index/icon_bankcard@2x.png">
+                      src="../../assets/img/index/qianbao@2x.png">
                       <span class='cellValueBox'  style="margin-right:-12px;">
                         <i class='arrow'></i>
                       </span>
                   </cell>
                   <cell title="收货地址"  link='/addrList'>
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
-                      src="../../assets/img/index/icon_adress@2x.png">
+                      src="../../assets/img/index/shouhuodizhi@2x.png">
                       <span class='cellValueBox' style="margin-right:-12px;">
                         <i class='arrow'></i>
                       </span>
                   </cell>
+                  <cell title="我的优惠卷" link="/my/cupon">
+                  <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                       src="../../assets/img/index/wodeyouhui@2x.png">
+                  <span class='cellValueBox' style="margin-right:-12px;">
+                        <!-- <i>{{personalData.cardNum}}</i> -->
+                        <i class='arrow'></i>
+                      </span>
+                </cell>
               </group>
       </div>
       <div class="emptyBox">
@@ -132,13 +171,26 @@ export default {
 
 <style scoped lang='less'>
     .personalPage{
-      background: #fff;
+      background: rgb(239,240,240);
       overflow-y:auto;
     }
     .personalTopBg{
-      background:url('../../assets/img/index/my_img_bg@2x.png') no-repeat;
+      background:url('../../assets/img/index/bg_shijie@2x.png') no-repeat;
       background-size: 100%;
-      height: 470/40rem;
+      height: 325/40rem;
+    }
+    .accountBoxT {
+      height: 128/40rem;
+      background-color: rgb(159,160,160);
+      padding: 0 110/40rem 0 50/40rem;
+      position: relative;
+    }
+    .accountCon {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .settingIcon{
       width: 60/40rem;
@@ -146,27 +198,33 @@ export default {
       float: right;
       margin: 70/40rem 20/40rem 0 0;
     }
+    .UserimgBox {
+      position: absolute;
+      top: -110/40rem;
+    }
     .accountUserImg{
       width: 150/40rem;
       height: 150/40rem;
-      margin: 0 auto;
-      padding: 140/40rem 0 15/40rem;
     }
     .nickName{
       text-align: center;
-      font-size: 36/40rem;
-      color: #222;
-      margin-top: 10/40rem;
+      font-size: 32/40rem;
+      color: #fff;
+      padding-top: 28/40rem;
     }
     .accountUserImg img,.accountUserImg span{
       display: inline-block;
       width: 150/40rem;
       height: 150/40rem;
       border-radius: 99/40rem;
+      border: 3px solid #fff;
       background-size: 100%;
       background-position: center;
       background-repeat: no-repeat;
       background-color: #f0f0f0;
+    }
+    .personalBox {
+      color: #fff;
     }
     .personalItemBox{
       text-align: center;
@@ -176,9 +234,8 @@ export default {
       .desc{
         font-size: 12px;
       }
-      .redFont{
-        font-size: 48/40rem;
-        color: #627984;
+      .redFontt{
+        font-size: 55/40rem;
       }
       .font12{
         font-size: 24/40rem;
@@ -217,12 +274,24 @@ export default {
   .emptyBox{
     height: 130/40rem;
   }
-
+  .flexbox {
+    display: flex;
+    justify-content: space-around;
+  }
+  .flexboxItem {
+    width: 30%;
+    padding: 26/40rem 0;
+    text-align: center;
+  }
+  .flexboxItem img {
+    width: 50/40rem;
+    height: 50/40rem;
+  }
 </style>
 <style lang='less'>
-  .personBox .weui-cells:before,.personBox .weui-cell:before{
-    border-top:none;
-  }
+  // .personBox .weui-cells:before,.personBox .weui-cell:before{
+  //   border-top:none;
+  // }
   .personBox .weui-cells{
     font-size: 30/40rem;
   }

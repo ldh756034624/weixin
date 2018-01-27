@@ -47,6 +47,7 @@ export default {
     return {
       myOrderData:[],
       hasItem:true,
+      status: this.$route.query.status,
       type:'order'
     }
   },
@@ -62,7 +63,11 @@ export default {
       }else{
         pageUrl='/h9/api/orders'
       }
-      self.$http.get(pageUrl+'?page='+page+'&limit='+self.page.limit)
+      pageUrl+='?page='+page+'&limit='+self.page.limit
+      if (self.status) {
+        pageUrl+='&status='+self.status
+      }
+      self.$http.get(pageUrl)
         .then(function(res) {
           if(res.data.code==0){
               if(res.data.data.data.length>0){
