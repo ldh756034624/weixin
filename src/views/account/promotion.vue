@@ -89,7 +89,7 @@
           })
       },
       onSet () {
-        this.$router.push({path:'/account/hongbao',query:{money: this.money}})
+        this.$router.replace({path:'/account/hongbao',query:{money: this.money}})
       },
       onParticulars () {
         this.$router.push({path:'/account/transferInfo',query:{type: '2'}})
