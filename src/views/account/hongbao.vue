@@ -22,7 +22,7 @@
     },
     data() {
       return {
-        fundMoney: this.$route.query.money || '',
+        fundMoney: Number(this.$route.query.money) || null,
         moneyMark: '',
         isFocus: false,
         fundsData: {}
@@ -43,7 +43,7 @@
           _g.toastMsg('error', '设置的金额不能小于1或空')
           return
         }
-        if (this.fundMoney > this.fundsData.balance) {
+        if (this.fundMoney > Number(this.fundsData.balance)) {
           _g.toastMsg('error', '您设置的红包金额大于可用余额')
           return
         }
