@@ -166,15 +166,15 @@
     input:-ms-input-placeholder { /* Internet Explorer 10+ */
       font-size: 28/40rem
     }
-  }
-  .vux-input-icon.weui-icon-warn:before, .vux-input-icon.weui-icon-success:before{
-    font-size: 0px;
-  }
-  .weui-btn:after{
-    border:none;
-  }
-  .weui-input{
-    color: #333!important;
+    .vux-input-icon.weui-icon-warn:before, .vux-input-icon.weui-icon-success:before{
+      font-size: 0px;
+    }
+    .weui-btn:after{
+      border:none;
+    }
+    .weui-input{
+      color: #333!important;
+    }
   }
     
 </style>
