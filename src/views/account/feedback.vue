@@ -87,6 +87,7 @@
           let data = res.data
           if (data.code === 0) {
             _g.toastMsg('success', data.msg)
+            this.$router.replace({path:"/account/setting"})
           }
         })
       }

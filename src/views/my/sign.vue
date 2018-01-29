@@ -62,6 +62,9 @@
 
   export default {
     created() {
+      if(!this.$route.query.token){
+        localStorage._user.token = this.$route.query.token
+      }
       this.initData()
     },
     mounted() {
