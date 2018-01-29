@@ -62,8 +62,10 @@
 
   export default {
     created() {
-      if(!this.$route.query.token){
-        localStorage._user.token = this.$route.query.token
+      if(this.$route.query.token){
+        let local = JSON.parse(localStorage._user)
+        local.token = this.$route.query.token
+        localStorage._user =JSON.stringify(local)
       }
       this.initData()
     },
