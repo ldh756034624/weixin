@@ -1,5 +1,5 @@
 <template>
-	<div class="page hongbaoPage">
+	<div class="page hongbaoPage" :style="{height: Wheight+'px'}">
     <div class="pageBox">
       <div class="RecordBox">
       <div class="RecordCon">
@@ -72,6 +72,7 @@ export default {
     return {
       personalData:{},
       showUserDeal:false,
+      Wheight: window.screen.height,
       WxCode:this.$route.query.code, //微信回调码
       barcode:this.$route.query.barcode, //扫码接口回调兑奖码
       code:'',
@@ -164,7 +165,11 @@ export default {
   .hongbaoPage{
     background: url('../../assets/img/active/bg@2x.jpg') repeat-y;
     background-size: 100%;
-    padding-top: 350/40rem;
+    .pageBox {
+      padding-top: 350/40rem;
+      width: 100%;
+      height: 100%;
+    }
     .RecordBox {
       width: 627/40rem;
       margin: 0 auto;
