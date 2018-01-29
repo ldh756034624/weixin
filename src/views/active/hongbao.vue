@@ -162,7 +162,7 @@ export default {
 </style>
 <style type="text/css" lang='less'>
   .hongbaoPage{
-    background: url('../../assets/img/active/bg@2x.png') repeat-y;
+    background: url('../../assets/img/active/bg@2x.jpg') repeat-y;
     background-size: 100%;
     .pageBox {
       padding-top: 350/40rem;
