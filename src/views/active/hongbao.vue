@@ -58,6 +58,7 @@ export default {
   },
   mounted(){
     let  self=this;
+    console.log(self.Wheight)
     self.setTitle('开盖扫红包');
     if (self.barcode) {
       self.code=self.barcode
@@ -72,7 +73,7 @@ export default {
     return {
       personalData:{},
       showUserDeal:false,
-      Wheight: window.screen.height,
+      Wheight: document.body.clientHeight ,
       WxCode:this.$route.query.code, //微信回调码
       barcode:this.$route.query.barcode, //扫码接口回调兑奖码
       code:'',
