@@ -164,11 +164,7 @@ export default {
   .hongbaoPage{
     background: url('../../assets/img/active/bg@2x.jpg') repeat-y;
     background-size: 100%;
-    .pageBox {
-      padding-top: 350/40rem;
-      width: 100%;
-      height: 100%;
-    }
+    padding-top: 350/40rem;
     .RecordBox {
       width: 627/40rem;
       margin: 0 auto;
