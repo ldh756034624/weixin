@@ -8,14 +8,16 @@
           <span>游戏记录 ></span>
         </router-link></div>
       </div>
+      <div class="yun"></div>
     </div>
-    <div class="RecordBox bg2">
+    <div class="RecordBox">
       <div class="RecordCon">
         <div class="btn"><x-input  v-model="code" class='inputCode'  placeholder='请输入兑奖码'></x-input></div>
         <div class="descRecord"><span  @click="prizeFn()">兑奖 ></span></div>
       </div>
-    </div>
+      <div class="yun2"></div>
     <div class="banner"></div>
+    </div>
     </div>
     <!-- <div class="hongbaoCont">
       <img class="wine" src="../../assets/img/active/jiajiu@2x.png"/>
@@ -160,66 +162,75 @@ export default {
 </style>
 <style type="text/css" lang='less'>
   .hongbaoPage{
-    background: url('../../assets/img/active/bg@2x.png') no-repeat;
-    background-size: cover;
+    background: url('../../assets/img/active/bg@2x.png') repeat-y;
+    background-size: 100%;
     .pageBox {
-      margin-top: 47%;
+      margin-top: 350/40rem;
       width: 100%;
       height: 100%;
     }
     .RecordBox {
-      width: 85.733%;
+      width: 627/40rem;
       margin: 0 auto;
-      height: 24.512%;
-      background: url('../../assets/img/active/shangjuanzhou@2x.png') no-repeat top center;
+      height: 327/40rem;
+      background: url('../../assets/img/active/juanzhou@2x.png') no-repeat top center;
       background-size: cover;
+      position: relative;
     }
     .RecordCon {
-      width: 55.987%;
-      height: 86%;
+      width: 360/40rem;
       margin: 0 auto;
-      padding-top: 14%;
+      padding-top: 78/40rem;
     }
     .btn {
       background: url('../../assets/img/active/kuangkuang@2x.png') no-repeat top center;
       background-size: cover;
-      width: 100%;
-      height: 25.382%;
-      line-height: 200%;
+      width: 360/40rem;
+      height: 83/40rem;
+      line-height: 83/40rem;
       text-align: center;
-      font-size: 19px;
+      font-size: 38/40rem;
       color: #595757;
     }
     .descRecord {
       color: #595757;
-      font-size: 12px;
+      font-size: 24/40rem;
       display: flex;
-      padding: 0 14px;
-      margin-top: 20px;
+      padding: 0 35/40rem;
+      margin-top: 42/40rem;
       justify-content: space-between;
     }
     .inputCode {
-      font-size: 19px;
+      font-size: 38/40rem;
       color: #595757;
       line-height: 100%;
     }
     .banner {
       background: url('../../assets/img/active/pingzi@2x.png') no-repeat top center;
       background-size: cover;
-      width: 36.666%;
-      height: 24.812%;
+      width: 275/40rem;
+      height: 331/40rem;
       position: absolute;
-      top: 65%;
-      left: 40%;
+      top: 180/40rem;
+      right: 102/40rem;
     }
-    .RecordBox.bg2 {
-      width: 91%;
-      margin-left: 9%;
-      background: url('../../assets/img/active/xiajuanzhou@2x.png') no-repeat top center;
+    .yun {
+      background: url('../../assets/img/active/yun@2x.png') no-repeat top center;
       background-size: cover;
+      width: 138/40rem;
+      height: 64/40rem;
+      position: absolute;
+      top: 162/40rem;
+      left: -20/40rem;
     }
-    .RecordBox.bg2 .RecordCon {
-      margin-left: 18%;
+    .yun2 {
+      background: url('../../assets/img/active/yun2@2x.png') no-repeat top center;
+      background-size: cover;
+      width: 174/40rem;
+      height: 97/40rem;
+      position: absolute;
+      top: 139/40rem;
+      right: -56/40rem;
     }
     // .hongbaoCont{
     //   width: 486/40rem;
