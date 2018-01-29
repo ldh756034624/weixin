@@ -77,10 +77,6 @@
           _g.toastMsg('error', '请输入反馈内容')
           return
         }
-        if (!this.formData.connect) {
-          _g.toastMsg('error', '请输入联系方式')
-          return
-        }
         let data = this.formData
         data.anonymous = data.anonymous ? 1 : 0  // 是否匿名
         this.$http.post('h9/api/advice/sendAdvice', data).then(res => {

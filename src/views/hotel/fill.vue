@@ -119,9 +119,11 @@
       },
       handleBook() { // 点击预订按钮
         /* 是否是手机号码 */
-       
+        function trim(str){
+            return str.replace(/\s|\xA0/g,"");    
+        }
         let data = this.orderForm
-        const reg = /^1[3|4|5|8][0-9]\d{4,8}$/
+        const reg = /^1[3|4|5|8|7][0-9]\d{4,8}$/
         // 必填判断
         if (!data.stayRoomer) {
           _g.toastMsg('error', '请填写入住人')
@@ -131,7 +133,7 @@
           _g.toastMsg('error', '请正确填写入住人')
           return
         }
-        if (!data.phone || data.phone.length !== 13 || !reg.test(data.phone)) {
+        if (!data.phone || data.phone.length !== 13 || !reg.test(trim(data.phone))) {
           _g.toastMsg('error', '请输入正确的手机号码')
           return
         }
