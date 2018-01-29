@@ -165,7 +165,7 @@ export default {
     background: url('../../assets/img/active/bg@2x.png') repeat-y;
     background-size: 100%;
     .pageBox {
-      margin-top: 350/40rem;
+      padding-top: 350/40rem;
       width: 100%;
       height: 100%;
     }
