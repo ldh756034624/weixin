@@ -68,10 +68,9 @@
               token: this.$route.query.token
           })
           localStorage._user = local
-          }
         }
       }
-      this.initData()
+        this.initData()
     },
     mounted() {
       this.setTitle('每日签到');
