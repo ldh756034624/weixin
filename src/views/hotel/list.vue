@@ -28,7 +28,17 @@
     </transition>
     <!--酒店搜索出来的列表-->
     <div class="list-wrapper">
-      <scroller lock-x ref="scroll" height="-46">
+      <scroller lock-x ref="scroll" 
+                :pullup-config="pulldefaultConfig"
+                use-pullup
+                :pullup-status="pullupStatus"
+                @on-pullup-loading="loadMore"
+                use-pulldown
+                @on-pulldown-loading="refresh"
+                :pulldown-config="pulldefaultConfig"
+                :pulldown-status="pulldownStatus"
+                @input="getCurrentValue"
+                height="-46">
         <div>
           <ul>
             <li class="hotel-item" v-for="item in hotelList" @click="handleHotel(item)">
@@ -51,13 +61,15 @@
             </li>
           </ul>
         </div>
+        <pull-header-footer v-if="showStatusFooter" :status-up="pullupStatus"
+                            :status-down="pulldownStatus"></pull-header-footer>
       </scroller>
     </div>
   </div>
 </template>
 <script>
   import {Scroller} from 'vux'
-
+  import PullHeaderFooter from '@/components/pullHeaderFooter'
   export default {
     data() {
       return {
@@ -65,14 +77,17 @@
         cityList: [], // 待选择的城市列表
         query: {
           queryKey: '',
-          city: '深圳' // todo 默认值？
+          city: '深圳', // todo 默认值？
+          page:1,
+          limit:10
         },
-        showCity: false  // 显示城市列表
+        showCity: false,  // 显示城市列表
+        showStatusFooter: false  // 底部没有更多等数据状态栏
       }
     },
     created() {
       this.getCityList()
-      this.getHotelList()
+      this.init(1)
     },
     mounted() {
       this.$nextTick(() => {
@@ -80,15 +95,58 @@
       })
     },
     methods: {
-      // 获取酒店列表
-      getHotelList() {
+      /**
+       * 获取酒店列表
+       * @param page [页码]
+       */
+      init(page) {
+        let self = this
+        if (page === 1) {
+          self.hotelList = []
+        }
+        this.query.page = page
         let params = this.query
-        this.$http.get('/h9/api/hotels', {params}).then(res => {
-          let data = res.data
-          if (data.code === 0) {
-            this.hotelList = data.data.data
-          }
-        })
+        console.log(params)
+        self.$http.get('/h9/api/hotels',{params})
+          .then(function (res) {
+            if (res.data.code == 0) {
+              if (res.data.data.data.length > 0) {
+                self.hotelList = [...self.hotelList, ...res.data.data.data]
+                self.hasItem = true
+              } else {
+                self.hasItem = false
+              }
+              self.page.totalpage = res.data.data.totalPage;
+              if (res.data.data.hasNext) {
+                self.page.currPage++;
+              }
+              self.page.hasNext = res.data.data.hasNext;
+            }
+            self.$nextTick(() => {
+              self.$refs.scroll.donePullup();
+              if (!self.page.hasNext) {
+                self.$refs.scroll.disablePullup();
+              }
+              if (res.data.data.currPage == 1) {
+                self.$refs.scroll.reset({top: 0}, 500, 'ease');
+              }
+            });
+          })
+      },
+      loadMore() {
+        let self = this;
+        self.showStatusFooter = true
+        if (self.page.hasNext) {
+          setTimeout(() => {
+            self.init(self.page.currPage)
+          }, 2000)
+        }
+      },
+      refresh() {
+        let self = this;
+        setTimeout(() => {
+          self.init(1);
+        }, 2000)
       },
       // 获取城市列表
       getCityList() {
@@ -111,7 +169,7 @@
       handleChooseCity(item) {
         this.query.city = item
         this.showCity = false
-        this.getHotelList()
+        this.init(1)
       },
       // 选择酒店
       handleHotel(item) {
@@ -124,15 +182,15 @@
         clearTimeout(this.timer)
         this.timer = setTimeout(() => {
           // 发起请求
-          this.getHotelList()
+          this.init()
         }, 1000)
       },
     },
     components: {
-      Scroller
+      Scroller,
+      PullHeaderFooter
     },
   }
-
 </script>
 
 <style scoped lang='less'>
