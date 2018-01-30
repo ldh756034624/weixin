@@ -224,7 +224,7 @@
       refresh() {
         let self = this;
         setTimeout(() => {
-          self.init();
+          self.init(self.index);
           self.$refs.detailScroller.reset({top: 0}, 500, 'ease');
         }, 2000)
       },

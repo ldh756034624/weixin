@@ -135,7 +135,6 @@
       },
       // 查看订单详情
       handleDetail(id) {
-        console.log(id)
         if (id) {
           this.$router.push({path: '/hotel/orderDetail', query: {id}})
         }
