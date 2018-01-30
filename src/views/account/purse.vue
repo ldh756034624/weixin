@@ -44,14 +44,14 @@
       </flexbox-item>
     </flexbox>
     <flexbox :gutter="0" class='purseWaiterBox'>
-      <!-- <flexbox-item v-show="purseData.canTransConfig">
+      <flexbox-item class='ItemBorder' v-show="purseData.canTransConfig">
         <router-link :to="{path:'/account/hongbao',query:{balance:purseData.balance}}">
           <div class="purseItemBox">
             <img src="../../assets/img/account/hongbao@2x.png"/>
             <p>推广红包</p>
           </div>
         </router-link>
-      </flexbox-item> -->
+      </flexbox-item>
       <!-- <flexbox-item class='ItemBorder' v-show="!purseData.canTransConfig">
       </flexbox-item> -->
       <flexbox-item v-show="purseData.canWithdeawal" class='ItemBorder' >
@@ -64,8 +64,8 @@
       </flexbox-item>
       <flexbox-item v-show="!purseData.canWithdeawal" class='ItemBorder'>
       </flexbox-item>
-      <flexbox-item class='ItemBorder'>
-      </flexbox-item>
+      <!-- <flexbox-item class='ItemBorder'>
+      </flexbox-item> -->
       <flexbox-item class='ItemBorder'>
       </flexbox-item>
     </flexbox>
