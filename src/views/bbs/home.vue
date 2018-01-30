@@ -63,10 +63,8 @@
                     <p>{{item.userName}}<span>{{item.spaceTime}}</span></p>
                   </div>
                   <div class="stickTitle">{{item.title}}</div>
-                  <div class="stickImage">
-                    <img :src="item.userAvatar">
-                    <img :src="item.userAvatar">
-                    <img :src="item.userAvatar">
+                  <div class="stickImage" v-if="item.images.length > 0">
+                    <img :src="img" v-for="img in item.images">
                   </div>
                   <div class="stickType">
                     <span>#{{item.typeName}}#</span>　
@@ -229,10 +227,10 @@
         }, 2000)
       },
       add () {
-        this.$router.push({ path: 'bbs/add' })
+        this.$router.push({ path: '/bbs/add' })
       },
       search () {
-        this.$router.push({ path: 'bbs/search' })
+        this.$router.push({ path: '/bbs/search' })
       }
     },
     components: {

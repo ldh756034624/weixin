@@ -113,7 +113,7 @@
             if (res.data.code == 0) {
               _g.toastMsg('success', '修改成功')
               setTimeout(() => {
-                self.$router.push({path: '/bbs/detail/'+res.data.data.id})
+                self.$router.replace({path: '/bbs/detail/'+res.data.data.id})
               }, 1500)
             }
           })
@@ -123,7 +123,7 @@
           .then(function (res) {
             if (res.data.code == 0) {
               setTimeout(() => {
-                self.$router.push({path: '/bbs/detail/'+res.data.data.id})
+                self.$router.replace({path: '/bbs/detail/'+res.data.data.id})
               }, 1500)
               _g.toastMsg('success', '发布成功')
             }

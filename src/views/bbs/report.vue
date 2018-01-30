@@ -22,13 +22,16 @@
         .then(function (res) {
           if (res.data.code == 0) {
             self.reportData = res.data.data
-            self.content = res.data.data[0]
           }
         })
     },
     methods: {
       onReport () {
         const self = this
+        if (!self.content) {
+          _g.toastMsg('error', '您还未选择举报类型')
+          return
+        }
         const data = {
           content: self.content,
           stickId: self.id
@@ -38,7 +41,7 @@
           if (res.data.code == 0) {
             _g.toastMsg('success', '举报成功')
             setTimeout(() => {
-              self.$router.push({ path: '/bbs', replace: true })
+              self.$router.replace({path: '/bbs/detail/'+self.id})
             }, 1500)
           }
         })
