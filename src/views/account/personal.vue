@@ -176,8 +176,8 @@ export default {
     }
     .personalTopBg{
       background:url('../../assets/img/index/bg_shijie@2x.png') no-repeat;
-      background-size: 100%;
-      height: 325/40rem;
+      background-size: 100% 100%;
+      height: 350/40rem;
     }
     .accountBoxT {
       height: 128/40rem;
