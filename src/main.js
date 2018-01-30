@@ -62,12 +62,12 @@ router.beforeEach((to, from, next) => {
   } else if(from.path === '/hotel/fail' && sessionStorage.paySuccess == 'true' ){  //从酒店支付失败页来到首页
     sessionStorage.paySuccess = 'false'
     next('/index')
+  } else if(from.path === '/hotel/orderDetail' && sessionStorage.paySuccess == 'true' ){  //从酒店支付失败页来到首页
+    sessionStorage.paySuccess = 'false'
+    next('/index')
   } else if(from.path === '/hotel/orderDetail' && sessionStorage.orderListPaySuccess == "true"){
     sessionStorage.orderListPaySuccess = 'false'
     next('/hotel/orderList')
-  } else if(from.path === '/hotel/orderDetail' && sessionStorage.paySuccess == "true"){
-    sessionStorage.paySuccess = 'false'
-    next('/index')
   } else {
     next()
   }

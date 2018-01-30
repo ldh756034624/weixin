@@ -66,7 +66,7 @@
         cityList: [], // 待选择的城市列表
         query: {
           queryKey: '',
-          city: '深圳', // todo 默认值？
+          city: '全部', // todo 默认值？
           page:1,
           limit:10
         },
