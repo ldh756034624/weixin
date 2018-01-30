@@ -44,8 +44,8 @@
   import listEmpty from '../../components/listEmpty.vue'
   export default {
     created() {
-      sessionStorage.orderListPaySuccess = 'false'
       this.getList()
+
     },
     data() {
       return {
@@ -149,7 +149,7 @@
       // 去支付
       goPay(id) {
         this.$router.push({path: '/hotel/pay', query: {id}})
-        sessionStorage.orderListPaySuccess = 'true'
+        sessionStorage.paySuccess = 'false'
       }
     },
     components: {
