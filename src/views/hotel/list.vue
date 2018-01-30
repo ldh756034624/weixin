@@ -157,6 +157,7 @@
     watch: {
       // 监听输入框关键字
       'query.queryKey'() {
+        this.query.page = 1
         clearTimeout(this.timer)
         this.timer = setTimeout(() => {
           // 发起请求
