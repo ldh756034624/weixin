@@ -19,10 +19,8 @@
               <p>{{item.userName}}<span>{{item.spaceTime}}</span></p>
             </div>
             <div class="stickTitle">{{item.title}}</div>
-            <div class="stickImage">
-              <img :src="item.userAvatar">
-              <img :src="item.userAvatar">
-              <img :src="item.userAvatar">
+            <div class="stickImage" v-if="item.images&&item.images.length > 0">
+              <img :src="img" v-for="img in item.images">
             </div>
             <div class="stickType">
               <span>#{{item.typeName}}#</span>　
@@ -152,7 +150,7 @@
           this.$router.push({path: '/bbs/detail/'+item.id})
       },
       add () {
-        this.$router.push({ path: 'bbs/add' })
+        this.$router.push({ path: '/bbs/add' })
       }
     },
     components: {

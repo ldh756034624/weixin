@@ -19,11 +19,14 @@
         searchList: []
       }
     },
+    mounted() {
+      this.setTitle('搜索');
+    },
     methods: {
       // id 商店ID
       neargoods (id) {
         // 跳转到水站介绍
-        this.$router.push({ name: 'nearDetails', params: {id: id} })
+        this.$router.push({path: '/bbs/detail/'+id})
       }
     },
     watch: {

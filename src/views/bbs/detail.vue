@@ -18,7 +18,7 @@
         <img v-for="item in detailData.stickRewardUserList" :src="item.avatar">
       </div>
     </div>
-    <div class="banner" v-if="detailData.images"><img :src="detailData.images"></div>
+    <div class="banner" v-if="detailData.images&&detailData.images.length>0"><img :src="img" v-for="img in detailData.images"></div>
     <div class="tool">
       <div class="toolL">
         <span>阅读 {{detailData.readCount}}</span>
@@ -33,7 +33,7 @@
 
       <div class="userItem" v-for="item in commentData" :key="item.id">
         <div class="userImg"><img :src="item.avatar" alt=""></div>
-        <div style="width: 100%;overflow: hidden;">
+        <div style="width: 100%;overflow: hidden;flex: 1;">
         <div class="userBox">
           <div class="userL">
             <div class="userName">{{item.nickName}} <i class="sexIcon" v-if="item.sex"></i></div>
@@ -62,7 +62,7 @@
         <div style="width: 100%;background: #F2F2F2;">
           <div class="popupItem" @click="onEdit" v-if="userId === detailData.userId">编辑</div>
           <div class="popupItem" @click="deleteDetail" v-if="userId === detailData.userId">删除</div>
-          <div class="popupItem" @click="goReport">举报</div>
+          <div class="popupItem" @click="goReport" v-if="userId !== detailData.userId">举报</div>
          <div class="popupItem" style="margin-top:4px;" @click="show = false">取消</div>
         </div>
       </popup>
@@ -86,10 +86,10 @@
       <popup v-model="playshow" is-transparent>
         <div style="width: 100%;background: #fff;">
           <div class="popupItem vux-1px-b">支付</div>
-          <div class="popupItem playType">商品类型：{{rewardData.type}}</div>
+          <div class="popupItem playType">商品类型：赞赏</div>
           <div class="popupItem vux-1px-b playType">支付金额：{{rewardData.rewardMoney}}元</div>
          <div class="popupItem vux-1px-b playType">酒元支付：(余额￥{{rewardData.balance}}）</div>
-         <div class="popupItem playBtn"><span @click="playshow = false" class="payitem">取消</span> <span @click="onPlay" class="payitem ok">支付</span></div>
+         <div class="popupItem playBtn"><span @click="playshow = false" class="payitem">取消</span> <span @click="onPlay" class="payitem ok">确认支付</span></div>
         </div>
       </popup>
     </div>
@@ -119,6 +119,7 @@ import {
         placeholderTxt: '说点什么',
         playshow: false,
         focusStatus: false,
+        loding: false,
         id: this.$route.params.id,
         userId: JSON.parse(localStorage.getItem('_user')).id,
         stickCommentId: '',
@@ -131,6 +132,7 @@ import {
     },
     mounted() {
       const self = this
+      self.setTitle('帖子详情');
       self.$http.get('h9/api/stick/detail/'+self.id)
         .then(function (res) {
           if (res.data.code == 0) {
@@ -234,6 +236,9 @@ import {
       },
       addComment () {
         const self = this
+        if (self.loding) {
+          return
+        }
         let data = {
           content: self.content,
           stickId: self.id
@@ -242,8 +247,10 @@ import {
           data.notifyUserId = self.notifyUserId
           data.stickCommentId = self.stickCommentId
         }
+        self.loding = true
         self.$http.post('h9/api/stick/addComment', data)
         .then(function (res) {
+          self.loding = false
           if (res.data.code == 0) {
             self.content = ''
             self.notifyUserId = ''
