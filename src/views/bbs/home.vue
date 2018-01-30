@@ -21,36 +21,11 @@
               </swiper>
             </div>
             <flexbox :gutter="0" wrap="wrap" style="background-color:#fff;" v-if="index === 0">
-              <flexbox-item :span="1/4">
-                <router-link to="/bbs/list/1" style="width:100%;">
+              <flexbox-item :span="1/4" v-for="item in classifyList" :key="item.title">
+                <router-link :to="'/bbs/list/'+item.id" style="width:100%;">
                   <div class="indexItemBox">
-                    <img src="../../assets/img/bbs/icon_zuixinhuodong@2x.png"/>
-                    <p>最新活动</p>
-                  </div>
-                </router-link>
-              </flexbox-item>
-              <!--todo 后台给予标签-->
-              <flexbox-item :span="1/4">
-                <router-link to="/bbs/list/2" style="width:100%;">
-                  <div class="indexItemBox">
-                    <img src="../../assets/img/bbs/icon_cangjiujiaoliu@2x.png"/>
-                    <p>藏酒交流</p>
-                  </div>
-                </router-link>
-              </flexbox-item>
-              <flexbox-item :span="1/4">
-                <router-link to="/bbs/list/3" style="width:100%;">
-                  <div class="indexItemBox">
-                    <img src="../../assets/img/bbs/icon_@2x.png"/>
-                    <p>文史影趣</p>
-                  </div>
-                </router-link>
-              </flexbox-item>
-              <flexbox-item :span="1/4">
-                <router-link to="/bbs/list/4" style="width:100%;">
-                  <div class="indexItemBox">
-                    <img src="../../assets/img/bbs/icon_chihewanle@2x.png"/>
-                    <p>吃喝玩乐</p>
+                    <img :src="item.imgUrl"/>
+                    <p>{{item.title}}</p>
                   </div>
                 </router-link>
               </flexbox-item>
@@ -63,7 +38,7 @@
                     <p>{{item.userName}}<span>{{item.spaceTime}}</span></p>
                   </div>
                   <div class="stickTitle">{{item.title}}</div>
-                  <div class="stickImage" v-if="item.images&&item.images.length > 0">
+                  <div class="stickImage" :class="{'three': item.images.length > 2}" v-if="item.images&&item.images.length > 0">
                     <img :src="img" v-for="img in item.images">
                   </div>
                   <div class="stickType">
@@ -125,6 +100,7 @@
       return {
         homeData: [],
         topBannerList: [],
+        classifyList: [],
         WxCode: '',
         index: null,
         showAdverBlur: false,
@@ -139,25 +115,30 @@
     mounted() {
       let self = this;
       self.setTitle('欢乐之家');
-      self.WxCode = self.$route.query.code;
+      self.WxCode = self.$route.query.token;
       let userObj = JSON.parse(localStorage.getItem('_user'))
       if (!userObj) {
         if (!self.WxCode) {
-          // self.getWxCode()
+          self.getWxCode()
         } else {
           self.weChatLogin();
         }
       } else {
         self.$http.get('h9/api/stick/home')
           .then(res => {
-            if (res.data.code == 0 && res.data.data.stickHomeTopBanner) {
-              for (var i = 0; i < res.data.data.stickHomeTopBanner.length; i++) {
-                self.topBannerList.push({
-                  url: res.data.data.stickHomeTopBanner[i].link,
-                  img: res.data.data.stickHomeTopBanner[i].imgUrl,
-                })
+            if (res.data.code == 0) {
+              self.classifyList = res.data.data.stickHomeCircularBanner
+              self.classifyList.forEach(function(item) {
+                item.id = item.link.split(':')[1]
+              })
+              if (res.data.data.stickHomeTopBanner) {
+                for (var i = 0; i < res.data.data.stickHomeTopBanner.length; i++) {
+                  self.topBannerList.push({
+                    url: res.data.data.stickHomeTopBanner[i].link,
+                    img: res.data.data.stickHomeTopBanner[i].imgUrl,
+                  })
+                }
               }
-              console.log(self.topBannerList)
             }
           })
         self.init(0);
@@ -477,11 +458,18 @@ display: flex;
   }
   .stickImage {
     display: flex;
+    // justify-content: space-between;
+  }
+  .stickImage.three {
     justify-content: space-between;
   }
   .stickImage img {
     width: 90px;
     height: 90px;
+    margin-right: 40/40rem;
+  }
+  .stickImage.three img {
+    margin-right: 0;
   }
   .stickType {
     font-size: 12px;

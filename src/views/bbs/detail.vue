@@ -18,7 +18,7 @@
         <img v-for="item in detailData.stickRewardUserList" :src="item.avatar">
       </div>
     </div>
-    <div class="banner" v-if="detailData.images&&detailData.images.length>0"><img :src="img" v-for="img in detailData.images"></div>
+    <div class="banner" v-if="detailData.listMap.images"><img :src="detailData.listMap.images"></div>
     <div class="tool">
       <div class="toolL">
         <span>阅读 {{detailData.readCount}}</span>
@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="reCont" v-if="item.list.length > 0">
-          <p v-for="list in item.list"><span class="reName">{{list.nickName+'：'}} </span><span class="reCon"> {{list.content}}</span> <span class="reDate">{{list.spaceTime}}</span><span class="reDelete" v-if="userId === list.commentUserId" @click="deleteFloor(list.commentId)">删除</span></p>
+          <p v-for="list in item.list"><span class="reName">{{(detailData.userId === list.commentUserId ? detailData.userName + ' 回复 ': '')+list.nickName+'：'}} </span><span class="reCon"> {{list.content}}</span> <span class="reDate">{{list.spaceTime}}</span><span class="reDelete" v-if="userId === list.commentUserId" @click="deleteFloor(list.commentId)">删除</span></p>
         </div>
         </div>
       </div>
@@ -259,6 +259,7 @@ import {
             self.focusStatus = false
             self.placeholderTxt = '说点什么'
             _g.toastMsg('success', '回复成功')
+            self.commentList(1)
           }
         })
       }

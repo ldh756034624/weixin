@@ -72,7 +72,7 @@
         .then(function (res) {
           if (res.data.code == 0) {
             self.CategoryList = res.data.data
-            self.form.typeId = res.data.data[0].id
+            // self.form.typeId = res.data.data[0].id
           }
         })
         if (self.id) {
@@ -104,6 +104,10 @@
         }
         if (!this.form.content) {
           _g.toastMsg('error', '请输入内容!')
+          return;
+        }
+        if (!this.form.typeId) {
+          _g.toastMsg('error', '请选择分类!')
           return;
         }
         const data = self.form

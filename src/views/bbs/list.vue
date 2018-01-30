@@ -83,7 +83,7 @@
     },
     mounted() {
       let self = this;
-      self.setTitle('欢乐之家');
+
       self.WxCode = self.$route.query.code;
       let userObj = JSON.parse(localStorage.getItem('_user'))
       if (!userObj) {
@@ -97,6 +97,7 @@
           .then(res => {
             if (res.data.code == 0) {
               self.detailData = res.data.data
+              self.setTitle(self.detailData.name);
             }
           })
         self.init();
@@ -295,6 +296,7 @@ padding-top: 10px;
   }
   .listTcon {
     flex: 1;
+    overflow: hidden;
   }
   .listT img {
     width: 60px;
@@ -312,6 +314,9 @@ line-height: 16px;
 color: #333333;
 line-height: 12px;
 padding: 8px 0 12px;
+text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
   .Tcount {
     font-size: 12px;
