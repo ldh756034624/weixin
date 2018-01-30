@@ -56,6 +56,8 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+
+  if(sessionStorage.paySuccess === "true")
 })
 let store = new Vuex.Store({
   state: {
