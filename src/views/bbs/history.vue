@@ -9,7 +9,7 @@
               :scroll-bottom-offst="150">
       <div class="box2">
         <ul>
-          <li class="one" v-if="type === 1" v-for="(item, index) in list" :key="index" @click="handleDetail(item.id)">
+          <li class="one" v-if="type === 1" v-for="(item, index) in list" :key="index" @click="handleDetail(item.stickId)">
             <div class="title">
               <div class="info">
                 <img :src="item.avatar" class="avatar">
@@ -28,7 +28,7 @@
               <span class="reward">打赏 {{item.rewardCount}}</span>
             </div>
           </li>
-          <li class="two" v-if="type === 2" v-for="(item, index) in list" :key="index" @click="handleDetail(item.id)">
+          <li class="two" v-if="type === 2" v-for="(item, index) in list" :key="index" @click="handleDetail(item.stickId)">
             <p class="title">
               <span class="time">{{item.createTime}}</span>
             </p>
@@ -36,7 +36,7 @@
               {{item.content}}
             </p>
             <div class="post-wrapper">
-              <img src="" class="post-cover">
+              <img :src="item.images[0]" class="post-cover" v-if="item.images">
               <div class="post-detail">
                 <p class="text">
                   {{item.title}}
@@ -45,7 +45,7 @@
               </div>
             </div>
           </li>
-          <li class="two" v-if="type === 3" v-for="(item, index) in list" :key="index" @click="handleDetail(item.id)">
+          <li class="two" v-if="type === 3" v-for="(item, index) in list" :key="index" @click="handleDetail(item.stickId)">
             <p class="title">
               <span class="time">{{item.createTime}}</span>
               <span class="money"><i class="money-icon"></i>{{item.reward}}酒元</span>
@@ -54,7 +54,7 @@
               {{item.words}}
             </p>
             <div class="post-wrapper">
-              <img src="" class="post-cover">
+              <img :src="item.images[0]" class="post-cover" v-if="item.images">
               <div class="post-detail">
                 <p class="text">
                   {{item.stickTitle}}
@@ -136,7 +136,7 @@
       // 查看订单详情
       handleDetail(id) {
         if (id) {
-          this.$router.push({path: '/hotel/orderDetail', query: {id}})
+          this.$router.push({path: '/bbs/detail/'+id})
         }
       },
       loadMore() {  // 上拉加载更多

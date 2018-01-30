@@ -36,7 +36,7 @@
           content: self.content,
           stickId: self.id
         }
-        self.$http.post('h9/api/stick/report/' + self.id, data)
+        self.$http.post('h9/api/stick/report', data)
         .then(function (res) {
           if (res.data.code == 0) {
             _g.toastMsg('success', '举报成功')
