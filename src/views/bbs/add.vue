@@ -112,6 +112,9 @@
           .then(function (res) {
             if (res.data.code == 0) {
               _g.toastMsg('success', '修改成功')
+              setTimeout(() => {
+                self.$router.push({path: '/bbs/detail/'+res.data.data.id})
+              }, 1500)
             }
           })
           return
@@ -119,13 +122,9 @@
         self.$http.post('h9/api/stick/', data)
           .then(function (res) {
             if (res.data.code == 0) {
-              self.form = {
-                title: '',
-                content: '',
-                typeId: '',
-                latitude: '',
-                longitude: ''
-              }
+              setTimeout(() => {
+                self.$router.push({path: '/bbs/detail/'+res.data.data.id})
+              }, 1500)
               _g.toastMsg('success', '发布成功')
             }
           })

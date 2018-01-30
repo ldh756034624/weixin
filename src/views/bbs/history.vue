@@ -9,7 +9,7 @@
               :scroll-bottom-offst="150">
       <div class="box2">
         <ul>
-          <li class="one" v-if="type === 1" v-for="(item, index) in list" :key="index">
+          <li class="one" v-if="type === 1" v-for="(item, index) in list" :key="index" @click="handleDetail(item.id)">
             <div class="title">
               <div class="info">
                 <img :src="item.avatar" class="avatar">
@@ -28,7 +28,7 @@
               <span class="reward">打赏 {{item.rewardCount}}</span>
             </div>
           </li>
-          <li class="two" v-if="type === 2" v-for="(item, index) in list" :key="index">
+          <li class="two" v-if="type === 2" v-for="(item, index) in list" :key="index" @click="handleDetail(item.id)">
             <p class="title">
               <span class="time">{{item.createTime}}</span>
             </p>
@@ -45,7 +45,7 @@
               </div>
             </div>
           </li>
-          <li class="two" v-if="type === 3" v-for="(item, index) in list" :key="index">
+          <li class="two" v-if="type === 3" v-for="(item, index) in list" :key="index" @click="handleDetail(item.id)">
             <p class="title">
               <span class="time">{{item.createTime}}</span>
               <span class="money"><i class="money-icon"></i>{{item.reward}}酒元</span>
@@ -135,6 +135,7 @@
       },
       // 查看订单详情
       handleDetail(id) {
+        console.log(id)
         if (id) {
           this.$router.push({path: '/hotel/orderDetail', query: {id}})
         }
