@@ -63,6 +63,9 @@ router.beforeEach((to, from, next) => {
     }else if(from.path === '/hotel/orderDetail' && to.path === '/hotel/fill' ){
       sessionStorage.paySuccess === false
       next('/index')
+    } else if(from.path === '/hotel/fail' && to.path === '/hotel/fill') {
+      sessionStorage.paySuccess === false
+      next('/index')
     } else{
       next()
     }

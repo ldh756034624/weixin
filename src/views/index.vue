@@ -167,7 +167,7 @@
           .then(res => {
             if (res.data.code == 0) {
               self.homeData = res.data.data;
-
+              sessionStorage.paySuccess = false  //初始化酒店成功页跳转表示
               if (self.homeData.adBanner) {
                 self.adBanner = self.homeData.adBanner[0];
                 self.showAdverBlur = true
