@@ -65,7 +65,7 @@ router.beforeEach((to, from, next) => {
   } else if(from.path === '/hotel/orderDetail' && sessionStorage.orderListPaySuccess == "true"){
     sessionStorage.orderListPaySuccess = 'false'
     next('/hotel/orderList')
-  } else if(from.path === '/hotel/orderDetail' && sessionStorage.orderListPaySuccess == "true"){
+  } else if(from.path === '/hotel/orderDetail' && sessionStorage.orderListPaySuccess == "false"){
     sessionStorage.orderListPaySuccess = 'false'
     next('/index')
   } else {
