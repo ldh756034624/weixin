@@ -6,10 +6,10 @@
         <ul>
           <li class="order-item" v-for="item in list">
             <div class="left">
-              <p class="date">2017-22-22</p>
-              <p class="time">12:43</p>
+              <p class="date">{{item.createTime}}</p>
+              <p class="time">{{item.hour}}</p>
             </div>
-            <div class="right">+0.1</div>
+            <div class="right">+{{item.cashBack}}</div>
           </li>
         </ul>
         <load-more tip="加载更多" v-if="showLoading"></load-more>

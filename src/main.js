@@ -53,15 +53,21 @@ router.beforeEach((to, from, next) => {
     } else {
       next()
     }
-  } else if (from.path === '/hotel/success' && sessionStorage.paySuccess == 'true') { // 如果从酒店支付成功页来
+  } else if (from.path === '/hotel/success' && sessionStorage.paySuccess == 'true') { // 如果从酒店支付成功页来到首页
     sessionStorage.paySuccess = 'false'
     next('/index')
-  } else if(from.path === '/hotel/orderDetail' && sessionStorage.payCheckOrder == 'true' ){
+  } else if (from.path === '/hotel/success' && sessionStorage.paySuccess == 'true') { // 如果从酒店支付成功页来到首页
+    sessionStorage.paySuccess = 'false'
+    next('/index')
+  } else if(from.path === '/hotel/fail' && sessionStorage.payCheckOrder == 'true' ){  //从酒店支付失败页来到首页
     sessionStorage.payCheckOrder = 'false'
     next('/index')
   } else if(from.path === '/hotel/orderDetail' && sessionStorage.orderListPaySuccess == "true"){
     sessionStorage.orderListPaySuccess = 'false'
     next('/hotel/orderList')
+  } else if(from.path === '/hotel/orderDetail' && sessionStorage.orderListPaySuccess == "true"){
+    sessionStorage.orderListPaySuccess = 'false'
+    next('/index')
   } else {
     next()
   }
