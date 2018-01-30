@@ -36,7 +36,7 @@
               {{item.content}}
             </p>
             <div class="post-wrapper">
-              <img :src="item.images[0]" class="post-cover" v-if="item.images">
+              <img :src="item.images[0]" class="post-cover" v-if="item.images&&item.images.length>0">
               <div class="post-detail">
                 <p class="text">
                   {{item.title}}
@@ -54,7 +54,7 @@
               {{item.words}}
             </p>
             <div class="post-wrapper">
-              <img :src="item.images[0]" class="post-cover" v-if="item.images">
+              <img :src="item.images[0]" class="post-cover" v-if="item.images&&item.images.length>0">
               <div class="post-detail">
                 <p class="text">
                   {{item.stickTitle}}
