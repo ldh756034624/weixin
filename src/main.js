@@ -56,8 +56,16 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
-
-  if(sessionStorage.paySuccess === "true")
+  if(sessionStorage.paySuccess === "true"){
+    if(from.path === '/hotel/success' && to.path === '/hotel/fill'){
+      sessionStorage.paySuccess === false
+      next('/index')
+    }else{
+      next()
+    }
+  }else{
+    next()
+  }
 })
 let store = new Vuex.Store({
   state: {
