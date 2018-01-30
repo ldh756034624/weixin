@@ -8,7 +8,7 @@
                   :options="editorOption">
     </quill-editor>
     <div class="botBox">
-      <div class="addr" @click="getLocation">所在位置</div>
+      <div class="addr" @click="getLocation">{{address}}</div>
       <div class="classly" @click="show = true">帖子分类 ></div>
     </div>
     <div class="btnBox" @click="onSubmit">发布</div>
@@ -54,6 +54,7 @@
         loadingShow: false,
         lodingImg: require('../../assets/img/blank/loading.gif'),
         id: this.$route.query.id,
+        address: '所在位置',
         form: {
           title: '',
           content: '',
@@ -170,18 +171,14 @@
           }
       },
       txMap (latitude, longitude) {
-        const params = {
-          params: {
-            location: latitude + ','+ longitude,
-            coord_type: 1,
-            get_poi: 1,
-            poi_options: 'address_format=short',
-            key: 'JRTBZ-J5RKW-CRXRW-OSMHF-LNGPT-W3FV3'
-          }
+        const data = {
+          latitude: latitude,
+          longitude: longitude
         }
-        this.$http.get('http://apis.map.qq.com/ws/geocoder/v1/', params).then(function (res) {
-            console.log(res)
-            if (res.data.status == 0) {
+        const self = this
+        this.$http.post('h9/api/stick/address', data).then(function (res) {
+            if (res.data.code == 0) {
+              self.address = res.data.data.address
               _g.toastMsg('success', '获取成功')
             }
           })

@@ -15,7 +15,7 @@
             </tab>
             <div class="header-wrap" v-if='topBannerList && index === 0'>
               <swiper dots-position="center" auto dots-class="custom-bottom" height="5rem">
-                <swiper-item class="swiper-demo-img" v-for="(item, index) in topBannerList" :key="index" @click.native='goLinkFn(item)'>
+                <swiper-item class="swiper-demo-img" v-for="(item, index) in topBannerList" :key="index" @click.native='goLink(item)'>
                   <img :src="item.img" class="homeImg">
                 </swiper-item>
               </swiper>
@@ -196,6 +196,11 @@
               })
             }
           })
+      },
+      goLink: function (item) {
+        if (item.link) {
+          window.location.href = item.link
+        }
       },
       goLinkFn: function (item) {
           this.$router.push({path: '/bbs/detail/'+item.id})
