@@ -25,7 +25,7 @@
         <span>回复 {{detailData.answerCount}}</span>
       </div>
       <div class="toolR">
-        <span @click="onlike(id, 1)"><i class="linkIcon"></i> <i style="vertical-align: 3px;">{{detailData.likeCount}}</i></span>
+        <span @click="onlike(detailData, 1)"><i class="linkIcon"></i> <i style="vertical-align: 3px;">{{detailData.likeCount}}</i></span>
         <span @click="show = true"><i class="moreIcon"></i></span>
       </div>
     </div>
@@ -41,7 +41,7 @@
             <div class="userB">{{item.spaceTime + ' ' + item.floor+'楼'}}</div>
           </div>
           <div class="userR">
-            <div class="zan" @click="onlike(item.id, 2)"><i class="zanIcon"></i> {{item.likeCount}}</div>
+            <div class="zan" @click="onlike(item, 2)"><i class="zanIcon"></i> {{item.likeCount}}</div>
             <div class=""><span @click="addCommentFloor(item)">回复</span> <span v-if="userId === item.commentUserId" @click="deleteFloor(item.id)">删除</span></div>
           </div>
         </div>
@@ -198,15 +198,16 @@ import {
           }
         })
       },
-      onlike (id, type) {
+      onlike (item, type) {
         const self = this
         const data = {
-          id: id,
+          id: item.id,
           type: type
         }
         self.$http.post('h9/api/stick/like', data)
         .then(function (res) {
           if (res.data.code == 0) {
+            item.likeCount++
             _g.toastMsg('success', '点赞成功')
           }
         })
