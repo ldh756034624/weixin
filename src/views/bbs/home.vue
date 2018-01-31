@@ -66,7 +66,7 @@
         <p>正在加载中</p>
       </div>
     </div>
-    <Bottombar :index="0"></Bottombar>
+    <Bottombar :index="0" v-if="client==3"></Bottombar>
 
   </div>
 </template>
@@ -103,6 +103,7 @@
         classifyList: [],
         WxCode: '',
         index: null,
+        client: this.$route.query.client || '3',
         showAdverBlur: false,
         status1: {
           pulldownStatus: 'default'
