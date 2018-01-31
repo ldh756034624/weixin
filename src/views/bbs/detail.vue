@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="reCont" v-if="item.list.length > 0">
-          <p v-for="list in item.list"><span class="reName">{{(detailData.userId === list.commentUserId ? detailData.userName + ' 回复 ': '')+list.nickName+'：'}} </span><span class="reCon"> {{list.content}}</span> <span class="reDate">{{list.spaceTime}}</span><span class="reDelete" v-if="userId === list.commentUserId" @click="deleteFloor(list.commentId)">删除</span></p>
+          <p v-for="list in item.list" @click="addCommentFloor(list)"><span class="reName">{{(detailData.userId === list.commentUserId ? detailData.userName + ' 回复 ': '')+list.nickName+'：'}} </span><span class="reCon"> {{list.content}}</span> <span class="reDate">{{list.spaceTime}}</span><span class="reDelete" v-if="userId === list.commentUserId" @click="deleteFloor(list.commentId)">删除</span></p>
         </div>
         </div>
       </div>
@@ -234,6 +234,9 @@ import {
         this.placeholderTxt = '回复: '+ item.nickName
         this.notifyUserId = item.commentUserId
         this.stickCommentId = item.id
+        if (item.commentId) {
+          this.stickCommentId = item.commentId
+        }
         this.focusStatus = true
       },
       addComment () {

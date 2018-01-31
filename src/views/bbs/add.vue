@@ -198,7 +198,7 @@
             methods: 'POST',  // 可选参数 图片上传方式  默认为post
             // token: sessionStorage.token,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
             name: 'file',  // 可选参数 文件的参数名 默认为img
-            size: 20480,  // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
+            size: 204800,  // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
             accept: 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon',
             start: () => {
               this.loadingShow = true
