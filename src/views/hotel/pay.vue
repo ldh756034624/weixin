@@ -86,6 +86,9 @@
           this.useJy = !this.useJy
         } else {
           this.useRmb = !this.useRmb
+          if(this.wexinBalance <=0 && this.useRmb) {
+            this.useJy = false
+          }
         }
         this.calcWeixinBalance()
         this.createPayMethod()
