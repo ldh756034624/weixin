@@ -116,16 +116,18 @@
     mounted() {
       let self = this;
       self.setTitle('欢乐之家');
-      self.WxCode = self.$route.query.token;
       let userObj = JSON.parse(localStorage.getItem('_user'))
       if (!userObj) {
-        if (!self.WxCode) {
-          self.getWxCode()
+        if (self.$route.query.token) {
+          userObj = {
+            token: self.$route.query.token
+          }
+          localStorage.setItem("_user", JSON.stringify(userObj))
         } else {
           self.weChatLogin();
         }
-      } else {
-        self.$http.get('h9/api/stick/home')
+      }
+      self.$http.get('h9/api/stick/home')
           .then(res => {
             if (res.data.code == 0) {
               self.classifyList = res.data.data.stickHomeCircularBanner
@@ -143,7 +145,6 @@
             }
           })
         self.init(0);
-      }
       //console.log( self.loadingShow)
       self.loadingShow = self.$store.state.showLoading
       //self.init();

@@ -25,7 +25,7 @@
         <span>回复 {{detailData.answerCount}}</span>
       </div>
       <div class="toolR">
-        <span @click="onlike(detailData, 1)"><i class="linkIcon"></i> <i style="vertical-align: 3px;">{{detailData.likeCount}}</i></span>
+        <span @click="onlike(detailData, 1)"><i class="linkIcon" :class="{'flag': detailData.flag}"></i> <i style="vertical-align: 3px;">{{detailData.likeCount}}</i></span>
         <span @click="show = true"><i class="moreIcon"></i></span>
       </div>
     </div>
@@ -41,7 +41,7 @@
             <div class="userB">{{item.spaceTime + ' ' + item.floor+'楼'}}</div>
           </div>
           <div class="userR">
-            <div class="zan" @click="onlike(item, 2)"><i class="zanIcon"></i> {{item.likeCount}}</div>
+            <div class="zan" @click="onlike(item, 2)"><i class="zanIcon" :class="{'flag': item.flag}"></i> {{item.likeCount}}</div>
             <div class=""><span @click="addCommentFloor(item)">回复</span> <span v-if="userId === item.commentUserId" @click="deleteFloor(item.id)">删除</span></div>
           </div>
         </div>
@@ -208,6 +208,7 @@ import {
         .then(function (res) {
           if (res.data.code == 0) {
             item.likeCount++
+            item.flag = 1
             _g.toastMsg('success', '点赞成功')
           }
         })
@@ -328,6 +329,7 @@ margin: 0 auto 18px;
   .rewardBox {
     text-align: center;
     margin: 0 auto;
+    width: 272px;
   }
   .rewardBox p {
     font-size: 12px;
@@ -370,6 +372,10 @@ justify-content: space-between;
   .linkIcon {
     width: 16px;
     height: 16px;
+    background: url('../../assets/img/bbs/aixin_kong@2x.png') no-repeat top center;
+    background-size: 16px 16px;
+  }
+  .linkIcon.flag {
     background: url('../../assets/img/bbs/xin@2x.png') no-repeat top center;
     background-size: 16px 16px;
   }
@@ -437,6 +443,10 @@ line-height: 14px;
     background: url('../../assets/img/bbs/zan@2x.png') no-repeat center;
     background-size: 14px 14px;
   }
+  .zanIcon.flag {
+    background: url('../../assets/img/bbs/dianzan@2x.png') no-repeat center;
+    background-size: 14px 14px;
+  }
   .zan {
     font-size: 12px;
 color: #999999;
@@ -450,14 +460,14 @@ line-height: 12px;
     font-size: 14px;
 color: #999999;
 line-height: 14px;
-padding: 5px 10px;
+padding: 5px 0;
   }
   .reCon {
     color: #333333;
     margin-right: 15px;
   }
   .reCont p {
-    padding: 5px 0;
+    padding: 5px 10px;
   }
   .usercomment {
     font-size: 16px;

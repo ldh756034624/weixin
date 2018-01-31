@@ -46,11 +46,7 @@ router.beforeEach((to, from, next) => {
   if (to.name) { // 设置标题
     setTitle(to.name)
   }
-  if (to.query.token) {
-    let user = JSON.parse(localStorage.getItem('_user'))
-    user.token = to.query.token
-    localStorage.setItem("_user", JSON.stringify(user))
-  }
+
   if (sessionStorage.isInResult === 'true') {
     if (from.path === '/account/result' && from.query.type === 'vMoneyExchange' && to.path === '/my/vUpdate' || from.path === '/account/purse' && to.path === '/account/result') {  // 如果来自v币兑换，点返回到个人中心
       sessionStorage.isInResult = false
