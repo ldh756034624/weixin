@@ -184,16 +184,16 @@
         border-bottom: 2/40rem solid #f2f2f2;
       }
       .shopBox {
-        box-sizing: border-box; 
+        box-sizing: border-box;
         text-align: center;
         margin:20/40rem;
-        height: 340/40rem;
+        // height: 340/40rem;
         box-sizing: border-box;
         border: 1px solid #C7000A;
         box-shadow:#4d4d4d 0 0 10px;
         .bottomBox{
-          line-height: 50/40rem;
-          height: 50/40rem;
+          line-height: 36/40rem;
+          // height: 50/40rem;
           width: 90%;
           margin:0 auto;
           background-color: #C7000A;
@@ -201,11 +201,11 @@
           .desc {
             display: inline-block;
             font-size: 24/40rem;
-            width: 95/40rem;
+            // width: 95/40rem;
             color: #ffffff;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+            // overflow: hidden;
+            // white-space: nowrap;
+            // text-overflow: ellipsis;
           }
           .joyMoney {
             display:inline-block;
@@ -217,7 +217,7 @@
           }
         }
       }
-     
+
       .shopImg {
         width: 220/40rem;
         height: 220/40rem;
