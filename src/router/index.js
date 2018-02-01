@@ -101,6 +101,25 @@ export default [
       name: '意见反馈',
       component (resolve) {require(['@/views/account/feedback'], resolve)} // 意见反馈
     },{
+      path:'/account/hongbao',
+      component (resolve) {require(['@/views/account/hongbao'], resolve)} //红包活动
+    },{
+      path:'/account/promotion',
+      component (resolve) {require(['@/views/account/promotion'], resolve)} //红包活动
+    },{
+      path:'/account/bankto',
+      component (resolve) {require(['@/views/account/bankto'], resolve)} //转账
+    },{
+      path:'/account/transferInfo',
+      component (resolve) {require(['@/views/account/transferInfo'], resolve)} //转账明细
+    },{
+      path:'/account/success',
+      name:'转账成功',
+      component (resolve) {require(['@/views/account/success'], resolve)}  //转账成功页
+    },{
+      path:'/account/redPaperAmount',
+      component (resolve) {require(['@/views/account/redPaperAmount'],resolve)}  //红包金额
+    },{
       path:'/my/vMoney',
       component (resolve) {require(['@/views/my/vMoney'], resolve)} //V币
     },{
@@ -211,6 +230,10 @@ export default [
       path:'/recharge/fail',
       name:'充值失败',
       component (resolve) {require(['@/views/recharge/fail'], resolve)}
+    },{
+      path:'/travel',
+      name:'旅游健康卡',
+      component (resolve) {require(['@/views/travel/index'], resolve)}
     },{
       path:'*',
       name:'home',

@@ -16,7 +16,7 @@
     </group>
     <p class="blockTips">增值服务</p>
     <flexbox :gutter="0" class='purseWaiterBox'>
-      <flexbox-item>
+      <flexbox-item class='ItemBorder'>
         <router-link :to="{path:'/account/phoneRecharge',query:{balance:purseData.balance}}">
           <div class="purseItemBox">
             <img src="../../assets/img/account/wallet_icon_recharge@2x.png"/>
@@ -32,15 +32,44 @@
           </div>
         </router-link>
       </flexbox-item>
-      <!--<flexbox-item>-->
-      <!--<router-link :to="{path:'/shop'}">-->
-      <!--<div class="purseItemBox">-->
-      <!--<img src="../../assets/img/account/tabbar_mall_normal.png"/>-->
-      <!--<p>酒元商城</p>-->
-      <!--</div>-->
-      <!--</router-link>-->
-      <!--</flexbox-item>-->
+      <flexbox-item class='ItemBorder' v-show="purseData.canTransConfig">
+        <router-link :to="{path:'/account/bankto',query:{balance:purseData.balance}}">
+          <div class="purseItemBox">
+            <img src="../../assets/img/account/zhuanzhang@2x.png"/>
+            <p>转账</p>
+          </div>
+        </router-link>
+      </flexbox-item>
+      <flexbox-item class='ItemBorder' v-show="!purseData.canTransConfig">
+      </flexbox-item>
     </flexbox>
+    <flexbox :gutter="0" class='purseWaiterBox'>
+      <flexbox-item class='ItemBorder' v-show="purseData.canTransConfig">
+        <router-link :to="{path:'/account/hongbao',query:{balance:purseData.balance}}">
+          <div class="purseItemBox">
+            <img src="../../assets/img/account/hongbao@2x.png"/>
+            <p>推广红包</p>
+          </div>
+        </router-link>
+      </flexbox-item>
+      <!-- <flexbox-item class='ItemBorder' v-show="!purseData.canTransConfig">
+      </flexbox-item> -->
+      <flexbox-item v-show="purseData.canWithdeawal" class='ItemBorder' >
+        <router-link :to="{path:'/account/funds'}">
+          <div class="purseItemBox">
+            <img src="../../assets/img/account/tixian@2x.png"/>
+            <p>提现</p>
+          </div>
+        </router-link>
+      </flexbox-item>
+      <flexbox-item v-show="!purseData.canWithdeawal" class='ItemBorder'>
+      </flexbox-item>
+      <!-- <flexbox-item class='ItemBorder'>
+      </flexbox-item> -->
+      <flexbox-item class='ItemBorder'>
+      </flexbox-item>
+    </flexbox>
+
   </div>
 </template>
 <script>
