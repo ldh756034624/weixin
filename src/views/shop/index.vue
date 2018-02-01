@@ -193,7 +193,6 @@
         box-shadow:#4d4d4d 0 0 10px;
         .bottomBox{
           line-height: 36/40rem;
-          // height: 50/40rem;
           width: 90%;
           margin:0 auto;
           background-color: #C7000A;
@@ -202,14 +201,20 @@
             display: inline-block;
             font-size: 24/40rem;
             // width: 95/40rem;
+            max-height: 72/40rem;
             color: #ffffff;
-            // overflow: hidden;
+            overflow: hidden;
+            word-break: break-all;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
             // white-space: nowrap;
-            // text-overflow: ellipsis;
+            text-overflow: ellipsis;
           }
           .joyMoney {
             display:inline-block;
             font-size: 24/40rem;
+            display: block;
             color: #fff;
             overflow: hidden;
             white-space: nowrap;
