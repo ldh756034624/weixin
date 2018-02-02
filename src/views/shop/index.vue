@@ -25,11 +25,12 @@
                   <router-link :to="{path:'/shopDataile',query:{id:item.id}}">
                     <div class='shopBox'>
                       <img class='shopImg' :src="item.img"/>
-                      <div class="bottomBox">
-                        <span class="desc">{{item.name}}</span>
-                        <span class="joyMoney"><span>{{item.price}}</span>酒元</span>
-                      </div>
+
                     </div>
+                    <div class="bottomBox">
+                        <span class="desc">{{item.name}}</span>
+                        <span class="joyMoney"><span>¥ {{item.price}}</span>/酒元</span>
+                      </div>
                   </router-link>
                 </flexbox-item>
               </flexbox>
@@ -184,40 +185,46 @@
         border-bottom: 2/40rem solid #f2f2f2;
       }
       .shopBox {
-        box-sizing: border-box; 
+        box-sizing: border-box;
         text-align: center;
         margin:20/40rem;
-        height: 340/40rem;
+        // height: 340/40rem;
         box-sizing: border-box;
         border: 1px solid #C7000A;
         box-shadow:#4d4d4d 0 0 10px;
-        .bottomBox{
-          line-height: 50/40rem;
-          height: 50/40rem;
+
+      }
+      .bottomBox{
+          line-height: 36/40rem;
           width: 90%;
           margin:0 auto;
-          background-color: #C7000A;
+          // background-color: #C7000A;
+          color: #e60012;
           border-radius: 10/40rem 10/40rem 0 0;
+          text-align: center;
           .desc {
             display: inline-block;
             font-size: 24/40rem;
-            width: 95/40rem;
-            color: #ffffff;
+            // width: 95/40rem;
+            max-height: 72/40rem;
+            color: #221815;
             overflow: hidden;
-            white-space: nowrap;
+            word-break: break-all;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            // white-space: nowrap;
             text-overflow: ellipsis;
           }
           .joyMoney {
             display:inline-block;
             font-size: 24/40rem;
-            color: #fff;
+            display: block;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
           }
         }
-      }
-     
       .shopImg {
         width: 220/40rem;
         height: 220/40rem;

@@ -104,6 +104,9 @@ export default [
       path:'/account/hongbao',
       component (resolve) {require(['@/views/account/hongbao'], resolve)} //红包活动
     },{
+      path:'/account/hongbao/result',
+      component (resolve) {require(['@/views/account/result2'], resolve)} //红包结果页
+    },{
       path:'/account/promotion',
       component (resolve) {require(['@/views/account/promotion'], resolve)} //红包活动
     },{
