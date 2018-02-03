@@ -2,51 +2,16 @@
   <div class="page resultPage">
     <div class="resultImgBox">
       <img class="resultImg" src="../../assets/img/account/tixian_img_success@2x.png"/>
-      <p class="typeBox">{{title}}成功</p>
-      <p class="moneyBox" v-if="type!=='shopExchange' && type!=='vMoneyExchange'"><i>￥</i>{{money}}</p>
+      <p class="typeBox">领取成功</p>
+      <p class="moneyBox" v-if="resultData"><i>￥</i>{{resultData.money}}</p>
     </div>
-    <div class="resultText" v-if="type==='funds'">
-      <p>申请时间:{{time}}</p>
-      <p>款项会在1-2个工作日内到帐</p>
+    <div class="resultText" v-if="resultData">
+      <span>红包发起人</span>
+      <div><img :src="resultData.img">{{resultData.nickName}}</div>
     </div>
-    <div class="resultText" v-if="type==='recharge' || type === 'indexRecharge'">
-      <p>充值号码:{{tel}}</p>
-      <p>1-10分钟到帐,请留意运营商短信通知</p>
+    <div class="fundsBtnBox">
+        <x-button class='gradientBtn' @click.native="goBack">完成</x-button>
     </div>
-    <div class="resultText" v-if="type==='exchange' || type === 'indexddExchange'">
-      <p>券号:{{num}}</p>
-    </div>
-    <div class="resultText" v-if="type==='vMoneyExchange'">
-      <p style="margin-top:30px">V币将成功兑换为酒元，请到我的钱包页查看</p>
-    </div>
-    <!-- <div class="resultText" v-if="type==='shopExchange'">
-      <p>兑换商品:{{goodsName}}</p>
-      <p>我们将尽快为您发货,请留意订单信息</p>
-    </div> -->
-    <div class="shopResultText" v-if="type==='shopExchange'">
-      <p>兑换价格:<label>{{money}}酒元</label></p>
-      <p>兑换商品:<label>{{goodsName}}</label></p>
-    </div>
-    <div class="shopResultBtnBox" v-if="type==='shopExchange'">
-      <router-link to='/shop'>
-        <x-button mini class='backIndex'>回到首页</x-button>
-      </router-link>
-      <router-link :to="{path:'/my/myOrder',query:{fromShop:true}}">
-        <x-button mini class='gradientBtn'>查看订单</x-button>
-      </router-link>
-    </div>
-    <div class="fundsBtnBox" v-else>
-      <div v-if="type==='vMoneyExchange'" @click="goPurse">
-        <x-button class='gradientBtn'>进入钱包</x-button>
-      </div>
-      <div v-else>
-        <x-button class='gradientBtn' v-if="(type==='exchange' || type==='indexddExchange') && coponShow" @click.native="copy">复制券号</x-button>
-        <x-button class='gradientBtn' v-if="type!=='exchange' && type!=='indexddExchange'" @click.native="goBack">完成</x-button>
-        <x-button class='gradientBtn' v-if="!coponShow" @click.native="goBackDD">完成</x-button>  <!--和复制券号联合使用的按钮-->
-      </div>
-
-    </div>
-    <input type="text" ref="copyInput" class="copy-input">
   </div>
 </template>
 <script>
@@ -58,18 +23,18 @@
     },
     mounted() {
       let self = this;
+      self.setTitle('领取成功');
       this.$http.get('h9/api/user/redEnvelope/scan/qrcode', {params: {tempId : self.id}} )
         .then((res) => {
           if (res.data.code == 0) {
-
+            self.resultData = rs.data.data
           }
         })
-      self.setTitle(self.title + '成功');
     },
     data() {
       return {
         coponShow: true,
-        title: '',
+        resultData: null,
         id:this.$route.query.id
       }
     },
@@ -79,29 +44,8 @@
         this.$router.push('/account/purse')
       },
       goBack: function () {
-        if(this.type==='indexRecharge'){
-          this.$router.replace({path:'/account/phoneRecharge'})
-        }else if(this.type === 'exchange' || this.type === 'indexddExchange'){
-          this.$router.replace({path:'/my/cupon'})
-        }else if (this.type === 'funds') {
-          this.$router.replace({path:'/account/funds'})
-        } else{
-          this.$router.replace({path:'/account/purse'})
-        }
-      },
-      goBackDD() {
-        this.$router.replace({path: '/my/cupon'})
-      },
-      copy: function () {
-        let input = this.$refs.copyInput
-        input.value = this.num
-        input.select()
-        document.execCommand('Copy')
-        _g.toastMsg('error', '券号复制成功，打开滴滴出行兑换')
-        input.blur()
-        this.coponShow = false
-      },
-
+        this.$router.replace({path:'/account/purse'})
+      }
     },
     components: {
       Group, Cell, XInput, XButton
@@ -141,28 +85,18 @@
       font-size: 24/40rem;
       color: #999;
       line-height: 40/40rem;
-      text-align: center;
-    }
-    .shopResultText{
-      margin: 120/40rem 0;
-      border-top: 1px solid #f2f2f2;
-      border-bottom: 1px solid #f2f2f2;
-      font-size: 30/40rem;
-      p{
-        padding: 30/40rem;
-      }
-      label{
-        float: right;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 60/40rem;
+      padding: 0 30/40rem;
+      img {
+        width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 10px;
       }
     }
-    .copy-input {
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 1px;
-      width: 1px;
-      opacity: 0;
-    }
+
     .shopResultBtnBox{
       text-align: center;
       margin: 40/40rem 0 30/40rem;

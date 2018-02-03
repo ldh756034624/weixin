@@ -4,7 +4,7 @@
         <img class="shopImg" :src="shopData.img"/>
         <div class="shopTitleBox">
           <p>{{shopData.name}}</p>
-          <p class="joyMoney">¥ {{shopData.price}}/酒元</p>
+          <p class="joyMoney">¥ {{shopData.price}}/{{shopData.unit}}</p>
         </div>
         <section>
           <div  class="descBox">

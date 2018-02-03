@@ -29,7 +29,7 @@
                     </div>
                     <div class="bottomBox">
                         <span class="desc">{{item.name}}</span>
-                        <span class="joyMoney"><span>¥ {{item.price}}</span>/酒元</span>
+                        <span class="joyMoney"><span>¥ {{item.price}}</span>/{{item.unit}}</span>
                       </div>
                   </router-link>
                 </flexbox-item>
