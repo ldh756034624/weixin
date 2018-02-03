@@ -107,10 +107,11 @@
 <style type="text/css" lang='less' scoped>
   .page {
     background: #627984;
+        overflow-y: auto;
   }
   .moneyBox {
     background-color: #fff;
-    margin: 15px;
+    margin: 0 15px;
     border-radius: 3px;
   }
   .moneyCon {

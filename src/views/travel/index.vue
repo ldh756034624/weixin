@@ -7,7 +7,7 @@
     </tab>
     <div class="mrgb">
       <div v-for="(item, index) in shopData" :key="index">
-        <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'">
+        <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1">
         <swiper-item class="swiper-demo-img" height="12.5rem" v-for="list in item.imgList" :key="index"
                      @click.native='goLinkFn(list)'>
           <img :src="list.imgUrl" width="100%" height="100%">

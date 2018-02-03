@@ -8,7 +8,11 @@ import Particulars from '@/components/particulars'
 export default {
   mounted(){
     let  self=this;
-    self.setTitle('转账明细');
+    if (self.type == 2) {
+      self.setTitle('收款明细');
+    } else {
+      self.setTitle('转账明细');
+    }
   },
   data () {
     return {
