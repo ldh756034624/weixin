@@ -15,7 +15,7 @@
         </swiper-item>
       </swiper>
       <div class="imgbox" v-if="item.layoutStyle=='TWO'">
-         <div class="imgItem" v-for="imgList in shopData[0].imgList" @click='goLinkFn(imgList)'>
+         <div class="imgItem" v-for="imgList in item.imgList" @click='goLinkFn(imgList)'>
            <img :src="imgList.imgUrl">
            <p>{{imgList.title}}</p>
          </div>
