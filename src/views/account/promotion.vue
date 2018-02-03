@@ -3,7 +3,7 @@
     <div class="moneyBox">
       <div class="moneyCon">
         <p class="moneyTips">扫一扫收款</p>
-        <div class="moneyTxt"><span>￥</span>{{moneyData.money}}</div>
+        <div class="moneyTxt"><span>¥</span>{{moneyData.money}}</div>
         <img :src="moneyData.codeUrl">
         <div class="btnBox"><div class="setBtn btn" @click="onSet">设置金额</div><div class="btn" @click="onParticulars">收款账单</div></div>
       </div>
@@ -17,7 +17,7 @@
               <div>{{item.nickName}}</div>
               <p>{{item.time}}</p>
             </div>
-            <div class="ConR">￥{{item.money}}</div>
+            <div class="ConR">¥{{item.money}}</div>
           </div>
         </div>
       </div>

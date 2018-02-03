@@ -4,7 +4,7 @@
       <div class="search"><i class="weui-icon weui_icon_search weui-icon-search"></i><input type="text" placeholder="搜索" name="search" v-model="search"></div>
     </div>
     <div class="searchList">
-      <div class="searchItem vux-1px-b" v-for="item in searchList" @click="neargoods(item.id)">
+      <div class="searchItem" v-for="item in searchList" @click="neargoods(item.id)">
         <div class="title">{{item.title}}</div>
         <div class="name"><p>{{item.userName}}</p><p>{{item.createTime}}</p></div>
       </div>
@@ -79,7 +79,7 @@
     border: none;
   }
   .searchList {
-    padding-left: 15px;
+    padding: 0 15px;
     background-color: #fff;
   }
   .searchItem {

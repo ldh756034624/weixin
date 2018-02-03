@@ -3,7 +3,7 @@
     <div class="resultImgBox">
       <img class="resultImg" src="../../assets/img/account/tixian_img_success@2x.png"/>
       <p class="typeBox">领取成功</p>
-      <p class="moneyBox" v-if="resultData"><i>￥</i>{{resultData.money}}</p>
+      <p class="moneyBox" v-if="resultData"><i>¥</i>{{resultData.money}}</p>
     </div>
     <div class="resultText" v-if="resultData">
       <span>红包发起人</span>

@@ -11,9 +11,9 @@
         <swiper-item class="swiper-demo-img" height="12.5rem" v-for="list in item.imgList" :key="index"
                      @click.native='goLinkFn(list)'>
           <img :src="list.imgUrl" width="100%" height="100%">
+          <div class="swiperTitle">{{list.title}}</div>
         </swiper-item>
       </swiper>
-      <div v-if="item.layoutStyle=='TWO'" style="height: 10px;"></div>
       <div class="imgbox" v-if="item.layoutStyle=='TWO'">
          <div class="imgItem" v-for="imgList in shopData[0].imgList" @click='goLinkFn(imgList)'>
            <img :src="imgList.imgUrl">
@@ -92,15 +92,14 @@
   .imgbox {
     display: flex;
     justify-content: center;
-    padding: 35/40rem 0;
-
+    padding-bottom: 35/40rem;
     .imgItem {
       width: 318/40rem;
-      height: 318/40rem;
+      // height: 318/40rem;
       text-align: center;
       img {
-        width: 100%;
-        height: 100%;
+        width: 318/40rem;
+      height: 318/40rem;
         box-shadow: 6px 5px 16px 0px
     rgba(4, 0, 0, 0.15);
     border: solid 2px #eeeeee;
@@ -115,6 +114,14 @@
     .imgItem:first-child {
       margin-right: 30/40rem;
     }
+  }
+  .swiperTitle {
+    position: absolute;
+    top: 260/40rem;
+    left: 50/40rem;
+    color: #221815;
+    font-size: 36/40rem;
+    text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;;
   }
 </style>
 <style type="text/css" lang='less'>

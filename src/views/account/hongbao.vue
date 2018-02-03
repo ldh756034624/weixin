@@ -2,7 +2,7 @@
   <div class="page">
     <group class="fundsBox  groupNoLine">
       <p class="flexBox fundsMoneyTips">红包金额 <span class='flex1 alignR'> 可用余额{{fundsData.balance}}</span></p>
-      <x-input v-model="fundMoney" type="number" title='￥' class="fundMoney" :show-clear="false" placeholder='请输入红包金额'>
+      <x-input v-model="fundMoney" type="number" title='¥' class="fundMoney" :show-clear="false" placeholder='请输入红包金额'>
       </x-input>
     </group>
     <div class="fundsBtnBox">

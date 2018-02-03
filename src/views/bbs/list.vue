@@ -19,9 +19,9 @@
               <p>{{item.userName}}<span>{{item.spaceTime}}</span></p>
             </div>
             <div class="stickTitle">{{item.title}}</div>
-            <div class="stickImage" v-if="item.images&&item.images.length > 0">
-              <img :src="img" v-for="img in item.images">
-            </div>
+            <div class="stickImage" :class="{'three': item.images.length > 2}" v-if="item.images&&item.images.length > 0">
+                    <img :src="img" v-for="img in item.images">
+                  </div>
             <div class="stickType">
               <span>#{{item.typeName}}#</span>　
               阅读 {{item.readCount}}　
@@ -257,11 +257,18 @@ display: flex;
   }
   .stickImage {
     display: flex;
+    // justify-content: space-between;
+  }
+  .stickImage.three {
     justify-content: space-between;
   }
   .stickImage img {
     width: 90px;
     height: 90px;
+    margin-right: 40/40rem;
+  }
+  .stickImage.three img {
+    margin-right: 0;
   }
   .stickType {
     font-size: 12px;
