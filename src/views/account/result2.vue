@@ -27,7 +27,7 @@
       this.$http.get('h9/api/user/redEnvelope/scan/qrcode', {params: {tempId : self.id}} )
         .then((res) => {
           if (res.data.code == 0) {
-            self.resultData = rs.data.data
+            self.resultData = res.data.data
             self.setTitle('领取成功');
           } else {
             self.txt = res.data.msg
@@ -95,10 +95,11 @@
       margin-top: 60/40rem;
       padding: 0 30/40rem;
       img {
-        width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    margin-right: 10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        margin-right: 6px;
+        vertical-align: -4px;
       }
     }
 
