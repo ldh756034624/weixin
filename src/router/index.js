@@ -194,7 +194,7 @@ export default [
       component (resolve) {require(['@/views/hotel/order_list'], resolve)} // 酒店订单列表
     },{
       path:'/bbs',
-      name:'社区BBS',
+      name:'欢乐之家',
       component (resolve) {require(['@/views/bbs/home'], resolve)} // 社区BBS
     },{
       path:'/bbs/search',
@@ -206,7 +206,7 @@ export default [
       component (resolve) {require(['@/views/bbs/add'], resolve)} // 新增帖子
     },{
       path:'/bbs/detail/:id',
-      name:'文章内文',
+      name:'帖子详情',
       component (resolve) {require(['@/views/bbs/detail'], resolve)} // 文章内文
     },{
       path:'/bbs/report/:id',

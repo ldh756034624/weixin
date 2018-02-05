@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="Expires" content="-1">
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta name="description" content="高炉家,徽酒">
+        <meta name="Keywords" content="高炉家,徽酒">
+    <title>红包兑换跳转</title>
+  </head>
+  <body>
+    <div id="box">
+        页面跳转中...
+    </div>
+
+    <script type="text/javascript">
+    var path = window.location.pathname,
+        pairs;
+    if (path) {
+        pairs=path.split("/");
+        goResult(pairs[1])
+    } else {
+        path = window.location.href
+        pairs = path.split("/")
+        goResult(pairs[3])
+    }
+    function goResult(key) {
+        location.replace('https://weixin-h9.thy360.com/h9/lottery/forward/' + key)
+    }
+    </script>
+  </body>
+</html>
