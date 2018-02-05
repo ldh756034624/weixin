@@ -1,8 +1,9 @@
 <template>
   <div class="page resultPage">
     <div class="resultImgBox">
-      <img class="resultImg" src="../../assets/img/account/tixian_img_success@2x.png"/>
-      <p class="typeBox">领取成功</p>
+      <img class="resultImg" v-if="txt=='领取成功'" src="../../assets/img/account/tixian_img_success@2x.png"/>
+      <img class="resultImg" v-else src="../../assets/img/account/tixian_img_fail@2x.png">
+      <p class="typeBox">{{txt}}</p>
       <p class="moneyBox" v-if="resultData"><i>¥</i>{{resultData.money}}</p>
     </div>
     <div class="resultText" v-if="resultData">
@@ -23,11 +24,14 @@
     },
     mounted() {
       let self = this;
-      self.setTitle('领取成功');
       this.$http.get('h9/api/user/redEnvelope/scan/qrcode', {params: {tempId : self.id}} )
         .then((res) => {
           if (res.data.code == 0) {
             self.resultData = rs.data.data
+            self.setTitle('领取成功');
+          } else {
+            self.txt = res.data.msg
+            self.setTitle(res.data.msg);
           }
         })
     },
@@ -35,6 +39,7 @@
       return {
         coponShow: true,
         resultData: null,
+        txt: '领取成功',
         id:this.$route.query.id
       }
     },
