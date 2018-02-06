@@ -9,7 +9,7 @@
       <p class="phoneName">默认</p>
       <p class="LeastMoney flexBox">充话费 <span class='flex1 alignR'>酒元余额￥{{rechargeData.balance}}</span></p>
       <flexbox :gutter="0" wrap="wrap" class='phoneRechargeFlexBox'>
-          <flexbox-item :span="1/3" v-for='(item,index) in rechargeData.priceList' @click.native='chooseMoney(item,index)'>
+          <flexbox-item :span="1/3" v-for='(item,index) in rechargeData.priceList' @click.native='chooseMoney(item,index)' :key="index">
             <div class="phoneBox" :class="{'blueBg':index==rechargeChoosed}">
               <p class="money">{{item.price}}元</p>
               <p class="soldMoney">售价{{item.realPrice}}酒元</p>

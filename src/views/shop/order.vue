@@ -19,7 +19,7 @@
               <img :src="shopData.img">
               <div class='flex1'>
                 <p>{{shopData.name}}</p>
-                <p class="joyMoney">{{shopPrice | price2}} 酒元</p>
+                <p class="joyMoney">{{shopPrice | price2}}</p>
               </div>
               <span class='num'>x{{countNum}}</span>
             </div>

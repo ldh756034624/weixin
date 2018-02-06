@@ -17,23 +17,31 @@
               <img src="../assets/img/index/mainpage_icon_notification_@2x.png" class="indexRadio"/>
               <div class="flex1">
                 <swiper auto height="40px" direction="vertical" :interval=2000 class="" :show-dots="false">
-                  <swiper-item v-for='item in homeData.noticeArticle' @click.native='goLinkFn(item)'>
+                  <swiper-item v-for='item in homeData.noticeArticle' @click.native='goLinkFn(item)' :key="item.id">
                     <p class="verticalSwiper TextEllipsis">{{item.title}}</p>
                   </swiper-item>
                 </swiper>
               </div>
             </div>
             <flexbox :gutter="0" wrap="wrap">
-              <flexbox-item :span="1/4" v-for='item in homeData.navigationBanner' @click.native='goLinkFn(item)'>
+              <flexbox-item :span="1/4" v-for='item in homeData.navigationBanner' @click.native='goLinkFn(item)' :key="item.id">
                 <div class="indexItemBox">
                   <img :src="item.imgUrl"/>
                   <p>{{item.title}}</p>
                 </div>
               </flexbox-item>
+              <!--todo 后台给予标签-->
+              <!-- <flexbox-item :span="1/4">
+                <router-link to="/my/sign" style="width:100%;">
+                  <div class="indexItemBox">
+                    <p>每日签到</p>
+                  </div>
+                </router-link>
+              </flexbox-item> -->
             </flexbox>
             <div class="indexLinkBox">
               <flexbox :gutter="0" wrap="wrap">
-                <flexbox-item :span="1/3" v-for='item in homeData.ideaBanner' @click.native='goLinkFn(item)'>
+                <flexbox-item :span="1/3" v-for='item in homeData.ideaBanner' @click.native='goLinkFn(item)' :key="item.id">
                   <div class="linkBox">
                     <img :src="item.imgUrl"/>
                   </div>
@@ -42,7 +50,7 @@
             </div>
             <div class="blockContBox" v-if='homeData.recommendArticle'>
               <p class="blockTitle">社区精选</p>
-              <div class="flexBox blockBox" v-for='item in homeData.recommendArticle' @click='goLinkFn(item)'>
+              <div class="flexBox blockBox" v-for='item in homeData.recommendArticle' @click='goLinkFn(item)' :key="item.id">
                 <div class="flex1">
                   <p class="articleTitle TextEllipsis">{{item.title}}</p>
                   <p class="articleTip">{{item.typeName}} <span>{{item.createTime}}</span></p>
@@ -135,14 +143,7 @@
       } else {
         self.init();
       }
-      //console.log( self.loadingShow)
       self.loadingShow = self.$store.state.showLoading
-      //self.init();
-      // self.$watch('showAdverBlur',function(val){
-      //   if(!val){
-      //     sessionStorage.setItem('AdverBlur',false)
-      //   }
-      // })
     },
     beforeUpdate: function () {
       let self = this;
@@ -166,7 +167,7 @@
           .then(res => {
             if (res.data.code == 0) {
               self.homeData = res.data.data;
-
+              sessionStorage.paySuccess = false  //初始化酒店成功页跳转表示
               if (self.homeData.adBanner) {
                 self.adBanner = self.homeData.adBanner[0];
                 self.showAdverBlur = true
@@ -192,8 +193,6 @@
           return
         }
         if ((item.link).indexOf('http') != -1 || (item.link).indexOf('https') != -1) {
-//          window.open(item.link)
-//          return
           window.location.href = item.link
         } else {
           //抢红包 "link:"lottery"/滴滴兑换 "link:"exchange_didi"/手机充值"link:"exchange_telephoneFare"/查询真伪 “link”:"validate"
@@ -205,7 +204,12 @@
             this.hasPhone('/account/phoneRecharge')
           } else if (item.link === 'validate') {
             this.$router.push({path: '/active/searchIsReally'})
-          } else {
+          } else if (item.link === 'hotel') { // 酒店预定
+            this.$router.push({path: '/hotel/list'})
+          }else if(item.link === "dailySign"){
+            this.$router.push({path:'/my/sign'})
+          }
+           else {
             this.$router.push({path: item.link})
           }
         }

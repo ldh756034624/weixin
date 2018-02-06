@@ -36,9 +36,7 @@ export default {
     TransferDom
   },
   props:{
-    money: {
-      type: String
-    },
+    money: [String, Number],
     showCodeAlert:{
       type:Boolean
     },

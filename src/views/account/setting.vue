@@ -3,6 +3,8 @@
     <group class='settingBox'>
 
       <cell title="常见问题" link='/account/problems' is-link></cell>
+      <cell title="意见反馈" link='/account/feedback' is-link></cell>
+      <cell title="关于我们" link='' is-link></cell>
       <p class="flexBox">版本信息 <span class='flex1 alignR'>V4.0</span></p>
     </group>
     <!--<x-button class='bottomBtn gradientBtn' @click.native="logOut">退出当前帐号</x-button>-->
@@ -58,7 +60,7 @@
 </style>
 <style lang='less'>
   .settingBox {
-    .weui-cells:before, .weui-cells:after {
+    .weui-cells:before, .weui-cells:after, .weui-cell:before {
       border: none;
     }
     .weui-cell {

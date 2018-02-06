@@ -1,10 +1,6 @@
 
 export default [
     {
-    	path:'*',
-    	name:'home',
-    	component (resolve) {require(['@/views/index'], resolve)}
-    },{
       path:'/index',
       name:'homeIndex',
       component (resolve) {require(['@/views/index'], resolve)}
@@ -100,6 +96,32 @@ export default [
     },{
       path:'/account/result',
       component (resolve) {require(['@/views/account/result'], resolve)} //手机充值,滴滴券兑换结果页
+    }, {
+      path:'/account/feedback',
+      name: '意见反馈',
+      component (resolve) {require(['@/views/account/feedback'], resolve)} // 意见反馈
+    },{
+      path:'/account/hongbao',
+      component (resolve) {require(['@/views/account/hongbao'], resolve)} //红包活动
+    },{
+      path:'/account/hongbao/result',
+      component (resolve) {require(['@/views/account/result2'], resolve)} //红包结果页
+    },{
+      path:'/account/promotion',
+      component (resolve) {require(['@/views/account/promotion'], resolve)} //红包活动
+    },{
+      path:'/account/bankto',
+      component (resolve) {require(['@/views/account/bankto'], resolve)} //转账
+    },{
+      path:'/account/transferInfo',
+      component (resolve) {require(['@/views/account/transferInfo'], resolve)} //转账明细
+    },{
+      path:'/account/success',
+      name:'转账成功',
+      component (resolve) {require(['@/views/account/success'], resolve)}  //转账成功页
+    },{
+      path:'/account/redPaperAmount',
+      component (resolve) {require(['@/views/account/redPaperAmount'],resolve)}  //红包金额
     },{
       path:'/my/vMoney',
       component (resolve) {require(['@/views/my/vMoney'], resolve)} //V币
@@ -121,6 +143,13 @@ export default [
     },{
       path:'/my/orderDetail',
       component (resolve) {require(['@/views/my/orderDetail'], resolve)} //订单详情
+    }, {
+      path:'/my/sign',
+      component (resolve) {require(['@/views/my/sign'], resolve)} // 签到
+    }, {
+      path:'/my/signRecord',
+      name: '签到记录',
+      component (resolve) {require(['@/views/my/signRecord'], resolve)} // 签到记录
     },{
       path:'/account/infoChange',
       component (resolve) {require(['@/views/account/infoChange'], resolve)} //资料修改
@@ -131,6 +160,67 @@ export default [
       path:'/deal/platformDeal',
       name:'aboutUs',
       component (resolve) {require(['@/views/deal/platformDeal'], resolve)} //平台规范
+    },{
+      path:'/hotel/list',
+      name:'酒店列表',
+      component (resolve) {require(['@/views/hotel/list'], resolve)} // 酒店列表
+    },{
+      path:'/hotel/detail',
+      name:'酒店详情',
+      component (resolve) {require(['@/views/hotel/detail'], resolve)} // 酒店详情
+    },{
+      path:'/hotel/fill',
+      name:'订单填写',
+      component (resolve) {require(['@/views/hotel/fill'], resolve)} // 酒店订单填写
+    },{
+      path:'/hotel/pay',
+      name:'在线支付',
+      component (resolve) {require(['@/views/hotel/pay'], resolve)} // 酒店订单支付
+    },{
+      path:'/hotel/success',
+      name:'支付成功',
+      component (resolve) {require(['@/views/hotel/success'], resolve)} // 酒店支付成功
+    },{
+      path:'/hotel/fail',
+      name:'支付失败',
+      component (resolve) {require(['@/views/hotel/fail'], resolve)} // 酒店支付失败
+    },{
+      path:'/hotel/orderDetail',
+      name:'订单详情',
+      component (resolve) {require(['@/views/hotel/order_detail'], resolve)} // 酒店订单详情
+    },{
+      path:'/hotel/orderList',
+      name:'酒店订单',
+      component (resolve) {require(['@/views/hotel/order_list'], resolve)} // 酒店订单列表
+    },{
+      path:'/bbs',
+      name:'欢乐之家',
+      component (resolve) {require(['@/views/bbs/home'], resolve)} // 社区BBS
+    },{
+      path:'/bbs/search',
+      name:'社区BBS搜索',
+      component (resolve) {require(['@/views/bbs/search'], resolve)} // 社区BBS搜索
+    },{
+      path:'/bbs/add',
+      name:'发帖',
+      component (resolve) {require(['@/views/bbs/add'], resolve)} // 新增帖子
+    },{
+      path:'/bbs/detail/:id',
+      name:'帖子详情',
+      component (resolve) {require(['@/views/bbs/detail'], resolve)} // 文章内文
+    },{
+      path:'/bbs/report/:id',
+      name:'文章举报',
+      component (resolve) {require(['@/views/bbs/report'], resolve)} // 文章举报
+    },
+    {
+      path:'/bbs/history',
+      name:'我的帖子',
+      component (resolve) {require(['@/views/bbs/history'], resolve)} // 我的帖子
+    },{
+      path:'/bbs/list/:id',
+      name:'文章分类',
+      component (resolve) {require(['@/views/bbs/list'], resolve)} // 文章分类
     },{
       path:'/recharge/index',
       name:'充值',
@@ -143,6 +233,13 @@ export default [
       path:'/recharge/fail',
       name:'充值失败',
       component (resolve) {require(['@/views/recharge/fail'], resolve)}
+    },{
+      path:'/travel',
+      name:'旅游健康卡',
+      component (resolve) {require(['@/views/travel/index'], resolve)}
+    },{
+      path:'*',
+      name:'home',
+      component (resolve) {require(['@/views/index'], resolve)}
     }
-
   ]

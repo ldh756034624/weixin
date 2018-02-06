@@ -4,7 +4,7 @@
         <img class="shopImg" :src="shopData.img"/>
         <div class="shopTitleBox">
           <p>{{shopData.name}}</p>
-          <p class="joyMoney">{{shopData.price}}酒元</p>
+          <p class="joyMoney">¥ {{shopData.price}}/{{shopData.unit}}</p>
         </div>
         <section>
           <div  class="descBox">
@@ -19,7 +19,7 @@
       </main>
       <footer>
         <div>
-          <x-button class='bottomBtn gradientBtn' :class="shopData.stock == 0 && 'grayBtn'" @click.native="goExchange">立即兑换</x-button>
+          <x-button class='bottomBtn gradientBtn' :class="shopData.stock == 0 && 'grayBtn'" @click.native="goExchange">立即购买（兑换）</x-button>
         </div>
       </footer>
 		</div>
@@ -92,11 +92,12 @@ export default {
       margin-top: -12/40rem;
       margin-bottom: 20/40rem;
       padding: 20/40rem 30/40rem;
+      font-size: 32/40rem;
       line-height: 60/40rem;
     }
     .joyMoney{
-      color: #627984;
-      font-size: 36/40rem;
+      color: #e60012;
+      font-size: 34/40rem;
     }
     .descBox{
       background: #fff;
@@ -129,6 +130,9 @@ export default {
       width: 100%;
       text-align: center;
       font-size: 32/40rem;
+    }
+    .gradientBtn {
+      background: #e60012;
     }
     .grayBtn{
       background: #999;
