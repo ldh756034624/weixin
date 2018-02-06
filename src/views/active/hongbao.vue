@@ -54,6 +54,7 @@ import userDeal from '../deal/userDeal'
 import {encode} from '@/util/base64Code'
 import wx from 'weixin-js-sdk'
 import Bottombar from '@/components/BottomBar'
+import Vue from 'vue'
 export default {
   directives: {
     TransferDom
@@ -167,7 +168,7 @@ export default {
 <style type="text/css" lang='less'scoped>
   .hongbaoPage{
         overflow: hidden;
-    background: url('../../assets/img/active/bg@2x.jpg') repeat-y;
+    background: url('../../assets/img/active/bg@2x.png') repeat-y;
     background-size: 100%;
     .pageBox {
       padding-top: 350/40rem;
