@@ -2,9 +2,9 @@
 	<div class="page problemPage">
     <group class='problemBox'>
 
-      <cell :title="item.title"  :link="{path:'/account/articleDetail',query:{id:item.articleId}}" v-for='item in problemList' is-link></cell>
+      <cell :title="item.title"  :link="{path:'/account/articleDetail',query:{id:item.articleId}}" v-for='item in problemList' is-link :key="item.id"></cell>
     </group>
-    
+
   </div>
 </template>
 <script>
@@ -25,7 +25,7 @@ export default {
       self.$http.get('h9/api/user/help')
         .then(function(res) {
           if(res.data.code==0){
-              self.problemList=res.data.data 
+              self.problemList=res.data.data
           }
         })
     }

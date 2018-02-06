@@ -19,15 +19,28 @@
     </div>
 
     <script type="text/javascript">
-    var path = window.location.pathname,
-        pairs;
+    var path = window.location.search.substring(1);
+    if (!path) {
+        path = window.location.href.split("?")[1]
+    }
     if (path) {
-        pairs=path.split("/");
-        goResult(pairs[1])
+        getArgs(path);
     } else {
-        path = window.location.href
-        pairs = path.split("/")
-        goResult(pairs[3])
+        alert('code获取失败')
+    }
+    function getArgs(url) {
+        var pairs=url.split(",");
+        var args = {}
+        for(var i=0;i<pairs.length;i++){
+            var pos=pairs[i].indexOf('=');
+            if(pos==-1){
+                continue;
+            }
+            var argname=pairs[i].substring(0,pos);
+            var value=pairs[i].substring(pos+1);
+            args[argname]=unescape(value);
+        }
+        goResult(args.code)
     }
     function goResult(key) {
         location.replace('https://weixin-h9.thy360.com/h9/lottery/forward/' + key)

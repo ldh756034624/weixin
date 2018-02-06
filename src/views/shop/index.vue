@@ -11,7 +11,7 @@
             </swiper-item>
           </swiper>
           <flexbox :gutter="0" wrap="wrap" class='sortBox'>
-            <flexbox-item :span="itembox" v-for='item in navBanner' @click.native='goLinkFn(item)'>
+            <flexbox-item :span="itembox" v-for='item in navBanner' @click.native='goLinkFn(item)' :key="item.id">
               <div>
                 <img :src="item.imgUrl"/>
                 <p class="title-bottom">{{item.title}}</p>
@@ -21,7 +21,7 @@
           <section>
             <div class="exchangeBox" v-if='shopData.hotGoods'>
               <flexbox :gutter="0" wrap="wrap">
-                <flexbox-item :span="1/2" class='shopLine' v-for='item in shopData.hotGoods'>
+                <flexbox-item :span="1/2" class='shopLine' v-for='item in shopData.hotGoods' :key="item.id">
                   <router-link :to="{path:'/shopDataile',query:{id:item.id}}">
                     <div class='shopBox'>
                       <img class='shopImg' :src="item.img"/>

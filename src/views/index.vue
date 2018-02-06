@@ -17,14 +17,14 @@
               <img src="../assets/img/index/mainpage_icon_notification_@2x.png" class="indexRadio"/>
               <div class="flex1">
                 <swiper auto height="40px" direction="vertical" :interval=2000 class="" :show-dots="false">
-                  <swiper-item v-for='item in homeData.noticeArticle' @click.native='goLinkFn(item)'>
+                  <swiper-item v-for='item in homeData.noticeArticle' @click.native='goLinkFn(item)' :key="item.id">
                     <p class="verticalSwiper TextEllipsis">{{item.title}}</p>
                   </swiper-item>
                 </swiper>
               </div>
             </div>
             <flexbox :gutter="0" wrap="wrap">
-              <flexbox-item :span="1/4" v-for='item in homeData.navigationBanner' @click.native='goLinkFn(item)'>
+              <flexbox-item :span="1/4" v-for='item in homeData.navigationBanner' @click.native='goLinkFn(item)' :key="item.id">
                 <div class="indexItemBox">
                   <img :src="item.imgUrl"/>
                   <p>{{item.title}}</p>
@@ -41,7 +41,7 @@
             </flexbox>
             <div class="indexLinkBox">
               <flexbox :gutter="0" wrap="wrap">
-                <flexbox-item :span="1/3" v-for='item in homeData.ideaBanner' @click.native='goLinkFn(item)'>
+                <flexbox-item :span="1/3" v-for='item in homeData.ideaBanner' @click.native='goLinkFn(item)' :key="item.id">
                   <div class="linkBox">
                     <img :src="item.imgUrl"/>
                   </div>
@@ -50,7 +50,7 @@
             </div>
             <div class="blockContBox" v-if='homeData.recommendArticle'>
               <p class="blockTitle">社区精选</p>
-              <div class="flexBox blockBox" v-for='item in homeData.recommendArticle' @click='goLinkFn(item)'>
+              <div class="flexBox blockBox" v-for='item in homeData.recommendArticle' @click='goLinkFn(item)' :key="item.id">
                 <div class="flex1">
                   <p class="articleTitle TextEllipsis">{{item.title}}</p>
                   <p class="articleTip">{{item.typeName}} <span>{{item.createTime}}</span></p>

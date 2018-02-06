@@ -26,7 +26,7 @@
 
         <div class="actorBox">
           <flexbox :gutter="0" wrap="wrap">
-            <flexbox-item :span="1/4" v-for='item in prizeData.lotteryUsers' @click.native=''>
+            <flexbox-item :span="1/4" v-for='item in prizeData.lotteryUsers' @click.native='' :key="item.id">
               <div class="actorHeadImgBox">
                 <img :src="item.avatar">
                 <span class="me" v-if="item.me">我</span>
