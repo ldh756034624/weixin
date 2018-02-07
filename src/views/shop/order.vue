@@ -165,10 +165,14 @@ export default {
       this.$http.post('h9/store/goods/convert',this.exchangeParams)
         .then((res)=>{
           if(res.data.code==0){
-            this.$router.replace({
-              path:'/account/result',
-              query: {type: 'shopExchange', money: res.data.data.price, goodsName: res.data.data.goodsName}
-            })
+            if (this.payMethod == 1) {
+              this.$router.replace({
+                path:'/account/result',
+                query: {type: 'shopExchange', money: res.data.data.price, goodsName: res.data.data.goodsName}
+              })
+            } else {
+              location.replace(res.data.data.wxPayInfo.payUrl)
+            }
           }
         })
     }
