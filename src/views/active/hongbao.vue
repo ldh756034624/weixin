@@ -61,7 +61,6 @@ export default {
   },
   mounted(){
     let  self=this;
-    console.log(self.Wheight)
     self.setTitle('开盖扫红包');
     if (self.barcode) {
       self.code=self.barcode
@@ -69,6 +68,15 @@ export default {
         self.getHongBaoWxCode()
       }else{
         self.weChatLogin();
+      }
+    } else {
+      let userObj = JSON.parse(localStorage.getItem('_user'))
+      if (!userObj) {
+        if (!self.WxCode) {
+          self.getWxCode()
+        } else {
+          self.weChatLogin();
+        }
       }
     }
   },
