@@ -37,7 +37,11 @@
     methods: {
       handleRecharge() {
         if (this.fundMoney > 0) {
+          this.$vux.loading.show({
+           text: '充值中'
+          })
           this.$http.get('/h9/api/recharge/order?money=' + this.fundMoney).then(res => {
+            this.$vux.loading.hide()
             let data = res.data
             if (data.code === 0) {
               const url = window.location.href.split("#")[0]

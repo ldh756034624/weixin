@@ -19,7 +19,7 @@
               <img :src="shopData.img">
               <div class='flex1'>
                 <p>{{shopData.name}}</p>
-                <p class="joyMoney">{{shopPrice | price2}}</p>
+                <p class="joyMoney">{{shopPrice | price2}} 酒元</p>
               </div>
               <span class='num'>x{{countNum}}</span>
             </div>
@@ -162,8 +162,12 @@ export default {
       this.exchangeParams.goodsId=this.goodsId
       this.exchangeParams.payMethod = this.payMethod
       this.exchangeParams.payPlatform = 'wxjs'
+      this.$vux.loading.show({
+       text: '支付中'
+      })
       this.$http.post('h9/store/goods/convert',this.exchangeParams)
         .then((res)=>{
+          this.$vux.loading.hide()
           if(res.data.code==0){
             if (this.payMethod == 1) {
               this.$router.replace({
