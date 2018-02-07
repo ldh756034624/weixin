@@ -144,10 +144,8 @@ export default {
       }
     },
     count:function(type){
-
       if(type==='minus'){
         this.countNum--
-
       }else{
         if(this.countNum===this.shopData.stock){
           _g.toastMsg('error','库存不足')
@@ -162,12 +160,14 @@ export default {
       this.exchangeParams.goodsId=this.goodsId
       this.exchangeParams.payMethod = this.payMethod
       this.exchangeParams.payPlatform = 'wxjs'
-      this.$vux.loading.show({
-       text: '支付中'
-      })
+      if (this.shopData.balance<this.shopPrice&&this.payMethod==1) {
+        _g.toastMsg('error','酒元余额不足，请使用微信支付')
+        return
+      }
+      _g.showLoading('支付中')
       this.$http.post('h9/store/goods/convert',this.exchangeParams)
         .then((res)=>{
-          this.$vux.loading.hide()
+          _g.hideLoading()
           if(res.data.code==0){
             if (this.payMethod == 1) {
               this.$router.replace({
@@ -175,7 +175,13 @@ export default {
                 query: {type: 'shopExchange', money: res.data.data.price, goodsName: res.data.data.goodsName}
               })
             } else {
-              location.replace(res.data.data.wxPayInfo.payUrl)
+              const url = window.location.href.split("#")[0]
+              let callbackurl = url + '#/account/result?type=shopExchange&money=' + res.data.data.price+'&goodsName='+res.data.data.goodsName // 成功回调
+              let callbackFail = url + '#/my/orderDetail?orderId=' + res.data.data.wxPayInfo.orderId // 失败回调
+              callbackurl = encodeURIComponent(callbackurl) // encode
+              callbackFail = encodeURIComponent(callbackFail) // encode
+              let link = res.data.data.wxPayInfo.payUrl + '&callback=' + callbackurl + '&callbackFail=' + callbackFail
+              window.location.replace(link)
             }
           }
         })
