@@ -39,7 +39,7 @@
           })
       },
       fundsFn: function () {
-        if (!this.fundMoney || this.fundMoney <= 0.01) {
+        if (!this.fundMoney || this.fundMoney < 0.01) {
           _g.toastMsg('error', '设置的金额不能小于0.01或空')
           return
         }
