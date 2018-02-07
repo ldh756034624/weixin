@@ -1,16 +1,22 @@
 
 export default [
     {
+      path:'/',
+      redirect: '/active/hongbao'
+      // name:'homeIndex',
+      // component (resolve) {require(['@/views/index'], resolve)}
+    },{
       path:'/index',
-      name:'homeIndex',
-      component (resolve) {require(['@/views/index'], resolve)}
+      redirect: '/active/hongbao'
+      // name:'homeIndex',
+      // component (resolve) {require(['@/views/index'], resolve)}
     },{
       path:'/login',
       name:'login',
       component (resolve) {require(['@/views/login'], resolve)}
     },{
       path:'/active/hongbao',
-      name:'hongbao',
+      name:'开盖扫红包',
       meta: { auth: true },
       component (resolve) {require(['@/views/active/hongbao'], resolve)} //红包活动页
     },{
@@ -240,6 +246,6 @@ export default [
     },{
       path:'*',
       name:'home',
-      component (resolve) {require(['@/views/index'], resolve)}
+      component (resolve) {require(['@/views/active/hongbao'], resolve)}
     }
   ]

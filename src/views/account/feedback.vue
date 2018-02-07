@@ -35,6 +35,7 @@
 
   export default {
     created() {
+      this.setTitle('意见反馈');
       this.getTypeList()
     },
     data() {

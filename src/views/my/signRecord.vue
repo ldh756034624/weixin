@@ -23,6 +23,7 @@
 
   export default {
     created() {
+      this.setTitle('签到记录');
       this.getList()
     },
     data() {

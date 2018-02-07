@@ -84,6 +84,7 @@
       }
     },
     created() {
+      this.setTitle('酒店详情');
       this.id = this.$route.query.id   // 酒店id
       this.initDate() // 初始化时间
       this.getHotelInfo()

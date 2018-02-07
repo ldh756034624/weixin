@@ -44,6 +44,7 @@
 
   export default {
     created() {
+      this.setTitle('在线支付');
       if (this.$route.query.orderInfo) {  // 从填写订单跳过来
         this.orderInfo = JSON.parse(this.$route.query.orderInfo)
         this.loadingShow = false

@@ -21,7 +21,7 @@
                 <p class="blockTips">{{item.month}}</p>
               </div>
               <div v-else>
-                <p class="blockTips" v-if='item.month!=particularsData[index].month'>{{item.month}}</p>
+                <p class="blockTips" v-if='item.month!=particularsData[index-1].month'>{{item.month}}</p>
               </div>
             </div>
             <div class="flexBox">

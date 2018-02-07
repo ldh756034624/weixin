@@ -15,6 +15,7 @@
 <script>
   export default {
     created() {
+      this.setTitle('支付失败');
       this.orderId = this.$route.query.orderId
     },
     data() {

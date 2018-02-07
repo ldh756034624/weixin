@@ -60,6 +60,7 @@
 
   export default {
     created() {
+      this.setTitle('酒店订单详情');
       this.id = this.$route.query.id
       this.getDetail()
     },

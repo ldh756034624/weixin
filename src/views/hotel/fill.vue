@@ -54,6 +54,7 @@
 
   export default {
     created() {
+      this.setTitle('订单填写');
       this.getBookSelectList()  // 初始化选择框列表
       this.timeData = JSON.parse(this.$route.query.timeData)
     },
@@ -183,7 +184,7 @@
     .hr{
       padding-top: 10px;
       position: relative;
-      border-bottom:1px dashed #F2F2F2; 
+      border-bottom:1px dashed #F2F2F2;
     }
     &::before{
       content:'';
@@ -209,7 +210,7 @@
     }
 
   }
-  
+
   .abstract-wrapper {
     margin: 0 15px;
     background: #fff;

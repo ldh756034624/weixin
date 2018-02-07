@@ -32,7 +32,7 @@
           </li>
         </ul>
         <load-more tip="加载更多" v-if="showLoading"></load-more>
-        
+
       </div>
     </scroller>
     <list-empty v-if="showEmpty" :text="emptyMsg()" state="1"></list-empty>
@@ -44,8 +44,8 @@
   import listEmpty from '../../components/listEmpty.vue'
   export default {
     created() {
+      this.setTitle('酒店订单列表');
       this.getList()
-
     },
     data() {
       return {

@@ -80,7 +80,7 @@
       this.getList()
     },
     mounted() {
-      
+      this.setTitle('酒店列表');
     },
     methods: {
       /**
@@ -318,7 +318,7 @@
     overflow: hidden;
     height: 100%;
     .city-list {
-      
+
       background: #fff;
       li {
         overflow-y: auto;

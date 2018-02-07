@@ -39,6 +39,7 @@
                     <img slot="icon" width="30" style="display:block;margin-right:10px;"
                     src="../../assets/img/index/dingdan@2x.png">
                     <span class='cellValueBox'  style="margin-right:-12px;">
+                      查看订单
                       <i class='arrow'></i>
                     </span>
                 </cell>
@@ -117,6 +118,14 @@
                   <cell title="我的优惠卷" link="/my/cupon">
                   <img slot="icon" width="30" style="display:block;margin-right:10px;"
                        src="../../assets/img/index/wodeyouhui@2x.png">
+                  <span class='cellValueBox' style="margin-right:-12px;">
+                        <!-- <i>{{personalData.cardNum}}</i> -->
+                        <i class='arrow'></i>
+                      </span>
+                </cell>
+                <cell title="设置" link="/account/setting">
+                  <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                       src="../../assets/img/index/shezhi@2x.png">
                   <span class='cellValueBox' style="margin-right:-12px;">
                         <!-- <i>{{personalData.cardNum}}</i> -->
                         <i class='arrow'></i>

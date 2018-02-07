@@ -30,6 +30,7 @@
 <script>
   export default {
     created() {
+      this.setTitle('支付成功');
       this.orderId = this.$route.query.orderId
       this.getOrderInfo()
     },

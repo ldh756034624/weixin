@@ -160,7 +160,7 @@ export default {
       this.exchangeParams.goodsId=this.goodsId
       this.exchangeParams.payMethod = this.payMethod
       this.exchangeParams.payPlatform = 'wxjs'
-      if (this.shopData.balance<this.shopPrice&&this.payMethod==1) {
+      if (parseFloat(this.shopData.balance)<parseFloat(this.shopPrice)&&this.payMethod==1) {
         _g.toastMsg('error','酒元余额不足，请使用微信支付')
         return
       }

@@ -32,7 +32,7 @@
 
   export default {
     mounted() {
-      // this.setTitle('酒元商城');
+      this.setTitle('旅游健康卡');
       this.init()
     },
     data() {

@@ -43,9 +43,9 @@ function setTitle(title) {
 
 router.beforeEach((to, from, next) => {
   // 下面这段拦截用于处理：如果处于结果页，手机点击返回，分别做跳转
-  if (to.name) { // 设置标题
-    setTitle(to.name)
-  }
+  // if (to.name) { // 设置标题
+  //   setTitle(to.name)
+  // }
 
   if (sessionStorage.isInResult === 'true') {
     if (from.path === '/account/result' && from.query.type === 'vMoneyExchange' && to.path === '/my/vUpdate' || from.path === '/account/purse' && to.path === '/account/result') {  // 如果来自v币兑换，点返回到个人中心
