@@ -57,13 +57,25 @@
 
   export default {
     mounted() {
-      this.setTitle('酒元商城');
-      this.init()
+      const self = this
+      self.setTitle('酒元商城');
+      self.WxCode = self.$route.query.code;
+      let userObj = JSON.parse(localStorage.getItem('_user'))
+      if (!userObj) {
+        if (!self.WxCode) {
+          self.getWxCode()
+        } else {
+          self.weChatLogin();
+        }
+      } else {
+        self.init();
+      }
     },
     data() {
       return {
         shopTop: [],
         navBanner: [],
+        WxCode:this.$route.query.code, //微信回调码
         shopData: {},
         status1: {
           pulldownStatus: 'default'
@@ -99,6 +111,18 @@
             })
           })
       },
+      weChatLogin:function(){
+      let self=this;
+      self.$http.get('h9/api/wechat/login?code='+self.WxCode)
+      .then(function(res) {
+        if(res.data.code==0){
+          _g.toastMsg('error', '微信登录成功');
+          localStorage.setItem("_user", JSON.stringify(res.data.data));
+          Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
+           _g.toastMsg('error', self.barcode);
+        }
+      })
+    },
       goLinkFn: function (item) {
         console.log('item', item)
         if (!item.link) {
