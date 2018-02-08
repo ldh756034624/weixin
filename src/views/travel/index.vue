@@ -32,8 +32,19 @@
 
   export default {
     mounted() {
+      const self = this
       this.setTitle('旅游健康卡');
-      this.init()
+      self.WxCode = self.$route.query.code;
+      let userObj = JSON.parse(localStorage.getItem('_user'))
+      if (!userObj) {
+        if (!self.WxCode) {
+          self.getWxCode()
+        } else {
+          self.weChatLogin();
+        }
+      } else {
+        self.init();
+      }
     },
     data() {
       return {
@@ -41,6 +52,7 @@
         navBanner: [],
         shopData: [],
         index: 1,
+        WxCode:this.$route.query.code, //微信回调码
         getBarWidth: function (index) { // 动态计算每个bar条的宽
           return 60 + 'px'
         },
@@ -61,6 +73,18 @@
               this.shopData = res.data.data
             }
           })
+      },
+      weChatLogin:function(){
+        let self=this;
+        self.$http.get('h9/api/wechat/login?code='+self.WxCode)
+        .then(function(res) {
+          if(res.data.code==0){
+            _g.toastMsg('error', '微信登录成功');
+            localStorage.setItem("_user", JSON.stringify(res.data.data));
+            Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
+             _g.toastMsg('error', self.barcode);
+          }
+        })
       },
       goLinkFn: function (item) {
         if (!item.link) {
