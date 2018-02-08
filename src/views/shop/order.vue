@@ -33,7 +33,7 @@
               </span>
             </p>
             <p class="total">共<span>{{countNum}}</span>件商品
-              <span class='totalMoney'>小计 : <i class='joyMoney'>{{shopPrice | price2}} 酒元</i></span>
+              <span class='totalMoney'>小计 : <i class='joyMoney'>{{shopPrice | price2}} 元</i></span>
             </p>
           </div>
         </main>
@@ -42,7 +42,7 @@
         <section>
           <div class="shopOrderMsgBox">
             <cell title="配送方式" value='快递 免邮' @click.native=""></cell>
-            <p class="ordeTotal"><label>订单总金额</label><span>{{shopPrice | price2}} 酒元</span></p>
+            <p class="ordeTotal"><label>订单总金额</label><span>{{shopPrice | price2}} 元</span></p>
           </div>
         </section>
       </div>
@@ -50,16 +50,20 @@
         <section>
           <p class="blockTips">支付方式</p>
           <div class="shopPayBox">
-            <p>
+            <p @click="payMethod = 1">
               <label>酒元余额(￥<i>{{shopData.balance}}</i>)</label>
-              <span class='payIcon hasSet'></span>
+              <span class='payIcon unSet' :class="{'hasSet':payMethod == 1}"></span>
+            </p>
+            <p @click="payMethod = 3">
+              <label>微信支付</label>
+              <span class='payIcon unSet' :class="{'hasSet':payMethod == 3}"></span>
             </p>
           </div>
         </section>
       </div>
       <div class="orderBottom">
-        实付酒元:<span class='joyMoney'>{{shopPrice | price2}}酒元</span>
-        <x-button class='exchangeBtn' mini @click.native="exchangeFn">立即兑换</x-button>
+        实付酒元:<span class='joyMoney'>{{shopPrice | price2}} 元</span>
+        <x-button class='exchangeBtn' mini @click.native="exchangeFn">支付</x-button>
       </div>
 
 		</div>
@@ -104,6 +108,7 @@ export default {
       addressData:{},
       shopData:{},
       shopPrice:0,
+      payMethod: 1,
       exchangeParams:{},
     }
   },
@@ -139,10 +144,8 @@ export default {
       }
     },
     count:function(type){
-
       if(type==='minus'){
         this.countNum--
-
       }else{
         if(this.countNum===this.shopData.stock){
           _g.toastMsg('error','库存不足')
@@ -155,13 +158,31 @@ export default {
     exchangeFn:function(){
       this.exchangeParams.count=this.countNum
       this.exchangeParams.goodsId=this.goodsId
+      this.exchangeParams.payMethod = this.payMethod
+      this.exchangeParams.payPlatform = 'wxjs'
+      if (parseFloat(this.shopData.balance)<parseFloat(this.shopPrice)&&this.payMethod==1) {
+        _g.toastMsg('error','酒元余额不足，请使用微信支付')
+        return
+      }
+      _g.showLoading('支付中')
       this.$http.post('h9/store/goods/convert',this.exchangeParams)
         .then((res)=>{
+          _g.hideLoading()
           if(res.data.code==0){
-            this.$router.replace({
-              path:'/account/result',
-              query: {type: 'shopExchange', money: res.data.data.price, goodsName: res.data.data.goodsName}
-            })
+            if (this.payMethod == 1) {
+              this.$router.replace({
+                path:'/account/result',
+                query: {type: 'shopExchange', money: res.data.data.price, goodsName: res.data.data.goodsName}
+              })
+            } else {
+              const url = window.location.href.split("#")[0]
+              let callbackurl = url + '#/account/result?type=shopExchange&money=' + res.data.data.price+'&goodsName='+res.data.data.goodsName // 成功回调
+              let callbackFail = url + '#/my/orderDetail?orderId=' + res.data.data.wxPayInfo.orderId // 失败回调
+              callbackurl = encodeURIComponent(callbackurl) // encode
+              callbackFail = encodeURIComponent(callbackFail) // encode
+              let link = res.data.data.wxPayInfo.payUrl + '&callback=' + callbackurl + '&callbackFail=' + callbackFail
+              window.location.replace(link)
+            }
           }
         })
     }

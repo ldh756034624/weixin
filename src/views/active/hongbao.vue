@@ -45,6 +45,7 @@
           <userDeal v-model="showUserDeal" v-on:listenToDealShow='dealShowFn'></userDeal>
         </popup>
      </div>
+     <Bottombar :index="0"></Bottombar>
   </div>
 </template>
 <script>
@@ -52,13 +53,14 @@ import { XInput,XButton,Popup,TransferDom} from 'vux'
 import userDeal from '../deal/userDeal'
 import {encode} from '@/util/base64Code'
 import wx from 'weixin-js-sdk'
+import Bottombar from '@/components/BottomBar'
+import Vue from 'vue'
 export default {
   directives: {
     TransferDom
   },
   mounted(){
     let  self=this;
-    console.log(self.Wheight)
     self.setTitle('开盖扫红包');
     if (self.barcode) {
       self.code=self.barcode
@@ -66,6 +68,15 @@ export default {
         self.getHongBaoWxCode()
       }else{
         self.weChatLogin();
+      }
+    } else {
+      let userObj = JSON.parse(localStorage.getItem('_user'))
+      if (!userObj) {
+        if (!self.WxCode) {
+          self.getWxCode()
+        } else {
+          self.weChatLogin();
+        }
       }
     }
   },
@@ -152,7 +163,7 @@ export default {
 
   },
    components: {
-    XInput,XButton,userDeal,Popup
+    XInput,XButton,userDeal,Popup,Bottombar
   },
 }
 
@@ -162,9 +173,10 @@ export default {
 
 
 </style>
-<style type="text/css" lang='less'>
+<style type="text/css" lang='less'scoped>
   .hongbaoPage{
-    background: url('../../assets/img/active/bg@2x.jpg') repeat-y;
+        overflow: hidden;
+    background: url('../../assets/img/active/bg@2x.png') repeat-y;
     background-size: 100%;
     .pageBox {
       padding-top: 350/40rem;

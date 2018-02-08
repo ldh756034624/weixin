@@ -19,6 +19,7 @@ export default {
   },
   mounted(){
     let self=this;
+    // console.log(self.$route)
     self.wxSign();
   },
   data(){
@@ -40,7 +41,7 @@ export default {
       self.$http.get(rcmurl)
         .then(function(res) {
           if(res.data.code==0){
-            console.log(res.data.data)
+            // console.log(res.data.data)
             self.wxConfig(res.data.data);
           } else {
             _g.toastMsg('error', res.data.msg)
@@ -66,7 +67,7 @@ export default {
 
 </script>
 <style scoped lang='less'>
-  
+
 </style>
 <style lang='less'>
 @import '~vux/src/styles/reset.less';

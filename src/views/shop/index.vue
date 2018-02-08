@@ -11,7 +11,7 @@
             </swiper-item>
           </swiper>
           <flexbox :gutter="0" wrap="wrap" class='sortBox'>
-            <flexbox-item :span="itembox" v-for='item in navBanner' @click.native='goLinkFn(item)'>
+            <flexbox-item :span="itembox" v-for='item in navBanner' @click.native='goLinkFn(item)' :key="item.id">
               <div>
                 <img :src="item.imgUrl"/>
                 <p class="title-bottom">{{item.title}}</p>
@@ -21,15 +21,16 @@
           <section>
             <div class="exchangeBox" v-if='shopData.hotGoods'>
               <flexbox :gutter="0" wrap="wrap">
-                <flexbox-item :span="1/2" class='shopLine' v-for='item in shopData.hotGoods'>
+                <flexbox-item :span="1/2" class='shopLine' v-for='item in shopData.hotGoods' :key="item.id">
                   <router-link :to="{path:'/shopDataile',query:{id:item.id}}">
                     <div class='shopBox'>
                       <img class='shopImg' :src="item.img"/>
-                      <div class="bottomBox">
-                        <span class="desc">{{item.name}}</span>
-                        <span class="joyMoney"><span>{{item.price}}</span>酒元</span>
-                      </div>
+
                     </div>
+                    <div class="bottomBox">
+                        <span class="desc">{{item.name}}</span>
+                        <span class="joyMoney"><span>¥ {{item.price}}</span>{{item.unit?'/'+item.unit:''}}</span>
+                      </div>
                   </router-link>
                 </flexbox-item>
               </flexbox>
@@ -56,13 +57,25 @@
 
   export default {
     mounted() {
-      this.setTitle('酒元商城');
-      this.init()
+      const self = this
+      self.setTitle('酒元商城');
+      self.WxCode = self.$route.query.code;
+      let userObj = JSON.parse(localStorage.getItem('_user'))
+      if (!userObj) {
+        if (!self.WxCode) {
+          self.getWxCode()
+        } else {
+          self.weChatLogin();
+        }
+      } else {
+        self.init();
+      }
     },
     data() {
       return {
         shopTop: [],
         navBanner: [],
+        WxCode:this.$route.query.code, //微信回调码
         shopData: {},
         status1: {
           pulldownStatus: 'default'
@@ -98,6 +111,18 @@
             })
           })
       },
+      weChatLogin:function(){
+      let self=this;
+      self.$http.get('h9/api/wechat/login?code='+self.WxCode)
+      .then(function(res) {
+        if(res.data.code==0){
+          _g.toastMsg('error', '微信登录成功');
+          localStorage.setItem("_user", JSON.stringify(res.data.data));
+          Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
+           _g.toastMsg('error', self.barcode);
+        }
+      })
+    },
       goLinkFn: function (item) {
         console.log('item', item)
         if (!item.link) {
@@ -191,18 +216,22 @@
         box-sizing: border-box;
         border: 1px solid #C7000A;
         box-shadow:#4d4d4d 0 0 10px;
-        .bottomBox{
+
+      }
+      .bottomBox{
           line-height: 36/40rem;
           width: 90%;
           margin:0 auto;
-          background-color: #C7000A;
+          // background-color: #C7000A;
+          color: #e60012;
           border-radius: 10/40rem 10/40rem 0 0;
+          text-align: center;
           .desc {
             display: inline-block;
             font-size: 24/40rem;
             // width: 95/40rem;
             max-height: 72/40rem;
-            color: #ffffff;
+            color: #221815;
             overflow: hidden;
             word-break: break-all;
             display: -webkit-box;
@@ -215,14 +244,11 @@
             display:inline-block;
             font-size: 24/40rem;
             display: block;
-            color: #fff;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
           }
         }
-      }
-
       .shopImg {
         width: 220/40rem;
         height: 220/40rem;

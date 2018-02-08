@@ -39,6 +39,7 @@
                     <img slot="icon" width="30" style="display:block;margin-right:10px;"
                     src="../../assets/img/index/dingdan@2x.png">
                     <span class='cellValueBox'  style="margin-right:-12px;">
+                      查看订单
                       <i class='arrow'></i>
                     </span>
                 </cell>
@@ -64,6 +65,13 @@
                 </div>
               </group>
               <group class='personBox'>
+                <!-- <cell title="我的社区" link='/bbs/history'>
+                  <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                       src="../../assets/img/index/icon_my_post@2x.png">
+                  <span class='cellValueBox'  style="margin-right:-12px;">
+                        <i class='arrow'></i>
+                      </span>
+                </cell> -->
                 <cell title="消费记录" link="/account/purseParticulars">
                   <img slot="icon" width="30" style="display:block;margin-right:10px;"
                        src="../../assets/img/index/xiaofeijilu@2x.png">
@@ -78,12 +86,18 @@
                         <i>{{personalData.vb}}</i>
                         <i class='arrow'></i>
                       </span>
-                </cell> -->
-                  <!-- <cell title="H9酒店记录"  value='暂未开放'>
+                </cell>
+                  <cell title="我的订单" link='/my/myOrder'>
+                      <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                      src="../../assets/img/index/icon_order@2x.png">
+                      <span class='cellValueBox'  style="margin-right:-12px;">
+                        <i class='arrow'></i>
+                      </span>
+                  </cell>
+                  <cell title="H9酒店记录" link="/hotel/orderList">
                       <img slot="icon" width="30" style="display:block;margin-right:10px;"
                       src="../../assets/img/index/icon_hotel@2x.png">
-                      <span class='cellValueBox'>
-                        <i>暂未开放</i>
+                      <span class='cellValueBox' style="margin-right:-12px;">
                         <i class='arrow'></i>
                       </span>
                   </cell> -->
@@ -104,6 +118,14 @@
                   <cell title="我的优惠卷" link="/my/cupon">
                   <img slot="icon" width="30" style="display:block;margin-right:10px;"
                        src="../../assets/img/index/wodeyouhui@2x.png">
+                  <span class='cellValueBox' style="margin-right:-12px;">
+                        <!-- <i>{{personalData.cardNum}}</i> -->
+                        <i class='arrow'></i>
+                      </span>
+                </cell>
+                <cell title="设置" link="/account/setting">
+                  <img slot="icon" width="30" style="display:block;margin-right:10px;"
+                       src="../../assets/img/index/shezhi@2x.png">
                   <span class='cellValueBox' style="margin-right:-12px;">
                         <!-- <i>{{personalData.cardNum}}</i> -->
                         <i class='arrow'></i>
@@ -175,7 +197,7 @@ export default {
       overflow-y:auto;
     }
     .personalTopBg{
-      background:url('../../assets/img/index/bg_shijie@2x.png') no-repeat;
+      background:url('../../assets/img/index/bg_wode@2x.png') bottom center no-repeat;
       background-size: 100% 100%;
       height: 350/40rem;
     }

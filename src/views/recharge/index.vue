@@ -37,7 +37,9 @@
     methods: {
       handleRecharge() {
         if (this.fundMoney > 0) {
+          _g.showLoading('充值中')
           this.$http.get('/h9/api/recharge/order?money=' + this.fundMoney).then(res => {
+            _g.hideLoading()
             let data = res.data
             if (data.code === 0) {
               const url = window.location.href.split("#")[0]
