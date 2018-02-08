@@ -19,9 +19,9 @@
               <img :src="shopData.img">
               <div class='flex1'>
                 <p>{{shopData.name}}</p>
-                <p class="joyMoney">{{shopPrice | price2}} 酒元</p>
+                <p class="joyMoney">{{shopData.price | price2}} 酒元</p>
               </div>
-              <span class='num'>x{{countNum}}</span>
+              <span class='num'>x{{countNum*4}}</span>
             </div>
             <p class="numBlock">
               购买数量
@@ -118,7 +118,7 @@ export default {
         .then((res)=>{
           if(res.data.code==0){
             this.shopData=res.data.data
-            this.shopPrice=this.shopData.price
+            this.shopPrice=this.shopData.price*4
           }
         })
     },
@@ -153,17 +153,17 @@ export default {
         }
         this.countNum++
       }
-      this.shopPrice=this.shopData.price*this.countNum
+      this.shopPrice=this.shopData.price*this.countNum*4
     },
     exchangeFn:function(){
-      this.exchangeParams.count=this.countNum
-      this.exchangeParams.goodsId=this.goodsId
-      this.exchangeParams.payMethod = this.payMethod
-      this.exchangeParams.payPlatform = 'wxjs'
-      if (parseFloat(this.shopData.balance)<parseFloat(this.shopPrice)&&this.payMethod==1) {
+      if (this.payMethod==1&&parseFloat(this.shopData.balance)<parseFloat(this.shopPrice)) {
         _g.toastMsg('error','酒元余额不足，请使用微信支付')
         return
       }
+      this.exchangeParams.count=this.countNum*4
+      this.exchangeParams.goodsId=this.goodsId
+      this.exchangeParams.payMethod = this.payMethod
+      this.exchangeParams.payPlatform = 'wxjs'
       _g.showLoading('支付中')
       this.$http.post('h9/store/goods/convert',this.exchangeParams)
         .then((res)=>{
