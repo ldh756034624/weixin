@@ -52,10 +52,10 @@ export default {
 //      let userBalance =  parseFloat(this.shopData.balance)
 //      let price = parseFloat(this.shopData.price)
       let {price, balance, stock} = this.shopData
-      if(parseInt(balance) < parseInt(price)) {
-        _g.toastMsg('error', '余额不足')
-        return
-      }
+      // if(parseInt(balance) < parseInt(price)) {
+      //   _g.toastMsg('error', '余额不足')
+      //   return
+      // }
       if(stock == 0) {
         _g.toastMsg('error', '库存不足')
         return
