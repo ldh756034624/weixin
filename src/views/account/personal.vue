@@ -198,8 +198,8 @@ export default {
     }
     .personalTopBg{
       background:url('../../assets/img/index/bg_wode@2x.png') bottom center no-repeat;
-      background-size: 100% 100%;
-      height: 350/40rem;
+      background-size: 100%;
+      height: 375/40rem;
     }
     .accountBoxT {
       height: 128/40rem;

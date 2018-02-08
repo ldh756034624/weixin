@@ -1,8 +1,8 @@
 <template>
   <div class="page shopPage">
     <tab bar-active-color="#e60012" :line-width="1" :custom-bar-width="getBarWidth">
-      <tab-item active-class="active-tab" selected @on-item-click="init(1)">旅游+体检</tab-item>
-      <tab-item active-class="active-tab" @on-item-click="init(2)">体检</tab-item>
+      <tab-item active-class="active-tab" selected @on-item-click="init(2)">体检</tab-item>
+      <tab-item active-class="active-tab" @on-item-click="init(1)">旅游+体检</tab-item>
       <tab-item active-class="active-tab" @on-item-click="init(3)">旅游</tab-item>
     </tab>
     <div class="mrgb">
@@ -51,7 +51,7 @@
         shopTop: [],
         navBanner: [],
         shopData: [],
-        index: 1,
+        index: 2,
         WxCode:this.$route.query.code, //微信回调码
         getBarWidth: function (index) { // 动态计算每个bar条的宽
           return 60 + 'px'
