@@ -32,7 +32,7 @@
                 <span class='numAdd' @click="count('add')"></span>
               </span>
             </p>
-            <p class="total">共<span>{{countNum}}</span>件商品
+            <p class="total">共<span>{{countNum}}</span>箱
               <span class='totalMoney'>小计 : <i class='joyMoney'>{{shopPrice | price2}} 元</i></span>
             </p>
           </div>
