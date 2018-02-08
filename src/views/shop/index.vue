@@ -58,7 +58,7 @@
   export default {
     mounted() {
       const self = this
-      self.setTitle('酒元商城');
+      self.setTitle('徽酒商城');
       self.WxCode = self.$route.query.code;
       let userObj = JSON.parse(localStorage.getItem('_user'))
       if (!userObj) {
