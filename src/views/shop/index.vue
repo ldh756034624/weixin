@@ -149,7 +149,7 @@
 </script>
 <style scoped lang='less'>
   .vux-swiper{
-    height: 425/40rem;
+    height: 425/40rem!important;
   }
   .shopPage {
     overflow-y: auto;
