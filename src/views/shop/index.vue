@@ -239,6 +239,7 @@
             -webkit-line-clamp: 2;
             // white-space: nowrap;
             text-overflow: ellipsis;
+            text-align:left;
           }
           .joyMoney {
             display:inline-block;
@@ -247,6 +248,7 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            text-align:left;
           }
         }
       .shopImg {

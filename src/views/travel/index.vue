@@ -8,12 +8,12 @@
     <div class="mrgb">
       <div v-for="(item, index) in shopData" :key="index">
         <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1">
-        <swiper-item class="swiper-demo-img" height="12.5rem" v-for="list in item.imgList" :key="list.id"
-                     @click.native='goLinkFn(list)'>
-          <img :src="list.imgUrl" width="100%" height="100%">
-          <div class="swiperTitle">{{list.title}}</div>
-        </swiper-item>
-      </swiper>
+          <swiper-item class="swiper-demo-img" height="12.5rem" v-for="list in item.imgList" :key="list.id"
+                       @click.native='goLinkFn(list)'>
+            <img :src="list.imgUrl" width="100%" height="100%">
+            <div class="swiperTitle">{{list.title}}</div>
+          </swiper-item>
+        </swiper>
       <div class="imgbox" v-if="item.layoutStyle=='TWO'">
          <div class="imgItem" v-for="imgList in item.imgList" @click='goLinkFn(imgList)'>
            <img :src="imgList.imgUrl">
@@ -116,7 +116,9 @@
   .imgbox {
     display: flex;
     justify-content: center;
+    padding-top: 30/40rem;
     padding-bottom: 35/40rem;
+    padding-top: 
     .imgItem {
       width: 318/40rem;
       // height: 318/40rem;
