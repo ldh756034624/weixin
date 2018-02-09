@@ -80,4 +80,10 @@ export default {
       }
     }
   }
+  /*iPhoneX的适配*/
+    @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+           /*添加底部适配*/
+        .home_navbar{padding-bottom: 34/40rem;}
+         
+    } 
 </style>
