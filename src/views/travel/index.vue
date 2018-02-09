@@ -1,8 +1,8 @@
 <template>
   <div class="page shopPage">
     <tab bar-active-color="#e60012" :line-width="1" :custom-bar-width="getBarWidth">
-      <tab-item active-class="active-tab" selected @on-item-click="init(2)">体检</tab-item>
-      <tab-item active-class="active-tab" @on-item-click="init(1)">旅游+体检</tab-item>
+      <tab-item class="vux-1px-r" active-class="active-tab" selected @on-item-click="init(2)">体检</tab-item>
+      <tab-item active-class="active-tab" class="vux-1px-r" @on-item-click="init(1)">旅游+体检</tab-item>
       <tab-item active-class="active-tab" @on-item-click="init(3)">旅游</tab-item>
     </tab>
     <div class="mrgb">
