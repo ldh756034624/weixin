@@ -3,7 +3,7 @@
     <div class="scroll-wrap">
       <scroller lock-x scrollbar-y ref="detailScroller" use-pulldown height="100%" @on-pulldown-loading="refresh"
                 v-model="status1">
-        <div class="mrgb">
+        <div class="mrgb" id="shopBanner">
           <swiper dots-position="center" auto dots-class="custom-bottom">
             <swiper-item class="swiper-demo-img" v-for="(item, index) in shopTop" height="12.5rem" :key="index"
                          @click.native='goLinkFn(item)'>
@@ -148,9 +148,7 @@
   }
 </script>
 <style scoped lang='less'>
-  .vux-swiper{
-    height: 425/40rem!important;
-  }
+  
   .shopPage {
     overflow-y: auto;
     .mrgb {
@@ -278,5 +276,8 @@
 
   .pulldown-arrow {
     font-size: 24/40rem;
+  }
+  #shopBanner .vux-swiper{
+    height: 425/40rem!important;
   }
 </style>
