@@ -118,7 +118,6 @@
     justify-content: center;
     padding-top: 30/40rem;
     padding-bottom: 35/40rem;
-    padding-top: 
     .imgItem {
       width: 318/40rem;
       // height: 318/40rem;
