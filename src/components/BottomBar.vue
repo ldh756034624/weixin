@@ -80,9 +80,4 @@ export default {
       }
     }
   }
-  @media only screen and (width: 375px) and (height: 690px){
-    .home_navbar {
-        background: blue;
-    }
-}
 </style>
