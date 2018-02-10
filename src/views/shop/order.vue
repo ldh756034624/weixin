@@ -154,14 +154,16 @@ export default {
         }
         this.countNum++
       }
-      this.shopPrice=this.shopData.price*this.countNum*4
+      // this.shopPrice=this.shopData.price*this.countNum*4
+      this.shopPrice=this.shopData.price*this.countNum
     },
     exchangeFn:function(){
       if (this.payMethod==1&&parseFloat(this.shopData.balance)<parseFloat(this.shopPrice)) {
         _g.toastMsg('error','酒元余额不足，请使用微信支付')
         return
       }
-      this.exchangeParams.count=this.countNum*4
+      // this.exchangeParams.count=this.countNum*4
+      this.exchangeParams.count=this.countNum
       this.exchangeParams.goodsId=this.goodsId
       this.exchangeParams.payMethod = this.payMethod
       this.exchangeParams.payPlatform = 'wxjs'
