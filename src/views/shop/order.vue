@@ -19,9 +19,9 @@
               <img :src="shopData.img">
               <div class='flex1'>
                 <p>{{shopData.name}}</p>
-                <p class="joyMoney">{{shopData.price | price2}} 酒元</p>
+                <!-- <p class="joyMoney">{{shopData.price | price2}} 酒元</p> -->
               </div>
-              <span class='num'>x{{countNum*4}}</span>
+              <!-- <span class='num'>x{{countNum*4}}</span> -->
             </div>
             <p class="numBlock">
               购买数量
