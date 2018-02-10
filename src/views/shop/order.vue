@@ -118,7 +118,8 @@ export default {
         .then((res)=>{
           if(res.data.code==0){
             this.shopData=res.data.data
-            this.shopPrice=this.shopData.price*4
+            // this.shopPrice=this.shopData.price*4
+            this.shopPrice=this.shopData.price
           }
         })
     },
