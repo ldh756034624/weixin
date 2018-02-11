@@ -186,10 +186,11 @@
     }
     .sortBox {
       background: #fff;
-      padding: 30/40rem 0;
-      margin: 20/40rem 0;
+      padding: 30/40rem 0 10/40rem;
+      margin: 20/40rem 0 0 0;
       text-align: center;
       font-size: 24/40rem;
+      border-bottom: 1px solid #EFEFEF;
       img {
         width: 92/40rem;
         height: 92/40rem;
@@ -201,6 +202,7 @@
       }
     }
     .exchangeBox {
+      padding-top: 25/40rem;
       background: #fff;
       margin-bottom: 20/40rem;
       font-size: 30/40rem;

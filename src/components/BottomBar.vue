@@ -17,8 +17,8 @@
         <span slot="label">社区</span>
       </tabbar-item> -->
       <tabbar-item :selected="/travel/.test($route.path)" @click.native="hasPhone('/travel')">
-          <img slot="icon" src="../assets/img/index/jiankangka_weixuanzhong@2x.png" class="default">
-          <img slot="icon" src="../assets/img/index/jiankangka_xuanzhong@2x.png" class="active">
+          <img slot="icon" src="../assets/img/index/lvyou_kong@2x.png" class="default">
+          <img slot="icon" src="../assets/img/index/lvyou@2x.png" class="active">
           <span slot="label">旅游健康卡</span>
       </tabbar-item>
       <tabbar-item :selected="/account/.test($route.path)" @click.native="hasPhone('/account/personal')">

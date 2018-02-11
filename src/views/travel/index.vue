@@ -146,6 +146,7 @@
   }
   .imgbox {
     display: flex;
+    background: #fff;
     justify-content: center;
     padding-top: 30/40rem;
     padding-bottom: 35/40rem;
@@ -182,10 +183,11 @@
   }
   .sortBox {
       background: #fff;
-      padding: 30/40rem 0;
-      margin: 20/40rem 0;
+      padding: 30/40rem 0 10/40rem;
+      margin: 20/40rem 0 0 0;
       text-align: center;
       font-size: 26/40rem;
+      border-bottom: 1px solid #EFEFEF;
       img {
         width: 122/40rem;
         height: 122/40rem;
