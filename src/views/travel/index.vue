@@ -138,7 +138,7 @@
     .imgItem {
       width: 318/40rem;
       // height: 318/40rem;
-      text-align: center;
+      text-align: left;
       img {
         width: 318/40rem;
         height: 318/40rem;
@@ -147,7 +147,7 @@
         border: 1px solid #d1d1d1;
       }
       p {
-        color: #727171;
+        color: #221815;
         font-size: 25/40rem;
         line-height: 25/40rem;
         padding-top: 10/40rem;
