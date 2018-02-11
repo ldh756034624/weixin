@@ -215,9 +215,9 @@
         margin:20/40rem;
         // height: 340/40rem;
         box-sizing: border-box;
-        border: 2px solid #d1d1d1;
-        box-shadow:#4d4d4d 0 0 10px;
-
+        border: 1px solid #d1d1d1;
+        box-shadow:0px 4px 12px -1px #4d4d4d;
+            /*box-shadow: 0 0 10px #4d4d4d;*/
       }
       .bottomBox{
           line-height: 36/40rem;

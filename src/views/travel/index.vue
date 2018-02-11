@@ -156,9 +156,10 @@
       img {
         width: 318/40rem;
         height: 318/40rem;
-        box-shadow: 6px 5px 16px 0px
-        rgba(4, 0, 0, 0.15);
-        border: 2px solid #d1d1d1;
+        /*box-shadow: 6px 5px 16px 0px
+        rgba(4, 0, 0, 0.15);*/
+        box-shadow: 0px 4px 12px -1px #4d4d4d;
+        border: 1px solid #d1d1d1;
       }
       p {
         color: #221815;
