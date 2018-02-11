@@ -305,6 +305,7 @@ export default {
     .orderBottom{
       position: fixed;
       bottom: 0;
+      border-top: 1px solid #efefef;
       height: 120/40rem;
       line-height: 120/40rem;
       background: #fff;
