@@ -203,6 +203,8 @@
     }
     .exchangeBox {
       padding-top: 25/40rem;
+      padding-left: 25/40rem;
+      padding-right: 25/40rem;
       background: #fff;
       margin-bottom: 20/40rem;
       font-size: 30/40rem;
@@ -214,7 +216,7 @@
       .shopBox {
         box-sizing: border-box;
         text-align: center;
-        margin:20/40rem;
+        margin:15/40rem;
         // height: 340/40rem;
         box-sizing: border-box;
         border: 1px solid #d1d1d1;
@@ -255,8 +257,8 @@
           }
         }
       .shopImg {
-        width: 220/40rem;
-        height: 220/40rem;
+        width: 300/40rem;
+        height: 300/40rem;
         margin-bottom: 16/40rem;
         padding-top: 40/40rem;
       }

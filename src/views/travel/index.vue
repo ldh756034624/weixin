@@ -95,6 +95,7 @@
     },
     methods: {
       init(num) {
+        console.log(num)
         if (num) {
           this.index = num
         }
