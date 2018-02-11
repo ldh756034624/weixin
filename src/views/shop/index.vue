@@ -216,7 +216,7 @@
       .shopBox {
         box-sizing: border-box;
         text-align: center;
-        margin:15/40rem;
+        margin: 23/40rem;
         height: 316/40rem;
         width: 316/40rem;
         box-sizing: border-box;

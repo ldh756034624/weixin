@@ -22,8 +22,8 @@
             <div class="swiperTitle">{{list.title}}</div>
           </swiper-item>
         </swiper>
-        <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="index===0" v-for="item in navBanner">
-          <flexbox-item :span="0.33"  @click.native='init(item.id)' >
+        <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="index===0" >
+          <flexbox-item :span="0.33"  @click.native='init(item.id)' v-for="item in navBanner">
             <div>
               <img :src="item.imgUrl"/>
               <p class="title-bottom">{{item.title}}</p>
