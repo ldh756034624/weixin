@@ -23,20 +23,20 @@
           </swiper-item>
         </swiper>
         <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="index===0">
-          <flexbox-item :span="0.33"  >
-            <div @click = 'init(2)'>
+          <flexbox-item :span="0.33"  @click.native='init(2)' >
+            <div>
               <img src="../../assets/img/travel/tijian@2x.png"/>
               <p class="title-bottom">体检</p>
             </div>
           </flexbox-item>
-          <flexbox-item :span="0.33"   >
-            <div @click = 'init(1)'>
+          <flexbox-item :span="0.33"  @click.native='init(1)' >
+            <div>
               <img src="../../assets/img/travel/lvyoujiatijian@2x.png"/>
               <p class="title-bottom">旅游+体检</p>
             </div>
           </flexbox-item>
-          <flexbox-item :span="0.33"  >
-            <div @click = 'init(3)'>
+          <flexbox-item :span="0.33"  @click.native='init(3)' >
+            <div>
               <img src="../../assets/img/travel/lvyou_shang@2x.png"/>
               <p class="title-bottom">旅游</p>
             </div>
@@ -108,6 +108,9 @@
     methods: {
       init(num) {
         console.log(num)
+        if(this.index === num){
+          return
+        }
         if (num) {
           this.index = num
         }

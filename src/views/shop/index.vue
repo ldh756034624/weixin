@@ -217,7 +217,8 @@
         box-sizing: border-box;
         text-align: center;
         margin:15/40rem;
-        // height: 340/40rem;
+        height: 316/40rem;
+        width: 316/40rem;
         box-sizing: border-box;
         border: 1px solid #d1d1d1;
         box-shadow:0px 4px 12px -1px rgba(77,77,77,.4);
@@ -260,7 +261,7 @@
         width: 220/40rem;
         height: 220/40rem;
         margin-bottom: 16/40rem;
-        padding-top: 40/40rem;
+        padding-top: 23/40rem;
       }
     }
   }
