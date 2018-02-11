@@ -5,7 +5,7 @@
       <tab-item active-class="active-tab" class="vux-1px-r" @on-item-click="init(1)">旅游+体检</tab-item>
       <tab-item active-class="active-tab" @on-item-click="init(3)">旅游</tab-item>
     </tab> -->
-    <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="shopData.length==0">
+    <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="shopData.length==0" id="length0topBar">
       <flexbox-item :span="0.33" v-for='item in navBanner' @click.native='init(item.id)'>
         <div>
           <img :src="item.imgUrl"/>
