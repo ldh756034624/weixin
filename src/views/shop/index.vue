@@ -257,8 +257,8 @@
           }
         }
       .shopImg {
-        width: 300/40rem;
-        height: 300/40rem;
+        width: 220/40rem;
+        height: 220/40rem;
         margin-bottom: 16/40rem;
         padding-top: 40/40rem;
       }
