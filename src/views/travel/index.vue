@@ -23,10 +23,22 @@
           </swiper-item>
         </swiper>
         <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="index===0">
-          <flexbox-item :span="0.33" v-for='tabItem in navBanner' @click.native='init(tabItem.id)' >
+          <flexbox-item :span="0.33"  @click.native='init(2)' >
             <div>
-              <img :src="tabItem.imgUrl"/>
-              <p class="title-bottom">{{tabItem.title}}</p>
+              <img :src="TJimg"/>
+              <p class="title-bottom">体检</p>
+            </div>
+          </flexbox-item>
+          <flexbox-item :span="0.33"  @click.native='init(1)' >
+            <div>
+              <img :src="TLimg"/>
+              <p class="title-bottom">旅游+体检</p>
+            </div>
+          </flexbox-item>
+          <flexbox-item :span="0.33"  @click.native='init(3)' >
+            <div>
+              <img :src="LYimg"/>
+              <p class="title-bottom">旅游</p>
             </div>
           </flexbox-item>
         </flexbox>
@@ -160,7 +172,7 @@
         height: 318/40rem;
         /*box-shadow: 6px 5px 16px 0px
         rgba(4, 0, 0, 0.15);*/
-        box-shadow: 0px 4px 12px -1px #4d4d4d;
+        box-shadow: 0px 4px 12px -1px rgba(77,77,77,.4);
         border: 1px solid #d1d1d1;
       }
       p {

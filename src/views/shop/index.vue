@@ -203,8 +203,8 @@
     }
     .exchangeBox {
       padding-top: 25/40rem;
-      padding-left: 25/40rem;
-      padding-right: 25/40rem;
+      padding-left: 15/40rem;
+      padding-right: 15/40rem;
       background: #fff;
       margin-bottom: 20/40rem;
       font-size: 30/40rem;
@@ -220,7 +220,7 @@
         // height: 340/40rem;
         box-sizing: border-box;
         border: 1px solid #d1d1d1;
-        box-shadow:0px 4px 12px -1px #4d4d4d;
+        box-shadow:0px 4px 12px -1px rgba(77,77,77,.4);
             /*box-shadow: 0 0 10px #4d4d4d;*/
       }
       .bottomBox{
