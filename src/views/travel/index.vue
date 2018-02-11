@@ -1,10 +1,10 @@
 <template>
   <div class="page shopPage">
-    <tab bar-active-color="#e60012" :line-width="1" :custom-bar-width="getBarWidth">
+    <!-- <tab bar-active-color="#e60012" :line-width="1" :custom-bar-width="getBarWidth">
       <tab-item class="vux-1px-r" active-class="active-tab" selected @on-item-click="init(2)">体检</tab-item>
       <tab-item active-class="active-tab" class="vux-1px-r" @on-item-click="init(1)">旅游+体检</tab-item>
       <tab-item active-class="active-tab" @on-item-click="init(3)">旅游</tab-item>
-    </tab>
+    </tab> -->
     <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="shopData.length==0">
       <flexbox-item :span="0.33" v-for='(item,idx) in navBanner' @click.native='init(idx+1)' :key="idx">
         <div>
@@ -22,7 +22,7 @@
             <div class="swiperTitle">{{list.title}}</div>
           </swiper-item>
         </swiper>
-        <flexbox :gutter="0" wrap="wrap" class='sortBox' v-once>
+        <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="index===0">
           <flexbox-item :span="0.33" v-for='item in navBanner' @click.native='init(item.id)' :key="item.id">
             <div>
               <img :src="item.imgUrl"/>
@@ -158,7 +158,7 @@
         height: 318/40rem;
         box-shadow: 6px 5px 16px 0px
         rgba(4, 0, 0, 0.15);
-        border: 1px solid #d1d1d1;
+        border: 2px solid #d1d1d1;
       }
       p {
         color: #221815;
