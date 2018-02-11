@@ -141,10 +141,10 @@
       text-align: center;
       img {
         width: 318/40rem;
-      height: 318/40rem;
+        height: 318/40rem;
         box-shadow: 6px 5px 16px 0px
-    rgba(4, 0, 0, 0.15);
-    border: solid 2px #eeeeee;
+        rgba(4, 0, 0, 0.15);
+        border: 1px solid #d1d1d1;
       }
       p {
         color: #727171;
@@ -175,7 +175,6 @@
         width: 122/40rem;
         height: 122/40rem;
         border-radius: 3rem;
-        border: 1px solid #d1d1d1;
         /*margin-bottom: 15/40rem;*/
       }
       .title-bottom{
