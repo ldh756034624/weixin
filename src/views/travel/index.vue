@@ -6,7 +6,7 @@
       <tab-item active-class="active-tab" @on-item-click="init(3)">旅游</tab-item>
     </tab> -->
     <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="shopData.length==0">
-      <flexbox-item :span="0.33" v-for='(item,idx) in navBanner' @click.native='init(idx+1)' :key="idx">
+      <flexbox-item :span="0.33" v-for='item in navBanner' @click.native='init(item.id)'>
         <div>
           <img :src="item.imgUrl"/>
           <p class="title-bottom">{{item.title}}</p>
@@ -22,23 +22,11 @@
             <div class="swiperTitle">{{list.title}}</div>
           </swiper-item>
         </swiper>
-        <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="index===0">
-          <flexbox-item :span="0.33"  @click.native='init(2)' >
+        <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="index===0" v-for="item in navBanner">
+          <flexbox-item :span="0.33"  @click.native='init(item.id)' >
             <div>
-              <img src="../../assets/img/travel/tijian@2x.png"/>
-              <p class="title-bottom">体检</p>
-            </div>
-          </flexbox-item>
-          <flexbox-item :span="0.33"  @click.native='init(1)' >
-            <div>
-              <img src="../../assets/img/travel/lvyoujiatijian@2x.png"/>
-              <p class="title-bottom">旅游+体检</p>
-            </div>
-          </flexbox-item>
-          <flexbox-item :span="0.33"  @click.native='init(3)' >
-            <div>
-              <img src="../../assets/img/travel/lvyou_shang@2x.png"/>
-              <p class="title-bottom">旅游</p>
+              <img :src="item.imgUrl"/>
+              <p class="title-bottom">{{item.title}}</p>
             </div>
           </flexbox-item>
         </flexbox>
