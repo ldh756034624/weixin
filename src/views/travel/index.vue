@@ -5,6 +5,14 @@
       <tab-item active-class="active-tab" class="vux-1px-r" @on-item-click="init(1)">旅游+体检</tab-item>
       <tab-item active-class="active-tab" @on-item-click="init(3)">旅游</tab-item>
     </tab>
+    <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="shopData.length==0">
+      <flexbox-item :span="0.33" v-for='(item,idx) in navBanner' @click.native='init(idx+1)' :key="idx">
+        <div>
+          <img :src="item.imgUrl"/>
+          <p class="title-bottom">{{item.title}}</p>
+        </div>
+      </flexbox-item>
+    </flexbox>
     <div class="mrgb" id="travelBanner">
       <div v-for="(item, index) in shopData" :key="index">
         <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1">
@@ -14,8 +22,8 @@
             <div class="swiperTitle">{{list.title}}</div>
           </swiper-item>
         </swiper>
-        <flexbox :gutter="0" wrap="wrap" class='sortBox'>
-          <flexbox-item :span="0.33" v-for='item in navBanner' @click.native='init(($index+1))' :key="$index">
+        <flexbox :gutter="0" wrap="wrap" class='sortBox' v-once>
+          <flexbox-item :span="0.33" v-for='item in navBanner' @click.native='init(item.id)' :key="item.id">
             <div>
               <img :src="item.imgUrl"/>
               <p class="title-bottom">{{item.title}}</p>
@@ -61,12 +69,15 @@
       return {
         shopTop: [],
         navBanner: [{
+          id:2,
           imgUrl:TJimg,
           title:"体检"
         },{
+          id:1,
           imgUrl:TLimg,
           title:"旅游+体检"
         },{
+          id:3,
           imgUrl:LYimg,
           title:"旅游"
         }],
