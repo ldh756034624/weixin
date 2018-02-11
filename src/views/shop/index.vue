@@ -215,7 +215,7 @@
         margin:20/40rem;
         // height: 340/40rem;
         box-sizing: border-box;
-        border: 1px solid #C7000A;
+        border: 1px solid #d1d1d1;
         box-shadow:#4d4d4d 0 0 10px;
 
       }
@@ -278,6 +278,6 @@
     font-size: 24/40rem;
   }
   #shopBanner .vux-swiper{
-    height: 425/40rem!important;
+    height: 375/40rem!important;
   }
 </style>
