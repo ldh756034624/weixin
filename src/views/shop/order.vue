@@ -62,7 +62,8 @@
         </section>
       </div>
       <div class="orderBottom">
-        实付{{payMethod==1?"旅游健康卡余额:":"实付金额:"}}<span class='joyMoney'>{{shopPrice | price2}} 元</span>
+        <!-- 实付{{payMethod==1?"旅游健康卡余额:":"金额:"}}<span class='joyMoney'>{{shopPrice | price2}} 元</span> -->
+        实付金额:<span class='joyMoney'>{{shopPrice | price2}} 元</span>
         <x-button class='exchangeBtn' mini @click.native="exchangeFn">支付</x-button>
       </div>
 
