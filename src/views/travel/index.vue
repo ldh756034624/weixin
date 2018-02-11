@@ -61,10 +61,10 @@
           imgUrl:"../../assets/img/travel/tijian@2x.png",
           title:"体检"
         },{
-          imgUrl:"../../../assets/img/travel/lvyoujiatijian@2x.png",
+          imgUrl:"../../assets/img/travel/lvyoujiatijian@2x.png",
           title:"旅游+体检"
         },{
-          imgUrl:"assets/img/travel/lvyou_shang@2x.png",
+          imgUrl:"../../assets/img/travel/lvyou_shang@2x.png",
           title:"旅游"
         }],
         shopData: [],
