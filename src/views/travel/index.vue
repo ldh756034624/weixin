@@ -23,10 +23,10 @@
           </swiper-item>
         </swiper>
         <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="index===0">
-          <flexbox-item :span="0.33" v-for='item in navBanner' @click.native='init(item.id)' :key="item.id">
+          <flexbox-item :span="0.33" v-for='tabItem in navBanner' @click.native='init(tabItem.id)' >
             <div>
-              <img :src="item.imgUrl"/>
-              <p class="title-bottom">{{item.title}}</p>
+              <img :src="tabItem.imgUrl"/>
+              <p class="title-bottom">{{tabItem.title}}</p>
             </div>
           </flexbox-item>
         </flexbox>

@@ -192,8 +192,8 @@
       font-size: 24/40rem;
       border-bottom: 1px solid #EFEFEF;
       img {
-        width: 92/40rem;
-        height: 92/40rem;
+        width: 122/40rem;
+        height: 122/40rem;
         border-radius: 3rem;
         /*margin-bottom: 15/40rem;*/
       }
