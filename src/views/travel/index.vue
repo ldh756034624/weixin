@@ -15,7 +15,7 @@
     </flexbox>
     <div class="mrgb" id="travelBanner">
       <div v-for="(item, index) in shopData" :key="index">
-        <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1" :height="'9.375rem'">
+        <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1" height="375px">
           <swiper-item class="swiper-demo-img" height="12.5rem" v-for="list in item.imgList" :key="list.id"
                        @click.native='goLinkFn(list)'>
             <img :src="list.imgUrl" width="100%" height="100%">
@@ -23,7 +23,7 @@
           </swiper-item>
         </swiper>
         <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="index===0" >
-          <flexbox-item :span="0.33"  @click.native='init(item.id)' v-for="item in navBanner">
+          <flexbox-item :span="0.33"  @click.native='init(item.id)' v-for="item in navBanner" :key="item.id">
             <div>
               <img :src="item.imgUrl"/>
               <p class="title-bottom">{{item.title}}</p>

@@ -4,7 +4,7 @@
       <scroller lock-x scrollbar-y ref="detailScroller" use-pulldown height="100%" @on-pulldown-loading="refresh"
                 v-model="status1">
         <div class="mrgb" id="shopBanner">
-          <swiper dots-position="center" :height="'9.375rem'" auto dots-class="custom-bottom">
+          <swiper dots-position="center" height="375px" auto dots-class="custom-bottom">
             <swiper-item class="swiper-demo-img" v-for="(item, index) in shopTop" height="12.5rem" :key="index"
                          @click.native='goLinkFn(item)'>
               <img :src="item.imgUrl" width="100%" height="100%">
@@ -258,10 +258,10 @@
           }
         }
       .shopImg {
-        width: 220/40rem;
-        height: 220/40rem;
-        margin-bottom: 16/40rem;
-        padding-top: 23/40rem;
+        width: 280/40rem;
+        height: 280/40rem;
+        margin-bottom: 12/40rem;
+        padding-top: 12/40rem;
       }
     }
   }
