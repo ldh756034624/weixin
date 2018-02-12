@@ -5,7 +5,7 @@
                 v-model="status1">
         <div class="mrgb" >
           <swiper dots-position="center" height="9.375rem" auto dots-class="custom-bottom">
-            <swiper-item class="swiper-demo-img" v-for="(item, index) in shopTop" height="12.5rem" :key="index"
+            <swiper-item class="swiper-demo-img" v-for="(item, index) in shopTop" height="9.375rem" :key="index"
                          @click.native='goLinkFn(item)'>
               <img :src="item.imgUrl" width="100%"  hieght="100%">
             </swiper-item>
