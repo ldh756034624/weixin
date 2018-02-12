@@ -5,9 +5,9 @@
                 v-model="status1">
         <div class="mrgb" >
           <swiper dots-position="center" :aspect-ratio="750/375" style="height:9.375rem;" auto dots-class="custom-bottom">
-            <swiper-item class="swiper-demo-img" v-for="(item, index) in shopTop" height="12.5rem" :key="index"
+            <swiper-item class="swiper-demo-img" v-for="(item, index) in shopTop" height="9.375rem" :key="index"
                          @click.native='goLinkFn(item)'>
-              <img :src="item.imgUrl" width="100%"  height="100%">
+              <img :src="item.imgUrl" width="100%"  style="height:9.375rem;">
             </swiper-item>
           </swiper>
           <flexbox :gutter="0" wrap="wrap" class='sortBox'>
@@ -282,7 +282,7 @@
   .pulldown-arrow {
     font-size: 24/40rem;
   }
-  /*#shopBanner .vux-slider>.vux-swiper>.vux-swiper-item,#shopBanner .vux-slider>.vux-swiper,#shopBanner .vux-slider>.vux-swiper>.vux-swiper-item>img{
+  #shopBanner .vux-slider>.vux-swiper>.vux-swiper-item,#shopBanner .vux-slider>.vux-swiper,#shopBanner .vux-slider>.vux-swiper>.vux-swiper-item>img{
     height: 375/40rem!important;
-  }*/
+  }
 </style>
