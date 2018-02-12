@@ -1,5 +1,5 @@
 <template>
-  <div class="page shopPage">
+  <div class="page shopPage" id="travelBanner">
     <!-- <tab bar-active-color="#e60012" :line-width="1" :custom-bar-width="getBarWidth">
       <tab-item class="vux-1px-r" active-class="active-tab" selected @on-item-click="init(2)">体检</tab-item>
       <tab-item active-class="active-tab" class="vux-1px-r" @on-item-click="init(1)">旅游+体检</tab-item>
@@ -13,7 +13,7 @@
         </div>
       </flexbox-item>
     </flexbox>
-    <div class="mrgb" id="travelBanner">
+    <div class="mrgb" >
       <div v-for="(item, index) in shopData" :key="index">
         <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1" height="9.375rem">
           <swiper-item class="swiper-demo-img" height="12.5rem" v-for="list in item.imgList" :key="list.id"
@@ -213,7 +213,7 @@
   .pulldown-arrow {
     font-size: 24/40rem;
   }
-/*  #travelBanner .vux-swiper{
+  #travelBanner .vux-swiper{
     height: 375/40rem!important;
-  }*/
+  }
 </style>
