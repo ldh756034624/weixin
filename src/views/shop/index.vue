@@ -258,10 +258,10 @@
           }
         }
       .shopImg {
-        width: 280/40rem;
-        height: 280/40rem;
-        margin-bottom: 12/40rem;
-        padding-top: 12/40rem;
+        width: 290/40rem;
+        height: 290/40rem;
+        margin-bottom: 6/40rem;
+        padding-top: 6/40rem;
       }
     }
   }
