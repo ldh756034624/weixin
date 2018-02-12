@@ -282,7 +282,7 @@
   .pulldown-arrow {
     font-size: 24/40rem;
   }
-  #shopBanner .vux-swiper{
+  #shopBanner .vux-slider>.vux-swiper>.vux-swiper-item,#shopBanner .vux-slider>.vux-swiper,#shopBanner .vux-slider>.vux-swiper>.vux-swiper-item>img{
     height: 375/40rem!important;
   }
 </style>

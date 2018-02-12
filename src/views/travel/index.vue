@@ -15,7 +15,7 @@
     </flexbox>
     <div class="mrgb" >
       <div v-for="(item, index) in shopData" :key="index">
-        <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1" :aspect-ratio="375/750">
+        <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1" :aspect-ratio="2">
           <swiper-item class="swiper-demo-img" height="12.5rem" v-for="list in item.imgList" :key="list.id"
                        @click.native='goLinkFn(list)'>
             <img :src="list.imgUrl" width="100%" style="height:9.375rem;">
@@ -213,7 +213,7 @@
   .pulldown-arrow {
     font-size: 24/40rem;
   }
-  #travelBanner .vux-swiper{
+   #shopBanner .vux-slider>.vux-swiper>.vux-swiper-item,#shopBanner .vux-slider>.vux-swiper,#shopBanner .vux-slider>.vux-swiper>.vux-swiper-item>img{
     height: 375/40rem!important;
   }
 </style>
