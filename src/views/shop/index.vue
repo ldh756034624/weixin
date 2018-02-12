@@ -20,7 +20,7 @@
           </flexbox>
           <section>
             <div class="exchangeBox" v-if='shopData.hotGoods'>
-              <flexbox :gutter="0" wrap="wrap">
+              <flexbox :gutter="0" wrap="wrap" align="flex-start">
                 <flexbox-item :span="1/2" class='shopLine' v-for='item in shopData.hotGoods' :key="item.id">
                   <router-link :to="{path:'/shopDataile',query:{id:item.id}}">
                     <div class='shopBox'>
