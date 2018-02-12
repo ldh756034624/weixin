@@ -18,7 +18,7 @@
         <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1" :aspect-ratio="375/750">
           <swiper-item class="swiper-demo-img" height="12.5rem" v-for="list in item.imgList" :key="list.id"
                        @click.native='goLinkFn(list)'>
-            <img :src="list.imgUrl" width="100%" height="100%">
+            <img :src="list.imgUrl" width="100%" style="height:9.375rem;">
             <div class="swiperTitle">{{list.title}}</div>
           </swiper-item>
         </swiper>
@@ -213,7 +213,7 @@
   .pulldown-arrow {
     font-size: 24/40rem;
   }
- /* #travelBanner .vux-swiper{
+  #travelBanner .vux-swiper{
     height: 375/40rem!important;
-  }*/
+  }
 </style>
