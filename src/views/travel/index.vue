@@ -6,7 +6,7 @@
       <tab-item active-class="active-tab" @on-item-click="init(3)">旅游</tab-item>
     </tab> -->
     <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="shopData.length==0" id="length0topBar">
-      <flexbox-item :span="0.33" v-for='item in navBanner' @click.native='init(item.id)'>
+      <flexbox-item :span="0.33" v-for='item in navBanner' @click.native='init(item.id)' :key="item.id">
         <div>
           <img :src="item.imgUrl"/>
           <p class="title-bottom">{{item.title}}</p>
@@ -15,7 +15,7 @@
     </flexbox>
     <div class="mrgb" id="travelBanner">
       <div v-for="(item, index) in shopData" :key="index">
-        <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1" height="375px">
+        <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1" height="9.375rem">
           <swiper-item class="swiper-demo-img" height="12.5rem" v-for="list in item.imgList" :key="list.id"
                        @click.native='goLinkFn(list)'>
             <img :src="list.imgUrl" width="100%" height="100%">
