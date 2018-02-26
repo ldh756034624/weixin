@@ -65,8 +65,8 @@ export default {
       display: none;
     }
     img{
-      width: 50/40rem;
-      height: 50/40rem;
+      width: 27px;
+      height: 27px;
     }
     .weui-bar__item_on{
       .default{
@@ -84,6 +84,6 @@ export default {
     @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
            /*添加底部适配*/
         .home_navbar{padding-bottom: 34/40rem;}
-         
-    } 
+
+    }
 </style>
