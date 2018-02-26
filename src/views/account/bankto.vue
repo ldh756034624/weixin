@@ -36,7 +36,7 @@
       fundsFn: function () {
         let self = this
         function trim(str){
-            return str.replace(/\s|\xA0/g,"");   
+            return str.replace(/\s|\xA0/g,"");
         }
         const reg = /^1[3|5|7|8][0-9]\d{4,8}$/;
         if(self.fundMoney == null || self.fundMoney.length !=13 || !reg.test(trim(self.fundMoney))){
@@ -51,7 +51,7 @@
             _g.toastMsg('error', res.data.msg)
           }
         })
-        
+
       }
     },
     components: {
@@ -138,7 +138,8 @@
     }
     .weui-input{
       line-height: 48/40rem!important;
+      height: 48/40rem;
       color: #333!important;
     }
-  }  
+  }
 </style>

@@ -10,7 +10,7 @@
         <x-button mini class='purseFundBtn' @click.native="handleRecharge">充值</x-button>
       </div>
       <cell title="酒元明细" link='/account/purseParticulars' is-link>
-        <img slot="icon" width="30" style="display:block;margin-right:5px;"
+        <img slot="icon" class="jyimg" style="display:block;margin-right:5px;"
              src="../../assets/img/index/icon_order@2x.png">
       </cell>
     </group>
@@ -136,6 +136,7 @@
     height: 60/40rem;
     margin-top: 20/40rem;
     color: #666;
+    font-size: 26/40rem;
     padding: 0 0.6rem !important;
     border: 1px solid #666;
     background: #fff;
@@ -163,6 +164,9 @@
   .ItemBorder {
     border-left: 1px solid #f2f2f2;
     border-right: 1px solid #f2f2f2;
+  }
+  .jyimg {
+    width: 60/40rem;
   }
 </style>
 <style lang='less'>

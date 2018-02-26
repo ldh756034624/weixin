@@ -77,25 +77,25 @@
 <style scoped lang='less'>
   .page {
     height: 100%;
-    padding-top: 10px;
+    padding-top: 20/40rem;
     position: relative;
     line-height: 1;
     background: #F2F2F2;
     .wrapper {
-      margin: 0 15px;
+      margin: 0 30/40rem;
       background: #fff;
-      padding: 15px;
+      padding: 30/40rem;
       .title {
-        margin-bottom: 20px;
-        font-size: 12px;
+        margin-bottom: 40/40rem;
+        font-size: 24/40rem;
         color: #333333;
       }
     }
   }
 
   .top {
-    padding-bottom: 20px;
-    margin-bottom: 25px;
+    padding-bottom: 40/40rem;
+    margin-bottom: 50/40rem;
     border-bottom: 1px solid #f2f2f2;
     .pay-wrapper {
       display: flex;
@@ -104,19 +104,19 @@
       .left {
         display: flex;
         align-items: center;
-        font-size: 15px;
+        font-size: 30/40rem;
         color: #333333;
         .weixin-icon {
-          margin-right: 10px;
-          height: 27px;
-          width: 27px;
+          margin-right: 20/40rem;
+          height: 54/40rem;
+          width: 54/40rem;
           background-size: 100% 100%;
           background-image: url("../../assets/img/shop/weixin@2x.png");
         }
       }
       .right {
-        width: 18px;
-        height: 18px;
+        width: 36/40rem;
+        height: 36/40rem;
         background-size: 100% 100%;
         background-image: url("../../assets/img/addr/queding.png");
       }
@@ -124,23 +124,23 @@
   }
 
   .middle {
-    padding-bottom: 12px;
-    margin-bottom: 50px;
+    padding-bottom: 24/40rem;
+    margin-bottom: 100/40rem;
     border-bottom: 1px solid #f2f2f2;
   }
 
   .pay-btn {
-    height: 50px;
-    line-height: 50px;
+    height: 100/40rem;
+    line-height: 100/40rem;
     text-align: center;
-    margin: 0 15px;
+    margin: 0 30/40rem;
     background: #627984;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 32/40rem;
     color: #FFFFFF;
   }
     .fundMoney {
-    font-size: 26px;
+    font-size: 52/40rem;
   }
 </style>
 <style lang="less">
@@ -151,12 +151,12 @@
         border: none;
       }
       .weui-label {
-        font-size: 36px;
+        font-size: 72/40rem;
         color: #333333;
         width: auto !important;
       }
       .weui-input {
-        height: 40px;
+        height: 80/40rem;
       }
     }
   }

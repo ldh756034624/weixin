@@ -254,7 +254,7 @@ export default {
       line-height: 0;
       margin:30/40rem 0;
       .desc{
-        font-size: 12px;
+        font-size: 24/40rem;
       }
       .redFontt{
         font-size: 55/40rem;

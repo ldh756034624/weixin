@@ -58,44 +58,44 @@
   }
 
   .top {
-    padding: 60px 0 20px;
+    padding: 120/40rem 0 40/40rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     .icon-success {
-      height: 50px;
-      width: 50px;
+      height: 100/40rem;
+      width: 100/40rem;
       background-size: 100% 100%;
       background-image: url("../../assets/img/account/tixian_img_success.png");
-      margin-bottom: 20px;
+      margin-bottom: 40/40rem;
     }
     .tip1 {
-      margin-bottom: 10px;
-      font-size: 14px;
+      margin-bottom: 20/40rem;
+      font-size: 28/40rem;
       color: #627984;
     }
     .tip2 {
-      font-size: 12px;
+      font-size: 24/40rem;
       color: #999999;
     }
   }
 
   .info-wrapper {
-    margin-bottom: 30px;
+    margin-bottom: 60/40rem;
     .info-item {
-      padding: 0 15px;
+      padding: 0 30/40rem;
       display: flex;
       justify-content: space-between;
-      height: 50px;
-      line-height: 50px;
-      font-size: 15px;
+      height: 100/40rem;
+      line-height: 100/40rem;
+      font-size: 30/40rem;
       color: #333;
       .left {
         color: #999;
       }
       .right {
         .time-range {
-          margin-right: 20px;
+          margin-right: 40/40rem;
         }
       }
     }
@@ -106,11 +106,11 @@
     justify-content: space-around;
     & > span {
       width: 90%;
-      height: 50px;
-      line-height: 50px;
+      height: 100/40rem;
+      line-height: 100/40rem;
       text-align: center;
       border: 1px solid #627984;
-      font-size: 16px;
+      font-size: 32/40rem;
       border-radius: 4px;
     }
     .purse {

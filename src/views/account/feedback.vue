@@ -97,7 +97,7 @@
 </script>
 <style scoped lang='less'>
   .page {
-    padding-top: 10px;
+    padding-top: 20/40rem;
     line-height: 1;
     background: rgb(242, 242, 242);
   }
@@ -105,15 +105,15 @@
   .edit-wrapper {
     position: relative;
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: 20/40rem;
     background: #fff;
-    padding: 18px 15px 15px;
+    padding: 36/40rem 30/40rem 30/40rem;
     .text-area {
-      margin-bottom: 18px;
+      margin-bottom: 36/40rem;
       textarea {
-        width: 345px;
-        height: 102px;
-        font-size: 12px;
+        width: 690/40rem;
+        height: 204/40rem;
+        font-size: 24/40rem;
         border: none;
         resize: none;
       }
@@ -125,15 +125,15 @@
       /*position: absolute;*/
       float: right;
       clear: both;
-      right: 16px;
-      bottom: 15px;
+      right: 32/40rem;
+      bottom: 30/40rem;
       display: flex;
       align-items: center;
-      font-size: 15px;
+      font-size: 30/40rem;
       .check-box {
-        margin-right: 10px;
-        height: 18px;
-        width: 18px;
+        margin-right: 20/40rem;
+        height: 36/40rem;
+        width: 36/40rem;
         background-image: url("../../assets/img/account/duihao_kong@2x.png");
         background-size: 100% 100%;
         &.checked {
@@ -144,18 +144,18 @@
   }
 
   .connect-content {
-    margin-left: 15px;
-    line-height: 33px;
-    font-size: 12px;
+    margin-left: 30/40rem;
+    line-height: 66/40rem;
+    font-size: 24/40rem;
     color: #999999;
   }
 
   .phone-input {
     display: block;
-    height: 50px;
+    height: 100/40rem;
     width: 100%;
-    font-size: 15px;
-    padding-left: 15px;
+    font-size: 30/40rem;
+    padding-left: 30/40rem;
     border: none;
   }
 
@@ -165,12 +165,12 @@
     left: 0;
     width: 100%;
     .submit {
-      height: 50px;
-      line-height: 50px;
+      height: 100/40rem;
+      line-height: 100/40rem;
       background: #627984;
       color: #fff;
       text-align: center;
-      font-size: 16px;
+      font-size: 32/40rem;
     }
   }
 

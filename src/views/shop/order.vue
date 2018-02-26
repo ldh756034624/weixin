@@ -319,6 +319,8 @@ export default {
         float: right;
         height: 120/40rem;
         margin-left: 40/40rem;
+        font-size: 26/40rem;
+        padding: 0 24/40rem;
       }
     }
   }

@@ -111,7 +111,7 @@
   }
   .moneyBox {
     background-color: #fff;
-    margin: 0 15px;
+    margin: 0 30/40rem;
     border-radius: 3px;
   }
   .moneyCon {
@@ -120,20 +120,20 @@
   }
   .moneyCon img {
     border: 1px solid #979797;
-    width: 160px;
-    height: 160px;
-    margin: 25px auto;
+    width: 320/40rem;
+    height: 320/40rem;
+    margin: 50/40rem auto;
   }
   .btnBox {
-    width: 160px;
-    font-size: 12px;
+    width: 320/40rem;
+    font-size: 24/40rem;
     color: #627984;
-    line-height: 12px;
-    height: 12px;
+    line-height: 24/40rem;
+    height: 24/40rem;
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
-    padding-bottom: 60px;
+    padding-bottom: 120/40rem;
   }
   .btn.setBtn {
     border-right: 1px solid #999;
@@ -144,31 +144,31 @@
     text-align: right;
   }
   .moneyTips {
-    font-size: 14px;
-    line-height: 14px;
-    padding: 40px 0 20px;
+    font-size: 28/40rem;
+    line-height: 28/40rem;
+    padding: 80/40rem 0 40/40rem;
   }
   .moneyTxt {
-    font-size: 36px;
-    line-height: 36px;
+    font-size: 72/40rem;
+    line-height: 72/40rem;
   }
   .moneyTxt span {
-    font-size: 18px;
-    line-height: 18px;
+    font-size: 36/40rem;
+    line-height: 36/40rem;
   }
   .list {
-    padding: 0 15px;
+    padding: 0 30/40rem;
   }
   .listItem {
     display: flex;
     align-items: center;
-    padding: 10px 0;
+    padding: 20/40rem 0;
   }
   .listItem img {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    margin-right: 10px;
+    width: 80/40rem;
+    height: 80/40rem;
+    border-radius: 40/40rem;
+    margin-right: 20/40rem;
   }
   .listCon {
     flex: 1;
@@ -177,20 +177,20 @@
     align-items: center;
   }
   .ConL {
-    font-size: 14px;
+    font-size: 28/40rem;
     color: #333333;
-    line-height: 14px;
+    line-height: 28/40rem;
   }
   .ConL p {
-    font-size: 12px;
+    font-size: 24/40rem;
     color: #CCCCCC;
-    line-height: 12px;
-    margin-top: 8px;
+    line-height: 24/40rem;
+    margin-top: 16/40rem;
   }
   .ConR {
-    font-size: 18px;
+    font-size: 36/40rem;
     color: #333333;
-    line-height: 18px;
+    line-height: 36/40rem;
   }
 
   .loading {

@@ -38,24 +38,24 @@
   }
 
   .top {
-    padding: 60px 0 70px;
+    padding: 120/40rem 0 140/40rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     .icon-fail {
-      height: 50px;
-      width: 50px;
+      height: 100/40rem;
+      width: 100/40rem;
       background-size: 100% 100%;
       background-image: url("../../assets/img/account/tixian_img_fail@2x.png");
-      margin-bottom: 20px;
+      margin-bottom: 40/40rem;
     }
     .tip1 {
-      margin-bottom: 10px;
-      font-size: 14px;
+      margin-bottom: 20/40rem;
+      font-size: 28/40rem;
       color: #627984;
     }
     .tip2 {
-      font-size: 12px;
+      font-size: 24/40rem;
       color: #999999;
     }
   }
@@ -64,12 +64,12 @@
     display: flex;
     justify-content: space-around;
     & > span {
-      width: 132px;
-      height: 50px;
-      line-height: 50px;
+      width: 264/40rem;
+      height: 100/40rem;
+      line-height: 100/40rem;
       text-align: center;
       border: 1px solid #627984;
-      font-size: 16px;
+      font-size: 32/40rem;
       border-radius: 4px;
     }
     .home {
