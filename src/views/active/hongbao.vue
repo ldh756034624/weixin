@@ -1,7 +1,9 @@
 <template>
 	<div class="page hongbaoPage" :style="{height: Wheight+'px'}">
     <div class="pageBox">
+        <div class="pageCon">
       <div class="RecordBox">
+        <div class="RecordBg"></div>
       <div class="RecordCon">
         <div class="btn" @click="scanFn()">扫码抢红包</div>
         <div class="descRecord"><span v-on:click="showUserDeal=true">游戏说明 ></span><router-link to='/active/prizeRecord'>
@@ -10,13 +12,15 @@
       </div>
       <div class="yun"></div>
     </div>
-    <div class="RecordBox">
+    <div class="RecordBox Box2">
+      <div class="RecordBg"></div>
       <div class="RecordCon">
         <div class="btn"><x-input  v-model="code" class='inputCode'  placeholder='请输入兑奖码'></x-input></div>
         <div class="descRecord"><span  @click="prizeFn()">兑奖 ></span></div>
       </div>
       <div class="yun2"></div>
     <div class="banner"></div>
+    </div>
     </div>
     </div>
     <!-- <div class="hongbaoCont">
@@ -175,11 +179,13 @@ export default {
 </style>
 <style type="text/css" lang='less'scoped>
   .hongbaoPage{
-        overflow: hidden;
-    background: url('../../assets/img/active/bg@2x.png') repeat-y;
-    background-size: 100%;
-    .pageBox {
+      overflow-y: auto;
+    .pageCon {
       padding-top: 350/40rem;
+      background: url('../../assets/img/active/bg@2x.png') repeat-y;
+      background-size: 100%;
+    }
+    .pageBox {
       width: 100%;
       height: 100%;
     }
@@ -187,14 +193,29 @@ export default {
       width: 627/40rem;
       margin: 0 auto;
       height: 327/40rem;
+      position: relative;
+    }
+    .RecordBox.Box2 {
+      height: 580/40rem;
+    }
+    .RecordBg {
+      width: 627/40rem;
+      height: 327/40rem;
       background: url('../../assets/img/active/juanzhou@2x.png') no-repeat top center;
       background-size: cover;
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
     .RecordCon {
       width: 360/40rem;
       margin: 0 auto;
       padding-top: 78/40rem;
+      position:absolute;
+      left: 50%;
+      margin-left: -360/2/40rem;
+      z-index: 2;
     }
     .btn {
       background: url('../../assets/img/active/kuangkuang@2x.png') no-repeat top center;
