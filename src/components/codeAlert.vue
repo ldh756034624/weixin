@@ -241,5 +241,6 @@ export default {
 <style type="text/css">
   .codeAlert .weui-dialog {
       max-width: 80%;
+      width: 80%;
     }
 </style>
