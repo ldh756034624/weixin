@@ -1,13 +1,13 @@
 <template>
-  <div class="page shopPage">
+  <div class="page shopPage" id="shopBanner">
     <div class="scroll-wrap">
       <scroller lock-x scrollbar-y ref="detailScroller" use-pulldown height="100%" @on-pulldown-loading="refresh"
                 v-model="status1">
-        <div class="mrgb" id="shopBanner">
-          <swiper dots-position="center" auto dots-class="custom-bottom">
-            <swiper-item class="swiper-demo-img" v-for="(item, index) in shopTop" height="12.5rem" :key="index"
+        <div class="mrgb" >
+          <swiper dots-position="center" height="9.375rem" auto dots-class="custom-bottom">
+            <swiper-item class="swiper-demo-img" v-for="(item, index) in shopTop" height="9.375rem" :key="index"
                          @click.native='goLinkFn(item)'>
-              <img :src="item.imgUrl" width="100%" height="100%">
+              <img :src="item.imgUrl" width="100%"  hieght="100%">
             </swiper-item>
           </swiper>
           <flexbox :gutter="0" wrap="wrap" class='sortBox'>
@@ -20,7 +20,7 @@
           </flexbox>
           <section>
             <div class="exchangeBox" v-if='shopData.hotGoods'>
-              <flexbox :gutter="0" wrap="wrap">
+              <flexbox :gutter="0" wrap="wrap" align="flex-start">
                 <flexbox-item :span="1/2" class='shopLine' v-for='item in shopData.hotGoods' :key="item.id">
                   <router-link :to="{path:'/shopDataile',query:{id:item.id}}">
                     <div class='shopBox'>
@@ -186,13 +186,14 @@
     }
     .sortBox {
       background: #fff;
-      padding: 30/40rem 0;
-      margin: 20/40rem 0;
+      padding: 30/40rem 0 10/40rem;
+      margin: 20/40rem 0 0 0;
       text-align: center;
       font-size: 24/40rem;
+      border-bottom: 1px solid #EFEFEF;
       img {
-        width: 92/40rem;
-        height: 92/40rem;
+        width: 122/40rem;
+        height: 122/40rem;
         border-radius: 3rem;
         /*margin-bottom: 15/40rem;*/
       }
@@ -201,6 +202,9 @@
       }
     }
     .exchangeBox {
+      padding-top: 25/40rem;
+      padding-left: 15/40rem;
+      padding-right: 15/40rem;
       background: #fff;
       margin-bottom: 20/40rem;
       font-size: 30/40rem;
@@ -212,12 +216,13 @@
       .shopBox {
         box-sizing: border-box;
         text-align: center;
-        margin:20/40rem;
-        // height: 340/40rem;
+        margin: 23/40rem;
+        height: 316/40rem;
+        width: 316/40rem;
         box-sizing: border-box;
-        border: 1px solid #C7000A;
-        box-shadow:#4d4d4d 0 0 10px;
-
+        border: 1px solid #d1d1d1;
+        box-shadow:0px 4px 12px -1px rgba(77,77,77,.4);
+            /*box-shadow: 0 0 10px #4d4d4d;*/
       }
       .bottomBox{
           line-height: 36/40rem;
@@ -253,10 +258,10 @@
           }
         }
       .shopImg {
-        width: 220/40rem;
-        height: 220/40rem;
-        margin-bottom: 16/40rem;
-        padding-top: 40/40rem;
+        width: 290/40rem;
+        height: 290/40rem;
+        margin-bottom: 6/40rem;
+        padding-top: 6/40rem;
       }
     }
   }
@@ -278,6 +283,6 @@
     font-size: 24/40rem;
   }
   #shopBanner .vux-swiper{
-    height: 425/40rem!important;
+    height: 375/40rem!important;
   }
 </style>

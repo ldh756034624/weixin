@@ -1,20 +1,36 @@
 <template>
-  <div class="page shopPage">
-    <tab bar-active-color="#e60012" :line-width="1" :custom-bar-width="getBarWidth">
+  <div class="page shopPage" id="travelBanner">
+    <!-- <tab bar-active-color="#e60012" :line-width="1" :custom-bar-width="getBarWidth">
       <tab-item class="vux-1px-r" active-class="active-tab" selected @on-item-click="init(2)">体检</tab-item>
       <tab-item active-class="active-tab" class="vux-1px-r" @on-item-click="init(1)">旅游+体检</tab-item>
       <tab-item active-class="active-tab" @on-item-click="init(3)">旅游</tab-item>
-    </tab>
-    <div class="mrgb">
+    </tab> -->
+    <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="shopData.length==0" id="length0topBar">
+      <flexbox-item :span="0.33" v-for='item in navBanner' @click.native='init(item.id)' :key="item.id">
+        <div>
+          <img :src="item.imgUrl"/>
+          <p class="title-bottom">{{item.title}}</p>
+        </div>
+      </flexbox-item>
+    </flexbox>
+    <div class="mrgb" >
       <div v-for="(item, index) in shopData" :key="index">
-        <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1">
-          <swiper-item class="swiper-demo-img" height="12.5rem" v-for="list in item.imgList" :key="list.id"
+        <swiper dots-position="center" auto dots-class="custom-bottom" v-if="item.layoutStyle=='Roll'" :show-dots="item.imgList.length>1" height="9.375rem">
+          <swiper-item class="swiper-demo-img" height="9.375rem" v-for="list in item.imgList" :key="list.id"
                        @click.native='goLinkFn(list)'>
             <img :src="list.imgUrl" width="100%" height="100%">
             <div class="swiperTitle">{{list.title}}</div>
           </swiper-item>
         </swiper>
-      <div class="imgbox" v-if="item.layoutStyle=='TWO'">
+        <flexbox :gutter="0" wrap="wrap" class='sortBox' v-if="index===0" >
+          <flexbox-item :span="0.33"  @click.native='init(item.id)' v-for="item in navBanner" :key="item.id">
+            <div>
+              <img :src="item.imgUrl"/>
+              <p class="title-bottom">{{item.title}}</p>
+            </div>
+          </flexbox-item>
+        </flexbox>
+        <div class="imgbox" v-if="item.layoutStyle=='TWO'">
          <div class="imgItem" v-for="imgList in item.imgList" @click='goLinkFn(imgList)'>
            <img :src="imgList.imgUrl">
            <p>{{imgList.title}}</p>
@@ -29,6 +45,9 @@
 <script>
   import {Flexbox, FlexboxItem,Tab, TabItem, Swiper, SwiperItem, Scroller, Spinner} from 'vux'
   import Bottombar from '@/components/BottomBar'
+  import TJimg from "../../assets/img/travel/tijian@2x.png"
+  import TLimg from "../../assets/img/travel/lvyoujiatijian@2x.png"
+  import LYimg from "../../assets/img/travel/lvyou_shang@2x.png"
 
   export default {
     mounted() {
@@ -49,7 +68,19 @@
     data() {
       return {
         shopTop: [],
-        navBanner: [],
+        navBanner: [{
+          id:2,
+          imgUrl:TJimg,
+          title:"体检"
+        },{
+          id:1,
+          imgUrl:TLimg,
+          title:"旅游+体检"
+        },{
+          id:3,
+          imgUrl:LYimg,
+          title:"旅游"
+        }],
         shopData: [],
         index: 2,
         WxCode:this.$route.query.code, //微信回调码
@@ -64,6 +95,10 @@
     },
     methods: {
       init(num) {
+        console.log(num)
+        if(this.index === num){
+          return
+        }
         if (num) {
           this.index = num
         }
@@ -115,22 +150,24 @@
   }
   .imgbox {
     display: flex;
+    background: #fff;
     justify-content: center;
     padding-top: 30/40rem;
     padding-bottom: 35/40rem;
     .imgItem {
       width: 318/40rem;
       // height: 318/40rem;
-      text-align: center;
+      text-align: left;
       img {
         width: 318/40rem;
-      height: 318/40rem;
-        box-shadow: 6px 5px 16px 0px
-    rgba(4, 0, 0, 0.15);
-    border: solid 2px #eeeeee;
+        height: 318/40rem;
+        /*box-shadow: 6px 5px 16px 0px
+        rgba(4, 0, 0, 0.15);*/
+        box-shadow: 0px 4px 12px -1px rgba(77,77,77,.4);
+        border: 1px solid #d1d1d1;
       }
       p {
-        color: #727171;
+        color: #221815;
         font-size: 25/40rem;
         line-height: 25/40rem;
         padding-top: 10/40rem;
@@ -148,6 +185,23 @@
     font-size: 36/40rem;
     text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;;
   }
+  .sortBox {
+      background: #fff;
+      padding: 30/40rem 0 10/40rem;
+      margin: 20/40rem 0 0 0;
+      text-align: center;
+      font-size: 26/40rem;
+      border-bottom: 1px solid #EFEFEF;
+      img {
+        width: 122/40rem;
+        height: 122/40rem;
+        border-radius: 3rem;
+        /*margin-bottom: 15/40rem;*/
+      }
+      .title-bottom{
+        margin-bottom: 20/40rem;
+      }
+    }
 </style>
 <style type="text/css" lang='less'>
   .shopPage {
@@ -158,5 +212,8 @@
 
   .pulldown-arrow {
     font-size: 24/40rem;
+  }
+   #shopBanner .vux-swiper{
+    height: 375/40rem!important;
   }
 </style>
