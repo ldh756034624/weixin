@@ -158,6 +158,7 @@ export default {
 <style scoped lang='less'>
   .codeAlert{
     position: relative;
+
     .closeDialog{
       position: absolute;
       right: 0;
@@ -236,4 +237,9 @@ export default {
   .changeCodeSpan span:last-child{
     border-right: 2/40rem solid #999;
   }
+</style>
+<style type="text/css">
+  .codeAlert .weui-dialog {
+      max-width: 80%;
+    }
 </style>
