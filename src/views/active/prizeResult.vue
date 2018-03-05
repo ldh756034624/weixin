@@ -18,14 +18,15 @@
           </div>
           <div v-else class="prizeGet">
             <p class="account">红包已放置账户:{{prizeAccount}}</p>
-            <p>登录App或欢乐之家社区即可使用</p>
+            <!--todo 下面这行有可能会改回去-->
+            <!--<p>登录App或欢乐之家社区即可使用</p>-->
           </div>
 
         </div>
       </div>
 
       <div class="prizeBtnBox" :class="{'prizeBtnMrg' : prizeData.money===0}">
-        <x-button mini class='miniBtn' @click.native="goIndex">进入社区</x-button>
+        <!--<x-button mini class='miniBtn' @click.native="goIndex">进入社区</x-button>-->
         <x-button mini class='miniBtn' @click.native="downApp">下载APP</x-button>
       </div>
     </div>
