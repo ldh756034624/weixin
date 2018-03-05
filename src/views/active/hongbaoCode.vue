@@ -5,9 +5,9 @@
         <div class="flexBox">
           <img class="groupLogo" src="../../assets/img/active/logo_huijiu@2x.png"/>
           <p class="flex1 alignR redFt">
-            <router-link to='/index'>
-              <span>进入社区</span>
-            </router-link>
+            <!--<router-link to='/index'>-->
+              <!--<span>进入社区</span>-->
+            <!--</router-link>-->
           </p>
         </div>
 
