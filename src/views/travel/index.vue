@@ -32,9 +32,6 @@
 <script>
   import {Flexbox, FlexboxItem, Tab, TabItem, Swiper, SwiperItem, Scroller, Spinner} from 'vux'
   import Bottombar from '@/components/BottomBar'
-  import TJimg from "../../assets/img/travel/tijian@2x.png"
-  import TLimg from "../../assets/img/travel/lvyoujiatijian@2x.png"
-  import LYimg from "../../assets/img/travel/lvyou_shang@2x.png"
 
   export default {
     mounted() {
