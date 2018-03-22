@@ -13,7 +13,7 @@
       </div>
       <div class="middle">
         <p class="title">充值金额</p>
-        <x-input v-model.number="fundMoneyt" title='￥' :value="fundMoneyt" :show-clear="false" keyboard="number" placeholder="请输入充值金额" class="fundMoney">
+        <x-input v-model.number="fundMoneyt" title='￥' :value="fundMoneyt" :show-clear="false" keyboard="tel" placeholder="请输入充值金额" class="fundMoney">
         </x-input>
       </div>
       <div class="pay-btn" @click="handleRecharge">
