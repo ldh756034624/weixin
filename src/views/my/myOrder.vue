@@ -40,7 +40,8 @@ import PullHeaderFooter from '@/components/pullHeaderFooter'
 import {Scroller} from 'vux'
 export default {
   mounted(){
-    this.setTitle('我的订单');
+    var title = this.$route.query.title || '我的订单'
+    this.setTitle(title);
     this.init(1);
   },
   data () {

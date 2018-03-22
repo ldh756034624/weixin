@@ -45,19 +45,19 @@
                 </cell>
                 <div class="flexbox vux-1px-t">
                   <div class="flexboxItem">
-                     <router-link :to="{path:'/my/myOrder',query:{status: 0}}">
+                     <router-link :to="{path:'/my/myOrder',query:{status: 0, title: '待付款'}}">
                     <img class="itemImg" src="../../assets/img/index/daifukuan@2x.png"></img>
                     <p>待付款</p>
                   </router-link>
                   </div>
                   <div class="flexboxItem">
-                    <router-link :to="{path:'/my/myOrder',query:{status: 1}}">
+                    <router-link :to="{path:'/my/myOrder',query:{status: 1, title: '待发货'}}">
                     <img class="itemImg" src="../../assets/img/index/daifahuo@2x.png"></img>
                     <p>待发货</p>
                   </router-link>
                   </div>
                   <div class="flexboxItem">
-                    <router-link :to="{path:'/my/myOrder',query:{status: 2}}">
+                    <router-link :to="{path:'/my/myOrder',query:{status: 2, title: '待收货'}}">
                     <img class="itemImg" src="../../assets/img/index/daishouhuo@2x.png"></img>
                     <p>待收货</p>
                   </router-link>
