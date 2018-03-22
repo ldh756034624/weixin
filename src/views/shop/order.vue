@@ -78,7 +78,7 @@ export default {
     this.init();
     if(this.orderAddrObj){ //编辑状态赋值
       var Obj=JSON.parse(this.orderAddrObj)
-       this.exchangeParams.addressId=Obj.addressId
+       this.exchangeParams.addressId=Obj.id
       this.addressData.name=Obj.name
       this.addressData.phone=Obj.phone
       this.addressData.address=Obj.address
@@ -320,7 +320,7 @@ export default {
         height: 120/40rem;
         margin-left: 40/40rem;
         font-size: 26/40rem;
-        padding: 0 24/40rem;
+        padding: 0 1.6rem;
       }
     }
   }
