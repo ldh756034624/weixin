@@ -3,11 +3,11 @@
     <div class="scroll-wrap">
       <scroller lock-x scrollbar-y ref="detailScroller" use-pulldown height="100%" @on-pulldown-loading="refresh"
                 v-model="status1">
-        <div class="mrgb" >
+        <div class="mrgb">
           <swiper dots-position="center" height="9.375rem" auto dots-class="custom-bottom">
             <swiper-item class="swiper-demo-img" v-for="(item, index) in shopTop" height="9.375rem" :key="index"
                          @click.native='goLinkFn(item)'>
-              <img :src="item.imgUrl" width="100%"  hieght="100%">
+              <img :src="item.imgUrl" width="100%" hieght="100%">
             </swiper-item>
           </swiper>
           <flexbox :gutter="0" wrap="wrap" class='sortBox'>
@@ -28,9 +28,9 @@
 
                     </div>
                     <div class="bottomBox">
-                        <span class="desc">{{item.name}}</span>
-                        <span class="joyMoney"><span>¥ {{item.price}}</span>{{item.unit?'/'+item.unit:''}}</span>
-                      </div>
+                      <span class="desc">{{item.name}}</span>
+                      <span class="joyMoney"><span>¥ {{item.price}}</span>{{item.unit ? '/' + item.unit : ''}}</span>
+                    </div>
                   </router-link>
                 </flexbox-item>
               </flexbox>
@@ -75,7 +75,7 @@
       return {
         shopTop: [],
         navBanner: [],
-        WxCode:this.$route.query.code, //微信回调码
+        WxCode: this.$route.query.code, //微信回调码
         shopData: {},
         status1: {
           pulldownStatus: 'default'
@@ -90,12 +90,12 @@
             if (res.data.code == 0) {
               this.shopData = res.data.data
               this.navBanner = this.shopData.banners.storeNavigationBanner
-              if(this.navBanner != undefined){
-                if(this.navBanner.length == 0){
-                this.itembox = 1
-                }else if(this.navBanner.length === 2){
-                  this.itembox =  0.5
-                }else if(this.navBanner.length === 3){
+              if (this.navBanner != undefined) {
+                if (this.navBanner.length == 0) {
+                  this.itembox = 1
+                } else if (this.navBanner.length === 2) {
+                  this.itembox = 0.5
+                } else if (this.navBanner.length === 3) {
                   this.itembox = 0.33
                 }
                 else {
@@ -111,18 +111,18 @@
             })
           })
       },
-      weChatLogin:function(){
-      let self=this;
-      self.$http.get('h9/api/wechat/login?code='+self.WxCode)
-      .then(function(res) {
-        if(res.data.code==0){
-          _g.toastMsg('error', '微信登录成功');
-          localStorage.setItem("_user", JSON.stringify(res.data.data));
-          Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
-           _g.toastMsg('error', self.barcode);
-        }
-      })
-    },
+      weChatLogin: function () {
+        let self = this;
+        self.$http.get('h9/api/wechat/login?code=' + self.WxCode)
+          .then(function (res) {
+            if (res.data.code == 0) {
+              _g.toastMsg('error', '微信登录成功');
+              localStorage.setItem("_user", JSON.stringify(res.data.data));
+              Vue.http.defaults.headers.token = (res.data.data.token) ? res.data.data.token : '';
+              _g.toastMsg('error', self.barcode);
+            }
+          })
+      },
       goLinkFn: function (item) {
         console.log('item', item)
         if (!item.link) {
@@ -130,7 +130,17 @@
         }
         if ((item.link).indexOf('http') != -1) {
           window.open(item.link)
-        } else {
+        } else if (item.link.split(':')[0] === 'bottomTab') {
+          let tab = item.link.split(':')[1]
+          let tabLink = {  // 0,1,2,3 分别对应下面的tab位置
+            '0': '/active/hongbao',
+            '1': '/shop',
+            '2': '/travel',
+            '3': '/account/personal'
+          }
+          this.$router.push({path: tabLink[tab]})
+        }
+        else {
           //所有商品'allGoods',食品'foods',日常家居'everydayGoods',今日新品'todayNewGoods')
           this.$router.push({path: '/shopList', query: {type: item.link.split(':')[1], title: item.title}})
         }
@@ -148,7 +158,7 @@
   }
 </script>
 <style scoped lang='less'>
-  
+
   .shopPage {
     overflow-y: auto;
     .mrgb {
@@ -197,7 +207,7 @@
         border-radius: 3rem;
         /*margin-bottom: 15/40rem;*/
       }
-      .title-bottom{
+      .title-bottom {
         margin-bottom: 20/40rem;
       }
     }
@@ -221,42 +231,42 @@
         width: 316/40rem;
         box-sizing: border-box;
         border: 1px solid #d1d1d1;
-        box-shadow:0px 4px 12px -1px rgba(77,77,77,.4);
-            /*box-shadow: 0 0 10px #4d4d4d;*/
+        box-shadow: 0px 4px 12px -1px rgba(77, 77, 77, .4);
+        /*box-shadow: 0 0 10px #4d4d4d;*/
       }
-      .bottomBox{
-          line-height: 36/40rem;
-          width: 90%;
-          margin:0 auto;
-          // background-color: #C7000A;
-          color: #e60012;
-          border-radius: 10/40rem 10/40rem 0 0;
-          text-align: center;
-          .desc {
-            display: inline-block;
-            font-size: 24/40rem;
-            // width: 95/40rem;
-            max-height: 72/40rem;
-            color: #221815;
-            overflow: hidden;
-            word-break: break-all;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            // white-space: nowrap;
-            text-overflow: ellipsis;
-            text-align:left;
-          }
-          .joyMoney {
-            display:inline-block;
-            font-size: 24/40rem;
-            display: block;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            text-align:left;
-          }
+      .bottomBox {
+        line-height: 36/40rem;
+        width: 90%;
+        margin: 0 auto;
+        // background-color: #C7000A;
+        color: #e60012;
+        border-radius: 10/40rem 10/40rem 0 0;
+        text-align: center;
+        .desc {
+          display: inline-block;
+          font-size: 24/40rem;
+          // width: 95/40rem;
+          max-height: 72/40rem;
+          color: #221815;
+          overflow: hidden;
+          word-break: break-all;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          // white-space: nowrap;
+          text-overflow: ellipsis;
+          text-align: left;
         }
+        .joyMoney {
+          display: inline-block;
+          font-size: 24/40rem;
+          display: block;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          text-align: left;
+        }
+      }
       .shopImg {
         width: 290/40rem;
         height: 290/40rem;
@@ -282,7 +292,8 @@
   .pulldown-arrow {
     font-size: 24/40rem;
   }
-  #shopBanner .vux-swiper{
-    height: 375/40rem!important;
+
+  #shopBanner .vux-swiper {
+    height: 375/40rem !important;
   }
 </style>
