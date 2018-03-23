@@ -11,8 +11,8 @@
         <span class="right" style="color: #999999;">可用金额 : {{transferInfo.balance}}</span>
       </div>
       <group class="redPaperBox  groupNoLine">
-        <x-input type="tel" :title="moneyMark"  v-model="transferMoney"
-                 :show-clear="false" keyboard="number">
+        <x-input type="number" :title="moneyMark"  v-model="transferMoney"
+                 :show-clear="false" keyboard="tel">
         </x-input>
       </group>
       <div class="fundsBtnBox">
