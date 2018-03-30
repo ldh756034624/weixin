@@ -1,0 +1,240 @@
+<template>
+  <div class="page">
+    <scroller lock-x
+              :pullup-config="pulldefaultConfig"
+              use-pullup
+              height="100%"
+              :pullup-status="pullupStatus"
+              @on-pullup-loading="loadMore"
+              ref="scroller"
+              use-pulldown
+              @on-pulldown-loading="refresh"
+              :pulldown-config="pulldefaultConfig"
+              :pulldown-status="pulldownStatus"
+              @input="getCurrentValue">
+      <div>
+        <div class="top">
+          <div class="rule-wrapper">
+            <img src="../../assets/img/active/huodongguize@2x.png"
+                 width="18"
+                 height="18">
+            <p>活动规则</p>
+          </div>
+          <p class="getchance">
+            {{userInfo.lotteryChance > 0 ? '有1次抽奖机会' : '获取抽奖机会'}}
+            <i class="icon-right"
+               v-if="userInfo.lotteryChance > 0"></i>
+          </p>
+          <p class="total-price"
+             @click="handleRecord">
+            累计中奖金额
+            <span class="big-red">{{userInfo.bigRichMoney}}元</span>
+            <i class="icon-right"></i>
+          </p>
+        </div>
+        <p class="title">往期开奖记录</p>
+        <div class="user-wrapper">
+          <p class="list-title">
+            <span class="sp1">用户</span>
+            <span class="sp2">中奖金额</span>
+            <span class="sp3">开奖时间</span>
+          </p>
+          <ul>
+            <li class="user-list"
+                v-for="(item, index) in dataList"
+                :key="index">
+              <span class="sp1 no-wrap">{{item.userName}}</span>
+              <span class="sp2">{{item.lotteryMoney}}元</span>
+              <span class="sp3">{{item.startLotteryTime}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <pull-header-footer v-if="showStatusFooter"
+                          :status-up="pullupStatus"
+                          :status-down="pulldownStatus"></pull-header-footer>
+    </scroller>
+  </div>
+</template>
+<script>
+import { Scroller } from "vux"
+import PullHeaderFooter from "@/components/pullHeaderFooter"
+
+export default {
+  created() {
+    this.firstIn = true
+    this.setTitle("1号大富贵")
+  },
+  mounted() {
+    this.init(1)
+  },
+  data() {
+    return {
+      userInfo: null,
+      dataList: [],
+      showStatusFooter: false // 底部没有更多等数据状态栏
+    }
+  },
+  methods: {
+    init(page) {
+      let self = this
+      if (page === 1) {
+        self.dataList = []
+      }
+      if (this.firstIn) {
+        _g.showLoading()
+      }
+      let url = "h9/api/bigrich/record" + "?page=" + page + "&limit=20"
+      this.$http.get(url).then(res => {
+        let datalist = res.data.data.recordList.data // 数据列表
+        let pageInfo = res.data.data.recordList // 数据页面信息
+        if (res.data.code == 0) {
+          this.userInfo = res.data.data
+          if (this.firstIn) {
+            _g.hideLoading()
+            this.firstIn = false
+          }
+          if (datalist.length > 0) {
+            self.dataList = [...self.dataList, ...datalist]
+            self.hasItem = true
+          } else {
+            self.hasItem = false
+          }
+          self.page.totalpage = pageInfo.totalPage
+          if (pageInfo.hasNext) {
+            self.page.currPage++
+          }
+          self.page.hasNext = pageInfo.hasNext
+        }
+        self.$nextTick(() => {
+          self.$refs.scroller.donePullup()
+          if (!self.page.hasNext) {
+            self.$refs.scroller.disablePullup()
+          }
+          if (pageInfo.currPage == 1) {
+            self.$refs.scroller.reset({ top: 0 }, 500, "ease")
+          }
+        })
+      })
+    },
+    loadMore() {
+      let self = this
+      self.showStatusFooter = true
+      if (self.page.hasNext) {
+        setTimeout(() => {
+          self.init(self.page.currPage)
+        }, 1000)
+      }
+    },
+    refresh() {
+      let self = this
+      setTimeout(() => {
+        self.init(1)
+      }, 1000)
+    },
+    // 去开奖记录
+    handleRecord() {
+      this.$router.push("/active/oneRichRecord")
+    }
+  },
+  components: {
+    Scroller,
+    PullHeaderFooter
+  }
+}
+</script>
+
+<style scoped lang='less'>
+p {
+  line-height: 1;
+}
+.top {
+  background: #fff;
+  position: relative;
+  height: 145px;
+  text-align: center;
+  .rule-wrapper {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+    font-size: 11px;
+    color: #888888;
+  }
+  .getchance {
+    padding-top: 30px;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+  .total-price {
+    font-size: 14px;
+    color: #333;
+    .big-red {
+      color: red;
+      font-size: 28px;
+    }
+  }
+}
+.user-wrapper {
+  background: #fff;
+  font-size: 14px;
+  color: #666666;
+  .list-title {
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 44px;
+    line-height: 44px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #333333;
+    font-weight: bold;
+  }
+  .user-list:last-child {
+    border-bottom: none;
+  }
+  .sp1 {
+    overflow: hidden;
+    display: inline-block;
+    width: 85px;
+    @media screen and(max-width: 320px) {
+      margin-right: 15px;
+    }
+    margin-right: 44px;
+  }
+  .sp2 {
+    overflow: hidden;
+    display: inline-block;
+    width: 65px;
+  }
+  .sp3 {
+    float: right;
+    height: 100%;
+    line-height: 42px;
+    text-align: right;
+  }
+}
+.icon-right {
+  display: inline-block;
+  width: 16px;
+  height: 26px;
+  background-image: url("../../assets/img/account/my_arrow_right.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.title {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  color: #666666;
+  margin-left: 15px;
+}
+.user-list {
+  padding-right: 15px;
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  margin-left: 15px;
+  color: #666;
+}
+</style>
