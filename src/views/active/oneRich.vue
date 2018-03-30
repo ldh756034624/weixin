@@ -14,16 +14,18 @@
               @input="getCurrentValue">
       <div>
         <div class="top">
-          <div class="rule-wrapper">
+          <div class="rule-wrapper"
+               @click="handleRule">
             <img src="../../assets/img/active/huodongguize@2x.png"
                  width="18"
                  height="18">
             <p>活动规则</p>
           </div>
-          <p class="getchance">
+          <p class="getchance"
+             @click="handleGetReword">
             {{userInfo.lotteryChance > 0 ? '有1次抽奖机会' : '获取抽奖机会'}}
             <i class="icon-right"
-               v-if="userInfo.lotteryChance > 0"></i>
+               v-if="!userInfo.lotteryChance"></i>
           </p>
           <p class="total-price"
              @click="handleRecord">
@@ -76,6 +78,12 @@ export default {
     }
   },
   methods: {
+    // 去获取抽奖机会
+    handleGetReword() {
+      if (!this.userInfo.lotteryChance) {
+        this.$router.push("/shop")
+      }
+    },
     init(page) {
       let self = this
       if (page === 1) {
@@ -135,6 +143,10 @@ export default {
     // 去开奖记录
     handleRecord() {
       this.$router.push("/active/oneRichRecord")
+    },
+    // 去活动规则介绍
+    handleRule() {
+      this.$router.push("/account/descDetail?code=" + "bigRichRules")
     }
   },
   components: {
