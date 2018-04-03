@@ -8,11 +8,7 @@
                 height="100%"
                 :pullup-status="pullupStatus"
                 @on-pullup-loading="loadMore"
-                ref="detailScroller"
-                use-pulldown
-                @on-pulldown-loading="refresh"
-                :pulldown-config="pulldefaultConfig"
-                :pulldown-status="pulldownStatus"
+                ref="scroller"
                 @input="getCurrentValue">
         <div>
           <div class="data-list"
@@ -89,18 +85,16 @@ export default {
           self.page.hasNext = pageInfo.hasNext
         }
         self.$nextTick(() => {
-          self.$refs.detailScroller.donePullup()
+          self.$refs.scroller.donePullup()
           if (!self.page.hasNext) {
-            self.$refs.detailScroller.disablePullup()
+            self.$refs.scroller.disablePullup()
           }
           if (pageInfo.currPage == 1) {
-            self.$refs.detailScroller.reset({ top: 0 }, 500, "ease")
+            self.$refs.scroller.reset({ top: 0 }, 500, "ease")
           }
         })
       })
     },
-    prizeFn: function() {},
-    scanFn: function() {},
     loadMore() {
       let self = this
       self.showStatusFooter = true

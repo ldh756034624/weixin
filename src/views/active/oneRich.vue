@@ -1,5 +1,6 @@
 <template>
-  <div class="page">
+  <div class="page"
+       v-if="userInfo">
     <scroller lock-x
               :pullup-config="pulldefaultConfig"
               use-pullup
@@ -23,7 +24,7 @@
           </div>
           <p class="getchance"
              @click="handleGetReword">
-            {{userInfo.lotteryChance > 0 ? '有1次抽奖机会' : '获取抽奖机会'}}
+            {{userInfo.lotteryChance ? '有1次抽奖机会' : '获取抽奖机会'}}
             <i class="icon-right"
                v-if="!userInfo.lotteryChance"></i>
           </p>
@@ -44,6 +45,7 @@
           <ul>
             <li class="user-list"
                 v-for="(item, index) in dataList"
+                v-if="item"
                 :key="index">
               <span class="sp1 no-wrap">{{item.userName}}</span>
               <span class="sp2">{{item.lotteryMoney}}元</span>
@@ -173,6 +175,8 @@ p {
     color: #888888;
   }
   .getchance {
+    display: flex;
+    justify-content: center;
     padding-top: 30px;
     font-size: 16px;
     color: #000000;
@@ -227,9 +231,10 @@ p {
 }
 .icon-right {
   display: inline-block;
-  width: 16px;
-  height: 26px;
-  background-image: url("../../assets/img/account/my_arrow_right.png");
+  margin-left: 5px;
+  width: 18px;
+  height: 18px;
+  background-image: url("../../assets/img/account/right_arrow_@2x.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }

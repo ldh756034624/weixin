@@ -121,7 +121,7 @@
           </span>
         </cell>
         <cell title="1号大富贵" link="/active/oneRich">
-          <img slot="icon" width="30" style="display:block;margin-right:10px;" src="../../assets/img/index/wodeyouhui@2x.png">
+          <img slot="icon" width="30" style="display:block;margin-right:10px;" src="../../assets/img/index/dafugui@2x.png">
           <span class='cellValueBox' style="margin-right:-12px;">
             <!-- <i>{{personalData.cardNum}}</i> -->
             <i class='arrow'></i>
