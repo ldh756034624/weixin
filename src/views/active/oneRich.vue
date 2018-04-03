@@ -197,6 +197,8 @@ p {
   font-size: 14px;
   color: #666666;
   .list-title {
+    display: flex;
+    justify-content: space-between;
     padding-left: 15px;
     padding-right: 15px;
     height: 44px;
@@ -225,6 +227,7 @@ p {
   }
   .sp3 {
     float: right;
+    width: 119px;
     height: 100%;
     line-height: 42px;
     text-align: right;
@@ -247,6 +250,8 @@ p {
   margin-left: 15px;
 }
 .user-list {
+  display: flex;
+  justify-content: space-between;
   padding-right: 15px;
   height: 40px;
   line-height: 40px;
