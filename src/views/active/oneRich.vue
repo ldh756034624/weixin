@@ -8,7 +8,6 @@
               :pullup-status="pullupStatus"
               @on-pullup-loading="loadMore"
               ref="scroller"
-              use-pulldown
               @on-pulldown-loading="refresh"
               :pulldown-config="pulldefaultConfig"
               :pulldown-status="pulldownStatus"
@@ -115,8 +114,10 @@ export default {
             self.page.currPage++
           }
           self.page.hasNext = pageInfo.hasNext
+          console.log(pageInfo)
         }
-        self.$nextTick(() => {
+
+        setTimeout(() => {
           self.$refs.scroller.donePullup()
           if (!self.page.hasNext) {
             self.$refs.scroller.disablePullup()
@@ -124,7 +125,7 @@ export default {
           if (pageInfo.currPage == 1) {
             self.$refs.scroller.reset({ top: 0 }, 500, "ease")
           }
-        })
+        }, 50)
       })
     },
     loadMore() {

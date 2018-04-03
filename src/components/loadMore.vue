@@ -9,6 +9,9 @@
                 :pullup-status="pullupStatus"
                 @on-pullup-loading="loadMore"
                 ref="scroller"
+                @on-pulldown-loading="refresh"
+                :pulldown-config="pulldefaultConfig"
+                :pulldown-status="pulldownStatus"
                 @input="getCurrentValue">
         <div>
           <div class="data-list"
@@ -84,7 +87,7 @@ export default {
           }
           self.page.hasNext = pageInfo.hasNext
         }
-        self.$nextTick(() => {
+        setTimeout(() => {
           self.$refs.scroller.donePullup()
           if (!self.page.hasNext) {
             self.$refs.scroller.disablePullup()
@@ -92,7 +95,7 @@ export default {
           if (pageInfo.currPage == 1) {
             self.$refs.scroller.reset({ top: 0 }, 500, "ease")
           }
-        })
+        }, 50)
       })
     },
     loadMore() {
