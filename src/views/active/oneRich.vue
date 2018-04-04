@@ -62,6 +62,7 @@
 <script>
 import { Scroller } from "vux"
 import PullHeaderFooter from "@/components/pullHeaderFooter"
+import { laterLoading } from "@/util/index"
 
 export default {
   created() {
@@ -91,9 +92,7 @@ export default {
         self.dataList = []
       }
       if (this.firstIn) {
-        this.timer = setTimeout(() => {
-          _g.showLoading()
-        }, 500)
+        laterLoading.start()
       }
       let url = "h9/api/bigrich/record" + "?page=" + page + "&limit=20"
       this.$http.get(url).then(res => {
@@ -102,9 +101,7 @@ export default {
         if (res.data.code == 0) {
           this.userInfo = res.data.data
           if (this.firstIn) {
-            clearTimeout(self.timer)
-            self.timer = null
-            _g.hideLoading()
+            laterLoading.end()
             this.firstIn = false
           }
           if (datalist.length > 0) {
