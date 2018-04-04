@@ -95,7 +95,7 @@ export default {
           if (pageInfo.currPage == 1) {
             self.$refs.scroller.reset({ top: 0 }, 500, "ease")
           }
-        }, 50)
+        }, 100)
       })
     },
     loadMore() {

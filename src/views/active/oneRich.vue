@@ -91,7 +91,9 @@ export default {
         self.dataList = []
       }
       if (this.firstIn) {
-        _g.showLoading()
+        this.timer = setTimeout(() => {
+          _g.showLoading()
+        }, 500)
       }
       let url = "h9/api/bigrich/record" + "?page=" + page + "&limit=20"
       this.$http.get(url).then(res => {
@@ -100,6 +102,8 @@ export default {
         if (res.data.code == 0) {
           this.userInfo = res.data.data
           if (this.firstIn) {
+            clearTimeout(self.timer)
+            self.timer = null
             _g.hideLoading()
             this.firstIn = false
           }
