@@ -128,7 +128,6 @@ export default {
   mounted() {
     this.setTitle("填写订单")
     this.getCoupons()
-    this.init()
     if (this.orderAddrObj) {
       //编辑状态赋值
       var Obj = JSON.parse(this.orderAddrObj)
@@ -211,6 +210,7 @@ export default {
               this.checkedCouponId = this.couponsList[0].id
               this.shopPrice = 0
             }
+            this.init()
           }
         })
     },
