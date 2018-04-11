@@ -8,7 +8,7 @@
           </div>
           <div v-if="blankType==='cupon'">
             <img src='../assets/img/blank/img_couponerror@2x.png' >
-            <p>还未获得卡券</p>
+            <p>没有优惠券数据</p>
           </div>
           <div v-if="blankType==='particulars'">
             <img src='../assets/img/blank/img_detailerror@2x.png' >

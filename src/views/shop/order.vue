@@ -46,7 +46,7 @@
           <p class="total">共
             <span>{{countNum}}</span>箱
             <span class='totalMoney'>小计 :
-              <i class='joyMoney'>{{shopPrice | price2}} 元</i>
+              <i class='joyMoney'>{{(shopData.price * countNum) | price2}} 元</i>
             </span>
           </p>
         </div>
@@ -56,12 +56,39 @@
       <section>
         <div class="shopOrderMsgBox">
           <cell title="配送方式"
-                value='快递 免邮'
-                @click.native=""></cell>
+                value='快递 免邮'></cell>
           <p class="ordeTotal">
             <label>订单总金额</label>
-            <span>{{shopPrice | price2}} 元</span>
+            <span>{{(shopData.price * countNum) | price2}} 元</span>
           </p>
+          <p class="ordeTotal"
+             @click="showCouponList=!showCouponList">
+            <label>优惠券</label>
+            <i class="arrow"
+               :class="{top: showCouponList}"></i>
+            <span v-if="checkedCouponId">已选一张，省￥{{shopData.price}}</span>
+            <span v-if="couponsList.length > 0 && !checkedCouponId">不使用</span>
+            <span v-if="couponsList.length == 0">暂无可用</span>
+
+          </p>
+          <div class="coupon-list"
+               v-if="showCouponList">
+            <ul>
+              <li class="coupon-item"
+                  :class="{active: item.id === checkedCouponId}"
+                  v-for="item in couponsList"
+                  @click="handleCouponItem(item.id)"
+                  :key="item.id">
+                <div class="name">{{item.couponType}}</div>
+                <div class="desc">
+                  <p class="title">{{item.useType}}</p>
+                  <p class="over-date">{{item.endTime}} 到期</p>
+                </div>
+                <div class="check-icon"
+                     v-if="item.id === checkedCouponId"></div>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
     </div>
@@ -100,6 +127,7 @@ import { Group, Cell, XButton } from "vux"
 export default {
   mounted() {
     this.setTitle("填写订单")
+    this.getCoupons()
     this.init()
     if (this.orderAddrObj) {
       //编辑状态赋值
@@ -130,6 +158,9 @@ export default {
   },
   data() {
     return {
+      showCouponList: false, // 切换显示couponlist
+      checkedCouponId: null, // 选中的coupon
+      couponsList: [], // 可用优惠券列表
       addressId: 0,
       countNum: 1,
       money: 0,
@@ -148,10 +179,40 @@ export default {
       this.$http.get("h9/store/goods/" + this.$route.query.id).then(res => {
         if (res.data.code == 0) {
           this.shopData = res.data.data
-          // this.shopPrice=this.shopData.price*4
-          this.shopPrice = this.shopData.price
+          this.calShouldPayPrice()
         }
       })
+    },
+    // 点击某个优惠券时
+    handleCouponItem(id) {
+      if (this.checkedCouponId === id) {
+        this.checkedCouponId = null
+      } else {
+        this.checkedCouponId = id
+      }
+      this.calShouldPayPrice()
+    },
+    // 计算应该付的总金额
+    calShouldPayPrice() {
+      if (this.checkedCouponId) {
+        this.shopPrice = this.shopData.price * (this.countNum - 1)
+      } else {
+        this.shopPrice = this.shopData.price * this.countNum
+      }
+    },
+    // 指定商品可用优惠券列表
+    getCoupons() {
+      this.$http
+        .get(`/h9/api/user/coupons?goodsId=${this.goodsId}`)
+        .then(res => {
+          if (res.data.code == 0) {
+            if (res.data.data.length > 0) {
+              this.couponsList = res.data.data
+              this.checkedCouponId = this.couponsList[0].id
+              this.shopPrice = 0
+            }
+          }
+        })
     },
     getDefaultAddr: function() {
       this.$http.get("h9/api/address/default").then(res => {
@@ -190,8 +251,7 @@ export default {
         }
         this.countNum++
       }
-      // this.shopPrice=this.shopData.price*this.countNum*4
-      this.shopPrice = this.shopData.price * this.countNum
+      this.calShouldPayPrice()
     },
     exchangeFn: function() {
       if (
@@ -201,11 +261,11 @@ export default {
         _g.toastMsg("error", "酒元余额不足，请使用微信支付")
         return
       }
-      // this.exchangeParams.count=this.countNum*4
       this.exchangeParams.count = this.countNum
       this.exchangeParams.goodsId = this.goodsId
       this.exchangeParams.payMethod = this.payMethod
       this.exchangeParams.payPlatform = "wxjs"
+      this.exchangeParams.couponsId = this.checkedCouponId
       _g.showLoading("支付中")
       this.$http
         .post("h9/store/goods/convert", this.exchangeParams)
@@ -264,6 +324,59 @@ export default {
 }
 </script>
 <style scoped lang='less'>
+.coupon-list {
+  padding: 20/40rem 0;
+  margin: 0 20/40rem;
+  border-top: 1/40rem solid #f2f2f2;
+  .coupon-item {
+    overflow: hidden;
+    width: 100%;
+    height: 120/40rem;
+    margin-bottom: 0.5rem;
+    box-sizing: border-box;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url("../../assets/img/shop/coupon_bg.png");
+    &.active {
+      background-image: url("../../assets/img/shop/coupon_bg_active.png");
+    }
+    & > div {
+      float: left;
+    }
+    .name {
+      height: 3rem;
+      width: 200/40rem;
+      line-height: 3em;
+      text-align: center;
+      font-size: 1rem;
+      color: #333333;
+    }
+    .desc {
+      margin-left: 1rem;
+      margin-top: 0.5rem;
+      .title {
+        font-size: 28/40rem;
+        color: #333333;
+        margin-bottom: 10/40rem;
+        padding: 0;
+      }
+      .over-date {
+        font-size: 22/40rem;
+        color: #888888;
+      }
+    }
+    .check-icon {
+      float: right;
+      margin-right: 40/40rem;
+      margin-top: 35/40rem;
+      height: 50/40rem;
+      width: 50/40rem;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-image: url("../../assets/img/shop/icon_check_coupon.png");
+    }
+  }
+}
 .shopOrderPage {
   overflow-y: auto;
   .title {
@@ -348,6 +461,19 @@ export default {
     span {
       float: right;
       color: #627984;
+    }
+    .arrow {
+      position: relative;
+      top: -3px;
+      float: right;
+      height: 1.5rem;
+      width: 60/40rem;
+      background-image: url("../../assets/img/shop/arr_bottom.png");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      &.top {
+        background-image: url("../../assets/img/shop/arr_top.png");
+      }
     }
   }
   .shopPayBox {
