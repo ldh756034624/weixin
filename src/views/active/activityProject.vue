@@ -88,7 +88,7 @@ export default {
         this.$router.push({ path: `shopDataile?id=` + id })
       } else {
         alert("叫我大帅比")
-        window.webkit.messageHandlers.activeProject.postMessage({ id })
+        window.webkit.messageHandlers.activeProject.postMessage()
       }
     }
   }
