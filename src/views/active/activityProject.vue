@@ -85,7 +85,9 @@ export default {
         androidInterface.activeProject(JSON.stringify({ id }))
       } else if (isiOS) {
         try {
-          window.webkit.messageHandlers.activeProject.postMessage("nimei")
+          window.webkit.messageHandlers.activeProject.postMessage(
+            JSON.stringify({ id })
+          )
         } catch (error) {
           alert(error)
         }
