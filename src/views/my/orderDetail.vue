@@ -61,7 +61,7 @@
         <label>下单时间</label>{{orderDetailData.createOrderDate}}
       </p>
       <p>
-        <label>优惠信息</label>{{orderDetailData.couponMessage}}
+        <label>优惠信息</label>{{orderDetailData.couponMessage || '无优惠'}} 
       </p>
       <p>
         <label>支付方式</label>{{orderDetailData.payMethod}}
