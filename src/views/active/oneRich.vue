@@ -115,7 +115,6 @@ export default {
             self.page.currPage++
           }
           self.page.hasNext = pageInfo.hasNext
-          console.log(pageInfo)
         }
 
         setTimeout(() => {
@@ -123,9 +122,7 @@ export default {
           if (!self.page.hasNext) {
             self.$refs.scroller.disablePullup()
           }
-          if (pageInfo.currPage == 1) {
-            self.$refs.scroller.reset({ top: 0 }, 500, "ease")
-          }
+          self.$refs.scroller.reset()
         }, 50)
       })
     },
@@ -161,40 +158,42 @@ export default {
 </script>
 
 <style scoped lang='less'>
+.page {
+  height: 100%;
+  background: #fff;
+}
 p {
   line-height: 1;
 }
 .top {
-  background: #fff;
+  background: url("../../assets/img/active/one_rich_bg.png") no-repeat;
+  background-size: 100%;
   position: relative;
   height: 145px;
   text-align: center;
+  color: #fff2d3;
   .rule-wrapper {
     position: absolute;
     right: 10px;
     top: 18px;
     font-size: 11px;
-    color: #888888;
   }
   .getchance {
     display: flex;
     justify-content: center;
     padding-top: 30px;
     font-size: 16px;
-    color: #000000;
     margin-bottom: 20px;
   }
   .total-price {
     font-size: 14px;
-    color: #333;
     .big-red {
-      color: red;
       font-size: 28px;
     }
   }
 }
 .user-wrapper {
-  background: #fff;
+  background: #fff5ea;
   font-size: 14px;
   color: #666666;
   .list-title {
@@ -249,6 +248,7 @@ p {
   font-size: 12px;
   color: #666666;
   margin-left: 15px;
+  background: #fff;
 }
 .user-list {
   display: flex;
