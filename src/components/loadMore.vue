@@ -16,12 +16,16 @@
         <div>
           <div class="data-list"
                v-for='item in dataList'
-               :key="item.ordersId">
+               :key="item.ordersId"
+               @click="handleDetail(item.ordersId)">
             <div class="left">
               <p class="time">{{item.startLotteryTime}} {{item.number}}期</p>
-              <p class="status">{{item.way}} {{item.status | statusFilter}}</p>
+              <p class="status"
+                 v-if="item.status != 1">{{item.way}} {{item.status | statusFilter}}</p>
+              <p class="status"
+                 v-else>{{item.money}}酒元</p>
             </div>
-            <div class="right">></div>
+            <div class="right"></div>
           </div>
         </div>
         <pull-header-footer v-if="showStatusFooter"
@@ -29,7 +33,6 @@
                             :status-down="pulldownStatus"></pull-header-footer>
       </scroller>
       <blankPage v-show='!hasItem'></blankPage>
-
     </div>
   </div>
 </template>
@@ -62,6 +65,10 @@ export default {
     }
   },
   methods: {
+    // 查看订单详情
+    handleDetail(id) {
+      this.$router.push(`/my/orderDetail?orderId=` + id)
+    },
     /**
      * @param page [页码]
      */
@@ -151,7 +158,20 @@ export default {
   .left {
     .time {
       margin-bottom: 5px;
+      font-size: 28/40rem;
+      color: #888888;
     }
+    .status {
+      font-size: 30/40rem;
+      color: #333333;
+    }
+  }
+  .right {
+    height: 36/40rem;
+    width: 36/40rem;
+    background-image: url("../assets/img/active/right_arrow_@2x.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
   }
 }
 p {
