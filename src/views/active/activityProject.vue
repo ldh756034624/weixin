@@ -85,12 +85,12 @@ export default {
         androidInterface.activeProject(JSON.stringify({ id }))
       } else if (isiOS) {
         try {
-          window.webkit.messageHandlers.activeProject.postMessage()
+          window.webkit.messageHandlers.activeProject.postMessage("nimei")
         } catch (error) {
           alert(error)
         }
       } else {
-        this.$router.push({ path: `shopDataile?id=` + id })
+        this.$router.push({ path: `/shopDataile?id=` + id })
       }
     }
   }
@@ -100,6 +100,7 @@ export default {
 .content {
   top: 0;
   bottom: 0;
+  overflow: hidden;
 }
 .box {
   height: auto;
