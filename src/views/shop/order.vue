@@ -62,10 +62,11 @@
             <span>{{(shopData.price * countNum) | price2}} 元</span>
           </p>
           <p class="ordeTotal"
-             @click="showCouponList=!showCouponList">
+             @click="(couponsList.length > 0) && (showCouponList=!showCouponList)">
             <label>优惠券</label>
             <i class="arrow"
-               :class="{top: showCouponList}"></i>
+               :class="{top: showCouponList}"
+               v-if="couponsList.length !== 0"></i>
             <span v-if="checkedCouponId">已选一张，省￥{{shopData.price}}</span>
             <span v-if="couponsList.length > 0 && !checkedCouponId">不使用</span>
             <span v-if="couponsList.length == 0">暂无可用</span>

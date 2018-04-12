@@ -20,7 +20,7 @@
                 ref="detailScroller"
                 use-pulldown
                 @on-pulldown-loading="refresh"
-                :pulldown-config="pulldefaultConfig" 
+                :pulldown-config="pulldefaultConfig"
                 :pulldown-status="pulldownStatus"
                 @input="getCurrentValue">
         <div class="coupon-wrapper">
@@ -36,6 +36,7 @@
                   <p>{{item.endTime}} 到期</p>
                 </div>
                 <div class="button-use"
+                     v-if="state == 1"
                      @click="handleUseCoupon(item.goodsId)">立即使用</div>
               </div>
               <p class="bottom">{{item.wide}}</p>
@@ -57,7 +58,7 @@ import { Scroller, XButton, Tab, TabItem } from "vux"
 
 export default {
   mounted() {
-    this.setTitle("我的卡券")
+    this.setTitle("我的优惠券")
     this.init(1)
   },
   data() {
@@ -177,7 +178,7 @@ export default {
           font-size: 28/40rem;
           color: #333333;
           & p:last-child {
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
             font-size: 24/40rem;
             color: #888888;
           }
