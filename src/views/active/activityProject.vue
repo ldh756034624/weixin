@@ -86,7 +86,7 @@ export default {
       } else if (isiOS) {
         try {
           window.webkit.messageHandlers.activeProject.postMessage(
-            JSON.stringify(id)
+            JSON.stringify(id.toString())
           )
         } catch (error) {
           alert(error)
