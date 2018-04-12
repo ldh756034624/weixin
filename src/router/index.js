@@ -43,6 +43,14 @@ export default [
     } //1号大富贵人开奖记录
   },
   {
+    path: "/active/project",
+    name: "专题活动",
+    meta: { auth: true },
+    component(resolve) {
+      require(["@/views/active/activityProject"], resolve)
+    } //专题活动
+  },
+  {
     path: "/active/hongbaoCode",
     name: "hongbaoCode",
     meta: { auth: false },
