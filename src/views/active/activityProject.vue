@@ -87,8 +87,9 @@ export default {
       } else if (isWeixin) {
         this.$router.push({ path: `shopDataile?id=` + id })
       } else {
+        window.webkit.messageHandlers.wxInvite.postMessage()
+        // window.webkit.messageHandlers.activeProject.postMessage()
         alert("叫我大帅比")
-        window.webkit.messageHandlers.activeProject.postMessage()
       }
     }
   }
