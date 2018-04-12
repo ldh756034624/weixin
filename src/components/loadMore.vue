@@ -20,10 +20,10 @@
                @click="handleDetail(item.ordersId)">
             <div class="left">
               <p class="time">{{item.startLotteryTime}} {{item.number}}期</p>
-              <p class="status"
-                 v-if="item.status != 1">{{item.way}} {{item.status | statusFilter}}</p>
-              <p class="status"
-                 v-else>{{item.money}}酒元</p>
+              <p class="status">{{item.way}}
+                <span v-if="item.status !== 1">{{item.status | statusFilter}}</span>
+                <span v-else>{{item.money}}酒元</span>
+              </p>
             </div>
             <div class="right"></div>
           </div>
