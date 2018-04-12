@@ -78,16 +78,17 @@ export default {
     goodsClick(id) {
       let u = navigator.userAgent
       let isAndroid = u.indexOf("Android") > -1 || u.indexOf("Adr") > -1 //android终端
-      let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) //ios终端
+      // let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) //ios终端
       let isWeixin =
         u.toLowerCase().match(/MicroMessenger/i) == "micromessenger"
       // this.$router.push({ path: `/shopDataile?id=` + id })
       if (isAndroid) {
         androidInterface.activeProject(JSON.stringify({ id }))
-      } else if (isiOS) {
-        window.webkit.messageHandlers.activeProject.postMessage({ id })
-      } else {
+      } else if (isWeixin) {
         this.$router.push({ path: `shopDataile?id=` + id })
+      } else {
+        alert("叫我大帅比")
+        window.webkit.messageHandlers.activeProject.postMessage({ id })
       }
     }
   }
