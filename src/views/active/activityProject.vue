@@ -81,7 +81,9 @@ export default {
       let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) //ios终端
       let isWeixin =
         u.toLowerCase().match(/MicroMessenger/i) == "micromessenger"
-      if (isAndroid) {
+      if (isWeixin) {
+        this.$router.push({ path: `/shopDataile?id=` + id })
+      } else if (isAndroid) {
         androidInterface.activeProject(JSON.stringify({ id }))
       } else if (isiOS) {
         try {
@@ -89,8 +91,6 @@ export default {
         } catch (error) {
           alert(error)
         }
-      } else {
-        this.$router.push({ path: `/shopDataile?id=` + id })
       }
     }
   }
