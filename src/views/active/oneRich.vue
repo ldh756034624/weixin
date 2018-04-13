@@ -1,62 +1,63 @@
 <template>
-  <div class="page"
-       v-if="userInfo">
-    <scroller lock-x
-              :pullup-config="pulldefaultConfig"
-              use-pullup
-              height="100%"
-              :pullup-status="pullupStatus"
-              @on-pullup-loading="loadMore"
-              ref="scroller"
-              @on-pulldown-loading="refresh"
-              :pulldown-config="pulldefaultConfig"
-              :pulldown-status="pulldownStatus"
-              @input="getCurrentValue">
-      <div>
-        <div class="top">
-          <div class="rule-wrapper"
-               @click="handleRule">
-            <img src="../../assets/img/active/huodongguize@2x.png"
-                 width="18"
-                 height="18">
-            <p>活动规则</p>
+  <div class="page">
+    <div>
+      <scroller lock-x
+                :pullup-config="pulldefaultConfig"
+                use-pullup
+                height="100%"
+                :pullup-status="pullupStatus"
+                @on-pullup-loading="loadMore"
+                ref="scroller"
+                @on-pulldown-loading="refresh"
+                :pulldown-config="pulldefaultConfig"
+                :pulldown-status="pulldownStatus"
+                @input="getCurrentValue">
+        <div v-if="userInfo">
+          <div class="top">
+            <div class="rule-wrapper"
+                 @click="handleRule">
+              <img src="../../assets/img/active/huodongguize@2x.png"
+                   width="18"
+                   height="18">
+              <p>活动规则</p>
+            </div>
+            <p class="getchance"
+               @click="handleGetReword">
+              {{userInfo.lotteryChance ? '有1次抽奖机会' : '获取抽奖机会'}}
+              <i class="icon-right"
+                 v-if="!userInfo.lotteryChance"></i>
+            </p>
+            <p class="total-price"
+               @click="handleRecord">
+              累计中奖金额
+              <span class="big-red">{{userInfo.bigRichMoney}}元</span>
+              <i class="icon-right"></i>
+            </p>
           </div>
-          <p class="getchance"
-             @click="handleGetReword">
-            {{userInfo.lotteryChance ? '有1次抽奖机会' : '获取抽奖机会'}}
-            <i class="icon-right"
-               v-if="!userInfo.lotteryChance"></i>
-          </p>
-          <p class="total-price"
-             @click="handleRecord">
-            累计中奖金额
-            <span class="big-red">{{userInfo.bigRichMoney}}元</span>
-            <i class="icon-right"></i>
-          </p>
+          <p class="title">往期开奖记录</p>
+          <div class="user-wrapper">
+            <p class="list-title">
+              <span class="sp1">用户</span>
+              <span class="sp2">中奖金额</span>
+              <span class="sp3">开奖时间</span>
+            </p>
+            <ul>
+              <li class="user-list"
+                  v-for="(item, index) in dataList"
+                  v-if="item"
+                  :key="index">
+                <span class="sp1 no-wrap">{{item.userName}}</span>
+                <span class="sp2">{{item.lotteryMoney}}元</span>
+                <span class="sp3">{{item.startLotteryTime}}</span>
+              </li>
+            </ul>
+          </div>
         </div>
-        <p class="title">往期开奖记录</p>
-        <div class="user-wrapper">
-          <p class="list-title">
-            <span class="sp1">用户</span>
-            <span class="sp2">中奖金额</span>
-            <span class="sp3">开奖时间</span>
-          </p>
-          <ul>
-            <li class="user-list"
-                v-for="(item, index) in dataList"
-                v-if="item"
-                :key="index">
-              <span class="sp1 no-wrap">{{item.userName}}</span>
-              <span class="sp2">{{item.lotteryMoney}}元</span>
-              <span class="sp3">{{item.startLotteryTime}}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <pull-header-footer v-if="showStatusFooter"
-                          :status-up="pullupStatus"
-                          :status-down="pulldownStatus"></pull-header-footer>
-    </scroller>
+        <pull-header-footer v-if="showStatusFooter"
+                            :status-up="pullupStatus"
+                            :status-down="pulldownStatus"></pull-header-footer>
+      </scroller>
+    </div>
   </div>
 </template>
 <script>
