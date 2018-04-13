@@ -74,12 +74,15 @@
     <!-- 显示抽奖机会  v-if="activityName && lotteryChance" -->
     <div class="lottery-wrapper"
          v-if="activityName && lotteryChance">
-      <p class="title">{{activityName}}</p>
+      <!-- <p class="title">{{activityName}}</p>
       <p class="result"
          @click="handleOneRich">
         <span>{{lotteryChance}}</span>
         <i class="icon-right"></i>
-      </p>
+      </p> -->
+      <img src="../../assets/img/account/get_lottery_bg.png"
+           @click="handleOneRich"
+           alt="">
     </div>
 
     <input type="text"
@@ -169,14 +172,17 @@ export default {
 .resultPage {
   background: #fff;
   .lottery-wrapper {
-    margin: 0 auto;
-    width: 80%;
-    border-top: 1px solid #f2f2f2;
-    border-bottom: 1px solid #f2f2f2;
-    text-align: center;
-    color: #666;
-    font-size: 13px;
-    padding-top: 15px;
+    // margin: 0 auto;
+    // width: 80%;
+    // border-top: 1px solid #f2f2f2;
+    // border-bottom: 1px solid #f2f2f2;
+    // text-align: center;
+    // color: #666;
+    // font-size: 13px;
+    // padding-top: 15px;
+    img {
+      width: 100%;
+    }
     .result {
       margin: 10px 0 15px;
       display: flex;
