@@ -126,7 +126,7 @@ export default {
       if (type === 1) {
         return "中奖"
       } else if (type === 2) {
-        return "待抽奖"
+        return "待开奖"
       } else {
         return "未中奖"
       }
