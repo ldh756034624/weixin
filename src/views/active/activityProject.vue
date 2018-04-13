@@ -120,7 +120,7 @@ export default {
       overflow: hidden;
       width: 50%;
       height: auto;
-      padding-bottom: 98/40rem;
+      padding-bottom: 1.2rem;
       .activity-box {
         width: 280/40rem;
         height: auto;
@@ -162,9 +162,11 @@ export default {
         .img-title {
           font-size: 24/40rem;
           min-height: 80/40rem;
+          padding-left: 0.5rem;
         }
         .img-price {
           font-size: 36/40rem;
+          padding-left: 0.5rem;
         }
         .button {
           font-size: 24/40rem;

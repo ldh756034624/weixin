@@ -33,7 +33,7 @@
                 <div class="title">{{item.couponType}}</div>
                 <div class="desc">
                   <p>{{item.useType}}</p>
-                  <p>{{item.endTime}} 到期</p>
+                  <p>{{item.startTime}}至{{item.endTime}}</p>
                 </div>
                 <div class="button-use"
                      v-if="state == 1"
@@ -185,7 +185,7 @@ export default {
         }
         .button-use {
           position: absolute;
-          top: 100/40rem;
+          top: 1.15rem;
           right: 30/40rem;
           height: 1.4rem;
           line-height: 1.4rem;
