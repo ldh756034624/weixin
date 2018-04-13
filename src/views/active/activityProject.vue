@@ -87,7 +87,8 @@ export default {
         androidInterface.activeProject(JSON.stringify({ id }))
       } else if (isiOS) {
         try {
-          window.webkit.messageHandlers.activeProject.postMessage(id.toString())
+          // window.webkit.messageHandlers.activeProject.postMessage(id.toString())
+          window.webkit.messageHandlers.activeProject.postMessage({ id })
         } catch (error) {
           alert(error)
         }
