@@ -275,6 +275,7 @@ export default {
           if (res.data.code == 0) {
             let activityName = res.data.data.activityName
             let lotteryChance = res.data.data.lotteryChance
+            let goodsCount = this.exchangeParams.count
 
             if (this.payMethod == 1) {
               this.$router.replace({
@@ -284,7 +285,8 @@ export default {
                   money: res.data.data.price,
                   goodsName: res.data.data.goodsName,
                   activityName,
-                  lotteryChance
+                  lotteryChance,
+                  goodsCount
                 }
               })
             } else {
@@ -298,7 +300,9 @@ export default {
                 "&activityName=" +
                 activityName +
                 "&lotteryChance=" +
-                lotteryChance
+                lotteryChance +
+                "&goodsCount" +
+                goodsCount
               let callbackFail =
                 url +
                 "#/my/orderDetail?orderId=" +
