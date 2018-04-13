@@ -159,7 +159,7 @@ export default {
 
 <style scoped lang='less'>
 .page {
-  height: 100%;
+  // height: 100%;
   background: #fff;
 }
 p {
