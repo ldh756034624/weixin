@@ -124,6 +124,7 @@
 
 <script>
 import { Group, Cell, XButton } from "vux"
+import { log } from "util"
 export default {
   mounted() {
     this.setTitle("填写订单")
@@ -276,8 +277,10 @@ export default {
             let activityName = res.data.data.activityName
             let lotteryChance = res.data.data.lotteryChance
             let goodsCount = this.exchangeParams.count
-
-            if (this.payMethod == 1 || this.exchangeParams.couponsId) {
+            if (
+              this.payMethod == 1 ||
+              (this.exchangeParams.couponsId && !res.data.data.resumePaywxjs)
+            ) {
               this.$router.replace({
                 path: "/account/result",
                 query: {
