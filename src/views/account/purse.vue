@@ -24,14 +24,14 @@
           </div>
         </router-link>
       </flexbox-item>
-      <flexbox-item class='ItemBorder'>
+      <!-- <flexbox-item class='ItemBorder'>
         <router-link :to="{path:'/account/ddExchange',query:{balance:purseData.balance,tel:purseData.tel}}">
           <div class="purseItemBox">
             <img src="../../assets/img/account/wallet_icon_didi@2x.png"/>
             <p>滴滴券兑换</p>
           </div>
         </router-link>
-      </flexbox-item>
+      </flexbox-item> -->
       <flexbox-item class='ItemBorder' v-show="purseData.canTransConfig">
         <router-link :to="{path:'/account/bankto',query:{balance:purseData.balance}}">
           <div class="purseItemBox">
@@ -54,14 +54,14 @@
       </flexbox-item>
       <!-- <flexbox-item class='ItemBorder' v-show="!purseData.canTransConfig">
       </flexbox-item> -->
-      <flexbox-item v-show="purseData.canWithdeawal" class='ItemBorder' >
+      <!-- <flexbox-item v-show="purseData.canWithdeawal" class='ItemBorder' >
         <router-link :to="{path:'/account/funds'}">
           <div class="purseItemBox">
             <img src="../../assets/img/account/tixian@2x.png"/>
             <p>提现</p>
           </div>
         </router-link>
-      </flexbox-item>
+      </flexbox-item> -->
       <flexbox-item v-show="!purseData.canWithdeawal" class='ItemBorder'>
       </flexbox-item>
       <!-- <flexbox-item class='ItemBorder'>

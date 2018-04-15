@@ -12,7 +12,7 @@
       </div>
       <group class="redPaperBox  groupNoLine">
         <x-input type="number" :title="moneyMark"  v-model="transferMoney"
-                 :show-clear="false" keyboard="number">
+                 :show-clear="false" keyboard="tel">
         </x-input>
       </group>
       <div class="fundsBtnBox">
@@ -62,7 +62,7 @@
       fundsFn: function () {
         let self = this
         function trim(str){
-            return str.replace(/\s|\xA0/g,"");    
+            return str.replace(/\s|\xA0/g,"");
         }
         let params = {
           targetUserPhone:trim(self.transferInfo.targetUserPhone),
@@ -78,7 +78,7 @@
             _g.toastMsg('error', res.data.msg)
           }
         })
-        
+
       }
     },
     components: {
@@ -117,7 +117,7 @@
       font-size: 24/40rem;
       color: #333333;
       line-height: 24/40rem;
-      
+
     }
     .redPaperBox {
       margin: 0 20/40rem;
@@ -176,5 +176,5 @@
       color: #333!important;
     }
   }
-    
+
 </style>
