@@ -312,7 +312,6 @@ export default {
                 res.data.data.wxPayInfo.orderId // 失败回调
               callbackurl = encodeURIComponent(callbackurl) // encode
               callbackFail = encodeURIComponent(callbackFail) // encode
-              alert(callbackurl)
               let link =
                 res.data.data.wxPayInfo.payUrl +
                 "&callback=" +
