@@ -277,7 +277,7 @@ export default {
             let lotteryChance = res.data.data.lotteryChance
             let goodsCount = this.exchangeParams.count
 
-            if (this.payMethod == 1) {
+            if (this.payMethod == 1 || this.exchangeParams.couponsId) {
               this.$router.replace({
                 path: "/account/result",
                 query: {
