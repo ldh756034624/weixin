@@ -299,13 +299,15 @@ export default {
                 "#/account/result?type=shopExchange&money=" +
                 res.data.data.price +
                 "&goodsName=" +
-                res.data.data.goodsName + // 成功回调
+                res.data.data.goodsName +
                 "&activityName=" +
                 activityName +
                 "&lotteryChance=" +
                 lotteryChance +
                 "&goodsCount" +
                 goodsCount
+              alert(callbackurl)
+                
               let callbackFail =
                 url +
                 "#/my/orderDetail?orderId=" +
