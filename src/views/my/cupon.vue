@@ -33,7 +33,7 @@
                 <div class="title">{{item.couponType}}</div>
                 <div class="desc">
                   <p>{{item.useType}}</p>
-                  <p>{{item.startTime}}至{{item.endTime}}</p>
+                  <p>{{item.endTime}}</p>
                 </div>
                 <div class="button-use"
                      v-if="state == 1"
