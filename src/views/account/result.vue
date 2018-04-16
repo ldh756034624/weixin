@@ -73,13 +73,7 @@
 
     <!-- 显示抽奖机会  v-if="activityName && lotteryChance" -->
     <div class="lottery-wrapper"
-         v-if="activityName && lotteryChance">
-      <!-- <p class="title">{{activityName}}</p>
-      <p class="result"
-         @click="handleOneRich">
-        <span>{{lotteryChance}}</span>
-        <i class="icon-right"></i>
-      </p> -->
+         v-if="lotteryChance && lotteryChance!== 'undefined'">
       <img src="../../assets/img/account/get_lottery_bg.png"
            @click="handleOneRich"
            alt="">
@@ -96,6 +90,7 @@ import { Group, Cell, XInput, XButton } from "vux"
 export default {
   created() {
     sessionStorage.isInResult = true
+    alert(this.$route.query.goodsName)
   },
   mounted() {
     let self = this
