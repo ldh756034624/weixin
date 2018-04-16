@@ -36,7 +36,7 @@
         <label>{{money}}酒元</label>
       </p>
       <p>兑换商品:
-        <label>{{goodsName}}*{{goodsCount}}</label>
+        <label>{{goodsName}}</label>
       </p>
     </div>
     <div class="shopResultBtnBox"
@@ -123,8 +123,7 @@ export default {
       num: this.$route.query.num,
       goodsName: this.$route.query.goodsName,
       activityName: this.$route.query.activityName,
-      lotteryChance: this.$route.query.lotteryChance,
-      goodsCount: this.$route.query.goodsCount
+      lotteryChance: this.$route.query.lotteryChance
     }
   },
   methods: {

@@ -302,10 +302,11 @@ export default {
                 res.data.data.goodsName +
                 "&activityName=" +
                 activityName +
-                "&lotteryChance=" +
-                lotteryChance +
                 "&goodsCount=" +
                 goodsCount
+              if (lotteryChance) {
+                callbackurl += "&lotteryChance=" + lotteryChance
+              }
               let callbackFail =
                 url +
                 "#/my/orderDetail?orderId=" +
