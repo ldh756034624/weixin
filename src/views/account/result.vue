@@ -123,7 +123,7 @@ export default {
   methods: {
     // 跳转到开奖页
     handleOneRich() {
-      this.$router.replace("/active/oneRich")
+      this.$router.push("/active/oneRich")
     },
     goPurse() {
       //        sessionStorage.isInResult = false
