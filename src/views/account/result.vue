@@ -90,7 +90,6 @@ import { Group, Cell, XInput, XButton } from "vux"
 export default {
   created() {
     sessionStorage.isInResult = true
-    alert(this.$route.query.goodsName)
   },
   mounted() {
     let self = this
