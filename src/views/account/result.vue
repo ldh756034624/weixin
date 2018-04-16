@@ -36,7 +36,7 @@
         <label>{{money}}酒元</label>
       </p>
       <p>兑换商品:
-        <label>{{goodsName}}*{{goodsCount}}</label>
+        <label>{{goodsName}}</label>
       </p>
     </div>
     <div class="shopResultBtnBox"
@@ -73,13 +73,7 @@
 
     <!-- 显示抽奖机会  v-if="activityName && lotteryChance" -->
     <div class="lottery-wrapper"
-         v-if="activityName && lotteryChance">
-      <!-- <p class="title">{{activityName}}</p>
-      <p class="result"
-         @click="handleOneRich">
-        <span>{{lotteryChance}}</span>
-        <i class="icon-right"></i>
-      </p> -->
+         v-if="lotteryChance && lotteryChance!== 'undefined'">
       <img src="../../assets/img/account/get_lottery_bg.png"
            @click="handleOneRich"
            alt="">
@@ -123,14 +117,13 @@ export default {
       num: this.$route.query.num,
       goodsName: this.$route.query.goodsName,
       activityName: this.$route.query.activityName,
-      lotteryChance: this.$route.query.lotteryChance,
-      goodsCount: this.$route.query.goodsCount
+      lotteryChance: this.$route.query.lotteryChance
     }
   },
   methods: {
     // 跳转到开奖页
     handleOneRich() {
-      this.$router.replace("/active/oneRich")
+      this.$router.push("/active/oneRich")
     },
     goPurse() {
       //        sessionStorage.isInResult = false
