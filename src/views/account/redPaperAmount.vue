@@ -62,9 +62,8 @@
       },
       fundsFn: function () {
         let self = this
-        // console.log("dddd");
+        console.log("dddd");
         self.canClick=true;
-        return;
         function trim(str){
             return str.replace(/\s|\xA0/g,"");
         }
