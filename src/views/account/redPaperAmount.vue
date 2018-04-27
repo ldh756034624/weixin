@@ -16,7 +16,7 @@
         </x-input>
       </group>
       <div class="fundsBtnBox">
-        <x-button class='gradientBtn' @click.native="fundsFn">确认</x-button>
+        <x-button class='gradientBtn' @click.native="fundsFn" :disabled="canClick">确认</x-button>
         <span class="right transfer ">
           <router-link :to="{path:'/account/transferInfo'}">
               转账账单
@@ -42,7 +42,8 @@
       return {
         transferMoney:null,
         transferInfo:{},
-        moneyMark:null
+        moneyMark:null,
+        canClick:false,
 
       }
     },
@@ -61,6 +62,9 @@
       },
       fundsFn: function () {
         let self = this
+        // console.log("dddd");
+        self.canClick=true;
+        return;
         function trim(str){
             return str.replace(/\s|\xA0/g,"");
         }
@@ -71,6 +75,7 @@
         self.$http.post('/h9/api/user/transfer' ,params)
         .then(function(res){
           if (res.data.code === 0) {
+            self.canClick=false;
              self.$router.push({path:'/account/success',query:{success:res.data.data.tips}})
           } else if(res.data.code === 1) {
             _g.toastMsg('error', res.data.msg)
